@@ -1,0 +1,15 @@
+$color-main: #00BCD4;
+$color-container: #EDEDED;
+$color-header : #444444;
+$color-footer: $color-header;
+$color-title: #666666;
+$color-text-light: white;
+
+@import "index";
+@import "product";
+@import "compte";
+
+
+.wrapper {
+    min-height: 100vh;
+}
