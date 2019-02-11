@@ -9,7 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityBackController extends AbstractController
 {
     /**
-     * @Route("/dashboard/connexion", name="security_back_login")
+     * @Route("/connexion/admin", name="security_back_login")
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
@@ -18,14 +18,15 @@ class SecurityBackController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('back/login.html.twig', [
+        return $this->render('securityAdmin/connexionSecurityAdmin.html.twig', [
+            'title' => "Connexion administrateur",
             'last_username' => $lastUsername,
             'error' => $error
         ]);
     }
 
     /**
-    * @Route("/dashboard/deconnexion", name="security_back_logout")
+    * @Route("/deconnexion/admin", name="security_back_logout")
     *
     */
     public function logout() 
