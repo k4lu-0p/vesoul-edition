@@ -2,9 +2,9 @@ security:
     encoders:
         App\Entity\Admin:
             algorithm: bcrypt
-        # App\Entity\User:
-        #     algorithm: bcrypt
-        #     cost: 12   
+        App\Entity\User:
+            algorithm: bcrypt
+              
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: ~ }
