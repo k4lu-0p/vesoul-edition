@@ -5,11 +5,13 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -17,6 +19,31 @@ class User
      * @ORM\Column(type="integer")
      */
     private $id;
+    
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $gender;
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $lastname;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $password;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $username;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="user")
@@ -28,10 +55,98 @@ class User
      */
     private $addresses;
 
+    /**
+     * @ORM\Column(type="simple_array")
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $email;
+    
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $tel;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":true})
+     */
+    private $newsletter;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $birth;
+    
+
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
         $this->addresses = new ArrayCollection();
+    }
+
+    public function getTel(): ?string
+    {
+        return $this->tel;
+    }
+
+    public function setTel(string $tel): self
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    public function getGender(): ?int 
+    {
+        return $this->gender;
+    }
+
+    public function setGender(string $gender): self 
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getNewsletter(): bool
+    {
+        return $this->newsletter;
+    }
+
+    public function setNewsletter(bool $newsletter): self
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    
+    public function getLastname(): string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getFirstname(): string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -92,6 +207,86 @@ class User
         if ($this->addresses->contains($address)) {
             $this->addresses->removeElement($address);
         }
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getSalt() {
+        return null;
+    }
+
+    public function eraseCredentials() {
+        
+    }
+
+    public function getBirth(): ?\DateTimeInterface
+    {
+        return $this->birth;
+    }
+
+    public function setBirth(?\DateTimeInterface $birth): self
+    {
+        $this->birth = $birth;
 
         return $this;
     }
