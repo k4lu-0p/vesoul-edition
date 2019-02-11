@@ -1,0 +1,34 @@
+#index {
+    #filters {
+        background-color: white;
+
+        .title {
+            background-color: $color-main;
+            color: $color-text-light;
+            height: 70px;
+        }
+
+        .price {
+            #input-select,
+            #input-number {
+                padding: 7px;
+                margin: 15px 5px 5px;
+                width: 70px;
+            }
+        }
+    }
+
+    #sort {
+        background-color: white;
+        height: 70px;
+
+        span {
+            color: $color-main;
+            font-weight: bold;
+        }
+
+        .custom-select {
+            width: 150px;
+        }
+    }
+}
