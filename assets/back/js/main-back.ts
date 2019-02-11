@@ -10,12 +10,28 @@ function afficher(mess:string, num:number):string {
 console.log(afficher(message, numero));
 // ---------------------------------------------
 
+let burger = document.querySelector(".hamburger");
+burger.addEventListener("click", function(){
+
+    document.querySelector(".navigation").classList.add("displayMenu");
+    burger.classList.remove("hamburger");
+
+});
+
+let closeBtn = document.querySelector(".closeBtn");
+closeBtn.addEventListener("click", function(){
+
+    document.querySelector(".navigation").classList.remove("displayMenu");
+    burger.classList.add("hamburger");
+
+});
+
 let buttonMenu = document.querySelectorAll(".button-menu");
 let urlPath:string = window.location.pathname;
 
 let lastUrl:string = (urlPath.split("/")).slice(-1).pop();
 
-if(lastUrl == "dashboard"){
+if(lastUrl == "admin"){
     for(let i:number ; i<buttonMenu.length ; i++){
         buttonMenu[i].classList.remove("button-active");
     }
