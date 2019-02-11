@@ -1,0 +1,92 @@
+.wrapper{
+    min-height: 100vh;
+}
+header {
+    height: 100%;
+    background-color: $color-header;
+    color: $color-text-light;
+    a{
+        text-decoration: none !important;
+        color: $color-text-light;
+        font-size: 1em;
+
+    }
+    a:hover{
+        color: $color-main !important;
+        transition: all 0.3s;
+    }
+    .brand{
+        font-weight: bold;
+        text-decoration: none !important;
+        color: $color-text-light;
+        font-size: 1.5em;
+    }
+    form{
+        width: 100%;
+        .search-bar{
+            width: 70% !important;
+        }
+    }
+    .user-icon{
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 50%;
+        border: solid 1px white;
+    }
+
+    .banner {
+        background-color: $color-main;
+       
+        h3 {
+            text-transform: uppercase;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        i{
+            font-size: 5em;
+
+        }
+        p{
+            font-size: 0.9em;
+        }
+    }
+}
+
+main {
+    background-color: $color-container;
+    height: 100%;
+
+}
+
+footer {    
+    height: 100%;
+    background-color: $color-footer;
+    color: $color-text-light;
+
+    h3 {
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1.2em;
+    }
+    a{
+        text-decoration: none !important;
+        color: $color-text-light;
+        font-size: 0.9em;
+
+    }
+    a:hover{
+        color: $color-main !important;
+        transition: all 0.3s;
+    }
+    input{
+        width: 170px !important;
+    }
+    .btn-newsletter{
+        font-size: 0.8em;
+
+    }
+    p{
+        font-size: 0.9em;
+    }
+}
