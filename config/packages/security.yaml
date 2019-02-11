@@ -7,7 +7,6 @@ security:
               
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory: { memory: ~ }
         in_manager: 
             entity:
                 class: App\Entity\Admin
@@ -15,14 +14,15 @@ security:
         in_user:
             entity:
                 class: App\Entity\User
-                property: mail
+                property: username
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         admin:
-            anonymous: true
+            anonymous: ~
+            pattern: ^/
             provider: in_manager
             form_login: 
                 default_target_path: dashboard
@@ -31,6 +31,18 @@ security:
             logout: 
                 path: security_back_logout
                 target: security_back_login
+        user:
+            anonymous: ~
+            pattern: ^/
+            provider: in_user
+            form_login:
+                default_target_path: mon_compte
+                login_path: security_front_login
+                check_path: security_front_login
+               # csrf_token_generator: security.csrf.token_manager
+            logout:
+                path: security_front_logout
+                target: security_front_login             
             # activate different ways to authenticate
 
             # http_basic: true
@@ -42,5 +54,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        #- { path: ^/admin, roles: ROLE_ADMIN }
+        #- { path: ^/mon-compte, roles: ROLE_USER }

@@ -23,8 +23,17 @@ class FrontController extends AbstractController
     public function test()
     {
         return $this->render('back/index.html.twig', [
-            'controller_name' => 'FrontController',
+            'controller_name' => 'FrontController'
         ]);
     }
 
+    /**
+     * @Route("/mon-compte", name="mon_compte")
+     */
+    public function showAccount()
+    {
+        return $this->render('front/mon-compte.html.twig', [
+            'title' => 'Mon compte'
+        ]);
+    }
 }
