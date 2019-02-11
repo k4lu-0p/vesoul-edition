@@ -2,30 +2,25 @@
 
 {% block body %}
 
-<form action="{{ path('security_back_login') }}" method="post" class="form-signin">
+<main class="adminLogin container-fluid">
+    <form action="{{ path('security_back_login') }}" method="post" class="form-signin d-flex flex-column justify-content-between align-items-center">
 
-    {% if error %}
-    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-    <div class=" wrapper-login d-flex flex-column justify-content-around align-items-center">
-        
-        <h1 class="title-login h3 mb-3 font-weight-normal text-center">Admin</h1>
-       
-        <input type="text" id="inputName" class="form-control" placeholder="Entrez votre nom d'utilisateur" value="{{ last_username }}"
-            name="_username" required autofocus>
-        
-        <input type="password" id="inputPassword" class="form-control" placeholder="Entrez votre mot de passe" name="_password"
-            required>
-       
-        </div> 
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Connexion</button>
-    </div>
+        <h1 class="title-login pt-5 text-center">Connexion administrateur</h1>
+        <div class="d-flex flex-column align-items-center w-100">
+            {% if error %}
+            <div class="alert alert-danger">nom d'utilisateur ou mot de passe incorrect</div>
+            {% endif %}
 
-    <p class="mt-5 mb-3 text-muted text-center">&copy; 2019-2020</p>
-   
-</form>
+            <input type="text" id="inputName" class="form-control w-75" placeholder="Entrez votre nom d'utilisateur" value="{{ last_username }}"
+                name="_username" required autofocus>
 
+            <input type="password" id="inputPassword" class="form-control m-3 w-75" placeholder="Entrez votre mot de passe" name="_password"
+                required>
 
-
+            <button class="btn btn-lg btn-block w-75" type="submit">Connexion</button>
+        </div>
+        <a class="w-100 pl-4 pb-4 text-left" href=" {{ path('front')}} "><i class="pl-2 fas fa-door-open"></i> Retour au site</a>
+    </form>
+</main>
 
 {% endblock %}

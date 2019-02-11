@@ -1,0 +1,48 @@
+.adminLogin {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(21, 21, 21);
+
+    .form-signin {
+        background-color: rgb(49, 49, 49);
+        border-radius: 2px;
+        width: 50%;
+        height: 50%;
+        position: absolute;
+        top: 25%;
+        left: 25%;
+
+        h1 {
+            color: white;
+        }
+
+        div {
+
+            .btn {
+                background-color: #0094cc;
+            }
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+
+            i {
+                transition: all 0.3s;
+                font-size: 1.5rem;
+                color: white;
+                text-decoration: none;
+            }
+
+            &:hover {
+                color: rgb(160, 160, 160);
+
+                i {
+                    color: rgb(160, 160, 160);
+                }
+            }
+        }
+
+    }
+}

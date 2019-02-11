@@ -1,3 +1,5 @@
+require ('./adminLogin');
+
 // ---------------- EXEMPLE -------------------
 
 let message:string = "Coucou";
