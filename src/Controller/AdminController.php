@@ -5,51 +5,57 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BackController extends AbstractController
+class AdminController extends AbstractController
 {
     /**
-     * @Route("/dashboard", name="dashboard")
+     * @Route("/admin", name="dashboard")
      */
     public function home()
     {
-        return $this->render('back/home.html.twig', [
+        return $this->render('admin/home.html.twig', [
             'title' => 'Accueil',
         ]);
     }
+
     /**
-     * @Route("/dashboard/commandes", name="dashboard-commandes")
+     * @Route("/admin/commandes", name="dashboard-commandes")
      */
     public function commandes()
     {
-        return $this->render('back/commandes.html.twig', [
+        return $this->render('admin/commandes.html.twig', [
             'title' => 'Commandes',
         ]);
     }
+
     /**
-     * @Route("/dashboard/livres", name="dashboard-livres")
+     * @Route("/admin/livres", name="dashboard-livres")
      */
     public function books()
     {
-        return $this->render('back/books.html.twig', [
+        return $this->render('admin/books.html.twig', [
             'title' => 'Livres',
         ]);
     }
+
     /**
-     * @Route("/dashboard/info-boutique", name="info-boutique")
+     * @Route("/admin/info-boutique", name="info-boutique")
      */
     public function info()
     {
-        return $this->render('back/info.html.twig', [
+        return $this->render('admin/info.html.twig', [
             'title' => 'Information Boutique',
         ]);
     }
+
     /**
-     * @Route("/dashboard/mentions", name="mentions")
+     * @Route("/admin/mentions", name="mentions")
      */
     public function mentions()
     {
-        return $this->render('back/mentions.html.twig', [
+        return $this->render('admin/mentions.html.twig', [
             'title' => 'Mentions légales',
         ]);
     }
+
+
 }

@@ -9,7 +9,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class SecurityBackController extends AbstractController
 {
     /**
-     * @Route("/administration/connexion", name="security_back_login")
+     * @Route("/dashboard/connexion", name="security_back_login")
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
@@ -25,7 +25,7 @@ class SecurityBackController extends AbstractController
     }
 
     /**
-    * @Route("/administration/deconnexion", name="security_back_logout")
+    * @Route("/dashboard/deconnexion", name="security_back_logout")
     *
     */
     public function logout() 
