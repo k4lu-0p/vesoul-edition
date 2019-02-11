@@ -15,7 +15,7 @@ let urlPath:string = window.location.pathname;
 
 let lastUrl:string = (urlPath.split("/")).slice(-1).pop();
 
-if(lastUrl == "dashboard"){
+if(lastUrl == "admin"){
     for(let i:number ; i<buttonMenu.length ; i++){
         buttonMenu[i].classList.remove("button-active");
     }

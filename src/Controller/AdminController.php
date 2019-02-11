@@ -38,7 +38,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/info-boutique", name="info-boutique")
+     * @Route("/admin/info-boutique", name="dashboard-info-boutique")
      */
     public function info()
     {
@@ -48,7 +48,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/mentions", name="mentions")
+     * @Route("/admin/mentions", name="dashboard-mentions")
      */
     public function mentions()
     {
