@@ -2,8 +2,8 @@ html, body {
 
     .hamburger {
         position: fixed;
-        top: 10%;
-        left: 10%;
+        top: 5%;
+        left: 5%;
         z-index: 1;
         transition: 0.3s;
         padding: 0px 10px;
@@ -53,22 +53,34 @@ html, body {
     }
 
     .navigation{
+        transition: all 0.5s ease-in-out;
+        z-index: 3;
         min-height: 100vh;
         width: 15%;
         background-color: rgba($color: #000000, $alpha: 0.78);
 
 
         @media (min-width: 768px) and (max-width: 991.98px) {
-            width: 20%;
+            width: 30%;
+            position: relative;
+            left: -30%;
         }
         @media (min-width: 576px) and (max-width: 767.98px) {
             width: 40%;
+            position: relative;
+            left: -40%;
         }
         
         @media (max-width: 575.98px) {
             width: 100%;
+            position: relative;
+            left: -100%;
         }
         nav{
+            .closeBtn{
+                font-size: 1.5rem;
+                color: white;
+            }
             .button-active{
                 color: white;
             }
@@ -106,6 +118,10 @@ html, body {
                 color: white;
             }
         }
+    }
+    .displayMenu{
+        position: absolute;
+        left: 0;
     }
 }
 
