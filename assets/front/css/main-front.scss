@@ -4,12 +4,9 @@ $color-header : #444444;
 $color-footer: $color-header;
 $color-title: #666666;
 $color-text-light: white;
+$width-book-card: 225px;
 
+@import "base";
 @import "index";
 @import "product";
 @import "compte";
-
-
-.wrapper {
-    min-height: 100vh;
-}

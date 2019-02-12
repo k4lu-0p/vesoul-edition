@@ -1,92 +1,63 @@
-.wrapper{
-    min-height: 100vh;
-}
-header {
-    height: 100%;
-    background-color: $color-header;
-    color: $color-text-light;
-    a{
-        text-decoration: none !important;
-        color: $color-text-light;
-        font-size: 1em;
+#index {
+    #filters {
+        background-color: white;
 
-    }
-    a:hover{
-        color: $color-main !important;
-        transition: all 0.3s;
-    }
-    .brand{
-        font-weight: bold;
-        text-decoration: none !important;
-        color: $color-text-light;
-        font-size: 1.5em;
-    }
-    form{
-        width: 100%;
-        .search-bar{
-            width: 70% !important;
+        .title {
+            background-color: $color-main;
+            color: $color-text-light;
+            height: 70px;
+        }
+
+        .price {
+            #input-select,
+            #input-number {
+                padding: 7px;
+                margin: 15px 5px 5px;
+                width: 70px;
+            }
         }
     }
-    .user-icon{
-        width: 30px !important;
-        height: 30px !important;
-        border-radius: 50%;
-        border: solid 1px white;
-    }
 
-    .banner {
-        background-color: $color-main;
-       
-        h3 {
-            text-transform: uppercase;
-            font-size: 0.8em;
+    #sort {
+        background-color: white;
+        height: 70px;
+
+        span {
+            color: $color-main;
             font-weight: bold;
         }
 
-        i{
-            font-size: 5em;
-
-        }
-        p{
-            font-size: 0.9em;
+        .custom-select {
+            width: 150px;
         }
     }
-}
-
-main {
-    background-color: $color-container;
-    height: 100%;
-
-}
-
-footer {    
-    height: 100%;
-    background-color: $color-footer;
-    color: $color-text-light;
-
-    h3 {
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 1.2em;
-    }
-    a{
-        text-decoration: none !important;
-        color: $color-text-light;
-        font-size: 0.9em;
-
-    }
-    a:hover{
-        color: $color-main !important;
-        transition: all 0.3s;
-    }
-    input{
-        width: 170px !important;
-    }
-    .btn-newsletter{
-        font-size: 0.8em;
-
-    }
-    p{
-        font-size: 0.9em;
+    .book-card{
+        background-color: white;
+        width: $width-book-card;
+        height: 350px;
+        .photo{
+            position: relative;
+            .book-pic{
+                width: $width-book-card;
+                height: $width-book-card;
+            }
+            .overlay{
+                display: none !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: $width-book-card;
+                height: $width-book-card;
+                background-color: rgba(10,10,10,0.4);
+                opacity: 40%;
+            }
+        }
+        .photo:hover{
+            .overlay{
+                display: flex !important;
+                transition: 0.3s
+            }
+        }
+       
     }
 }

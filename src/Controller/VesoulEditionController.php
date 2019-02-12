@@ -5,26 +5,28 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class FrontController extends AbstractController
+
+class VesoulEditionController extends AbstractController
 {
     /**
-     * @Route("/", name="front")
+     * @Route("/", name="vesoul_edition_home")
      */
-    public function index()
+    public function home()
     {
-        return $this->render('front/index.html.twig', [
+        return $this->render('vesoul-edition/home.html.twig', [
             'controller_name' => 'FrontController',
         ]);
     }
 
     /**
-     * @Route("/test", name="test")
+     * @Route("/product", name="product")
      */
-    public function test()
+    public function showProduct()
     {
-        return $this->render('back/index.html.twig', [
+        return $this->render('front/product.html.twig', [
             'controller_name' => 'FrontController',
         ]);
     }
 
 }
+// lol
