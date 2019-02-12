@@ -22,12 +22,16 @@
         
         <div id="adresses-compte" class="col-9 d-flex justify-content-center">
 
-            <div class="wrapper-adresses d-flex flex-column">
+            <div class="wrapper-adresses d-flex flex-wrap justify-content-center">
 
             {% for adresse in adresses %}
 
-                <div class="list-adresse">
-                    <p>{{ adresse.number }} {{ adresse.type }} {{ adresse.street }} {{ adresse.city }} {{ adresse.cp }} {{ adresse.country }} {{ adresse.additional }}</p>
+                <div class="col-5 list-adresse card mt-2 mb-2 ml-2 mr-2 pt-2 pb-2 pl-2 pr-2">
+                    <p>{{ adresse.number }} {{ adresse.type }} {{ adresse.street }}</p>
+                    <p>{{ adresse.city }}</p>
+                    <p>{{ adresse.cp }}</p>
+                    <p>{{ adresse.country }}</p>
+                    <p class="mb-0">{{ adresse.additional }}</p>
                 </div>
 
             {% endfor %}
