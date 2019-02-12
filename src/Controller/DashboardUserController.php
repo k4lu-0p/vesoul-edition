@@ -27,7 +27,7 @@ class DashboardUserController extends AbstractController
      */
     public function showAccount()
     {
-        return $this->render('dashboard-user/info.html.twig', [
+        return $this->render('dashboard-user/mon-compte.html.twig', [
             'controller_name' => 'FrontController',
         ]);
     }
