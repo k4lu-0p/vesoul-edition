@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Address;
+use App\Repository\AddressRepository;
+
 
 class FrontController extends AbstractController
 {
@@ -41,10 +44,12 @@ class FrontController extends AbstractController
     /**
      * @Route("/mon-compte/adresses", name="compte-adresses")
      */
-    public function showAdresses()
+    public function showAdresses(AddressRepository $repo)
     {
+        $adresses = $repo->findAll();
         return $this->render('front/compte-adresses.html.twig', [
             'controller_name' => 'FrontController',
+            'adresses' => $adresses
         ]);
     }
 

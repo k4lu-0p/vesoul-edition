@@ -1,4 +1,4 @@
-#product-page {
+#compte-page {
     
     #menu-compte {
         background-color: $color-header;
@@ -45,38 +45,54 @@
         }
     }
 
-    #infos-compte {
+   
 
-        input {
-            border: none;
-            border-bottom: solid grey 2px;
-            border-radius: 0px;
-            // width: 250px;
-            background-color: transparent;
-            margin-top: 50px;
-        }
-    
-        input:focus {
-            outline: none;
-            border-bottom: solid black 2px;
-            transition: all 0.2s linear;
-        }
-    
-        input:active {
-            outline: none;
-        }
+}
 
-        button {
-            background-color: $color-main;
-            color: white;
-            width: 150px;
-            height: 40px;
-        }
+#infos-compte {
 
-        .wrapper-infos {
-            width: 70%;
-        }
+    input {
+        border: none;
+        border-bottom: solid grey 2px;
+        border-radius: 0px;
+        // width: 250px;
+        background-color: transparent;
+        margin-top: 50px;
+    }
 
+    input:focus {
+        outline: none;
+        border-bottom: solid black 2px;
+        transition: all 0.2s linear;
+    }
+
+    input:active {
+        outline: none;
+    }
+
+    button {
+        background-color: $color-main;
+        color: white;
+        width: 150px;
+        height: 40px;
+    }
+
+    .wrapper-infos {
+        width: 70%;
     }
 
 }
+
+#adresses-compte {
+
+    .wrapper-adresses {
+        width: 80%;
+    }
+
+    .list-adresse {
+        
+    }
+
+}
+
+
