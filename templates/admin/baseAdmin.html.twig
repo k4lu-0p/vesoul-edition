@@ -11,7 +11,7 @@
     {{ encore_entry_link_tags("back")}}
     {% endblock %}
 </head>
-<body>
+<body class="d-flex">
 
     <span class="hamburger d-block d-sm-block d-md-block d-lg-none d-xl-none">
         <div class="btn-menu"></div>
@@ -34,10 +34,15 @@
                 <hr>
                 <a class="button-menu py-3 pl-5 pl-sm-3 pl-md-2 pl-lg-2 pl-xl-2" href=" {{ path('dashboard-mentions') }} "><i class="p-1 fas fa-file-alt"></i> MENTIONS LEGALES</a>
         </nav>
-                <a class="deconnexion text-center py-4" href="{{ path('security_back_logout')}}">DECONNEXION</a>   
+        <a class="deconnexion text-center py-4" href="{{ path('security_back_logout')}}">DECONNEXION</a>   
     </div>
-
+<main class="d-flex flex-column">
+    <div class="date pt-3 pr-2 text-right">
+        <p>date du jour</p>
+        <hr>
+    </div>
     {% block body %}{% endblock %}
+</main>
     {% block javascripts %}
     {{ encore_entry_script_tags("back")}}
     {% endblock %}
