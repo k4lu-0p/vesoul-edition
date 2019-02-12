@@ -1,0 +1,43 @@
+main {
+
+    position: absolute;
+    right: 0;
+    width: 85%;
+
+    .date {
+        right: 5%;
+        width: 90%;
+    }
+    .titre{
+        background-color: #999999;
+        width: 85%;
+        color: white;
+
+    }
+    .listBook {
+        width: 85%;
+        .nom-colonne {
+            border: #999999 solid 1px;
+            border-top: none;
+            p {
+                color: #999999;
+            }
+            hr {
+                border-right: black solid 1px;
+            }
+        }
+        .livre {
+            border: #999999 solid 1px;
+            border-top: none;
+            p {
+                height: 8rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:nth-child(7){
+                    overflow-y: scroll;
+                }
+            }
+            }
+    }
+}
