@@ -5,11 +5,7 @@ $color-footer: $color-header;
 $color-title: #666666;
 $color-text-light: white;
 
+@import "base";
 @import "index";
 @import "product";
 @import "compte";
-
-
-.wrapper {
-    min-height: 100vh;
-}
