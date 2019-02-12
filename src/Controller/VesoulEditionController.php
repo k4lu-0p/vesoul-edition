@@ -18,4 +18,14 @@ class VesoulEditionController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/product", name="product")
+     */
+    public function showProduct()
+    {
+        return $this->render('front/product.html.twig', [
+            'controller_name' => 'FrontController',
+        ]);
+    }
+
 }

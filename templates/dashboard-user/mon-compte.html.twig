@@ -1,0 +1,62 @@
+{% extends "vesoul-edition/base.html.twig" %}
+
+
+{% block content %}
+
+    <div id="compte-page" class="pt-4 pb-4 d-flex">
+
+        <nav id="menu-compte" class="col-3">
+            <ul>
+                <a class="list active" href="{{ path('dashboard_user_informations' )}}">
+                    <li>INFORMATIONS</li>
+                </a>
+                <a class="list" href="{{ path('dashboard_user_addresses')}}">
+                    <li>ADRESSES</li>
+                </a>
+                <a class="list" href="{{ path('dashboard_user_commands')}}">
+                    <li>COMMANDES</li>
+                </a>
+            </ul>
+            <div class="space"></div>
+        </nav>
+
+        <div id="infos-compte" class="col-9 d-flex justify-content-center">
+
+            <div class="wrapper-infos d-flex flex-column">
+
+                <div class="d-flex">
+                    <label for="homme" class="mr-2">
+                        <input type="radio" name="sexe" id="homme">M
+                    </label>
+                    <label for="femme">
+                        <input type="radio" name="sexe" id="femme">Mme
+                    </label>
+                </div>
+                <div class="d-flex flex-column">
+                    <input type="text" placeholder="Prénom">
+                    <input type="text" placeholder="Nom">
+                    <input type="email" placeholder="Email">
+                    <input type="password" placeholder="Mot de passe">
+                    <input type="password" placeholder="Nouveau mot de passe">
+                    <input type="date">
+                    <label for="news">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <input type="checkbox" name="news" id="news" class="justify-self-center">
+                        <label for="news" class="ml-2 align-self-center">Recevoir la newsletter</label>
+                    </div>
+                    <div class="d-flex align-items-end">
+                        <button>Enregistrer</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+{% endblock %}
