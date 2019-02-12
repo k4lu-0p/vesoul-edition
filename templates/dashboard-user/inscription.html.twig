@@ -1,0 +1,34 @@
+{% extends "vesoul-edition/base.html.twig" %}
+
+{% block body %}
+    {{ form_start(form, {'attr' : {'class': 'form-signin' }}) }}
+
+        <h1 class="h3 mb-3 font-weight-normal text-center">Lucas Robin : Portfolio</h1>
+
+        {{ form_row(form.username, {'label' : 'Nom d\'utilisateur' ,'attr' : {'class': 'form-control', 'placeholder' : 'Choisir un nom d\'utilisateur', 'id' : 'inputUser'}}) }}
+
+        {{ form_row(form.password, {'label' : 'Mot de passe', 'attr' : {'class': 'form-control', 'placeholder' : 'Choisir un mot de passe', 'id' : 'inputPassword'}}) }}
+
+        {{ form_row(form.confirm_password, {'label' : 'Confirmation', 'attr' : {'class': 'form-control', 'placeholder' : 'Confirmation du mot de passe', 'id' : 'inputConfirm'}}) }}
+
+        {{ form_row(form.firstname, {'label' : 'Prénom', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre prénom', 'id' : 'inputFirstname'}}) }}
+
+        {{ form_row(form.lastname, {'label' : 'Nom', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre nom', 'id' : 'inputLastname'}}) }}
+
+        {{ form_row(form.email, {'label' : 'Email', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre adresse mail', 'id' : 'inputMail'}}) }}
+
+        {{ form_row(form.tel, {'label' : 'Téléphone', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre numéro de téléphone', 'id' : 'inputTel'}}) }}
+
+        {{ form_row(form.birth, {'label' : 'Date de naissance', 'attr' : {'class': 'form-control', 'id' : 'inputBirth'}}) }}
+
+        {{ form_row(form.adresses, {'label' : 'Votre adresses', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre adresse', 'id' : 'inputDate'}}) }}
+
+        {{ form_row(form.newsletter, {'label' : 'Recevoir les newsletters', 'attr' : {'class': 'form-control', 'id' : 'inputPassword'}}) }}
+
+        {{ form_row(form.gender, {'label' : 'Sexe', 'attr' : {'class': 'form-control', 'placeholder' : 'Choisir un sexe (lol)', 'id' : 'inputGender'}}) }}
+
+
+        <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">S'inscrire</button>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; 2019-2020</p>
+    {{ form_end(form) }}
+{% endblock %}
