@@ -4,4 +4,3 @@ require('../../../node_modules/bootstrap/dist/js/bootstrap.js');
 require('../../../node_modules/bootstrap/dist/css/bootstrap.min.css');
 require('../css/main-front.scss');
 require('./main-front.ts');
-//require('./index.ts');

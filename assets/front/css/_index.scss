@@ -58,6 +58,15 @@
                 transition: 0.3s
             }
         }
-       
+        .info{
+            height: 125px;
+            h3{
+                font-size: 1.1em;
+                font-weight: bold;
+            }
+            #price{
+                font-weight: bold;
+            }
+        }
     }
 }
