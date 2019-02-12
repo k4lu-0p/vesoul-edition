@@ -6,10 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class SecurityBackController extends AbstractController
+/**
+ * @Route("/pannel-admin")
+ */
+class SecurityAdminController extends AbstractController
 {
     /**
-     * @Route("/connexion/admin", name="security_back_login")
+     * @Route("/connexion", name="security_admin_login")
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
@@ -18,7 +21,7 @@ class SecurityBackController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('securityAdmin/connexionSecurityAdmin.html.twig', [
+        return $this->render('security-admin/connexionSecurityAdmin.html.twig', [
             'title' => "Connexion administrateur",
             'last_username' => $lastUsername,
             'error' => $error
@@ -26,7 +29,7 @@ class SecurityBackController extends AbstractController
     }
 
     /**
-    * @Route("/deconnexion/admin", name="security_back_logout")
+    * @Route("/deconnexion", name="security_admin_logout")
     *
     */
     public function logout() 

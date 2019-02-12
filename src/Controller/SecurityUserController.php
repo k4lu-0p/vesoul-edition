@@ -7,17 +7,19 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
 
-
-class SecurityFrontController extends AbstractController
+/**
+ * @Route("/pannel-client")
+ */
+class SecurityUserController extends AbstractController
 {
     /**
-     * @Route("/connexion/user", name="security_front_login")
+     * @Route("/connexion", name="security_user_login")
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-        return $this->render('securityFront/connexionSecurityFront.html.twig', [
+        return $this->render('security-user/connexionSecurityUser.html.twig', [
             'title' => "Connexion utilisateur",
             'last_username' => $lastUsername,
             'error' => $error
@@ -25,7 +27,7 @@ class SecurityFrontController extends AbstractController
     }
 
     /**
-    * @Route("/deconnexion/user", name="security_front_logout")
+    * @Route("/deconnexion", name="security_user_logout")
     *
     */
     public function logout() 

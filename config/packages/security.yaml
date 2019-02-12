@@ -1,48 +1,46 @@
 security:
     encoders:
-        App\Entity\Admin:
-            algorithm: bcrypt
-        App\Entity\User:
-            algorithm: bcrypt
-              
+        App\Entity\Admin: bcrypt
+        App\Entity\User: bcrypt
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        in_manager: 
-            entity:
-                class: App\Entity\Admin
-                property: username
-        in_user:
-            entity:
-                class: App\Entity\User
-                property: username
+        database_admin:
+            entity: { class: App\Entity\Admin, property: username }
+        database_user:
+            entity: { class: App\Entity\User, property: username }
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        admin:
+
+        user_secured_area:
             anonymous: ~
-            pattern: ^/
-            provider: in_manager
-            form_login: 
-                default_target_path: dashboard
-                login_path: security_back_login
-                check_path: security_back_login
-            logout: 
-                path: security_back_logout
-                target: security_back_login
-        user:
-            anonymous: ~
-            pattern: ^/
-            provider: in_user
+            pattern: ^/pannel-client
+            provider: database_user
             form_login:
-                default_target_path: mon_compte
-                login_path: security_front_login
-                check_path: security_front_login
-               # csrf_token_generator: security.csrf.token_manager
+                check_path: security_user_login
+                login_path: security_user_login
+                # csrf_token_generator: security.csrf.token_manager
+                default_target_path: dashboard_user_home
             logout:
-                path: security_front_logout
-                target: security_front_login             
+                path: security_user_logout
+                target: security_user_login
+
+        admin_secured_area:
+            anonymous: ~
+            pattern: ^/pannel-admin
+            provider: database_admin
+            form_login:
+                check_path: security_admin_login
+                login_path: security_admin_login
+                # csrf_token_generator: security.csrf.token_manager
+                default_target_path: dashboard_admin_home
+            logout:
+                path: security_admin_logout
+                target: security_admin_login
+         
             # activate different ways to authenticate
 
             # http_basic: true
@@ -54,5 +52,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        #- { path: ^/admin, roles: ROLE_ADMIN }
-        #- { path: ^/mon-compte, roles: ROLE_USER }
+        - { path: ^/pannel-admin/accueil, roles: ROLE_ADMIN }
+        - { path: ^/pannel-client/accueil, roles: ROLE_USER }
+    
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
