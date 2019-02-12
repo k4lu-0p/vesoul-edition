@@ -55,12 +55,11 @@ header {
 
 main {
     background-color: $color-container;
-    height: 100%;
+    min-height: 73vh;
 
 }
 
 footer {    
-    height: 100%;
     background-color: $color-footer;
     color: $color-text-light;
 

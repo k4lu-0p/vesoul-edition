@@ -17,17 +17,24 @@
                     <li>COMMANDES</li>
                 </a>
             </ul>
-            <div class="space"></div>
         </nav>
         
         <div id="adresses-compte" class="col-9 d-flex justify-content-center">
 
-            <div class="wrapper-adresses d-flex flex-column">
+            <div class="wrapper-adresses d-flex flex-wrap justify-content-center">
 
             {% for adresse in adresses %}
 
-                <div class="list-adresse">
-                    <p>{{ adresse.number }} {{ adresse.type }} {{ adresse.street }} {{ adresse.city }} {{ adresse.cp }} {{ adresse.country }} {{ adresse.additional }}</p>
+                <div class="col-5 list-adresse card mt-2 mb-2 ml-2 mr-2 pt-4 pb-4 pl-4 pr-4">
+                        <p><span>Adresse :</span> {{ adresse.number }} {{ adresse.type }} {{ adresse.street }}</p>
+                        <p><span>Ville :</span> {{ adresse.city }}</p>
+                        <p><span>Code postal :</span> {{ adresse.cp }}</p>
+                        <p><span>Pays :</span> {{ adresse.country }}</p>
+                        <p class="mb-0"><span>Additionnel :</span> {{ adresse.additional }}</p>
+                        <div class="d-flex justify-content-end mt-4">
+                            <button class="align-self-end btn edit-address mr-2"><i class="fas fa-pencil-alt pen-address"></i></button>
+                            <button class="align-self-end btn delete-address"><i class="fas fa-trash trash-address"></i></button>
+                        </div>
                 </div>
 
             {% endfor %}
