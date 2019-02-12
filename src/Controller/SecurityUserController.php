@@ -5,28 +5,29 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\HttpFoundation\Request;
 
-class SecurityBackController extends AbstractController
+/**
+ * @Route("/pannel-client")
+ */
+class SecurityUserController extends AbstractController
 {
     /**
-     * @Route("/connexion/admin", name="security_back_login")
+     * @Route("/connexion", name="security_user_login")
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('securityAdmin/connexionSecurityAdmin.html.twig', [
-            'title' => "Connexion administrateur",
+        return $this->render('security-user/connexionSecurityUser.html.twig', [
+            'title' => "Connexion utilisateur",
             'last_username' => $lastUsername,
             'error' => $error
         ]);
     }
 
     /**
-    * @Route("/deconnexion/admin", name="security_back_logout")
+    * @Route("/deconnexion", name="security_user_logout")
     *
     */
     public function logout() 
