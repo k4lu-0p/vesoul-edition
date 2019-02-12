@@ -1,0 +1,40 @@
+{% extends "admin/baseAdmin.html.twig" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{# {% block stylesheets %}{% endblock %} #}
+
+{% block body %}
+
+<main class="d-flex flex-column">
+    <div class="date pt-3 pr-2 text-right">
+        <p>date du jour</p>
+        <hr>
+    </div>
+
+    <div class="addBook">
+
+    </div>
+    <div class="listBook">
+        <div class="d-flex">
+            <p>En stock</p>
+            <hr>
+            <p>Titre</p>
+            <hr>
+            <p>Code ISBN</p>
+            <hr>
+            <p>Prix</p>
+            <hr>
+            <p>Auteur</p>
+            <hr>
+            <p>Catégories</p>
+            <hr>
+            <p>Description</p>
+
+        </div>
+    </div>
+
+</main>
+{% endblock %}
+
+{# {% block javascripts %}{% endblock %} #}
