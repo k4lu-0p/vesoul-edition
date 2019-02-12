@@ -5,6 +5,7 @@
 {% block content %}
 <section id="index">
     <div class="row p-3">
+        {# Partie filtres ===================================== #}
         <div class="col-4 p-0 m-0" id="filters">
             <div class="row p-0 m-0">
                 <div class="title col-12 d-flex justify-content-center align-items-center ">
@@ -12,12 +13,15 @@
                 </div>
             </div>
             <form action="">
+                {# => Sous secton Auteur ------------- #}
                 <div class="row p-0 m-0">
                     <div id="badges" class="col-12 p-2">
                         <a href="#" class="badge badge-light p-2 m-2">Auteur 1</a>
                         <a href="#" class="badge badge-light p-2 m-2">Genre 1</a>
                     </div>
                 </div>
+                {# => Fin Sous section Badges ----------- #}
+                {# => Sous secton Auteur ------------- #}
                 <div class="row p-0 m-0">
                     <div class="col-12 p-2">
                         <h3>Auteur</h3>
@@ -57,6 +61,8 @@
                         </ul>
                     </div>
                 </div>
+                {# => Fin Sous section Auteur ----------- #}
+                {# => Sous secton Genre ------------- #}
                 <div class="row p-0 m-0">
                     <div class="col-12 p-2">
                         <h3>Genre</h3>
@@ -96,6 +102,8 @@
                         </ul>
                     </div>
                 </div>
+                {# => Fin Sous section genre ----------- #}
+                {# => Sous secton Prix ------------- #}
                 <div class="row p-0 m-0">
                     <div class="price col-12 p-2">
                         <h3>Prix</h3>
@@ -110,6 +118,8 @@
                 </div>
             </form>
         </div>
+        {# => Fin Sous section Prix ------------- #}
+        {# Fin de la partie filtres ======================================= #}
         <div class="col-8">
             <div class="row" id="sort">
                 <div class="col-6 d-flex align-items-center">
@@ -126,17 +136,259 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 d-flex flex-wrap">
-                    <div class="m-0 p-3">
+                <div class="col-12 m-0 p-0 d-flex flex-wrap justify-content-center">
+                    {# --- Livre 1 --- #}
+                    <div class="m-0 p-2">
                         <div class="book-card">
                             <div class="photo">
-                                <img src="build/static/livre1.png" alt="image du livre">
-                                <div class="overlay">
-                                    <a href="/detail/{{id}}"><button class="btn btn-info p-3">Details</button></a>
+                                <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                <div class="overlay d-flex justify-content-center  align-items-center">
+                                    <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                </div>
+                            </div>
+                            <h3 class="m-0">Un super livre</h3>
+                            <p class="m-0">Un aueur célèbre</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="mo" id="price"><span>15,99</span>€</p>
+                                </div>
+                                <div class="col-8">
+                                    <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {# --- Livre 2 --- #}
+                    <div class="m-0 p-2">
+                        <div class="book-card">
+                            <div class="photo">
+                                <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                <div class="overlay d-flex justify-content-center  align-items-center">
+                                    <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                </div>
+                            </div>
+                            <h3 class="m-0">Un super livre</h3>
+                            <p class="m-0">Un aueur célèbre</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="mo" id="price"><span>15,99</span>€</p>
+                                </div>
+                                <div class="col-8">
+                                    <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# --- Livre 3 --- #}
+                    <div class="m-0 p-2">
+                        <div class="book-card">
+                            <div class="photo">
+                                <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                <div class="overlay d-flex justify-content-center  align-items-center">
+                                    <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                </div>
+                            </div>
+                            <h3 class="m-0">Un super livre</h3>
+                            <p class="m-0">Un aueur célèbre</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="mo" id="price"><span>15,99</span>€</p>
+                                </div>
+                                <div class="col-8">
+                                    <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# --- Livre 4 --- #}
+                    <div class="m-0 p-2">
+                        <div class="book-card">
+                            <div class="photo">
+                                <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                <div class="overlay d-flex justify-content-center  align-items-center">
+                                    <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                </div>
+                            </div>
+                            <h3 class="m-0">Un super livre</h3>
+                            <p class="m-0">Un aueur célèbre</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="mo" id="price"><span>15,99</span>€</p>
+                                </div>
+                                <div class="col-8">
+                                    <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# --- Livre 5 --- #}
+                    <div class="m-0 p-2">
+                        <div class="book-card">
+                            <div class="photo">
+                                <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                <div class="overlay d-flex justify-content-center  align-items-center">
+                                    <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                </div>
+                            </div>
+                            <h3 class="m-0">Un super livre</h3>
+                            <p class="m-0">Un aueur célèbre</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="mo" id="price"><span>15,99</span>€</p>
+                                </div>
+                                <div class="col-8">
+                                    <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {# --- Livre 6 --- #}
+                    <div class="m-0 p-2">
+                        <div class="book-card">
+                            <div class="photo">
+                                <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                <div class="overlay d-flex justify-content-center  align-items-center">
+                                    <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                </div>
+                            </div>
+                            <h3 class="m-0">Un super livre</h3>
+                            <p class="m-0">Un aueur célèbre</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p class="m-o" id="price"><span>15,99</span>€</p>
+                                </div>
+                                <div class="col-8">
+                                    <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                       {# --- Livre 1 --- #}
+                       <div class="m-0 p-2">
+                            <div class="book-card">
+                                <div class="photo">
+                                    <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                    <div class="overlay d-flex justify-content-center  align-items-center">
+                                        <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                    </div>
+                                </div>
+                                <h3 class="m-0">Un super livre</h3>
+                                <p class="m-0">Un aueur célèbre</p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p class="mo" id="price"><span>15,99</span>€</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# --- Livre 2 --- #}
+                        <div class="m-0 p-2">
+                            <div class="book-card">
+                                <div class="photo">
+                                    <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                    <div class="overlay d-flex justify-content-center  align-items-center">
+                                        <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                    </div>
+                                </div>
+                                <h3 class="m-0">Un super livre</h3>
+                                <p class="m-0">Un aueur célèbre</p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p class="mo" id="price"><span>15,99</span>€</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# --- Livre 3 --- #}
+                        <div class="m-0 p-2">
+                            <div class="book-card">
+                                <div class="photo">
+                                    <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                    <div class="overlay d-flex justify-content-center  align-items-center">
+                                        <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                    </div>
+                                </div>
+                                <h3 class="m-0">Un super livre</h3>
+                                <p class="m-0">Un aueur célèbre</p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p class="mo" id="price"><span>15,99</span>€</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# --- Livre 4 --- #}
+                        <div class="m-0 p-2">
+                            <div class="book-card">
+                                <div class="photo">
+                                    <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                    <div class="overlay d-flex justify-content-center  align-items-center">
+                                        <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                    </div>
+                                </div>
+                                <h3 class="m-0">Un super livre</h3>
+                                <p class="m-0">Un aueur célèbre</p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p class="mo" id="price"><span>15,99</span>€</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# --- Livre 5 --- #}
+                        <div class="m-0 p-2">
+                            <div class="book-card">
+                                <div class="photo">
+                                    <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                    <div class="overlay d-flex justify-content-center  align-items-center">
+                                        <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                    </div>
+                                </div>
+                                <h3 class="m-0">Un super livre</h3>
+                                <p class="m-0">Un aueur célèbre</p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p class="mo" id="price"><span>15,99</span>€</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {# --- Livre 6 --- #}
+                        <div class="m-0 p-2">
+                            <div class="book-card">
+                                <div class="photo">
+                                    <img class="book-pic" src="build/livre1.jpg" alt="image du livre">
+                                    <div class="overlay d-flex justify-content-center  align-items-center">
+                                        <a href="/detail/id"><button class="btn btn-info p-2">Details</button></a>
+                                    </div>
+                                </div>
+                                <h3 class="m-0">Un super livre</h3>
+                                <p class="m-0">Un aueur célèbre</p>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p class="mo" id="price"><span>15,99</span>€</p>
+                                    </div>
+                                    <div class="col-8">
+                                        <a href=""><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
         </div>

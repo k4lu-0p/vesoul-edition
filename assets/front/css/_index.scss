@@ -31,4 +31,33 @@
             width: 150px;
         }
     }
+    .book-card{
+        background-color: white;
+        width: $width-book-card;
+        height: 350px;
+        .photo{
+            position: relative;
+            .book-pic{
+                width: $width-book-card;
+                height: $width-book-card;
+            }
+            .overlay{
+                display: none !important;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: $width-book-card;
+                height: $width-book-card;
+                background-color: rgba(10,10,10,0.4);
+                opacity: 40%;
+            }
+        }
+        .photo:hover{
+            .overlay{
+                display: flex !important;
+                transition: 0.3s
+            }
+        }
+       
+    }
 }
