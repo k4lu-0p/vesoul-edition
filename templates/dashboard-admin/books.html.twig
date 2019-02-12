@@ -5,27 +5,68 @@
 {# {% block stylesheets %}{% endblock %} #}
 
 {% block body %}
-<div class="addBook">
-    
-</div>
-<div class="listBook">
-    <div class="d-flex">
-    <p>En stock</p>
-    <hr>
-    <p>Titre</p>
-    <hr>
-    <p>Code ISBN</p>
-    <hr>
-    <p>Prix</p>
-    <hr>
-    <p>Auteur</p>
-    <hr>
-    <p>Catégories</p>
-    <hr>
-    <p>Description</p>
+
+<main class="d-flex flex-column align-items-center">
+    <div class="date pt-3 pr-2 text-right">
+        <p>date du jour</p>
+        <hr>
+    </div>
+
+    <div class="addBook">
 
     </div>
-</div>
+
+    <p class="titre p-3 m-0">Gestion des livres</p>
+    <div class="listBook">
+        <div class="nom-colonne w-100 m-0 row pt-2 d-flex justify-content-around">
+            <p class="text-center m-0 py-3 col-1">En stock</p>
+            <p class="text-center m-0 py-3 col-2">Titre</p>
+            <p class="text-center m-0 py-3 col-2">Code ISBN</p>
+            <p class="text-center m-0 py-3 col-1">Prix</p>
+            <p class="text-center m-0 py-3 col-2">Auteur</p>
+            <p class="text-center m-0 py-3 col-2">Catégories</p>
+            <p class="text-center m-0 py-3 col-2">Description</p>
+        </div>
+        <div class="livre row m-0 d-flex">
+            <p class="m-0 col-1">14</p>
+            <p class="m-0 col-2">Titre du livre</p>
+            <p class="m-0 col-2">1684865168435</p>
+            <p class="m-0 col-1">22.00</p>
+            <p class="m-0 col-2">John Doe</p>
+            <p class="m-0 col-2">Thriller</p>
+            <p class="text-center m-0 col-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quam nesciunt sed facere repellendus perferendis pariatur amet rem eum non et saepe facilis optio, quaerat eligendi. Similique doloribus nam perspiciatis.</p>
+        </div>
+        <div class="livre row m-0 d-flex">
+            <p class="m-0 col-1">14</p>
+            <p class="m-0 col-2">Titre du livre</p>
+            <p class="m-0 col-2">1684865168435</p>
+            <p class="m-0 col-1">22.00</p>
+            <p class="m-0 col-2">John Doe</p>
+            <p class="m-0 col-2">Thriller</p>
+            <p class="text-center m-0 col-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quam nesciunt sed facere repellendus perferendis pariatur amet rem eum non et saepe facilis optio, quaerat eligendi. Similique doloribus nam perspiciatis.</p>
+        </div>
+        <div class="livre row m-0 d-flex">
+            <p class="m-0 col-1">14</p>
+            <p class="m-0 col-2">Titre du livre</p>
+            <p class="m-0 col-2">1684865168435</p>
+            <p class="m-0 col-1">22.00</p>
+            <p class="m-0 col-2">John Doe</p>
+            <p class="m-0 col-2">Thriller</p>
+            <p class="text-center m-0 col-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quam nesciunt sed facere repellendus perferendis pariatur amet rem eum non et saepe facilis optio, quaerat eligendi. Similique doloribus nam perspiciatis.</p>
+        </div>
+        <div class="livre row m-0 d-flex">
+            <p class="m-0 col-1">14</p>
+            <p class="m-0 col-2">Titre du livre</p>
+            <p class="m-0 col-2">1684865168435</p>
+            <p class="m-0 col-1">22.00</p>
+            <p class="m-0 col-2">John Doe</p>
+            <p class="m-0 col-2">Thriller</p>
+            <p class="text-center m-0 col-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro quam nesciunt sed facere repellendus perferendis pariatur amet rem eum non et saepe facilis optio, quaerat eligendi. Similique doloribus nam perspiciatis.</p>
+        </div>
+    </div>
+
+</main>
+
 {% endblock %}
 
 {# {% block javascripts %}{% endblock %} #}
