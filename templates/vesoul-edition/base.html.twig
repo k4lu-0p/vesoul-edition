@@ -40,9 +40,12 @@
                     </form>
                     <div class="col-3 d-flex justify-content-end">
                         <div class="d-flex align-items-center">
-                            <p class="m-0 pr-3"> Bonjour,
-                                <br> Jean-Jean
-                            </p>
+                            {% if not app.user %}
+                                <a class="m-0 pr-3" href="#">Inscription</a>
+                                <a class="m-0 pr-3" href="{{ path('security_user_login') }}">Connexion</a>
+                            {% else %}
+                                <a class="m-0 pr-3" href="{{ path('security_user_logout') }}">Deconnexion</a>
+                            {% endif %}
                             <i class="fas fa-user user-icon p-2 m-0"></i>
                         </div>
                         <div class="pl-4">
