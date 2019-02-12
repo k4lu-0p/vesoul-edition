@@ -1,10 +1,13 @@
 #compte-page {
+
+    display: flex;
+
     
     #menu-compte {
         background-color: $color-header;
         color: white;
         padding: 0px;
-        height: 100%;
+        flex: 1;
 
         .active {
             background-color: $color-main;
@@ -40,10 +43,6 @@
             list-style: none;
         }
 
-        .space {
-            min-height: 500px;
-            max-height: 100%;
-        }
     }
 
    
@@ -88,13 +87,28 @@
 
     padding-left: 30px;
 
+    .delete-address {
+        background-color: red;
+    }
+    
+    .edit-address {
+        background-color: $color-main;
+        color: white;
+    }
+
     .wrapper-adresses {
         width: 90%;
     }
 
-    .list-adresse {
-
+    .trash-address {
+        color: white;
     }
+
+    span {
+        font-weight: bold;
+    }
+
+
 
 }
 
