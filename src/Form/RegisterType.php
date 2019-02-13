@@ -7,24 +7,36 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\RadioType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('gender')
-            ->add('firstname')
+            ->add('gender', ChoiceType::class, [
+                'data' => 0,
+                'choices' => [ 'Homme' => 0, 'Femme' => 1],
+                'expanded' => true,
+                'label' => 'Civilités'
+            ])
+            // ->add('gender', RadioType::class)
+            ->add('firstname')      
             ->add('lastname')
             ->add('password', PasswordType::class)
             ->add('confirm_password', PasswordType::class)
-            ->add('username')
-            // ->add('roles')
+            ->add('username') 
             ->add('email')
             ->add('tel')
             ->add('newsletter')
-            ->add('birth')
-            // ->add('addresses')
+            ->add('birth', DateType::class, [
+                'html5' => false,
+                'widget' => 'single_text',
+                'format' => 'dd-mm-yyyy',
+                
+            ])  
         ;
     }
 

@@ -35,7 +35,7 @@ class UserFixtures extends Fixture
         ->setGender('homme')
         ->setNewsletter(true)
         ->setBirth(new \DateTime());
-
+        
         $objectManager->persist($user);
         $objectManager->flush();
     }

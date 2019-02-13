@@ -1,6 +1,6 @@
 {% extends "vesoul-edition/base.html.twig" %}
 
-{% block body %}
+{% block content %}
     {{ form_start(form, {'attr' : {'class': 'form-signin' }}) }}
 
         <h1 class="h3 mb-3 font-weight-normal text-center">Inscription</h1>
@@ -19,17 +19,15 @@
 
         {{ form_row(form.tel, {'label' : 'Téléphone', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre numéro de téléphone', 'id' : 'inputTel'}}) }}
 
-        {{ form_row(form.birth, {'label' : 'Date de naissance', 'attr' : {'class': 'form-control', 'id' : 'inputBirth'}}) }}
+        {{ form_row(form.birth, {'label' : 'Date de naissance', 'attr' : {'class': 'form-control client-datepicker', 'id' : 'inputBirth', 'data-language' : 'fr', 'data-date-format' : 'dd-mm-yyyy'}}) }}
 
-        {{ form_row(form.adresses, {'label' : 'Votre adresses', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre adresse', 'id' : 'inputDate'}}) }}
-
+        {{ form_row(form.gender, {'label' : 'Homme', 'attr' : {'class': 'form-control', 'id' : 'radioMen'}}) }}
+        {# {{ form_row(form.gender, {'label' : 'Femme',     'attr' : {'class': 'form-control', 'id' : 'radioWomen'}}) }} #}
+        
         {{ form_row(form.newsletter, {'label' : 'Recevoir les newsletters', 'attr' : {'class': 'form-control', 'id' : 'inputPassword'}}) }}
 
-        {{ form_row(form.gender, {'label' : 'Sexe', 'attr' : {'class': 'form-control', 'placeholder' : 'Choisir un sexe (lol)', 'id' : 'inputGender'}}) }}
-
-
         <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">S'inscrire</button>
-        <p class="mt-5 mb-3 text-muted text-center">&copy; 2019-2020</p>
+
     {{ form_end(form) }}
 {% endblock %} 
 

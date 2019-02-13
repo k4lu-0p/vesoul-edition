@@ -14,6 +14,12 @@ Encore
     // Activer TS
     .enableTypeScriptLoader()
 
+    // Activer jQuery
+    .autoProvideVariables({
+        $: 'jquery',
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery',
+    })
     /*
      * ENTRY CONFIG
      *
