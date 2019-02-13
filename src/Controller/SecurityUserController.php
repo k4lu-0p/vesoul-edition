@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 
 /**
- * @Route("/pannel-client")
+ * @Route("/client")
  */
 class SecurityUserController extends AbstractController
 {

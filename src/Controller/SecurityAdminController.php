@@ -7,7 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * @Route("/pannel-admin")
+ * @Route("/admin")
  */
 class SecurityAdminController extends AbstractController
 {
