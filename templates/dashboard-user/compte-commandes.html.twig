@@ -19,14 +19,31 @@
             </ul>
         </nav>
         
-        <div id="adresses-compte" class="col-9 d-flex justify-content-center">
+        <div id="commandes-compte" class="col-9 d-flex justify-content-center">
 
-            <div class="wrapper-adresses d-flex flex-wrap justify-content-center">
+            <div class="wrapper-commandes d-flex align-items-center flex-column ml-3">
 
-                
-                {% for commande in commandes %}
 
-                    <p>{{ commande.date }} {{ commande.number }} {{ commande.quantity }} {{ commande.totalcost }} {{ commande.state }}</p>
+                    <div class="row commandes-header w-100">
+                        <div class="col-2">N°</div>
+                        <div class="col-2">Date</div>
+                        <div class="col-2">Quantité</div>
+                        <div class="col-2">Montant TTC</div>
+                        <div class="col-2">Statut</div>
+                    </div>
+
+                    {# {% for techno in projet.technology %} #}
+                    {% for commande in commandes %}
+
+                    <div class="row commandes-tableau w-100">
+                        <div class="col-2">{{ commande.number }}</div>
+                        <div class="col-2">{{ commande.date | date('d/m/Y') }}</div>
+                        <div class="col-2">{{ commande.quantity }}</div>
+                        <div class="col-2">{{ commande.totalcost }}</div>
+                        <div class="col-2">{{ commande.state }}</div>
+                        <div class="col-2"><i class="fas fa-search"></i></div>
+                    </div>
+
 
                 {% endfor %}
 

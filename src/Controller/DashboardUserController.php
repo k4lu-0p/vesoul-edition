@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AddressRepository;
 use App\Repository\CommandRepository;
+use App\Repository\BookRepository;
+use App\Repository\AuthorRepository;
 
 /**
  * @Route("/pannel-client")
