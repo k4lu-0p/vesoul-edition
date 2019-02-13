@@ -1,12 +1,16 @@
 #compte-page {
 
     display: flex;
-
+    height: 100%;
+    flex: 1;
     
     #menu-compte {
         background-color: $color-header;
         color: white;
         padding: 0px;
+        min-height: 70vh;
+
+        display: flex;
         flex: 1;
 
         .active {
@@ -50,6 +54,8 @@
 }
 
 #infos-compte {
+
+    height: 100%;
 
     input {
         border: none;
@@ -109,7 +115,36 @@
     }
 
 
+}
 
+#commandes-compte {
+
+    .wrapper-commandes {
+        width: 100%;
+        background-color: white;
+    }
+
+    .commandes-header, .commandes-tableau {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .commandes-header {
+
+        background-color: $color-header; 
+        color: white;
+        
+    }
+
+    .commandes-tableau {
+        color: $color-text-dark;
+    }
+
+    .commandes-tableau div:nth-child(1) {
+        color: $color-main;
+    }
 }
 
 
