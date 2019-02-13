@@ -124,7 +124,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getNewsletter(): bool
+    public function getNewsletter(): ?bool
     {
         return $this->newsletter;
     }
@@ -137,7 +137,7 @@ class User implements UserInterface
     }
 
     
-    public function getLastname(): string
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
@@ -149,7 +149,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getFirstname(): string
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }

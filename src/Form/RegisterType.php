@@ -24,7 +24,7 @@ class RegisterType extends AbstractType
             ->add('tel')
             ->add('newsletter')
             ->add('birth')
-            ->add('addresses')
+            // ->add('addresses')
         ;
     }
 
