@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\AddressRepository;
+use App\Repository\CommandRepository;
 
 /**
  * @Route("/pannel-client")
@@ -57,10 +58,12 @@ class DashboardUserController extends AbstractController
     /**
      * @Route("/commandes", name="dashboard_user_commands")
      */
-    public function showCommandes()
+    public function showCommandes(CommandRepository $repo)
     {
+        $commandes = $repo->findAll();
         return $this->render('dashboard-user/compte-commandes.html.twig', [
             'controller_name' => 'FrontController',
+            'commandes' => $commandes
         ]);
     }
 

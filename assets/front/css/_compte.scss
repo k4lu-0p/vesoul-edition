@@ -1,12 +1,16 @@
 #compte-page {
 
     display: flex;
-
+    height: 100%;
+    flex: 1;
     
     #menu-compte {
         background-color: $color-header;
         color: white;
         padding: 0px;
+        min-height: 70vh;
+
+        display: flex;
         flex: 1;
 
         .active {
@@ -50,6 +54,8 @@
 }
 
 #infos-compte {
+
+    height: 100%;
 
     input {
         border: none;

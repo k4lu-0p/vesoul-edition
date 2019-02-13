@@ -3,9 +3,9 @@
 
 {% block content %}
 
-    <div id="product-page" class="pt-4 pb-4 d-flex">
+    <div id="compte-page" class="pt-4 pb-4 d-flex">
 
-        <nav id="menu-compte" class="col-3">
+        <nav id="menu-compte" class="col-3 align-items-start">
             <ul>
                 <a class="list" href="{{ path('dashboard_user_informations' )}}">
                     <li>INFORMATIONS</li>
@@ -19,9 +19,16 @@
             </ul>
         </nav>
         
-        <div id="infos-compte" class="col-9 d-flex justify-content-center">
+        <div id="adresses-compte" class="col-9 d-flex justify-content-center">
 
-            <div class="wrapper-infos d-flex flex-column">
+            <div class="wrapper-adresses d-flex flex-wrap justify-content-center">
+
+                
+                {% for commande in commandes %}
+
+                    <p>{{ commande.date }} {{ commande.number }} {{ commande.quantity }} {{ commande.totalcost }} {{ commande.state }}</p>
+
+                {% endfor %}
 
 
             </div>
