@@ -3,21 +3,140 @@
 {% block title %}VesoulEdition - Panier{% endblock %}
 
 {% block content %}
-<div id="panier" class="d-flex justify-content-center align-items-center">
+<div id="panier" class="p-0 m-0">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 py-4">
             <h1>Votre panier</h1>
         </div>
     </div>
-    <div class="row">
-
-    </div>
-    <div class="row">
-        <div class="col-3">
-            <a href="panier/update"><button class="btn btn-info">Mettre à jour le panier</button></a>
+    <div class="row pr-3">
+        <!-- ===================== Partie Articles ======================== -->
+        <div class="col-9 px-3">
+            <!-- ----- Légende ----- -->
+            <div class="row legend m-0 mb-2 p-0">
+                <div class="col-12 d-flex justify-content-between align-items-center">
+                    <h3 class="m-0 pr-3 livre">
+                        Livre
+                    </h3>
+                    <h3 class="m-0 p-2 prix">
+                        Prix
+                    </h3>
+                    <h3 class="m-0 p-2 qty">
+                        Quantité
+                    </h3>
+                    <h3 class="m-0 p-2 total">
+                        Total
+                    </h3>
+                </div>
+            </div>
+            <!-- ----- Articles 1 ----- -->
+            <div class="row article m-0 my-2 p-0">
+                <div class="col-12  m-0 p-0 d-flex justify-content-between align-items-center">
+                    <div class="d-flex livre">
+                        <div class="d-flex align-items-center">
+                            <img src="build/livre1.jpg" alt="photo principale du livre" width="150px" height="150px">
+                            <div class="p-2 d-flex flex-column">
+                                <h4 class="m-0">Un livre</h4>
+                                <h5 class="m-0">Par un Auteur</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="m-0 prix">15,99 €</p>
+                    <div class="d-flex align-items-center">
+                        <p class="m-0 p-3" id="quantite">1</p>
+                        <button class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</button>
+                        <button class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</button>
+                    </div>
+                    <p class="m-0 pr-3 total">15,99 €</p>
+                    <button class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- ----- Articles 2 ----- -->
+            <div class="row article m-0 my-2 p-0">
+                <div class="col-12  m-0 p-0 d-flex justify-content-between align-items-center">
+                    <div class="d-flex livre">
+                        <div class="d-flex align-items-center">
+                            <img src="build/livre2.jpg" alt="photo principale du livre" width="150px" height="150px">
+                            <div class="p-2 d-flex flex-column">
+                                <h4 class="m-0">Un autre livre</h4>
+                                <h5 class="m-0">Par un autre Auteur</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="m-0"><span>18,00</span> €</p>
+                    <div class="d-flex align-items-center">
+                        <p class="m-0 p-3" id="quantite">2</p>
+                        <button class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</button>
+                        <button class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</button>
+                    </div>
+                    <p class="m-0 pr-3 total"><span>18,00</span> €</p>
+                    <button class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- ----- Articles 3 ----- -->
+            <div class="row article m-0 my-2 p-0">
+                <div class="col-12  m-0 p-0 d-flex justify-content-between align-items-center">
+                    <div class="d-flex livre">
+                        <div class="d-flex align-items-center">
+                            <img src="build/livre3.jpg" alt="photo principale du livre" width="150px" height="150px">
+                            <div class="p-2 d-flex flex-column">
+                                <h4 class="m-0">Encore un livre</h4>
+                                <h5 class="m-0">Par encore un Auteur</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="m-0"><span>21,50</span> €</p>
+                    <div class="d-flex align-items-center">
+                        <p class="m-0 p-3" id="quantite">1</p>
+                        <button class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</button>
+                        <button class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</button>
+                    </div>
+                    <p class="m-0 pr-3 total"><span>21,50</span> €</p>
+                    <button class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="col-3">
-            <a href=""><button class="btn btn-light"></button>continuer mes ahats</a>
+        <!-- ======================= Partie Total ===================== -->
+        <div class="col-3 p-3" id="total">
+            <div class="row mb-5">
+                <div class="col-12 titre">Total du panier</div>
+            </div>
+            <div class="row py-3 d-flex justify-content-between">
+                <div class="col-6">Sous-total</div>
+                <div class="col-6 text-right infos"><span>73,49</span> €</div>
+            </div>
+            <div class="row py-3 d-flex justify-content-between">
+                <div class="col-6">Livraison</div>
+                <div class="col-6 text-right infos">Gratuite</div>
+            </div>
+            <div class="row py-3 d-flex justify-content-between">
+                <div class="col-6">TVA</div>
+                <div class="col-6 text-right infos"><span>14,70</span> €</div>
+            </div>
+            <div class="row py-4 d-flex justify-content-between">
+                <div class="col-6 total">Total</div>
+                <div class="col-6 text-right total"><span>73,49</span> €</div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="commande"><button class="btn btn-info w-100">Commander</button></a>
+                </div>
+            </div>
+            </div-col-3>
+        </div>
+    </div>
+    <div class="row py-4">
+        <div class="col-4">
+            <a href="panier/update"><button class="btn btn-info w-100">Mettre à jour le panier</button></a>
+        </div>
+        <div class="col-4">
+            <a href=""><button class="btn btn-light w-100">continuer mes ahats</button></a>
         </div>
     </div>
 </div>
