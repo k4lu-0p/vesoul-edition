@@ -38,16 +38,20 @@
                         <div class="col-2">Statut</div>
                     </div>
 
-                    {# {% for techno in projet.technology %} #}
+
                     {% for commande in commandes %}
 
-                    <div class="row commandes-tableau w-100">
-                        <div class="col-2">{{ commande.number }}</div>
-                        <div class="col-2">{{ commande.date | date('d/m/Y') }}</div>
-                        <div class="col-2">{{ commande.quantity }}</div>
-                        <div class="col-2">{{ commande.totalcost }} €</div>
-                        <div class="col-2 {{ commande.state == "en cours" ? 'orange' : 'green' }}">{{ commande.state }}</div>
-                        <div class="col-2"><button class="btn"><i class="fas fa-search"></i></button></div>
+                    <div class="table-commandes w-100 d-flex justify-content-center">
+
+                        <div class="row commandes-tableau w-100">
+                            <div class="col-2">{{ commande.number }}</div>
+                            <div class="col-2">{{ commande.date | date('d/m/Y') }}</div>
+                            <div class="col-2">{{ commande.quantity }}</div>
+                            <div class="col-2">{{ commande.totalcost }} €</div>
+                            <div class="col-2 {{ commande.state == "en cours" ? "orange" : "green" }}">{{ commande.state }}</div>
+                            <div class="col-2"><button class="btn"><i class="fas fa-search"></i></button></div>
+                        </div>
+
                     </div>
 
 
