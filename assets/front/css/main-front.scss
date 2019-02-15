@@ -2,9 +2,9 @@ $color-main: #00BCD4;
 $color-container: #EDEDED;
 $color-header : #444444;
 $color-footer: $color-header;
-$color-title: #666666;
+$color-title: #444444;
 $color-text-light: white;
-$color-text-dark: #666666;
+$color-text-dark: #333333;
 $width-book-card: 225px;
 $color-bg-clear: white;
 $color-text-dark: black;
@@ -15,4 +15,4 @@ $color-text-dark: black;
 @import "compte";
 @import "user-connexion";
 @import "panier";
-
+@import "commande";
