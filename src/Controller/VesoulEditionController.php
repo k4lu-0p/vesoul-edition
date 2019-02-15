@@ -24,5 +24,15 @@ class VesoulEditionController extends AbstractController
         return $this->render('front/product.html.twig');
     }
 
+      /**
+     * @Route("/panier", name="panier")
+     */
+    public function showPanier()
+    {
+        return $this->render('vesoul-edition/panier.html.twig', [
+            'controller_name' => 'FrontController',
+        ]);
+    }
+
 }
 // lol

@@ -4,6 +4,7 @@ $color-header : #444444;
 $color-footer: $color-header;
 $color-title: #666666;
 $color-text-light: white;
+$color-text-dark: #666666;
 $width-book-card: 225px;
 $color-bg-clear: white;
 $color-text-dark: black;
@@ -13,4 +14,5 @@ $color-text-dark: black;
 @import "product";
 @import "compte";
 @import "user-connexion";
+@import "panier";
 
