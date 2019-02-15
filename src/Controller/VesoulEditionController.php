@@ -28,5 +28,15 @@ class VesoulEditionController extends AbstractController
         ]);
     }
 
+      /**
+     * @Route("/panier", name="panier")
+     */
+    public function showPanier()
+    {
+        return $this->render('vesoul-edition/panier.html.twig', [
+            'controller_name' => 'FrontController',
+        ]);
+    }
+
 }
 // lol
