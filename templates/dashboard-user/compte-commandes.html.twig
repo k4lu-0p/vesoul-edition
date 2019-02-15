@@ -5,7 +5,8 @@
 
     <div id="compte-page" class="pt-4 pb-4 d-flex">
 
-        <nav id="menu-compte" class="col-3 align-items-start">
+        <nav id="menu-compte" class="col-3">
+            <h2 class="text-center">Mon compte</h2>
             <ul>
                 <a class="list" href="{{ path('dashboard_user_informations' )}}">
                     <li>INFORMATIONS</li>
@@ -23,6 +24,11 @@
 
             <div class="wrapper-commandes d-flex align-items-center flex-column ml-3">
 
+                    <div class="cmd-title-wrapper">
+                        <div class="commandes-title">
+                            <h2>Mes commandes</h2>
+                        </div>
+                    </div>
 
                     <div class="row commandes-header w-100">
                         <div class="col-2">N°</div>
@@ -39,9 +45,9 @@
                         <div class="col-2">{{ commande.number }}</div>
                         <div class="col-2">{{ commande.date | date('d/m/Y') }}</div>
                         <div class="col-2">{{ commande.quantity }}</div>
-                        <div class="col-2">{{ commande.totalcost }}</div>
-                        <div class="col-2">{{ commande.state }}</div>
-                        <div class="col-2"><i class="fas fa-search"></i></div>
+                        <div class="col-2">{{ commande.totalcost }} €</div>
+                        <div class="col-2 {{ commande.state == "en cours" ? 'orange' : 'green' }}">{{ commande.state }}</div>
+                        <div class="col-2"><button class="btn"><i class="fas fa-search"></i></button></div>
                     </div>
 
 
