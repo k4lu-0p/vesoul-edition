@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Croissant+One');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans');
+
 $color-main: #00BCD4;
 $color-container: #EDEDED;
 $color-header : #444444;
@@ -8,6 +12,9 @@ $color-text-dark: #666666;
 $width-book-card: 225px;
 $color-bg-clear: white;
 $color-text-dark: black;
+$font-title: 'Croissant One', cursive;
+$font-secondary: 'Roboto Slab', serif;
+$font-main: 'Work Sans', sans-serif;
 
 @import "base";
 @import "index";
