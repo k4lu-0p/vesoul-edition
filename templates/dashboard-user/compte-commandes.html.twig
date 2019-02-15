@@ -3,9 +3,10 @@
 
 {% block content %}
 
-    <div id="product-page" class="pt-4 pb-4 d-flex">
+    <div id="compte-page" class="pt-4 pb-4 d-flex">
 
         <nav id="menu-compte" class="col-3">
+            <h2 class="text-center">Mon compte</h2>
             <ul>
                 <a class="list" href="{{ path('dashboard_user_informations' )}}">
                     <li>INFORMATIONS</li>
@@ -17,12 +18,40 @@
                     <li>COMMANDES</li>
                 </a>
             </ul>
-            <div class="space"></div>
         </nav>
         
-        <div id="infos-compte" class="col-9 d-flex justify-content-center">
+        <div id="commandes-compte" class="col-9 d-flex justify-content-center">
 
-            <div class="wrapper-infos d-flex flex-column">
+            <div class="wrapper-commandes d-flex align-items-center flex-column ml-3">
+
+                    <div class="cmd-title-wrapper">
+                        <div class="commandes-title">
+                            <h2>Mes commandes</h2>
+                        </div>
+                    </div>
+
+                    <div class="row commandes-header w-100">
+                        <div class="col-2">N°</div>
+                        <div class="col-2">Date</div>
+                        <div class="col-2">Quantité</div>
+                        <div class="col-2">Montant TTC</div>
+                        <div class="col-2">Statut</div>
+                    </div>
+
+                    {# {% for techno in projet.technology %} #}
+                    {% for commande in commandes %}
+
+                    <div class="row commandes-tableau w-100">
+                        <div class="col-2">{{ commande.number }}</div>
+                        <div class="col-2">{{ commande.date | date('d/m/Y') }}</div>
+                        <div class="col-2">{{ commande.quantity }}</div>
+                        <div class="col-2">{{ commande.totalcost }} €</div>
+                        <div class="col-2 {{ commande.state == "en cours" ? 'orange' : 'green' }}">{{ commande.state }}</div>
+                        <div class="col-2"><button class="btn"><i class="fas fa-search"></i></button></div>
+                    </div>
+
+
+                {% endfor %}
 
 
             </div>

@@ -1,48 +1,68 @@
 #compte-page {
+
+    display: flex;
+    height: 100%;
+    flex: 1;
     
     #menu-compte {
-        background-color: $color-header;
-        color: white;
+        background-color: transparent;
+        color: $color-header;
         padding: 0px;
-        height: 100%;
+        min-height: 70vh;
+
+        // display: flex;
+        // flex: 1;
+
+        h2 {
+            background-color: white;
+            margin-bottom: 0;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: $color-main;
+            padding: 15px 0 15px 0;
+        }
 
         .active {
             background-color: $color-main;
+            color: white;
         }
 
         ul {
             list-style-type: none;
-            padding-left: 0px;
+            padding: 11px 0 5px 0;
             margin-bottom: 0px;
             width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            background-color: white;
         }
 
         .list {
-            border-bottom: solid white 2px;
+            border-bottom: solid white 6px;
             width: 100%;
-            height: 70px;
+            height: 50px;
             display: flex;
-            justify-content: center;
+            padding-left: 10px;
+        }
+
+        .list:not(.active) {
+            background-color: rgba(0, 188, 212, 0.2);
+            color: $color-header;
         }
         
         .list:hover {
             background-color: $color-main;
             text-decoration: none;
+            color: white;
         }
         
         li {
             display: flex;
             align-items: center;
-            color: white;
             list-style: none;
         }
 
-        .space {
-            height: 500px;
-        }
     }
 
    
@@ -50,6 +70,8 @@
 }
 
 #infos-compte {
+
+    min-height: 70vh;
 
     input {
         border: none;
@@ -85,14 +107,109 @@
 
 #adresses-compte {
 
+    padding-left: 30px;
+
+    .delete-address {
+        background-color: red;
+    }
+    
+    .edit-address {
+        background-color: $color-main;
+        color: white;
+    }
+
     .wrapper-adresses {
-        width: 80%;
+        width: 90%;
     }
 
-    .list-adresse {
+    .trash-address {
+        color: white;
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+
+}
+
+#commandes-compte {
+
+    .cmd-title-wrapper {
+        background-color : #EDEDED;
+        width: 100%;
+    }
+
+    .commandes-title {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 50px;
+        width: 100%;
+        background-color: $color-main;
+        color: white;
+        font-weight: bold;
+        padding-right: 15px;
+        margin-bottom: 20px;
         
+        h2 {
+            margin-bottom: 0;
+            font-size: 1.4em;
+        }
     }
 
+    .col-2 {
+        display: flex;
+        justify-content: center;
+    }
+
+    .wrapper-commandes {
+        width: 100%;
+        background-color: white;
+    }
+
+    .commandes-header, .commandes-tableau {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .commandes-header {
+
+        background-color: $color-header; 
+        color: white;
+        font-size: 12px;        
+    }
+    
+    .commandes-tableau {
+        color: $color-text-dark;
+        font-size: 16px;
+    }
+
+    .commandes-tableau div:nth-child(1) {
+        color: $color-main;
+        font-weight: bold;
+    }
+
+    .commandes-tableau div:nth-child(3), .commandes-tableau div:nth-child(4), .commandes-tableau div:nth-child(5) {
+        font-weight: bold;
+    }
+
+    .commandes-tableau {
+        button {
+            background-color: $color-main;
+            color: white;
+        }
+    }
+}
+
+.green {
+    color: green;
+}
+
+.orange {
+    color: orange;
 }
 
 

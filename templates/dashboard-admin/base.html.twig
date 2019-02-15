@@ -11,7 +11,7 @@
     {{ encore_entry_link_tags("admin")}}
     {% endblock %}
 </head>
-<body>
+<body class="d-flex">
 
     <span class="hamburger d-block d-sm-block d-md-block d-lg-none d-xl-none">
         <div class="btn-menu"></div>
@@ -38,6 +38,7 @@
     </div>
 
     {% block body %}{% endblock %}
+
     {% block javascripts %}
     {{ encore_entry_script_tags("admin")}}
     {% endblock %}

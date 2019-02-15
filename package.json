@@ -16,6 +16,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "air-datepicker": "^2.2.3",
         "bootstrap": "^4.2.1",
         "chart.js": "^2.7.3",
         "jquery": "^3.3.1",

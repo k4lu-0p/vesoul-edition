@@ -17,9 +17,10 @@
         crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
-    <!-- Feuille de style personalisée -->
-    <link rel="stylesheet" href="build/front.css">
+    {{ encore_entry_link_tags("front")}}
 
+    <!-- Feuille de style personalisée -->
+    {# <link rel="stylesheet" href="build/front.css"> #}
     <title>{% block title %}{% endblock %}</title>
 </head>
 
@@ -44,9 +45,12 @@
                     {# ======== Connexion ========#}
                     <div class="col-3 d-flex justify-content-end">
                         <div class="d-flex align-items-center">
-                            <p class="m-0 pr-3"> Bonjour,
-                                <br> Jean-Jean
-                            </p>
+                            {% if not app.user %}
+                                <a class="m-0 pr-3" href="#">Inscription</a>
+                                <a class="m-0 pr-3" href="{{ path('security_user_login') }}">Connexion</a>
+                            {% else %}
+                                <a class="m-0 pr-3" href="{{ path('security_user_logout') }}">Deconnexion</a>
+                            {% endif %}
                             <i class="fas fa-user user-icon p-2 m-0"></i>
                         </div>
                         {# ======== Panier ========#}
@@ -153,5 +157,6 @@
         </footer>
     </div>
 </body>
+    {{ encore_entry_script_tags("front")}}
 
 </html>

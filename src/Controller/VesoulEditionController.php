@@ -13,9 +13,7 @@ class VesoulEditionController extends AbstractController
      */
     public function home()
     {
-        return $this->render('vesoul-edition/home.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
+        return $this->render('vesoul-edition/home.html.twig');
     }
 
     /**
@@ -23,9 +21,7 @@ class VesoulEditionController extends AbstractController
      */
     public function showProduct()
     {
-        return $this->render('front/product.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
+        return $this->render('front/product.html.twig');
     }
 
       /**
