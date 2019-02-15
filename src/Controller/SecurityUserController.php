@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Entity\User;
 
 /**
- * @Route("/client")
+ * @Route("/pannel-client")
  */
 class SecurityUserController extends AbstractController
 {
@@ -42,7 +42,8 @@ class SecurityUserController extends AbstractController
     /**
     * @Route("/inscription", name="security_user_registration") 
     */ 
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder) {
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    {
 
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user); // Créer le formulaire
