@@ -109,19 +109,38 @@
 
 #adresses-compte {
 
-    padding-left: 30px;
+    padding-left: 15px;
 
     .delete-address {
         background-color: red;
     }
     
     .edit-address {
-        background-color: $color-main;
+        background-color: $color-title;
         color: white;
     }
 
     .wrapper-adresses {
-        width: 90%;
+        width: 100%;
+        margin-left: 15px;
+        h3 {
+            justify-self: stretch;
+            color: $color-main;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .list-adresse {
+            height: 200px;
+        }
+
+        .nouvelle-adresse {
+            background-color: rgba(0, 188, 212, 0.2)
+        }
+
+        .add-address {
+            border-radius: 50%;
+            color: $color-main;
+        }
     }
 
     .trash-address {
@@ -137,29 +156,9 @@
 
 #commandes-compte {
 
-    
 
-    .cmd-title-wrapper {
-        background-color : #EDEDED;
-        width: 100%;
-    }
-
-    .commandes-title {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        height: 50px;
-        width: 100%;
-        background-color: $color-main;
-        color: white;
-        font-weight: bold;
-        padding-right: 15px;
-        margin-bottom: 20px;
-        
-        h2 {
-            margin-bottom: 0;
-            font-size: 1.4em;
-        }
+    .table-commandes:nth-child(odd) {
+        background-color: rgba(212, 212, 212, 0.6);
     }
 
     .col-2 {
@@ -213,7 +212,30 @@
 }
 
 .orange {
-    color: orange;
+    color: rgb(238, 155, 0);
+}
+
+.title-wrapper {
+    background-color : #EDEDED;
+    width: 100%;
+}
+
+.title-compte {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    background-color: $color-main;
+    color: white;
+    font-weight: bold;
+    padding-right: 15px;
+    margin-bottom: 20px;
+    
+    h2 {
+        margin-bottom: 0;
+        font-size: 1.4em;
+    }
 }
 
 

@@ -27,8 +27,6 @@ class AddressFixtures extends Fixture
         // $objectManager->persist($address);
         // $objectManager->flush();
 
-        for ($i = 1; $i <= 3; $i++) {
-
             $address = new Address();
 
             $address->setNumber("2")
@@ -67,6 +65,5 @@ class AddressFixtures extends Fixture
 
             $objectManager->persist($address);
             $objectManager->flush();
-        }
     }
 }

@@ -52,8 +52,19 @@ class UserFixtures extends Fixture
 
         $objectManager->persist($command);
         $command = new Command();
-
+        
         // $objectManager->flush();
+        
+        $command->setDate(new \DateTimeImmutable())
+        ->setNumber(8917186412)
+        ->setQuantity(1)
+        ->setTotalcost(22)
+        ->setState("expédié")
+        ->addBook($book);
+        
+        $objectManager->persist($command);
+        $command = new Command();
+
 
         $command->setDate(new \DateTimeImmutable())
         ->setNumber(8917186412)
