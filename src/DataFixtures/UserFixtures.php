@@ -50,6 +50,14 @@ class UserFixtures extends Fixture
         ->setState("en cours")
         ->addBook($book);
 
+        $objectManager->persist($command);
+
+        $command->setDate(new \DateTimeImmutable())
+        ->setNumber(8657185758)
+        ->setQuantity(2)
+        ->setTotalcost(44)
+        ->setState("en cours")
+        ->addBook($book);
         
         $user->setFirstname("Lucas")
         ->setLastname("Robin")
