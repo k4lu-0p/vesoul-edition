@@ -18,7 +18,7 @@
 
     </div>
     <div class="listBook">
-        <div class="nom-colonne w-100 m-0 row pt-2 d-flex justify-content-around">
+        <div class="nom-colonne w-100 m-0 row pt-2 d-flex justify-content-around align-items-center">
             <p class="text-center m-0 py-3 col-2">En stock</p>
             <p class="text-center m-0 py-3 col-3">Titre</p>
             <p class="text-center m-0 py-3 col-3">Code ISBN</p>
@@ -26,22 +26,24 @@
             <p class="text-center m-0 py-3 col-2">Options</p>
         </div>
         <section class="livres">
-            <div class="livre row m-0 d-flex">
+            <div class="livre row m-0 d-flex justify-content-between">
                 <p class="m-0 col-2">14</p>
-                <p class="m-0 col-2">Titre du livre</p>
+                <p class="m-0 col-3">Titre du livre</p>
                 <p class="m-0 col-3">1684865168435</p>
                 <p class="m-0 col-2">22.00 €</p>
-                {# bouton voir les détails #}
-                <button type="button" class="col-1 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i title="Voir les détails" class="details fas fa-eye"></i>
-                </button>
-                {# bouton modifier les détails #}
-                <button type="button" class="col-1" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i title="Modifier" class="modifier fas fa-pen"></i>
-                </button>
-                {# supprimer le livre #}
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
-                    <i title="Effacer" class="effacer fas fa-trash"></i>
+                <div class="options col-2 d-flex justify-content-around">
+                    {# bouton voir les détails #}
+                    <button type="button" class="details btn btn-primary" data-toggle="modal" data-target="#lightboxShow">
+                        <i title="Voir les détails" class="fas fa-eye"></i>
+                    </button>
+                    {# bouton modifier les détails #}
+                    <button type="button" class="modifier" data-toggle="modal" data-target="#lightboxEdit">
+                        <i title="Modifier" class="fas fa-pen"></i>
+                    </button>
+                    {# supprimer le livre #}
+                    <button type="button" class="effacer" data-toggle="modal" data-target="#lightboxDelete">
+                        <i title="Effacer" class="fas fa-trash"></i>
+                    </button>
                 </div>
             </div>
             <div class="livre row m-0 d-flex">
@@ -49,10 +51,19 @@
                 <p class="m-0 col-3">Titre du livre 2</p>
                 <p class="m-0 col-3">4981541896443</p>
                 <p class="m-0 col-2">20.00 €</p>
-                <button type="button" class="col-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
+                <div class="options col-2 d-flex justify-content-around">
+                    {# bouton voir les détails #}
+                    <button type="button" class="details btn btn-primary" data-toggle="modal" data-target="#lightboxShow">
+                        <i title="Voir les détails" class="fas fa-eye"></i>
+                    </button>
+                    {# bouton modifier les détails #}
+                    <button type="button" class="modifier" data-toggle="modal" data-target="#lightboxEdit">
+                        <i title="Modifier" class="fas fa-pen"></i>
+                    </button>
+                    {# supprimer le livre #}
+                    <button type="button" class="effacer" data-toggle="modal" data-target="#lightboxDelete">
+                        <i title="Effacer" class="fas fa-trash"></i>
+                    </button>
                 </div>
             </div>
             <div class="livre row m-0 d-flex">
@@ -60,10 +71,19 @@
                 <p class="m-0 col-3">Titre du livre 3</p>
                 <p class="m-0 col-3">5465651351359</p>
                 <p class="m-0 col-2">14.00 €</p>
-                <button type="button" class="col-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
+                <div class="options col-2 d-flex justify-content-around">
+                    {# bouton voir les détails #}
+                    <button type="button" class="details btn btn-primary" data-toggle="modal" data-target="#lightboxShow">
+                        <i title="Voir les détails" class="fas fa-eye"></i>
+                    </button>
+                    {# bouton modifier les détails #}
+                    <button type="button" class="modifier" data-toggle="modal" data-target="#lightboxEdit">
+                        <i title="Modifier" class="fas fa-pen"></i>
+                    </button>
+                    {# supprimer le livre #}
+                    <button type="button" class="effacer" data-toggle="modal" data-target="#lightboxDelete">
+                        <i title="Effacer" class="fas fa-trash"></i>
+                    </button>
                 </div>
             </div>
             <div class="livre row m-0 d-flex">
@@ -71,10 +91,19 @@
                 <p class="m-0 col-3">Titre du livre 4</p>
                 <p class="m-0 col-3">9875874512354</p>
                 <p class="m-0 col-2">25.00 €</p>
-                <button type="button" class="col-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
+                <div class="options col-2 d-flex justify-content-around">
+                    {# bouton voir les détails #}
+                    <button type="button" class="details btn btn-primary" data-toggle="modal" data-target="#lightboxShow">
+                        <i title="Voir les détails" class="fas fa-eye"></i>
+                    </button>
+                    {# bouton modifier les détails #}
+                    <button type="button" class="modifier" data-toggle="modal" data-target="#lightboxEdit">
+                        <i title="Modifier" class="fas fa-pen"></i>
+                    </button>
+                    {# supprimer le livre #}
+                    <button type="button" class="effacer" data-toggle="modal" data-target="#lightboxDelete">
+                        <i title="Effacer" class="fas fa-trash"></i>
+                    </button>
                 </div>
             </div>
             <div class="livre row m-0 d-flex">
@@ -82,43 +111,19 @@
                 <p class="m-0 col-3">Titre du livre 5</p>
                 <p class="m-0 col-3">9875874512354</p>
                 <p class="m-0 col-2">25.00 €</p>
-                <button type="button" class="col-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
-                </div>
-            </div>
-            <div class="livre row m-0 d-flex">
-                <p class="m-0 col-2">21</p>
-                <p class="m-0 col-3">Titre du livre 6</p>
-                <p class="m-0 col-3">9875874512354</p>
-                <p class="m-0 col-2">25.00 €</p>
-                <button type="button" class="col-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
-                </div>
-            </div>
-            <div class="livre row m-0 d-flex">
-                <p class="m-0 col-2">21</p>
-                <p class="m-0 col-3">Titre du livre 7</p>
-                <p class="m-0 col-3">9875874512354</p>
-                <p class="m-0 col-2">25.00 €</p>
-                <button type="button" class="col-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
-                </div>
-            </div>
-            <div class="livre row m-0 d-flex">
-                <p class="m-0 col-2">21</p>
-                <p class="m-0 col-3">Titre du livre 8</p>
-                <p class="m-0 col-3">9875874512354</p>
-                <p class="m-0 col-2">25.00 €</p>
-                <button type="button" class="col-2 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                    <i class="fas fa-eye"></i>
-                </button>
-                <div class="col-1 d-flex flex-column justify-content-around align-items-center">
+                <div class="options col-2 d-flex justify-content-around">
+                    {# bouton voir les détails #}
+                    <button type="button" class="details btn btn-primary" data-toggle="modal" data-target="#lightboxShow">
+                        <i title="Voir les détails" class="fas fa-eye"></i>
+                    </button>
+                    {# bouton modifier les détails #}
+                    <button type="button" class="modifier" data-toggle="modal" data-target="#lightboxEdit">
+                        <i title="Modifier" class="fas fa-pen"></i>
+                    </button>
+                    {# supprimer le livre #}
+                    <button type="button" class="effacer" data-toggle="modal" data-target="#lightboxDelete">
+                        <i title="Effacer" class="fas fa-trash"></i>
+                    </button>
                 </div>
             </div>
         </section>
@@ -126,8 +131,7 @@
 
     {# lightbox détails livre #}
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+    <div class="modal fade" id="lightboxShow" tabindex="-1" role="dialog" aria-labelledby="lightboxShow" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -148,8 +152,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                    <button class="modifier" title="Modifier"><i class="fas fa-pen"></i></button>
-                    <button class="effacer" title="Effacer"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         </div>
@@ -157,8 +159,7 @@
 
     {# lightbox ajouter un livre #}
 
-    <div class="modal fade" id="ajouterLivre" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+    <div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -182,10 +183,39 @@
                     <input class="col-7" name="img" type="file">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Enregistrer</button>
                 </div>
             </div>
         </div>
+    </div>
+
+    {# lightbox supprimer un livre #}
+
+    <div class="modal fade" id="lightboxDelete" tabindex="-1" role="dialog" aria-labelledby="lightboxDelete"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Supprimer "titre du livre" ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
+                    <p>Voulez-vous vraiment effacer "titre du livre" ?</p>
+                    <div class="deleteButtons">
+                        <button>
+                            ANNULER
+                        </button>
+                        <button>
+                            SUPPRIMER
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 
 </main>
