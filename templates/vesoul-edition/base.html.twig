@@ -29,19 +29,19 @@
     <div class="wrapper m-0 p-0 container-fluid">
         <header class="sticky-top">
             <nav class="row py-3 m-0">
-                <div class="col-3 d-flex align-items-center justify-content-start ">
-                    <a class="brand px-3" href="#">Vesoul Edition<span class="pl-1">.</span></a>
+                <div class="col-3 d-flex align-items-center justify-content-center ">
+                    <a class="brand" href="#">Vesoul Edition<span class="pl-1">.</span></a>
                 </div>
                 {# ======== Recherche ========#}
                 <form class="form-inline col-6 d-flex justify-content-center">
-                    <input class="form-control search-bar text-center m-0" type="search" placeholder="Rechercher votre livre ex: Peines de mort et exécutions en Haute-Saône "
+                    <input class="form-control search-bar text-center m-0" type="search" placeholder="Rechercher votre livre !"
                         aria-label="Search">
                     <button class="btn btn-search btn-info m-0" type="submit">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
                 {# ======== Connexion ========#}
-                <div class="col-3 pr-5">
+                <div class="col-3 d-flex align-items-center justify-content-center">
                     <div class="d-flex align-items-center justify-content-end">
                         {% if not app.user %}
                         <a class="m-0 pr-3" href="{{ path('security_user_login') }}">Mon espace</a>
@@ -107,8 +107,8 @@
             {% block content %}{% endblock %}
         </main>
 
-        <footer>
-            <div class="container pb-3">
+          <footer>
+            <div class="container py-5">
                 <div class="row">
                     {# ======== Navigation ========#}
                     <div class="col-3 p-0">
@@ -159,6 +159,7 @@
                 </div>
             </div>
         </footer>
+
     </div>
 </body>
 {{ encore_entry_script_tags("front")}}
