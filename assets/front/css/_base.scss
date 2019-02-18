@@ -110,14 +110,26 @@ footer {
         border-top-left-radius: 0px !important;
         border-bottom-left-radius: 0px !important; 
     }
-    p{
-        font-size: 0.9em;
-    }
+    
 
     li {
         list-style: none;
         text-decoration: none;
+
+        p{
+            font-size: 0.9em;
+            color: $color-text-footer;
+            font-size: 0.9em;
+            font-weight: lighter;
+        }
     }
+
+    hr {
+        background-color: $color-text-footer;
+        width: 5vw;
+    }
+
+  
 }
 
 
