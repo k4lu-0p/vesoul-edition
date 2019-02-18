@@ -1,7 +1,9 @@
+
 .wrapper{
     min-height: 100vh;
 }
 header {
+    font-family: $font-main;
     height: 100%;
     background-color: $color-header;
     color: $color-text-light;
@@ -20,11 +22,19 @@ header {
         text-decoration: none !important;
         color: $color-text-light;
         font-size: 1.5em;
+        font-family: $font-title;
+        
+
+        span {
+            color: $color-main;
+            font-size: 30px;
+        }
     }
     form{
         width: 100%;
         .search-bar{
             width: 70% !important;
+            border: solid $color-main 1px;
         }
     }
     .user-icon{
@@ -36,11 +46,14 @@ header {
 
     .banner {
         background-color: $color-main;
-       
+        
+
         h3 {
             text-transform: uppercase;
-            font-size: 0.8em;
             font-weight: bold;
+            font-family: $font-secondary;
+            font-size: 16px;
+            
         }
 
         i{
@@ -62,16 +75,21 @@ main {
 footer {    
     background-color: $color-footer;
     color: $color-text-light;
+    font-family: $font-main;
 
     h3 {
         text-transform: uppercase;
-        font-weight: bold;
-        font-size: 1.2em;
+        font-weight: lighter;
+        font-family: $font-secondary;
+        font-size: 16px;
+        // border-bottom: solid white 1px;
+        padding-bottom: 0.5rem;
     }
     a{
         text-decoration: none !important;
-        color: $color-text-light;
+        color: $color-text-footer;
         font-size: 0.9em;
+        font-weight: lighter;
 
     }
     a:hover{
@@ -80,12 +98,44 @@ footer {
     }
     input{
         width: 170px !important;
+        border-top-left-radius: 2px !important;
+        border-bottom-left-radius: 2px !important;         
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important; 
     }
     .btn-newsletter{
         font-size: 0.8em;
-
+        border-top-right-radius: 2px !important;
+        border-bottom-right-radius: 2px !important;         
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important; 
     }
     p{
         font-size: 0.9em;
     }
+
+    li {
+        list-style: none;
+        text-decoration: none;
+    }
 }
+
+
+nav {
+    .search-bar {
+        border-top-left-radius: 2px !important;
+        border-bottom-left-radius: 2px !important;         
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important; 
+    }
+
+    .btn-search {
+        border-top-right-radius: 2px !important;
+        border-bottom-right-radius: 2px !important;         
+        border-top-left-radius: 0px !important;
+        border-bottom-left-radius: 0px !important; 
+        
+    }
+}
+
+
