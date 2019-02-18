@@ -3,6 +3,8 @@
 
 {% block content %}
 
+
+
     <div id="compte-page" class="pt-4 pb-4 d-flex">
 
         <nav id="menu-compte" class="col-3">
@@ -21,6 +23,31 @@
         </nav>
         
         <div id="commandes-compte" class="col-9 d-flex justify-content-center">
+
+            <!-- Modal -->
+            <div class="modal fade" id="cmd-modal" tabindex="-1" role="dialog" aria-labelledby="cmd-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                <div class="modal-head d-flex">
+                    <div class="col-8 offset-2 d-flex justify-content-center align-items-center">
+                        <h5 class="modal-title" id="cmd-title">Détail de votre commande</h5>
+                    </div>
+                    <div class="col-1 offset-1 pt-2">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Télécharger en PDF</button>
+                    <button type="button" class="btn btn-primary">Fermer</button>
+                </div>
+                </div>
+            </div>
+            </div>
 
             <div class="wrapper-commandes d-flex align-items-center flex-column ml-3">
 
@@ -49,7 +76,7 @@
                             <div class="col-2">{{ commande.quantity }}</div>
                             <div class="col-2">{{ commande.totalcost }} €</div>
                             <div class="col-2 {{ commande.state == "en cours" ? "orange" : "green" }}">{{ commande.state }}</div>
-                            <div class="col-2"><button class="btn"><i class="fas fa-search"></i></button></div>
+                            <div class="col-2"><button type="button" class="btn" data-toggle="modal" data-target="#cmd-modal"><i class="fas fa-search"></i></button></div>
                         </div>
 
                     </div>

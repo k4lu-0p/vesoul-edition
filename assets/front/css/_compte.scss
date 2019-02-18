@@ -75,19 +75,31 @@
 
     min-height: 70vh;
 
-    input:not(.radio) {
+    input:not(.check) {
         border: none;
-        border-bottom: solid grey 2px;
+        border: solid rgb(168, 168, 168) 1px;
         border-radius: 0px;
         background-color: transparent;
         margin-top: 50px;
+        height: 40px;
+        padding-left: 10px;
     }
 
     input:focus {
         outline: none;
-        border-bottom: solid black 2px;
+        border: solid black 1px;
         transition: all 0.2s linear;
     }
+
+    hr {
+        border-bottom: 3px #333;
+        color: black !important;
+    }
+
+    input[type="checkbox"] {
+        width: 17px;
+        height: 17px;
+      }
 
     input:active {
         outline: none;
@@ -96,22 +108,32 @@
     button {
         background-color: $color-main;
         color: white;
-        width: 150px;
-        height: 40px;
-        margin-top: 30px;
+        width: 350px;
+        height: 65px;
+        margin-top: 50px;
+        font-size: 1.3em;
     }
 
     .wrapper-infos {
         width: 100%;
         background-color: white;
-        padding: 50px 100px 50px 100px;
+        padding: 70px 150px 70px 150px;
     }
+
+    .changing-pass {
+        display: none;
+    }
+      
 
 }
 
 #adresses-compte {
 
     padding-left: 15px;
+
+    .icon {
+        font-size: 1.3em;
+    }
 
     .delete-address {
         background-color: red;
@@ -148,6 +170,17 @@
         .new-card {
             font-size: 1.3em;
             font-weight: bold;
+        }
+
+        .fa-plus-circle {
+            background-color: white;
+        }
+
+        .button-add {
+            border-radius: 50%;
+            color: white;
+            background-color: $color-main;
+            padding: 10px;
         }
     }
 
@@ -213,6 +246,16 @@
             color: white;
         }
     }
+
+    .modal-head {
+        background-color: $color-main;
+        color: white;
+        height: 70px;
+        h5 {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    }
 }
 
 .green {
@@ -220,7 +263,7 @@
 }
 
 .orange {
-    color: rgb(238, 155, 0);
+    color: rgb(196, 127, 0);
 }
 
 .title-wrapper {
