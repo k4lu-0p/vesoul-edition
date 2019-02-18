@@ -3,7 +3,94 @@
 {% block title %}VesoulEdition - Confirmation de commande{% endblock %}
 
 {% block content %}
-<div id="confirmation" class="p-3 m-0">
-    Confirmation
+<div id="confirmation" class="p-5 m-0">
+    <div class="card">
+        <row>
+            <div class="col-12 p-3 d-flex justify-content-center">
+                <div class="logo d-flex justify-content-center align-items-center">
+                    <i class="fas fa-check"></i>
+                </div>
+            </div>
+        </row>
+        <row>
+            <div class="col-12 p-3 d-flex justify-content-center">
+                <h2 class="m-0">Merci ! Nous avons bien reçu votre commande.</h2>
+            </div>
+        </row>
+        <row>
+            <div class="col-12 p-2 d-flex justify-content-center">
+                <p class="m-0">Vous serez bientôt recontacté par téléphone pour convenir de la livraison</p>
+            </div>
+        </row>
+        <row class="d-flex">
+            <div class="col-4">
+                <h3 class="m-0">Infos Commande</h3>
+                <div class="m-0 d-flex justify-content-between">
+                    <p class="m-0">Numéro</p>
+                    <p class="m-0">24513</p>
+                </div>
+                <div class="m-0 d-flex justify-content-between">
+                    <p class="m-0">Date</p>
+                    <p class="m-0">15-02-2019</p>
+                </div>
+                <div class="m-0 d-flex justify-content-between">
+                    <p class="m-0">Total</p>
+                    <p class="m-0">73,49 €</p>
+                </div>
+                <div class="m-0 d-flex justify-content-between">
+                    <p class="m-0">Paeiment</p>
+                    <p class="m-0">Chèque</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <h3 class="m-0">Adresse de livraison</h3>
+                <div class="destinataire m-0 py-2 d-flex align-items-center">
+                    <i class="fas fa-user"></i>
+                    <div class="d-flex flex-column pl-3">
+                        <p class="prenom m-0">Jean-Jean</p>
+                        <p class="nom m-0">Dupont</p>
+                    </div>
+                </div>
+                <div class="place m-0 py-2 d-flex align-items-center">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="d-flex flex-column pl-3">
+                        <p class="adress m-0">2 Bis Rue du Truc</p>
+                        <p class="complement m-0">Appartement 4, 3e étage</p>
+                        <div class="d-flex m-0">
+                            <p class="cp m-0">70000</p>
+                            <p class="ville m-0">VESOUL</p>
+                        </div>
+                        <p class="pays m-0">FRANCE</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h3 class="m-0">Adresse de facturation</h3>
+                <div class="destinataire m-0 py-2 d-flex align-items-center">
+                    <i class="fas fa-user"></i>
+                    <div class="d-flex flex-column pl-3">
+                        <p class="prenom m-0">Jean-Jean</p>
+                        <p class="nom m-0">Dupont</p>
+                    </div>
+                </div>
+                <div class="place m-0 py-2 d-flex align-items-center">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="d-flex flex-column pl-3">
+                        <p class="adress m-0">2 Bis Rue du Truc</p>
+                        <p class="complement m-0">Appartement 4, 3e étage</p>
+                        <div class="d-flex m-0">
+                            <p class="cp m-0">70000</p>
+                            <p class="ville m-0">VESOUL</p>
+                        </div>
+                        <p class="pays m-0">FRANCE</p>
+                    </div>
+                </div>
+            </div>
+        </row>
+        <!-- tableau de prix -->
+        <row class="d-flex justify-content-center">
+            <div class="col-6 p-4"><button class="btn btn-info w-100">Retour à l'acceuil</button></div>
+        </row>
+    </div>
 </div>
 {% endblock %}
