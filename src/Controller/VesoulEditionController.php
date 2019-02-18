@@ -44,5 +44,15 @@ class VesoulEditionController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/confirmation", name="commander")
+     */
+    public function showConfirmation()
+    {
+        return $this->render('vesoul-edition/confirmation.html.twig', [
+            'controller_name' => 'FrontController',
+        ]);
+    }
+
 }
 // lol
