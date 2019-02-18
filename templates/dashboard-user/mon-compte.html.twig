@@ -22,33 +22,29 @@
 
         <div id="infos-compte" class="col-9 d-flex justify-content-center">
 
-            <div class="wrapper-infos d-flex flex-column">
+            <div class="wrapper-infos d-flex flex-column ml-3">
 
                 <div class="d-flex">
-                    <label for="homme" class="mr-2">
-                        <input type="radio" name="sexe" id="homme">M
+                    <label for="homme" class="mr-5">
+                        <input class="mr-2 radio" type="radio" name="sexe" id="homme">M
                     </label>
                     <label for="femme">
-                        <input type="radio" name="sexe" id="femme">Mme
+                        <input class="mr-2 radio" type="radio" name="sexe" id="femme">Mme
                     </label>
                 </div>
-                <div class="d-flex flex-column">
-                    <input type="text" placeholder="Prénom">
-                    <input type="text" placeholder="Nom">
+                <div class="d-flex flex-column ">
+                    <div class="d-flex justify-content-between">
+                        <input type="text" placeholder="Prénom">
+                        <input type="text" placeholder="Nom">
+                    </div>
                     <input type="email" placeholder="Email">
                     <input type="password" placeholder="Mot de passe">
                     <input type="password" placeholder="Nouveau mot de passe">
+                    <input type="password" placeholder="Confirmer le nouveau mot de passe">
                     <input type="date">
-                    <label for="news">
                 </div>
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <input type="checkbox" name="news" id="news" class="justify-self-center">
-                        <label for="news" class="ml-2 align-self-center">Recevoir la newsletter</label>
-                    </div>
-                    <div class="d-flex align-items-end">
-                        <button>Enregistrer</button>
-                    </div>
+                <div class="d-flex justify-content-end">
+                    <button>Enregistrer</button>
                 </div>
 
             </div>
