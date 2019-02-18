@@ -9,5 +9,6 @@ require('../../../node_modules/air-datepicker/dist/js/i18n/datepicker.fr');
 require('./main-front.ts');
 require('./home.ts');
 require('./connexion-client.js');
+require('./user-panel.ts');
 
 // const $ = require('jquery');

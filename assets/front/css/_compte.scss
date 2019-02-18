@@ -77,7 +77,7 @@
 
     input:not(.radio) {
         border: none;
-        border-bottom: solid grey 2px;
+        border-bottom: solid rgb(168, 168, 168) 1px;
         border-radius: 0px;
         background-color: transparent;
         margin-top: 50px;
@@ -85,9 +85,14 @@
 
     input:focus {
         outline: none;
-        border-bottom: solid black 2px;
+        border-bottom: solid black 1px;
         transition: all 0.2s linear;
     }
+
+    input[type="checkbox"] {
+        width: 17px;
+        height: 17px;
+      }
 
     input:active {
         outline: none;
@@ -96,9 +101,10 @@
     button {
         background-color: $color-main;
         color: white;
-        width: 150px;
-        height: 40px;
+        width: 350px;
+        height: 65px;
         margin-top: 30px;
+        font-size: 1.3em;
     }
 
     .wrapper-infos {
@@ -106,6 +112,11 @@
         background-color: white;
         padding: 50px 100px 50px 100px;
     }
+
+    input[type="checkbox"] {
+        color: blue;
+    }
+      
 
 }
 
