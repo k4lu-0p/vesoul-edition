@@ -53,7 +53,7 @@
 
     <div class="modal fade" id="lightboxDetails" tabindex="-1" role="dialog" aria-labelledby="lightboxDetails"
         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle">"Titre du livre"</h5>
@@ -61,7 +61,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                     <p><strong>Code ISBN : </strong>1684865168435</p>
                     <p><strong>Auteur : </strong>Trans Palette</p>
                     <p><strong>Prix : </strong>22.00 €</p>
@@ -69,38 +70,66 @@
                     <p><strong>Description : </strong>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque,
                         explicabo quod, dolorem velit voluptate recusandae itaque ea amet consequuntur corporis natus
                         fugit aperiam quis id veniam, neque quisquam facere ducimus.</p>
-                    <div class="d-flex flex-column justify-content-center">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-center align-items-center">
                         <div class="slider-for">
-
+                            <div class="">
+                                <h4>un</h4>
+                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            </div>
+                            <div class="">
+                                <h4>deux</h4>
+                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            </div>
+                            <div class="">
+                                <h4>trois</h4>
+                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            </div>
+                            <div class="">
+                                <h4>quatre</h4>
+                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            </div>
+                            <div class="">
+                                <h4>cinq</h4>
+                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            </div>
+                            <div class="">
+                                <h4>six</h4>
+                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            </div>
+                            <div class="">
+                                <h4>sept</h4>
+                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            </div>
                         </div>
-                        <div class="slider-nav">
-                            <div class="">
-                                {# <img src="https://placehold.it/150x250" alt=""> #}
-                                <h4>UN</h4>
+                        <div class="slider-nav pt-5">
+                            <div class="elem">
+                                <h4>un</h4>
+                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
                             </div>
-                            <div class="">
-                                {# <img src="https://placehold.it/150x250" alt=""> #}
-                                <h4>DEUX</h4>
+                            <div class="elem ">
+                                <h4>deux</h4>
+                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
                             </div>
-                            <div class="">
-                                {# <img src="https://placehold.it/150x250" alt=""> #}
-                                <h4>TROIS</h4>
+                            <div class="elem ">
+                                <h4>trois</h4>
+                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
                             </div>
-                            <div class="">
-                                {# <img src="https://placehold.it/150x250" alt=""> #}
-                                <h4>QUATRE</h4>
+                            <div class="elem ">
+                                <h4>quatre</h4>
+                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
                             </div>
-                            <div class="">
-                                {# <img src="https://placehold.it/150x250" alt=""> #}
-                                <h4>CINQ</h4>
+                            <div class="elem ">
+                                <h4>cinq</h4>
+                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
                             </div>
-                            <div class="">
-                                {# <img src="https://placehold.it/150x250" alt=""> #}
-                                <h4>SIX</h4>
+                            <div class="elem ">
+                                <h4>six</h4>
+                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
                             </div>
-                            <div class="">
-                                {# <img src="https://placehold.it/150x250" alt=""> #}
-                                <h4>SEPT</h4>
+                            <div class="elem ">
+                                <h4>sept</h4>
+                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
                             </div>
                         </div>
                     </div>
@@ -112,7 +141,7 @@
         </div>
     </div>
 
-    {# lightbox ajouter un livre #}
+    {# lightbox modifier un livre #}
 
     <div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -144,6 +173,39 @@
             </div>
         </div>
     </div>
+
+        {# lightbox ajouter un livre #}
+
+        <div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">"Titre du livre"</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body row">
+                            <label class="col-4" for="isbn"><strong>Code ISBN : </strong></label>
+                            <input class="col-7" name="isbn" type="text">
+                            <label class="col-4" for="auteur"><strong>Auteur : </strong></label>
+                            <input class="col-7" name="auteur" type="text">
+                            <label class="col-4" for="prix"><strong>Prix : </strong></label>
+                            <input class="col-7" name="prix" type="text">€
+                            <label class="col-4" for="cat"><strong>Catégories : </strong></label>
+                            <input class="col-7" name="cat" type="text">
+                            <label class="col-4" for="desc"><strong>Description : </strong></label>
+                            <input class="col-7" name="desc" type="text">
+                            <label class="col-4" for="img"><strong>Image(s) : </strong></label>
+                            <input class="col-7" name="img" type="file">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Enregistrer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     {# lightbox supprimer un livre #}
 
