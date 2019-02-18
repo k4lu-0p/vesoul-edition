@@ -24,3 +24,15 @@ $font-main: 'Work Sans', sans-serif;
 @import "user-connexion";
 @import "panier";
 @import "commande";
+@import 'inscription';
+
+// Redéfinition ou ajout de classe Bootstrap
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1350px;
+    }
+}
+
+.w-95 {
+    width: 95%!important;
+}

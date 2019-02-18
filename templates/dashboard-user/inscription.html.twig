@@ -1,34 +1,59 @@
 {% extends "vesoul-edition/base.html.twig" %}
 
 {% block content %}
-    {{ form_start(form, {'attr' : {'class': 'form-signin' }}) }}
 
-        <h1 class="h3 mb-3 font-weight-normal text-center">Inscription</h1>
+<div class="inscription-wrapper d-flex justify-content-center align-items-center">
 
-        {{ form_row(form.username, {'label' : 'Nom d\'utilisateur' ,'attr' : {'class': 'form-control', 'placeholder' : 'Choisir un nom d\'utilisateur', 'id' : 'inputUser'}}) }}
+    <div class="row">
 
-        {{ form_row(form.password, {'label' : 'Mot de passe', 'attr' : {'class': 'form-control', 'placeholder' : 'Choisir un mot de passe', 'id' : 'inputPassword'}}) }}
+        <div class="px-5 inscription-part-left col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 d-flex flex-column justify-content-center align-items-center">
+            <h1 class="text-center">Bienvenue !</h1>
+            <p class="text-center p-5">Veuillez saisir vos informations pour vous inscrire sur le site de Vesoul Edition</p>
+        </div>
 
-        {{ form_row(form.confirm_password, {'label' : 'Confirmation', 'attr' : {'class': 'form-control', 'placeholder' : 'Confirmation du mot de passe', 'id' : 'inputConfirm'}}) }}
+        <div class="p-5 inscription-part-right col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
 
-        {{ form_row(form.firstname, {'label' : 'Prénom', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre prénom', 'id' : 'inputFirstname'}}) }}
+            <h3 class="text-center pb-5 m-0">Créez votre compte</h3>
+            
+            {{ form_start(form, {'attr' : {'class': 'form-signin d-flex flex-column justify-content-center align-items-center' }}) }}
 
-        {{ form_row(form.lastname, {'label' : 'Nom', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre nom', 'id' : 'inputLastname'}}) }}
+                {{ form_row(form.username, {'label' : false ,'attr' : {'class': 'form-control mb-4', 'placeholder' : 'Nom d\'utilisateur', 'id' : 'inputUser'}}) }}
 
-        {{ form_row(form.email, {'label' : 'Email', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre adresse mail', 'id' : 'inputMail'}}) }}
+                {{ form_row(form.password, {'label' : false ,'attr' : {'class': 'form-control mb-4', 'placeholder' : 'Mot de passe', 'id' : 'inputPassword'}}) }}
 
-        {{ form_row(form.tel, {'label' : 'Téléphone', 'attr' : {'class': 'form-control', 'placeholder' : 'Votre numéro de téléphone', 'id' : 'inputTel'}}) }}
+                {{ form_row(form.confirm_password, {'label' : false ,'attr' : {'class': 'form-control mb-3', 'placeholder' : 'Confirmation du mot de passe', 'id' : 'inputConfirm'}}) }}
 
-        {{ form_row(form.birth, {'label' : 'Date de naissance', 'attr' : {'class': 'form-control client-datepicker', 'id' : 'inputBirth', 'data-language' : 'fr', 'data-date-format' : 'dd-mm-yyyy'}}) }}
+                {{ form_row(form.gender, {'label' : false ,'attr' : {'class': 'register-gender mb-3', 'id' : 'radioMen'}}) }}
 
-        {{ form_row(form.gender, {'label' : 'Homme', 'attr' : {'class': 'form-control', 'id' : 'radioMen'}}) }}
-        {# {{ form_row(form.gender, {'label' : 'Femme',     'attr' : {'class': 'form-control', 'id' : 'radioWomen'}}) }} #}
-        
-        {{ form_row(form.newsletter, {'label' : 'Recevoir les newsletters', 'attr' : {'class': 'form-control', 'id' : 'inputPassword'}}) }}
+                <div class="d-flex justify-content-between mb-4 wrapper-lastname-firstname">
+                    {{ form_row(form.firstname, {'label' : false ,'attr' : {'class': 'form-control', 'placeholder' : 'Prénom', 'id' : 'inputFirstname'}}) }}
 
-        <button class="btn btn-lg btn-primary btn-block mt-2" type="submit">S'inscrire</button>
+                    {{ form_row(form.lastname, {'label' : false ,'attr' : {'class': 'form-control', 'placeholder' : 'Nom', 'id' : 'inputLastname'}}) }}
+                </div>
 
-    {{ form_end(form) }}
+                {{ form_row(form.email, {'label' : false ,'attr' : {'class': 'form-control mb-4', 'placeholder' : 'Email', 'id' : 'inputMail'}}) }}
+                
+                <div class="wrapper-tel-birth d-flex justify-content-between mb-4">
+                    {{ form_row(form.tel, {'label' : false ,'attr' : {'class': 'form-control', 'placeholder' : 'Téléphone', 'id' : 'inputTel'}}) }}
+
+                    {{ form_row(form.birth, {'label' : false ,'attr' : {'placeholder' : 'Date de naissance' ,'class': 'form-control client-datepicker', 'id' : 'inputBirth', 'data-language' : 'fr', 'data-date-format' : 'dd-mm-yyyy'}}) }}
+                </div>
+                
+                {{ form_row(form.newsletter, {'label' : false, 'attr' : {'class': 'd-none', 'id' : 'inputPassword'}}) }}
+
+                <button class="btn-inscription btn btn-lg mt-2 px-3" type="submit">Inscription</button>
+
+        {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
 {% endblock %} 
 
 
