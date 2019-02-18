@@ -75,11 +75,10 @@
 
     min-height: 70vh;
 
-    input {
+    input:not(.radio) {
         border: none;
         border-bottom: solid grey 2px;
         border-radius: 0px;
-        // width: 250px;
         background-color: transparent;
         margin-top: 50px;
     }
@@ -99,10 +98,13 @@
         color: white;
         width: 150px;
         height: 40px;
+        margin-top: 30px;
     }
 
     .wrapper-infos {
-        width: 70%;
+        width: 100%;
+        background-color: white;
+        padding: 50px 100px 50px 100px;
     }
 
 }
@@ -128,6 +130,7 @@
             color: $color-main;
             font-size: 1.5em;
             font-weight: bold;
+            margin-bottom: 30px;
         }
         .list-adresse {
             height: 200px;
@@ -140,6 +143,11 @@
         .add-address {
             border-radius: 50%;
             color: $color-main;
+        }
+
+        .new-card {
+            font-size: 1.3em;
+            font-weight: bold;
         }
     }
 
