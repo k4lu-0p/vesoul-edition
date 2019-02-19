@@ -58,6 +58,21 @@ class Address
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $lastname;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -176,6 +191,42 @@ class Address
             $this->users->removeElement($user);
             $user->removeAddress($this);
         }
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }
