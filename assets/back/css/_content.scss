@@ -1,3 +1,4 @@
+$color-ajouter: #84B103;
 $color-details: #65b2ff;
 $color-modifier: #1976d2;
 $color-supprimer: #D93A30;
@@ -22,7 +23,7 @@ main {
 
         button {
             font-weight: inherit;
-            background-color: #84B103;
+            background-color: $color-ajouter;
             color: inherit;
             border: none;
             border-radius: 0.25rem;
@@ -121,20 +122,152 @@ main {
 
     #lightboxDetails {
         .modal-dialog {
-            max-width: 65%;
+            max-width: 55%;
+
             .modal-content {
                 .modal-body {
                     div {
-                        .slider-for{
+                        .slider-for {
                             width: 300px;
                             height: 500px;
                         }
-                        .slider-nav{
+
+                        .slider-nav {
                             width: 360px;
-                        }
                         }
                     }
                 }
             }
         }
     }
+
+    // lightbox modifier
+
+    #lightboxEdit {
+        .modal-dialog {
+            .modal-content {
+                .modal-body {
+                    .images {
+                        width: 90%;
+                        margin-left: 5%;
+                        margin-right: 5%;
+                        fieldset {
+                            width: fit-content;
+                            height: fit-content;
+
+                            .addImg {
+                                width: 100px;
+                                height: 170px;
+                                border: $color-details solid 3px;
+                                color: $color-details;
+                                border-radius: 0.25rem;
+                                transition: all 0.3s ease;
+
+                                &:hover {
+                                    cursor: pointer;
+                                    font-size: 1.3rem;
+                                }
+                            }
+
+                            input {
+                                width: 0.1px;
+                                height: 0.1px;
+                                opacity: 0;
+                                overflow: hidden;
+                                position: absolute;
+                                z-index: -1;
+                            }
+                            .elem{
+                                i{
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .modal-footer {
+                    .save {
+                        background-color: $color-modifier;
+                        border-color: $color-modifier;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #165ca3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+    // lightbox ajouter
+
+    #lightboxAdd {
+        .modal-dialog {
+            .modal-content {
+                .modal-body {
+                    .images {
+                        width: 90%;
+                        margin-left: 5%;
+                        margin-right: 5%;
+                        fieldset {
+                            width: fit-content;
+                            height: fit-content;
+
+                            .addImg {
+                                width: 75px;
+                                height: 125px;
+                                border: $color-details solid 3px;
+                                color: $color-details;
+                                border-radius: 0.25rem;
+                                transition: all 0.3s ease;
+
+                                &:hover {
+                                    cursor: pointer;
+                                    font-size: 1.3rem;
+                                }
+                            }
+
+                            input {
+                                width: 0.1px;
+                                height: 0.1px;
+                                opacity: 0;
+                                overflow: hidden;
+                                position: absolute;
+                                z-index: -1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+// lightbox supprimer
+
+#lightboxDelete {
+    .modal-dialog {
+        .modal-content {
+            .modal-body {
+                div {
+                    .supprimer {
+                        background-color: $color-supprimer;
+                        border: none;
+                        color: white;
+                        font-weight: bold;
+                        border-radius: 0.25rem;
+                        transition: all 0.3s ease;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #B03229;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
