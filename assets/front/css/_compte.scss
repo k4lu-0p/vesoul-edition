@@ -119,10 +119,6 @@
         background-color: white;
         padding: 70px 150px 70px 150px;
     }
-
-    .changing-pass {
-        display: none;
-    }
       
 
 }
@@ -263,9 +259,10 @@
             font-weight: bold;
             font-size: 1em;
         }
-        
+
         p {
             margin-bottom: 0px;
+            font-size: 0.8em;
         }
     }
 
@@ -282,7 +279,49 @@
 
     @media (min-width: 576px) {
         .modal-dialog {
-            max-width: 700px;
+            max-width: 800px;
+        }
+    }
+
+    .table-sm {
+        thead {
+            background-color: $color-header;
+            color: white;
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
+        .th-title {
+            color: $color-main;
+        }
+
+        tr {
+            height: 50px;
+            font-size: 0.8em
+        }
+
+        tbody {
+            tr:nth-child(odd):not(.last) {
+                background-color: rgba(212, 212, 212, 0.6);
+            }
+            tr {
+                height: 30px;
+                text-align: center;
+            }
+        }
+
+        .last {
+            background-color: rgba(0, 188, 212, 0.2);
+            td {
+                border-top: 0px;
+            }
+        }
+
+        .last:nth-last-child(1) {
+            td:nth-child(3), td:nth-child(4) {
+                color: $color-main;
+                font-weight: bold;
+            }
         }
     }
 
