@@ -256,6 +256,36 @@
             font-weight: bold;
         }
     }
+    
+    .subsection-cmd {
+        h3 {
+            color: $color-main;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        
+        p {
+            margin-bottom: 0px;
+        }
+    }
+
+    .modal-footer {
+        button {
+            font-size: 0.8em;
+        }
+
+        button:nth-child(2) {
+            background-color: #FF6666;
+            color: white;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .modal-dialog {
+            max-width: 700px;
+        }
+    }
+
 }
 
 .green {
