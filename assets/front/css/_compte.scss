@@ -91,11 +91,6 @@
         transition: all 0.2s linear;
     }
 
-    hr {
-        border-bottom: 3px #333;
-        color: black !important;
-    }
-
     input[type="checkbox"] {
         width: 17px;
         height: 17px;
@@ -109,15 +104,20 @@
         background-color: $color-main;
         color: white;
         width: 350px;
-        height: 65px;
+        height: 60px;
         margin-top: 50px;
+        margin-bottom: 50px;
         font-size: 1.3em;
+    }
+
+    .infos-content {
+        width: 100%;
+        background-color: white;
+        padding: 50px 100px 50px 100px;
     }
 
     .wrapper-infos {
         width: 100%;
-        background-color: white;
-        padding: 70px 150px 70px 150px;
     }
       
 
@@ -348,11 +348,11 @@
     width: 100%;
     background-color: $color-main;
     color: white;
-    font-weight: bold;
     padding-right: 15px;
     margin-bottom: 20px;
     
     h2 {
+        font-weight: bold;
         margin-bottom: 0;
         font-size: 1.4em;
     }

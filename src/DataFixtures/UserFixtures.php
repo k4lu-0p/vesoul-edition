@@ -75,9 +75,8 @@ class UserFixtures extends Fixture
         
         $user->setFirstname("Lucas")
         ->setLastname("Robin")
-        ->setEmail("lucas.rob1@live.fr")
         ->setTel("0649357680")
-        ->setUsername("root")
+        ->setUsername("lucas.rob1@live.fr")
         ->setRoles(["ROLE_USER"])
         ->setPassword($hash)
         ->setGender('homme')
