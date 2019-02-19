@@ -1,0 +1,15 @@
+#confirmation{
+    .card{
+        background-color: $color-bg-clear;
+        .logo{
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background-color: #009900;
+            .fa-check{
+                color: white;
+                font-size: 45px;
+            }
+        }
+    }
+}

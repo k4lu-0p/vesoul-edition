@@ -22,33 +22,35 @@
 
         <div id="infos-compte" class="col-9 d-flex justify-content-center">
 
-            <div class="wrapper-infos d-flex flex-column">
+            <div class="wrapper-infos d-flex flex-column ml-3 justify-content-center">
 
-                <div class="d-flex">
-                    <label for="homme" class="mr-2">
-                        <input type="radio" name="sexe" id="homme">M
+                <div class="d-flex sex-options">
+                    <label for="homme" class="mr-5">
+                        <input class="mr-2 homme check filled-in" type="checkbox" name="sexe" id="homme">M
                     </label>
                     <label for="femme">
-                        <input type="radio" name="sexe" id="femme">Mme
+                        <input class="mr-2 femme check filled-in" type="checkbox" name="sexe" id="femme">Mme
                     </label>
                 </div>
-                <div class="d-flex flex-column">
-                    <input type="text" placeholder="Prénom">
-                    <input type="text" placeholder="Nom">
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Mot de passe">
-                    <input type="password" placeholder="Nouveau mot de passe">
-                    <input type="date">
-                    <label for="news">
+                <div class="d-flex flex-column ">
+                    <div class="d-flex justify-content-between">
+                        <input type="text" placeholder="Prénom">
+                        <input type="text" placeholder="Nom">
+                    </div>
+                    <input type="email" placeholder="Adresse mail">
+                    <div class="d-flex justify-content-between">
+                        <input type="text" placeholder="Téléphone">
+                        <input type="date">
+                    </div>
+
+                    <hr>
+                    
+                    <input class="changing-pass" type="password" placeholder="Mot de passe">
+                    <input class="changing-pass" type="password" placeholder="Nouveau mot de passe">
+                    <input class="changing-pass" type="password" placeholder="Confirmer le nouveau mot de passe">
                 </div>
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <input type="checkbox" name="news" id="news" class="justify-self-center">
-                        <label for="news" class="ml-2 align-self-center">Recevoir la newsletter</label>
-                    </div>
-                    <div class="d-flex align-items-end">
-                        <button>Enregistrer</button>
-                    </div>
+                <div class="d-flex justify-content-center align-items-end">
+                    <button class="btn">Enregistrer les modifications</button>
                 </div>
 
             </div>

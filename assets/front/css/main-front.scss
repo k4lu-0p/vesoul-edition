@@ -8,11 +8,10 @@ $color-header : #444444;
 $color-footer: $color-header;
 $color-title: #444444;
 $color-text-light: white;
-$color-text-dark: #666666;
+$color-text-dark: #444444;
 $color-text-footer: rgb(182, 181, 181);
 $width-book-card: 225px;
 $color-bg-clear: white;
-$color-text-dark: black;
 $font-title: 'Croissant One', cursive;
 $font-secondary: 'Roboto Slab', serif;
 $font-main: 'Work Sans', sans-serif;
@@ -24,3 +23,16 @@ $font-main: 'Work Sans', sans-serif;
 @import "user-connexion";
 @import "panier";
 @import "commande";
+@import "confirmation";
+@import 'inscription';
+
+// Redéfinition ou ajout de classe Bootstrap
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1350px;
+    }
+}
+
+.w-95 {
+    width: 95%!important;
+}
