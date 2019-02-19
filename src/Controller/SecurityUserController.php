@@ -42,7 +42,7 @@ class SecurityUserController extends AbstractController
     /**
     * @Route("/inscription", name="security_user_registration") 
     */ 
-    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder)
+    public function registration(Request $request, ObjectManager $manager, UserPasswordEncoderInterface $encoder, \Swift_Mailer $mailer)
     {
 
         $user = new User();
@@ -57,6 +57,23 @@ class SecurityUserController extends AbstractController
             $manager->persist($user); // Faire persister les données en BDD
             $manager->flush(); // Envois le tout en BDD
             
+            $mail = (new \Swift_Message("Bienvenue sur Vesoul Edition !"))
+            ->setFrom($user->getUsername())
+            ->setTo('vesouledition@sfr.fr')
+            ->setBody(
+                $this->renderView(
+                    'email/confirm.html.twig',
+                    [
+                        'firstname' => $user->getFirstname(),
+                        'lastname' => $user->getLastname(),
+                        'email' => $user->getUsername()
+                        
+                    ]                                             
+                    ),
+                'text/html'
+            );
+
+            $mailer->send($mail);
             return $this->redirectToRoute('security_user_login'); // Redirige sur la route de login (plus bas)
         }
      
