@@ -64,4 +64,25 @@ class SecurityUserController extends AbstractController
             'form' => $form->createView() // Rendu du formulaire
         ]);
     }
+
+
+    /**
+     * @Route("/test/mail", name="mail_test")
+     */
+    public function sendMail(\Swift_Mailer $mailer)
+    {
+
+        $mail = (new \Swift_Message("Bonjour"))
+        ->setFrom('lucas.rob1@live.fr')
+        ->setTo('lucas.r@codeur.online')
+        ->setBody("<h1>Ceci est un message de test.</h1>", 'text/html');
+
+        $mailer->send($mail);
+
+        return $this->redirectToRoute('security_user_login');
+
+    }
+
+
+
 }
