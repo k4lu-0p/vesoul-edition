@@ -65,8 +65,8 @@ class SecurityUserController extends AbstractController
                     'email/confirm.html.twig',
                     [
                         'firstname' => $user->getFirstname(),
-                        'lastname' => $user->getLastname(),
-                        'email' => $user->getUsername()
+                        // 'lastname' => $user->getLastname(),
+                        // 'email' => $user->getUsername()
                         
                     ]                                             
                     ),
