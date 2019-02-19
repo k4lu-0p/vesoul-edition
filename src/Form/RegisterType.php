@@ -8,8 +8,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class RegisterType extends AbstractType
 {
@@ -22,13 +22,11 @@ class RegisterType extends AbstractType
                 'expanded' => true,
                 'label' => 'Civilités'
             ])
-            // ->add('gender', RadioType::class)
             ->add('firstname')      
             ->add('lastname')
             ->add('password', PasswordType::class)
             ->add('confirm_password', PasswordType::class)
-            ->add('username') 
-            ->add('email')
+            ->add('username', EmailType::class) 
             ->add('tel')
             ->add('newsletter')
             ->add('birth', DateType::class, [
