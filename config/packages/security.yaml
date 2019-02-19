@@ -15,18 +15,6 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        user_secured_area:
-            anonymous: ~
-            pattern: ^/pannel-client
-            provider: database_user
-            form_login:
-                check_path: security_user_login
-                login_path: security_user_login
-                # csrf_token_generator: security.csrf.token_manager
-                default_target_path: dashboard_user_home
-            logout:
-                path: security_user_logout
-                target: security_user_login
 
         admin_secured_area:
             anonymous: ~
@@ -40,7 +28,20 @@ security:
             logout:
                 path: security_admin_logout
                 target: security_admin_login
-         
+            
+        user_secured_area:
+            anonymous: ~
+            pattern: ^/
+            provider: database_user
+            form_login:
+                check_path: security_user_login
+                login_path: security_user_login
+                # csrf_token_generator: security.csrf.token_manager
+                default_target_path: dashboard_user_home
+            logout:
+                path: security_user_logout
+                target: security_user_login
+        
             # activate different ways to authenticate
 
             # http_basic: true

@@ -37,6 +37,7 @@ console.log('Moins de 4 éléments')
 console.log(document.querySelectorAll('.elem'));
 
 // TEST click sur le premier element afin d'avoir le carousel actif
+
 document.querySelectorAll('.elem').forEach(element => {
     if(!element.classList.contains('slick-cloned')){
         console.log(element);
