@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(
- *    fields={"email"},
+ *    fields={"username"},
  *    message="Le nom d'utilisateur que vous avez indiqué est déjà utilisé !"
  * )
  */
@@ -71,11 +71,6 @@ class User implements UserInterface
      * @ORM\Column(type="simple_array")
      */
     private $roles = [];
-
-    /**
-     * @ORM\Column(type="string", length=150)
-     */
-    private $email;
     
     /**
      * @ORM\Column(type="string", length=30)
@@ -219,18 +214,6 @@ class User implements UserInterface
         if ($this->addresses->contains($address)) {
             $this->addresses->removeElement($address);
         }
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
 
         return $this;
     }
