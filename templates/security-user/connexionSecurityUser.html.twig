@@ -9,7 +9,7 @@
             <h3 class="py-5">Nouveau sur notre site ?</h3>
             <p class="py-2 text-center">Inscrivez-vous des maintenant
                 <br>pour poursuivre votre commande</p>
-            <a class="py-5" href="#"><button class="btn btn-warning">Créer un compte</button></a>
+            <a class="py-5" href="{{ path('security_user_registration') }}"><button class="btn btn-warning">Créer un compte</button></a>
         </div>
         <div class="right-panel col-6 d-flex flex-column justify-content-center align-items-center py-4">
             <form action="{{ path('security_user_login') }}" method="post" class="form-signin">
@@ -17,7 +17,7 @@
                 {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-                <div class=" wrapper-login d-flex flex-column justify-content-around align-items-center">
+                <div class="wrapper-login d-flex flex-column justify-content-around align-items-center">
 
                     <h2 class="m-3 text-center">Déjà client ?</h2>
                     <h3 class="m-4 text-center">Connectez-vous</h3>
@@ -33,7 +33,7 @@
                 </div>
                 <button class="btn btn-lg btn-info btn-block my-2" type="submit">Connexion</button>
                 <div class="d-flex justify-content-center">
-                    <a href="" class="py-3 my-3 text-center" id="recup-mdp">Mot de passe oublié ?</a>
+                    <a href="#" class="py-3 my-3 text-center" id="recup-mdp">Mot de passe oublié ?</a>
                 </div>
 
                 {# <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate')}}"> #}
