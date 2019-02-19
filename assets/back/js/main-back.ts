@@ -33,7 +33,7 @@ let urlPath:string = window.location.pathname;
 
 let lastUrl:string = (urlPath.split("/")).slice(-1).pop();
 
-if(lastUrl == "admin"){
+if(lastUrl == "accueil"){
     for(let i:number ; i<buttonMenu.length ; i++){
         buttonMenu[i].classList.remove("button-active");
     }
@@ -51,7 +51,7 @@ if(lastUrl == "livres"){
     }
 buttonMenu[2].classList.add("button-active");
 }
-if(lastUrl == "info-boutique"){
+if(lastUrl == "boutique"){
     for(let i:number ; i<buttonMenu.length ; i++){
         buttonMenu[i].classList.remove("button-active");
     }
