@@ -11,5 +11,26 @@
                 font-size: 45px;
             }
         }
+        .infos{
+            h3{
+                font-size: 1.2em;
+                color: $color-main;
+                font-weight: bold;
+            }
+            p{
+                font-size: 0.8em;
+            }
+            .adresses{
+                padding-left: 100px;
+            }
+        }
+        .tableau-recap{
+            h3{
+                color: $color-header;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+        }
+      
     }
 }
