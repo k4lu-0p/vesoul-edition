@@ -57,7 +57,7 @@ main {
         }
 
         // liste des livres
-        section {
+        .livres {
             .livre {
                 border: #999999 solid 1px;
                 border-top: none;
@@ -122,7 +122,7 @@ main {
 
     #lightboxDetails {
         .modal-dialog {
-            max-width: 55%;
+            max-width: 45%;
 
             .modal-content {
                 .modal-body {

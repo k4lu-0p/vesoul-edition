@@ -32,31 +32,31 @@ class UserFixtures extends Fixture
         
         $book1 = new Book();
         
-        $book1->setDescription("C'est très le livre")
-        ->setPrice(24)
-        ->setIsbn(6486158165)
-        ->setStock(5)
+        $book1->setDescription("C'est très le premier livre, super intéressant")
+        ->setPrice(18)
+        ->setIsbn(3654135465)
+        ->setStock(8)
         ->setTitle("Le titre du livre");
 
         $objectManager->persist($book1);
 
         $book2 = new Book();
         
-        $book2->setDescription("C'est très le livre")
-        ->setPrice(24)
+        $book2->setDescription("Le deuxième de la saga")
+        ->setPrice(20)
         ->setIsbn(6486158165)
-        ->setStock(5)
-        ->setTitle("Le titre du livre");
+        ->setStock(15)
+        ->setTitle("Livre numéro 2");
 
         $objectManager->persist($book2);
 
         $book3 = new Book();
         
-        $book3->setDescription("C'est très le livre")
+        $book3->setDescription("C'est très le super livre, à lire")
         ->setPrice(24)
-        ->setIsbn(6486158165)
+        ->setIsbn(1351651364)
         ->setStock(5)
-        ->setTitle("Le titre du livre");
+        ->setTitle("Encore un très bon livre");
 
         $objectManager->persist($book3);
 

@@ -104,18 +104,38 @@
                         </button>
                     </div>
                     <div class="modal-body row">
-                        <label class="py-1 m-0 col-4" for="title"><strong>Titre : </strong></label>
-                        <input class="my-1 col-7" name="title" type="text" value="{{ book.title }}">
-                        <label class="py-1 m-0 col-4" for="isbn"><strong>Code ISBN : </strong></label>
-                        <input class="my-1 col-7" name="isbn" type="text" value="{{ book.isbn }}">
-                        <label class="py-1 m-0 col-4" for="auteur"><strong>Auteur : </strong></label>
-                        <input class="my-1 col-7" name="auteur" type="text" value="{{ book.author.firstname }} {{ book.author.lastname }}">
-                        <label class="py-1 m-0 col-4" for="prix"><strong>Prix en euro €: </strong></label>
+                        {{ form_start(form) }}
+                        
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.price) }}
+                        {{ form_row(form.isbn) }}
+                        {{ form_row(form.author) }}
+                        {{ form_row(form.categories) }}
+                        {{ form_row(form.description) }}
+                        
+                        {# <strong class="py-1 m-0 col-4">{{ form_label(form.title, 'Titre') }}</strong>
+                        {{ form_widget(form.title, {'value': '{{ book.title }}', 'attr': {'class': 'my-1 col-8'}} ) }}
+
+                        <strong class="py-1 m-0 col-4">{{ form_label(form.isbn, 'Code ISBN') }}</strong>
+                        {{ form_widget(form.isbn, {'value': '{{ book.isbn }}', 'attr': {'class': 'my-1 col-8'}} ) }}
+
+                        <strong class="py-1 m-0 col-4">{{ form_label(form.price, 'Prix en euro €') }}</strong>
+                        {{ form_widget(form.price, {'value': '{{ book.price }}', 'attr': {'class': 'my-1 col-8'}} ) }}
+
+                        <strong class="py-1 m-0 col-4">{{ form_label(form.isbn, 'Code ISBN') }}</strong>
+                        {{ form_widget(form.isbn, {'value': '{{ book.isbn }}', 'attr': {'class': 'my-1 col-8'}} ) }}
+
+                        <strong class="py-1 m-0 col-4">{{ form_label(form.isbn, 'Code ISBN') }}</strong>
+                        {{ form_widget(form.isbn, {'value': '{{ book.isbn }}', 'attr': {'class': 'my-1 col-8'}} ) }}
+
+                        <strong class="py-1 m-0 col-4">{{ form_label(form.isbn, 'Code ISBN') }}</strong>
+                        {{ form_widget(form.isbn, {'value': '{{ book.isbn }}', 'attr': {'class': 'my-1 col-8'}} ) }} #}
+                        {# <label class="py-1 m-0 col-4" for="prix"><strong>{{ form_label(form.price) }}</strong></label>
                         <input class="my-1 col-7" name="prix" type="text" value="{{ book.price }}">
                         <label class="py-1 m-0 col-4" for="cat"><strong>Catégories : </strong></label>
                         <input class="my-1 col-7" name="cat" type="text" value="{% for categorie in book.categories %}{{ categorie.name }} {% endfor %}">
-                        <label class="py-1 m-0 col-4" for="desc"><strong>Description : </strong></label>
-                        <input class="my-1 col-7" name="desc" type="text" value="{{ book.description }}">
+                        <label class="py-1 m-0 col-4" for="desc"><strong>{{ form_label(form.description) }}</strong></label>
+                        <input class="my-1 col-7" name="desc" type="text" value="{{ book.description }}"> #}
                         <div class="images d-flex flex-wrap">
                             <fieldset>
                                 <label class="addImg mt-1 ml-1 d-flex justify-content-center align-items-center" for="img"><i
@@ -127,6 +147,7 @@
                                 <img class="mt-1 ml-1" src="{{ image.url }}" width="100" height="170" alt="">
                             </div>
                             {% endfor %}
+                            {{ form_end(form) }}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -191,7 +212,7 @@
                         </button>
                     </div>
                     <div class="modal-body row">
-                        <p class="w-100 text-center">Voulez-vous vraiment effacer {{ book.title }} ?</p>
+                        <p class="w-100 pb-3 text-center">Voulez-vous vraiment effacer {{ book.title }} ?</p>
                         <div class="deleteButtons w-100 d-flex justify-content-around">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                 ANNULER
@@ -204,7 +225,6 @@
                 </div>
             </div>
         </div>
-</div>
 {% endfor %}
 </section>
 </div>
