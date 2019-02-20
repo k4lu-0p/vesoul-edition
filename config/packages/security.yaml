@@ -14,8 +14,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-
         admin_secured_area:
             anonymous: ~
             pattern: ^/pannel-admin
