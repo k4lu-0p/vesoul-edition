@@ -143,6 +143,11 @@
     .wrapper-adresses {
         width: 100%;
         margin-left: 15px;
+
+        .list-adresses:first-child {
+            margin-top: 0px !important;
+        }
+        
         h3 {
             justify-self: stretch;
             color: $color-main;
