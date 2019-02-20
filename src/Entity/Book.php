@@ -51,7 +51,7 @@ class Book
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Genra", inversedBy="books")
      */
-    private $genra;
+    private $genras;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="books")
