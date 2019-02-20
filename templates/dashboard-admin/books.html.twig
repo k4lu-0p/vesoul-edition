@@ -6,234 +6,208 @@
 
 {% block body %}
 
-<main class="d-flex flex-column align-items-center">
-    <div class="date pt-3 pr-2 text-right">
-        <p>date du jour</p>
-        <hr>
-    </div>
-    <div class="titre d-flex justify-content-between align-items-center">
-        <p class="p-3 m-0">Gestion des livres</p>
-        <button type="button" class="ajouter p-2 mr-2" title="Ajouter" data-toggle="modal" data-target="#ajouterLivre">
-            <i class="p-1 fas fa-plus"></i> Ajouter un livre</button>
+<div class="titre d-flex justify-content-between align-items-center">
+    <p class="p-3 m-0">Gestion des livres</p>
+    <button type="button" class="ajouter p-2 mr-2" title="Ajouter" data-toggle="modal" data-target="#lightboxAdd">
+        <i class="p-1 fas fa-plus"></i> Ajouter un livre</button>
 
+</div>
+<div class="listBook">
+    <div class="nom-colonne w-100 m-0 row pt-2 d-flex justify-content-around align-items-center">
+        <p class="text-center m-0 py-3 col-2">En stock</p>
+        <p class="text-center m-0 py-3 col-3">Titre</p>
+        <p class="text-center m-0 py-3 col-3">Code ISBN</p>
+        <p class="text-center m-0 py-3 col-2">Prix</p>
+        <p class="text-center m-0 py-3 col-2">Options</p>
     </div>
-    <div class="listBook">
-        <div class="nom-colonne w-100 m-0 row pt-2 d-flex justify-content-around align-items-center">
-            <p class="text-center m-0 py-3 col-2">En stock</p>
-            <p class="text-center m-0 py-3 col-3">Titre</p>
-            <p class="text-center m-0 py-3 col-3">Code ISBN</p>
-            <p class="text-center m-0 py-3 col-2">Prix</p>
-            <p class="text-center m-0 py-3 col-2">Options</p>
-        </div>
-        <section class="livres">
-            <div class="livre row m-0 d-flex justify-content-between">
-                <p class="m-0 col-2">14</p>
-                <p class="m-0 col-3">Titre du livre</p>
-                <p class="m-0 col-3">1684865168435</p>
-                <p class="m-0 col-2">22.00 €</p>
-                <div class="options col-2 d-flex justify-content-around">
-                    {# bouton voir les détails #}
-                    <button type="button" class="details btn btn-primary" data-toggle="modal" data-target="#lightboxDetails">
-                        <i title="Voir les détails" class="fas fa-eye"></i>
-                    </button>
-                    {# bouton modifier les détails #}
-                    <button type="button" class="modifier" data-toggle="modal" data-target="#lightboxEdit">
-                        <i title="Modifier" class="fas fa-pen"></i>
-                    </button>
-                    {# supprimer le livre #}
-                    <button type="button" class="effacer" data-toggle="modal" data-target="#lightboxDelete">
-                        <i title="Effacer" class="fas fa-trash"></i>
-                    </button>
-                </div>
+    <section class="livres">
+        {% for book in books %}
+
+        <div class="livre row m-0 d-flex justify-content-between">
+            <p class="m-0 col-2">{{ book.stock }}</p>
+            <p class="m-0 col-3">{{ book.title }}</p>
+            <p class="m-0 col-3">{{ book.isbn }}</p>
+            <p class="m-0 col-2">{{ book.price }} €</p>
+            <div class="options col-2 d-flex justify-content-around">
+                {# bouton voir les détails #}
+                <button type="button" class="details btn btn-primary" data-toggle="modal" data-target="#lightboxDetails">
+                    <i title="Voir les détails" class="fas fa-eye"></i>
+                </button>
+                {# bouton modifier les détails #}
+                <button type="button" class="modifier" data-toggle="modal" data-target="#lightboxEdit">
+                    <i title="Modifier" class="fas fa-pen"></i>
+                </button>
+                {# supprimer le livre #}
+                <button type="button" class="effacer" data-toggle="modal" data-target="#lightboxDelete">
+                    <i title="Effacer" class="fas fa-trash"></i>
+                </button>
             </div>
-        </section>
-    </div>
+        </div>
 
-    {# lightbox détails livre #}
+        {# lightbox détails livre #}
 
-    <div class="modal fade" id="lightboxDetails" tabindex="-1" role="dialog" aria-labelledby="lightboxDetails"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">"Titre du livre"</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body row">
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
-                    <p><strong>Code ISBN : </strong>1684865168435</p>
-                    <p><strong>Auteur : </strong>Trans Palette</p>
-                    <p><strong>Prix : </strong>22.00 €</p>
-                    <p><strong>Catégories : </strong>Thriller, Roman</p>
-                    <p><strong>Description : </strong>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque,
-                        explicabo quod, dolorem velit voluptate recusandae itaque ea amet consequuntur corporis natus
-                        fugit aperiam quis id veniam, neque quisquam facere ducimus.</p>
+        <div class="modal fade" id="lightboxDetails" tabindex="-1" role="dialog" aria-labelledby="lightboxDetails"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">{{ book.title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-center align-items-center">
-                        <div class="slider-for">
-                            <div class="">
-                                <h4>un</h4>
-                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                    <div class="modal-body row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
+                            <p class="pt-4 m-0"><strong>Code ISBN : </strong>{{ book.isbn}}</p>
+                            <p class="pt-4 m-0"><strong>Auteur : </strong>{{ book.author.firstname }} {{
+                                book.author.lastname }}</p>
+                            <p class="pt-4 m-0"><strong>Prix : </strong>{{ book.price }} €</p>
+                            <p class="pt-4 m-0"><strong>Catégories : </strong>
+                                {% for categorie in book.categories %}
+                                {{ categorie.name }}
+                                {% endfor %}</p>
+                            <p class="pt-4 m-0"><strong>Description : </strong>{{ book.description }}</p>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-center align-items-center">
+                            <div class="slider-for">
+                                {% for image in book.images %}
+                                <img class="" src="{{ image.url }}" width="300" height="500" alt="">
+                                {% endfor %}
+
                             </div>
-                            <div class="">
-                                <h4>deux</h4>
-                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
-                            </div>
-                            <div class="">
-                                <h4>trois</h4>
-                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
-                            </div>
-                            <div class="">
-                                <h4>quatre</h4>
-                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
-                            </div>
-                            <div class="">
-                                <h4>cinq</h4>
-                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
-                            </div>
-                            <div class="">
-                                <h4>six</h4>
-                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
-                            </div>
-                            <div class="">
-                                <h4>sept</h4>
-                                <img class="" src="https://placehold.it/150x250" width="300" height="500" alt="">
+                            <div class="slider-nav pt-5">
+                                {% for image in book.images %}
+                                <div class="elem">
+                                    <img class="" src="{{ image.url }}" width="75" height="125" alt="">
+                                </div>
+                                {% endfor %}
                             </div>
                         </div>
-                        <div class="slider-nav pt-5">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# lightbox modifier un livre #}
+
+        <div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Modifier {{ book.title }}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body row">
+                        <label class="py-1 m-0 col-4" for="title"><strong>Titre : </strong></label>
+                        <input class="my-1 col-7" name="title" type="text" value="{{ book.title }}">
+                        <label class="py-1 m-0 col-4" for="isbn"><strong>Code ISBN : </strong></label>
+                        <input class="my-1 col-7" name="isbn" type="text" value="{{ book.isbn }}">
+                        <label class="py-1 m-0 col-4" for="auteur"><strong>Auteur : </strong></label>
+                        <input class="my-1 col-7" name="auteur" type="text" value="{{ book.author.firstname }} {{ book.author.lastname }}">
+                        <label class="py-1 m-0 col-4" for="prix"><strong>Prix en euro €: </strong></label>
+                        <input class="my-1 col-7" name="prix" type="text" value="{{ book.price }}">
+                        <label class="py-1 m-0 col-4" for="cat"><strong>Catégories : </strong></label>
+                        <input class="my-1 col-7" name="cat" type="text" value="{% for categorie in book.categories %}{{ categorie.name }} {% endfor %}">
+                        <label class="py-1 m-0 col-4" for="desc"><strong>Description : </strong></label>
+                        <input class="my-1 col-7" name="desc" type="text" value="{{ book.description }}">
+                        <div class="images d-flex flex-wrap">
+                            <fieldset>
+                                <label class="addImg mt-1 ml-1 d-flex justify-content-center align-items-center" for="img"><i
+                                        class="p-1 fas fa-plus"></i></label>
+                                <input class="" name="img" id="img" type="file">
+                            </fieldset>
+                            {% for image in book.images %}
                             <div class="elem">
-                                <h4>un</h4>
-                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
+                                <img class="mt-1 ml-1" src="{{ image.url }}" width="100" height="170" alt="">
                             </div>
-                            <div class="elem ">
-                                <h4>deux</h4>
-                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
-                            </div>
-                            <div class="elem ">
-                                <h4>trois</h4>
-                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
-                            </div>
-                            <div class="elem ">
-                                <h4>quatre</h4>
-                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
-                            </div>
-                            <div class="elem ">
-                                <h4>cinq</h4>
-                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
-                            </div>
-                            <div class="elem ">
-                                <h4>six</h4>
-                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
-                            </div>
-                            <div class="elem ">
-                                <h4>sept</h4>
-                                <img class="" src="https://placehold.it/150x250" width="75" height="125" alt="">
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {# lightbox modifier un livre #}
-
-    <div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">"Titre du livre"</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body row">
-                    <label class="col-4" for="isbn"><strong>Code ISBN : </strong></label>
-                    <input class="col-7" name="isbn" type="text">
-                    <label class="col-4" for="auteur"><strong>Auteur : </strong></label>
-                    <input class="col-7" name="auteur" type="text">
-                    <label class="col-4" for="prix"><strong>Prix : </strong></label>
-                    <input class="col-7" name="prix" type="text">€
-                    <label class="col-4" for="cat"><strong>Catégories : </strong></label>
-                    <input class="col-7" name="cat" type="text">
-                    <label class="col-4" for="desc"><strong>Description : </strong></label>
-                    <input class="col-7" name="desc" type="text">
-                    <label class="col-4" for="img"><strong>Image(s) : </strong></label>
-                    <input class="col-7" name="img" type="file">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Enregistrer</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="save btn btn-secondary" data-dismiss="modal">Enregistrer</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
         {# lightbox ajouter un livre #}
 
-        <div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">"Titre du livre"</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body row">
-                            <label class="col-4" for="isbn"><strong>Code ISBN : </strong></label>
-                            <input class="col-7" name="isbn" type="text">
-                            <label class="col-4" for="auteur"><strong>Auteur : </strong></label>
-                            <input class="col-7" name="auteur" type="text">
-                            <label class="col-4" for="prix"><strong>Prix : </strong></label>
-                            <input class="col-7" name="prix" type="text">€
-                            <label class="col-4" for="cat"><strong>Catégories : </strong></label>
-                            <input class="col-7" name="cat" type="text">
-                            <label class="col-4" for="desc"><strong>Description : </strong></label>
-                            <input class="col-7" name="desc" type="text">
-                            <label class="col-4" for="img"><strong>Image(s) : </strong></label>
-                            <input class="col-7" name="img" type="file">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Enregistrer</button>
+        <div class="modal fade" id="lightboxAdd" tabindex="-1" role="dialog" aria-labelledby="lightboxAdd" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Ajouter un livre</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body row">
+                        <label class="col-4" for="title"><strong>Titre : </strong></label>
+                        <input class="col-7" name="title" type="text">
+                        <label class="col-4" for="isbn"><strong>Code ISBN : </strong></label>
+                        <input class="col-7" name="isbn" type="text">
+                        <label class="col-4" for="auteur"><strong>Auteur : </strong></label>
+                        <input class="col-7" name="auteur" type="text">
+                        <label class="col-4" for="prix"><strong>Prix : </strong></label>
+                        <input class="col-7" name="prix" type="text">€
+                        <label class="col-4" for="cat"><strong>Catégories : </strong></label>
+                        <input class="col-7" name="cat" type="text">
+                        <label class="col-4" for="desc"><strong>Description : </strong></label>
+                        <input class="col-7" name="desc" type="text">
+                        <p class="pl-3"><strong>Image(s) : </strong></p>
+                        <div class="images d-flex flex-wrap">
+                            <fieldset>
+                                <label class="addImg mt-1 ml-1 d-flex justify-content-center align-items-center" for="img"><i
+                                        class="p-1 fas fa-plus"></i></label>
+                                <input class="" name="img" id="img" type="file">
+                            </fieldset>
                         </div>
                     </div>
-                </div>
-            </div>
-
-    {# lightbox supprimer un livre #}
-
-    <div class="modal fade" id="lightboxDelete" tabindex="-1" role="dialog" aria-labelledby="lightboxDelete"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Supprimer "titre du livre" ?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body row">
-                    <p>Voulez-vous vraiment effacer "titre du livre" ?</p>
-                    <div class="deleteButtons">
-                        <button>
-                            ANNULER
-                        </button>
-                        <button>
-                            SUPPRIMER
-                        </button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Enregistrer</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
+
+        {# lightbox supprimer un livre #}
+
+        <div class="modal fade" id="lightboxDelete" tabindex="-1" role="dialog" aria-labelledby="lightboxDelete"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Supprimer {{ book.title }} ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body row">
+                        <p class="w-100 text-center">Voulez-vous vraiment effacer {{ book.title }} ?</p>
+                        <div class="deleteButtons w-100 d-flex justify-content-around">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                ANNULER
+                            </button>
+                            <button class="supprimer">
+                                SUPPRIMER
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endfor %}
+</section>
+</div>
 
 </main>
 

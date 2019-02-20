@@ -18,6 +18,8 @@ use App\Entity\Book;
 
 class VesoulEditionController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="home")
      */

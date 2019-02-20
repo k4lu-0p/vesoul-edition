@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\BookRepository;
 
 /**
  * @Route("/pannel-admin")
@@ -33,10 +34,12 @@ class DashboardAdminController extends AbstractController
     /**
      * @Route("/livres", name="dashboard_admin_livres")
      */
-    public function books()
+    public function books(BookRepository $repo)
     {
+        $books = $repo->findAll();
         return $this->render('dashboard-admin/books.html.twig', [
             'title' => 'Livres',
+            'books' => $books,
         ]);
     }
 

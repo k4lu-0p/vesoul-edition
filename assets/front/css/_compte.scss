@@ -91,11 +91,6 @@
         transition: all 0.2s linear;
     }
 
-    hr {
-        border-bottom: 3px #333;
-        color: black !important;
-    }
-
     input[type="checkbox"] {
         width: 17px;
         height: 17px;
@@ -109,19 +104,20 @@
         background-color: $color-main;
         color: white;
         width: 350px;
-        height: 65px;
+        height: 60px;
         margin-top: 50px;
+        margin-bottom: 50px;
         font-size: 1.3em;
+    }
+
+    .infos-content {
+        width: 100%;
+        background-color: white;
+        padding: 50px 100px 50px 100px;
     }
 
     .wrapper-infos {
         width: 100%;
-        background-color: white;
-        padding: 70px 150px 70px 150px;
-    }
-
-    .changing-pass {
-        display: none;
     }
       
 
@@ -256,6 +252,79 @@
             font-weight: bold;
         }
     }
+    
+    .subsection-cmd {
+        h3 {
+            color: $color-main;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        p {
+            margin-bottom: 0px;
+            font-size: 0.8em;
+        }
+    }
+
+    .modal-footer {
+        button {
+            font-size: 0.8em;
+        }
+
+        button:nth-child(2) {
+            background-color: #FF6666;
+            color: white;
+        }
+    }
+
+    @media (min-width: 576px) {
+        .modal-dialog {
+            max-width: 800px;
+        }
+    }
+
+    .table-sm {
+        thead {
+            background-color: $color-header;
+            color: white;
+            text-align: center;
+            vertical-align: middle !important;
+        }
+
+        .th-title {
+            color: $color-main;
+        }
+
+        tr {
+            height: 50px;
+            font-size: 0.8em
+        }
+
+        tbody {
+            tr:nth-child(odd):not(.last) {
+                background-color: rgba(212, 212, 212, 0.6);
+            }
+            tr {
+                height: 30px;
+                text-align: center;
+            }
+        }
+
+        .last {
+            background-color: rgba(0, 188, 212, 0.2);
+            td {
+                border-top: 0px;
+            }
+        }
+
+        .last:nth-last-child(1) {
+            td:nth-child(3), td:nth-child(4) {
+                color: $color-main;
+                font-weight: bold;
+            }
+        }
+    }
+
 }
 
 .green {
@@ -279,11 +348,11 @@
     width: 100%;
     background-color: $color-main;
     color: white;
-    font-weight: bold;
     padding-right: 15px;
     margin-bottom: 20px;
     
     h2 {
+        font-weight: bold;
         margin-bottom: 0;
         font-size: 1.4em;
     }

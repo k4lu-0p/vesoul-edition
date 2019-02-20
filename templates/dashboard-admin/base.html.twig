@@ -37,6 +37,11 @@
                 <a class="deconnexion text-center py-4" href="{{ path('security_admin_logout')}}">DECONNEXION</a>   
     </div>
 
+    <main class="d-flex flex-column align-items-center">
+            <div class="date pt-3 pr-2 text-right">
+                <p class="dateActuelle"></p>
+                <hr>
+            </div>
     {% block body %}{% endblock %}
 
     {% block javascripts %}
