@@ -39,7 +39,7 @@ class DashboardUserController extends AbstractController
      * @Route("/informations", name="dashboard_user_informations")
      * 
      */
-    public function showInformations(Request $request, ObjectManager $manager)
+    public function showInformations(Request $request, ObjectManager $manager, AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $encoder)
     {
         $user = $this->getUser();
 
@@ -54,8 +54,50 @@ class DashboardUserController extends AbstractController
             // return $this->redirectToRoute('');
         }
 
-        // $repo = $this->getDoctrine()->getRepository(User::class);
 
+        $user = $this->getUser();
+
+
+        
+    	$form = $this->createForm(EditInformationsType::class, $user);
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // $passwordEncoder = $this->get('security.password_encoder');
+            // $oldPassword = $authenticationUtils->getLastUsername();
+            $oldPassword = $user->getPassword();
+            
+            dump($oldPassword);
+            die();
+
+
+            // $passwordEncoder = $this->get('security.password_encoder');
+            // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
+
+            // Si l'ancien mot de passe est bon
+            if ($encoder->isPasswordValid($user, $oldPassword)) {
+                
+                $hash = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
+                
+                $username_mail = $user->getUsername();
+                $tel = $user->getTel();
+                
+                $user->setPassword($hash) // Enregistrer le mot de passee chiffré en BDD
+                     ->setUsername($username_mail)
+                     ->setTel($tel);
+                
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
+
+                return $this->redirectToRoute('security_user_login');
+            } else {
+                $form->addError(new FormError('Ancien mot de passe incorrect'));
+            }
+        }
         return $this->render('dashboard-user/mon-compte.html.twig', [
             'user' => $user,
             'form' => $form->createView()
@@ -82,15 +124,12 @@ class DashboardUserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $passwordEncoder = $this->get('security.password_encoder');
-            // $error = $authenticationUtils->getLastAuthenticationError();
             $oldPassword = $authenticationUtils->getLastUsername();
 
             $user->getPassword();
 
-            dump($user);
             // $passwordEncoder = $this->get('security.password_encoder');
             // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
-
 
             // Si l'ancien mot de passe est bon
             if ($encoder->isPasswordValid($user, $oldPassword)) {
