@@ -34,10 +34,10 @@ class VesoulEditionController extends AbstractController
         $panier = $session->get('panier');
         $nbItems = count($panier);
 
-        dump($session);
+        // dump($session);
 
         return $this->render('vesoul-edition/home.html.twig', [
-            'nbItems' => $nbItems
+            // 'nbItems' => $nbItems
         ]);
     }
 
