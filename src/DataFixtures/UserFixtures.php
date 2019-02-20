@@ -42,6 +42,7 @@ class UserFixtures extends Fixture
         ->setLastname("Jean")
         ->addBook($book);
 
+        $image->set
         
         $command->setDate(new \DateTimeImmutable())
         ->setNumber(8657185758)
