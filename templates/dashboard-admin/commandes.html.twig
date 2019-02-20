@@ -4,6 +4,34 @@
 
 {# {% block stylesheets %}{% endblock %} #}
 
-{% block body %}{% endblock %}
+{% block body %}
+<div class="titre d-flex justify-content-between align-items-center">
+        <p class="p-3 m-0">Gestion des commandes</p>
+    
+    </div>
+    <div class="listBook">
+        <div class="nom-colonne w-100 m-0 row pt-2 d-flex justify-content-around align-items-center">
+            <p class="text-center m-0 py-3 col-1">Date</p>
+            <p class="text-center m-0 py-3 col-2">N° Commande</p>
+            <p class="text-center m-0 py-3 col-2">Nom Prenom</p>
+            <p class="text-center m-0 py-3 col-2">Adresse de livraison</p>
+            <p class="text-center m-0 py-3 col-2">Articles</p>
+            <p class="text-center m-0 py-3 col-2">Facture</p>
+            <p class="text-center m-0 py-3 col-1">Status</p>
+        </div>
+        <section class="livres">
+    
+            <div class="livre row m-0 d-flex justify-content-between">
+                    <p class="text-center m-0 py-3 col-1">20/02/19</p>
+                    <p class="text-center m-0 py-3 col-2">323211</p>
+                    <p class="text-center m-0 py-3 col-2">Tabou Ret</p>
+                    <p class="text-center m-0 py-3 col-2">16 rue du labrador</p>
+                    <p class="text-center m-0 py-3 col-2">Article 1</br>Article 2</br></p>
+                    <p class="text-center m-0 py-3 col-2">PDF</p>
+                    <p class="text-center m-0 py-3 col-1">En cours</p>
+            </div>
+        </section>
+    
+{% endblock %}
 
 {# {% block javascripts %}{% endblock %} #}
