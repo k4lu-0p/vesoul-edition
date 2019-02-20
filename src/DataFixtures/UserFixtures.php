@@ -7,11 +7,12 @@ use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
 use App\Entity\Command;
 use App\Entity\Image;
+use App\Entity\Genra;
 use App\Entity\Book;
 use App\Entity\Author;
 use App\Entity\Address;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
 
 class UserFixtures extends Fixture
 {
@@ -27,24 +28,42 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $objectManager)
     {   
-         // ==== Images ==========================================================
-         $image1 = new Image();
+        // ==== Images ==========================================================
+        $image1 = new Image();
+    
+        $image1->setUrl("/build/livre1.jpg");
+
+        $objectManager->persist($image1);
+        // -------------------------------------
+        $image2 = new Image();
         
-         $image1->setUrl("build/livre1.jpg");
- 
-         $objectManager->persist($image1);
-         // -------------------------------------
-         $image2 = new Image();
-         
-         $image2->setUrl("build/livre2.jpg");
- 
-         $objectManager->persist($image2);
-         // ------------------------------------
-         $image3 = new Image();
-         
-         $image3->setUrl("build/livre3.jpg");
- 
-         $objectManager->persist($image3);
+        $image2->setUrl("/build/livre2.jpg");
+
+        $objectManager->persist($image2);
+        // ------------------------------------
+        $image3 = new Image();
+        
+        $image3->setUrl("/build/livre3.jpg");
+
+        $objectManager->persist($image3);
+
+        // ===== Categories ===============================================
+        $genra1 = new Genra();
+        $genra1->setName('Histoire');
+
+        $objectManager->persist($genra1);
+        //-----------------------------------
+        $genra2 = new Genra();
+
+        $genra2->setName('Politique');
+
+        $objectManager->persist($genra2);
+        // ----------------------------------
+        $genra3 = new Genra();
+
+        $genra3->setName('Humour');
+
+        $objectManager->persist($genra3);
          
         // ===== Books =====================================================
         $book1 = new Book();
@@ -54,29 +73,32 @@ class UserFixtures extends Fixture
         ->setIsbn(6486158165)
         ->setStock(5)
         ->setTitle("Le titre du livre")
-        ->addImage($image1);
+        ->addImage($image1)
+        ->addGenra($genra1);
 
         $objectManager->persist($book1);
         // ---------------------------------------------
         $book2 = new Book();
         
-        $book2->setDescription("Le deuxième de la saga")
-        ->setPrice(20)
-        ->setIsbn(6486158165)
-        ->setStock(5)
-        ->setTitle("Le titre du livre")
-        ->addImage($image2);
+        $book2->setDescription("Le meilleur livre du monde à lire absolument")
+        ->setPrice(18)
+        ->setIsbn(87521463258)
+        ->setStock(8)
+        ->setTitle("Le meilleur livre du monde")
+        ->addImage($image2)
+        ->addGenra($genra2);
 
         $objectManager->persist($book2);
         // ----------------------------------------------
         $book3 = new Book();
         
-        $book3->setDescription("C'est très le super livre, à lire")
-        ->setPrice(24)
-        ->setIsbn(1351651364)
-        ->setStock(5)
-        ->setTitle("Le titre du livre")
-        ->addImage($image3);
+        $book3->setDescription("C'est l'histoire d'un pinguoin qui respire par les fesses...")
+        ->setPrice(15)
+        ->setIsbn(44215889753)
+        ->setStock(10)
+        ->setTitle("L'histoire du pinguoin")
+        ->addImage($image3)
+        ->addGenra($genra3);
 
         $objectManager->persist($book3);
 
@@ -133,7 +155,7 @@ class UserFixtures extends Fixture
         ->addBook($book1);
         
         $objectManager->persist($command3);
-        
+
         // ===== Adresses ======================================================
         $address1 = new Address();
 
