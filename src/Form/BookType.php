@@ -23,6 +23,7 @@ class BookType extends AbstractType
                 'label' => 'Commandes',
             ])
             ->add('categories', ChoiceType::class, [
+                // 'choices' => $this->getChoices(),
                 'label' => 'Catégories',
             ])
             ->add('author', ChoiceType::class, [
@@ -37,4 +38,8 @@ class BookType extends AbstractType
             'data_class' => Book::class,
         ]);
     }
+
+//     private function getChoices(){
+//         $choices = 
+//     }
 }
