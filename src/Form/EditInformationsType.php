@@ -15,7 +15,27 @@ class EditInformationsType extends AbstractType
             ->add('password')
             ->add('username')
             ->add('tel')
-        ;
+            ->add('new_password', null, array(
+            'mapped' => false,
+            'required'      => true,
+            // 'multiple' => true,
+            // 'class'         => 'UserBundle:User',
+            // 'query_builder' => function(EntityRepository $er) {
+                    // return $er->createQueryBuilder('u')
+                        // ->where('u.type = 3');
+                // }
+            ))
+            ->add('confirm_new_password', null, array(
+            'mapped' => false,
+            'required'      => true,
+            // 'multiple' => true,
+            // 'class'         => 'UserBundle:User',
+            // 'query_builder' => function(EntityRepository $er) {
+                    // return $er->createQueryBuilder('u')
+                        // ->where('u.type = 3');
+                // }
+            ))
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

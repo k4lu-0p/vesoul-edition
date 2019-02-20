@@ -32,7 +32,7 @@
 
                 <div class="infos-content">
 
-                {# {{ form_start(form, {'attr' : {'class': 'form-signin d-flex flex-column justify-content-center align-items-center' }}) }}
+                {{ form_start(form, {'attr' : {'class': 'form-signin d-flex flex-column justify-content-center align-items-center' }}) }}
 
                     {{ form_row(form.username, {'label' : false ,'attr' : {'class': 'form-control mb-4', 'placeholder' : 'Adresse mail', 'id' : 'inputUser'}}) }}
 
@@ -40,29 +40,29 @@
 
                     {{ form_row(form.password, {'label' : false ,'attr' : {'class': 'form-control mb-3', 'placeholder' : 'Mot de passe', 'id' : 'inputPassword'}}) }}
 
-                    {{ form_row(form.password, {'label' : false ,'attr' : {'class': 'form-control mb-3', 'placeholder' : 'Nouveau mot de passe', 'id' : 'inputNew'}}) }}
+                    {{ form_row(form.new_password, {'label' : false ,'attr' : {'class': 'form-control mb-3', 'placeholder' : 'Nouveau mot de passe', 'id' : 'inputNew'}}) }}
                     
-                    {{ form_row(form.password, {'label' : false ,'attr' : {'class': 'form-control mb-3', 'placeholder' : 'Confirmation du nouveau mot de passe', 'id' : 'inputNewConfirm'}}) }}
+                    {{ form_row(form.confirm_new_password, {'label' : false ,'attr' : {'class': 'form-control mb-3', 'placeholder' : 'Confirmation du nouveau mot de passe', 'id' : 'inputNewConfirm'}}) }}
                     
                     <button class="btn-inscription btn btn-lg mt-2 px-3" type="submit">Enregistrer les modifications</button>
 
-                {{ form_end(form) }} #}
+                {{ form_end(form) }}
 
-                    <form action="" method="POST">
+                    {# <form action="{{ path('dashboard_user_informations_validation')}}" method="POST">
                         <div class="d-flex flex-column">
                             <div class="d-flex justify-content-between">
-                                <input class="col-5" type="email" placeholder="Adresse mail">
-                                <input class="col-5" type="text" placeholder="Téléphone">
+                                <input class="col-5" name="mail_info" type="email" placeholder="Adresse mail">
+                                <input class="col-5" name="tel_info" type="text" placeholder="Téléphone">
                             </div>
         
-                            <input class="changing-pass" type="password" placeholder="Mot de passe">
-                            <input class="changing-pass" type="password" placeholder="Nouveau mot de passe">
-                            <input class="changing-pass" type="password" placeholder="Confirmer le nouveau mot de passe">
+                            <input class="changing-pass" name="ancien_mdp_info" type="password" placeholder="Mot de passe">
+                            <input class="changing-pass" name="nouveau_mdp_info" type="password" placeholder="Nouveau mot de passe">
+                            <input class="changing-pass" name="confirm_nouveau_mdp_info" type="password" placeholder="Confirmer le nouveau mot de passe">
                         </div>
                         <div class="d-flex justify-content-center align-items-end">
                             <button class="btn">Enregistrer les modifications</button>
                         </div>
-                    </form>
+                    </form> #}
 
                 </div>
 
