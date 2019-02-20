@@ -10,6 +10,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CommandRepository;
 
 /**
  * @Route("/pannel-admin")
@@ -29,10 +30,12 @@ class DashboardAdminController extends AbstractController
     /**
      * @Route("/commandes", name="dashboard_admin_commandes")
      */
-    public function commandes()
+    public function commandes(CommandRepository $repo)
     {
+        $allCommands = $repo->findAll();
         return $this->render('dashboard-admin/commandes.html.twig', [
             'title' => 'Commandes',
+            'commands' => $allCommands,
         ]);
     }
 

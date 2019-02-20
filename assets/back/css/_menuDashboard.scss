@@ -95,15 +95,12 @@
                 text-decoration: none;
                 color: white;
             }
-            @media (min-width: 768px) and (max-width: 991.98px) { 
-                font-size: 0.7rem;
-            }
             h1{
                 text-decoration: none;
                 font-size: 1.4rem;
                 color: white;
                 @media (min-width: 768px) and (max-width: 991.98px) { 
-                    font-size: 1rem;
+                    font-size: 1.3rem;
                 }
             }
         }

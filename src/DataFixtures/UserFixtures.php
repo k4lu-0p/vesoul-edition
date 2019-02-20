@@ -30,19 +30,19 @@ class UserFixtures extends Fixture
          // ==== Images ==========================================================
          $image1 = new Image();
         
-         $image1->setUrl("build/livre1.jpg");
+         $image1->setUrl("/build/livre1.jpg");
  
          $objectManager->persist($image1);
          // -------------------------------------
          $image2 = new Image();
          
-         $image2->setUrl("build/livre2.jpg");
+         $image2->setUrl("/build/livre2.jpg");
  
          $objectManager->persist($image2);
          // ------------------------------------
          $image3 = new Image();
          
-         $image3->setUrl("build/livre3.jpg");
+         $image3->setUrl("/build/livre3.jpg");
  
          $objectManager->persist($image3);
          
