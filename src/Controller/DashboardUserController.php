@@ -15,6 +15,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Form\FormError;
 
 
 /**
@@ -68,7 +69,6 @@ class DashboardUserController extends AbstractController
     public function infoValidation(Request $request, ObjectManager $manager, AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $encoder)
     {
 
-        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
         // dump($user);
@@ -82,18 +82,18 @@ class DashboardUserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $passwordEncoder = $this->get('security.password_encoder');
-            $error = $authenticationUtils->getLastAuthenticationError();
+            // $error = $authenticationUtils->getLastAuthenticationError();
             $oldPassword = $authenticationUtils->getLastUsername();
 
             $user->getPassword();
 
-
+            dump($user);
             // $passwordEncoder = $this->get('security.password_encoder');
             // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
 
 
             // Si l'ancien mot de passe est bon
-            if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
+            if ($encoder->isPasswordValid($user, $oldPassword)) {
                 
                 $hash = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
                 
@@ -104,8 +104,8 @@ class DashboardUserController extends AbstractController
                      ->setUsername($username_mail)
                      ->setTel($tel);
                 
-                $em->persist($user);
-                $em->flush();
+                $manager->persist($user);
+                $manager->flush();
 
                 $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
 

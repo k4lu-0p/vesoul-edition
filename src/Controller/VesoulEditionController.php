@@ -40,7 +40,7 @@ class VesoulEditionController extends AbstractController
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
 
-        dump($books);
+        // dump($books);
 
         return $this->render('vesoul-edition/home.html.twig', [
             'nbItems' => $nbItems,
