@@ -15,6 +15,8 @@ use App\Repository\BookRepository;
 use App\Repository\CartRepository;
 
 use App\Entity\Book;
+use App\Repository\GenraRepository;
+use App\Repository\AuthorRepository;
 
 class VesoulEditionController extends AbstractController
 {
@@ -23,7 +25,7 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(SessionInterface $session)
+    public function home(SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
     {
         
         // $session->invalidate();
@@ -34,10 +36,17 @@ class VesoulEditionController extends AbstractController
         $panier = $session->get('panier');
         $nbItems = count($panier);
 
-        // dump($session);
+        $books = $repoBook->findAll();
+        $genras = $repoGenra->findAll();
+        $authors = $repoAuthor->findAll();
+
+        dump($books);
 
         return $this->render('vesoul-edition/home.html.twig', [
-            // 'nbItems' => $nbItems
+            'nbItems' => $nbItems,
+            'books' => $books,
+            'genras' => $genras,
+            'authors' => $authors
         ]);
     }
 
@@ -75,7 +84,7 @@ class VesoulEditionController extends AbstractController
     }
 
     /**
-     * @Route("/product", name="product")
+     * @Route("/product/{id}", name="product")
      */
     public function showProduct()
     {
