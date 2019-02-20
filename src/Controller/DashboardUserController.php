@@ -8,6 +8,12 @@ use App\Repository\AddressRepository;
 use App\Repository\CommandRepository;
 use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
+use App\Repository\UserRepository;
+use App\Form\EditInformationsType;
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
+use App\Entity\User;
+
 
 /**
  * @Route("/pannel-client")
@@ -28,9 +34,26 @@ class DashboardUserController extends AbstractController
     /**
      * @Route("/informations", name="dashboard_user_informations")
      */
-    public function showAccount()
+    public function showAccount(Request $request, ObjectManager $manager)
     {
-        return $this->render('dashboard-user/mon-compte.html.twig');
+        $user = new User();
+
+        $form = $this->createForm(EditInformationsType::class, $user);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $manager->persist($user);
+            $manager->flush();
+            
+            // return $this->redirectToRoute('');
+        }
+        // dump($form);
+
+        // die();
+        return $this->render('dashboard-user/mon-compte.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
     /**
