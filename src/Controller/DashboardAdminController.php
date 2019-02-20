@@ -11,6 +11,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\CommandRepository;
+use App\Repository\AdminRepository;
 
 /**
  * @Route("/pannel-admin")
@@ -94,10 +95,12 @@ class DashboardAdminController extends AbstractController
     /**
      * @Route("/boutique", name="dashboard_admin_boutique")
      */
-    public function info()
+    public function info(AdminRepository $repo)
     {
+        $info = $repo->findAll();
         return $this->render('dashboard-admin/info.html.twig', [
             'title' => 'Information Boutique',
+            'infos' => $info,
         ]);
     }
 
