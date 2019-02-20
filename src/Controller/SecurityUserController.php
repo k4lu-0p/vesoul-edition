@@ -23,6 +23,7 @@ class SecurityUserController extends AbstractController
     {
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
+        
         return $this->render('security-user/connexionSecurityUser.html.twig', [
             'title' => "Connexion utilisateur",
             'last_username' => $lastUsername,
@@ -50,7 +51,7 @@ class SecurityUserController extends AbstractController
         $form->handleRequest($request); // Bind automatique avec l'objet user des champs remplis dans le formulaire
 
         if($form->isSubmitted() && $form->isValid()) {
-            $hash = $encoder->encodePassword($user, $user->getPassword()); // Chiffré le mot de passe de l'user
+            $hash = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
             $user->setPassword($hash); // Enregistrer le mot de passee chiffré en BDD
             $user->setRoles(['ROLE_USER']);
 
