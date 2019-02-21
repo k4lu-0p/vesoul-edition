@@ -19,6 +19,45 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function findAllBooks(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = ' 
+            SELECT book.id, book.description, book.price, book.isbn, book.title, book.stock,     author.firstname, author.lastname, image.url, genra.name AS genre
+            FROM book
+            INNER JOIN  author ON book.author_id = author.id
+            INNER JOIN image ON book.id = image.book_id
+            INNER jOIN book_genra ON book.id = book_genra.book_id
+            INNER JOIN genra ON book_genra.genra_id = genra.id
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        // returns an array of book
+        return $stmt->fetchAll();
+    }
+
+    public function findBook($id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = ' 
+            SELECT book.description, book.price, book.isbn, book.title, book.stock, author.firstname, author.lastname, genra.name AS genre, image.url
+            FROM book
+            INNER JOIN  author ON book.author_id = author.id
+            INNER jOIN book_genra ON book.id = book_genra.book_id
+            INNER JOIN genra ON book_genra.genra_id = genra.id
+            INNER JOIN image ON book.id = image.book_id
+            WHERE book.id = :book_id
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['book_id' => $id]);
+    
+        // returns an array of book
+        return $stmt->fetchAll();
+    }
+
     // /**
     //  * @return Book[] Returns an array of Book objects
     //  */

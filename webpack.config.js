@@ -43,7 +43,7 @@ Encore
              from: 'assets/front/static',
     
              // optional target path, relative to the output dir
-             //to: 'images/[path][name].[ext]',
+            //  to: 'images',
     
              // if versioning is enabled, add the file hash too
              //to: 'images/[path][name].[hash:8].[ext]',
@@ -51,7 +51,7 @@ Encore
              // only copy files matching this pattern
              //pattern: /\.(png|jpg|jpeg)$/
              //to: 'static',
-             //toType: 'dir'
+            //  toType: 'dir'
     })
     /*
      * FEATURE CONFIG
