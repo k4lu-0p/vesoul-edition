@@ -106,7 +106,8 @@
                                             <p class="m-0 pl-2" id="price"><span>{{book.price}}</span>€</p>
                                         </div>
                                         <div class="col-8 d-flex justify-content-end">
-                                            <a href="panier/add/{{book.id}}"><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                            <a href="{{ path('addItem',{ 'id':book.id }) }}"><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
+                                            {#  #}
                                         </div>
                                     </div>
                                 </div>

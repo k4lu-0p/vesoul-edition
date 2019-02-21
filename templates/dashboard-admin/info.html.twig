@@ -4,6 +4,15 @@
 
 {# {% block stylesheets %}{% endblock %} #}
 
-{% block body %}{% endblock %}
+{% block body %}
+{% for info in infos %}
+    
+{{ info.company }}</br>
+{{ info.tel }}</br>
+{{ info.email }}</br>
+{{ info.address }}</br>
+
+{% endfor %}
+{% endblock %}
 
 {# {% block javascripts %}{% endblock %} #}
