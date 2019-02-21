@@ -17,6 +17,7 @@ use App\Repository\CartRepository;
 use App\Entity\Book;
 use App\Repository\GenraRepository;
 use App\Repository\AuthorRepository;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class VesoulEditionController extends AbstractController
 {
@@ -59,23 +60,25 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="addItem")
      */
-    public function addItem($id, SessionInterface $session, BookRepository $repo)
+    public function addItem(Book $book, SessionInterface $session, ObjectManager $manager)
     {
-        $book = $repo->find($id);
-        // dump($book);
-
         $id = $book->getId();
         $title = $book->getTitle();
         $author = $book->getAuthor();
         $price = $book->getPrice();
         $stock = $book->getStock();
+
         
+    
         if ($stock > 0) {
 
             $this->quantity++;
             $book->setStock($stock - 1);
             $panier = $session->get('panier');
             
+            $manager->persist($book);
+            $manager->flush();
+                        
             array_push($panier, $id = [
                 'title'=> $title,
                 'author'=> $author,
@@ -86,7 +89,9 @@ class VesoulEditionController extends AbstractController
             $session->set('panier', $panier);
             $panier = $session->get('panier');
             $this->nbItems = count($panier);
-
+            
+            dump($panier);
+            die;
             return $this->redirectToRoute('home');
             
         } else {
