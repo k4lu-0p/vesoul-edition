@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\CommandRepository;
 use App\Repository\AdminRepository;
+use App\Entity\Admin;
+use App\Form\AdminType;
 
 /**
  * @Route("/pannel-admin")
@@ -95,13 +97,34 @@ class DashboardAdminController extends AbstractController
     /**
      * @Route("/boutique", name="dashboard_admin_boutique")
      */
-    public function info(AdminRepository $repo)
+    public function info(Request $request, AdminRepository $repo, ObjectManager $manager)
     {
-        $info = $repo->findAll();
-        return $this->render('dashboard-admin/info.html.twig', [
-            'title' => 'Information Boutique',
-            'infos' => $info,
-        ]);
+
+        $toggle = false;
+        if($request->get('id')!= null){
+            $toggle = $request->get('id');
+            $info = $repo->findBy(['id' => $request->get('id')]);
+            $info = $this->getDoctrine()->getRepository(Admin::class)->find($request->get('id'));
+        } else {
+            $info = new Admin();
+        }
+
+        $form = $this->createForm(AdminType::class, $info);
+        $form->handleRequest($request);
+        $allInfo = $repo->findAll();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($info);
+            $manager->flush();
+            return $this->redirectToRoute('dashboard_admin_boutique');
+        } else {
+            return $this->render('dashboard-admin/info.html.twig', [
+                'title' => 'Information Boutique',
+                'infos' => $allInfo,
+                'form' => $form->createView(),
+                'toggle' => $toggle,
+                ]);
+            }
     }
 
     /**

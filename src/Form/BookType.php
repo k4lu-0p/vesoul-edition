@@ -22,7 +22,7 @@ class BookType extends AbstractType
                 'choices' => [],
                 'label' => 'Commandes',
             ])
-            ->add('categories', ChoiceType::class, [
+            ->add('genras', ChoiceType::class, [
                 // 'choices' => $this->getChoices(),
                 'label' => 'Catégories',
             ])
