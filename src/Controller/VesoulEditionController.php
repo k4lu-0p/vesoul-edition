@@ -45,9 +45,12 @@ class VesoulEditionController extends AbstractController
             $this->nbItems = 0;
         }
     
-        $books = $repoBook->findAll();
+        $books = $repoBook->findAllBooks();
+        // $booksImages = $books->getImage()->getUrl();
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
+
+        // dump($books);
 
         return $this->render('vesoul-edition/home.html.twig', [
             'nbItems' => $this->nbItems,
@@ -99,9 +102,15 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/product/{id}", name="product")
      */
-    public function showProduct()
+    public function showProduct($id, BookRepository $repo)
     {
-        return $this->render('front/product.html.twig');
+        $book2 = $repo->findBook($id);
+
+        dump($book2);
+
+        return $this->render('vesoul-edition/product.html.twig', [
+            'nbItems' => $this->nbItems
+        ]);
     }
 
     /**
@@ -111,6 +120,7 @@ class VesoulEditionController extends AbstractController
     {
         return $this->render('vesoul-edition/panier.html.twig', [
             'controller_name' => 'FrontController',
+            'nbItems' => $this->nbItems
         ]);
     }
 
