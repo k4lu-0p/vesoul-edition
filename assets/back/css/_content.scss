@@ -267,10 +267,19 @@ main {
                         .slider-for {
                             width: 300px;
                             height: 500px;
+                            img{
+                                width: 300px;
+                                height: 500px;
+                            }
                         }
 
                         .slider-nav {
                             width: 360px;
+                            .elem{
+                                img{
+                                width: 75px;
+                                height: 120px;
+                            }}
                         }
                     }
                 }
