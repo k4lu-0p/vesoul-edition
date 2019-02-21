@@ -24,7 +24,7 @@ class Address
     private $number;
 
     /**
-     * @ORM\Column(type="string", length=45)
+     * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $type;
 
@@ -64,14 +64,26 @@ class Address
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=100)
      */
     private $lastname;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="Relation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user_id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="relation")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $command_facturation_id;
 
     public function __construct()
     {
@@ -212,7 +224,7 @@ class Address
         return $this->firstname;
     }
 
-    public function setFirstname(?string $firstname): self
+    public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -224,9 +236,33 @@ class Address
         return $this->lastname;
     }
 
-    public function setLastname(?string $lastname): self
+    public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getUserId(): ?Command
+    {
+        return $this->user_id;
+    }
+
+    public function setUserId(?Command $user_id): self
+    {
+        $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    public function getCommandFacturationId(): ?Command
+    {
+        return $this->command_facturation_id;
+    }
+
+    public function setCommandFacturationId(?Command $command_facturation_id): self
+    {
+        $this->command_facturation_id = $command_facturation_id;
 
         return $this;
     }

@@ -53,9 +53,6 @@ class DashboardUserController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-
-
-
             // $passwordEncoder = 'bcrypt';
             // $oldPassword = $authenticationUtils->getLastUsername();
             // $oldPassword = $user->getPassword();
@@ -84,7 +81,7 @@ class DashboardUserController extends AbstractController
             // if ($user->isPasswordValid($user, $oldPassword)) {
                 
                 $em = $this->getDoctrine()->getManager();
-                
+
                 $hash = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
                 
                 $username_mail = $user->getUsername();
@@ -115,7 +112,12 @@ class DashboardUserController extends AbstractController
      */
     public function showAdresses(AddressRepository $repo)
     {
-        $adresses = $repo->findAll();
+
+        $user = $this->getUser();
+
+        $id = $user->getId();
+
+        $adresses = $repo->findAddressByUserId($id);
         return $this->render('dashboard-user/compte-adresses.html.twig', [
             'adresses' => $adresses
         ]);
@@ -132,11 +134,18 @@ class DashboardUserController extends AbstractController
     /**
      * @Route("/commandes", name="dashboard_user_commands")
      */
-    public function showCommandes(CommandRepository $repo)
+    public function showCommandes(CommandRepository $repo_commande, AddressRepository $repo_adresse)
     {
-        $commandes = $repo->findAll();
+        $user = $this->getUser();
+
+        $id = $user->getId();
+
+        $commandes = $repo_commande->findCommandByUserId($id);
+        $addresses = $repo_adresse->findAddressByUserId($id);
+        
         return $this->render('dashboard-user/compte-commandes.html.twig', [
-            'commandes' => $commandes
+            'commandes' => $commandes,
+            'addresses' => $addresses
         ]);
     }
 
