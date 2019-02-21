@@ -37,10 +37,11 @@ class VesoulEditionController extends AbstractController
         $nbItems = count($panier);
 
         $books = $repoBook->findAll();
+        // $booksImages = $books->getImage()->getUrl();
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
 
-        // dump($books);
+        // dump($booksImages);
 
         return $this->render('vesoul-edition/home.html.twig', [
             'nbItems' => $nbItems,
