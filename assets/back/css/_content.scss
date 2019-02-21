@@ -97,7 +97,8 @@ main {
     // En-tête
     .listBook,
     .listCommande,
-    .info-boutique {
+    .info-boutique,
+    .mentions {
         width: 85%;
 
         @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -124,6 +125,29 @@ main {
                 color: #999999;
             }
         }
+        .mention{
+            border: #999999 solid 1px;
+            width: 95%;
+            min-height: 30vh; 
+        }
+        .save-mentions{
+            width: 95%;
+            button{
+                background-color: $color-details;
+                color: white;
+                font-weight: bold;
+                font-size: 1rem;
+                height: 2.5rem;
+                width: 9rem;
+                border: none;
+                border-radius: 0.25rem;
+                transition: all 0.3s ease;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #58a0e7;
+                }
+            }
+        }
         .form-input{
             input{
                 height: 2.5rem;
@@ -141,6 +165,10 @@ main {
                 border: none;
                 border-radius: 0.25rem;
                 transition: all 0.3s ease;
+                &:hover {
+                    cursor: pointer;
+                    background-color: #58a0e7;
+                }
             }
         }
 

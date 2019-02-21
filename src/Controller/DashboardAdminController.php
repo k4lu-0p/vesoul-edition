@@ -76,7 +76,7 @@ class DashboardAdminController extends AbstractController
     }
 
     /**
-     * @Route("/pannel-admin/livres/redit/{id} ", name="dashboard_admin_redit_book")
+     * @Route("/livres/redit/{id} ", name="dashboard_admin_redit_book")
      */
     public function reditBooks(Book $book, Request $request, ObjectManager $manager, RouterInterface $router )
     {
