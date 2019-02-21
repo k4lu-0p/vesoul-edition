@@ -14,8 +14,8 @@ use App\Form\EditInformationsType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
@@ -46,38 +46,44 @@ class DashboardUserController extends AbstractController
         $form = $this->createForm(EditInformationsType::class, $user);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
 
-            $manager->persist($user);
-            $manager->flush();
+        //     $manager->persist($user);
+        //     $manager->flush();
             
-            // return $this->redirectToRoute('');
-        }
-
-
-        $user = $this->getUser();
-
-
-        
-    	$form = $this->createForm(EditInformationsType::class, $user);
-
-        $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $passwordEncoder = $this->get('security.password_encoder');
+
+
+
+            // $passwordEncoder = 'bcrypt';
             // $oldPassword = $authenticationUtils->getLastUsername();
-            $oldPassword = $user->getPassword();
+            // $oldPassword = $user->getPassword();
+
+            // $valid = $passwordEncoder->encodePassword('online@2017', null);
+
+            // dump($valid);
+            // die();
+
+            // $encoded = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
+
             
-            dump($oldPassword);
-            die();
+            // dump($oldPassword);
+            // dump($user);
+            // die();
 
 
-            // $passwordEncoder = $this->get('security.password_encoder');
+            // $passwordEncoder = $this->container->get('security.encoder_factory');
             // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
+            
+            // dump($user->isPasswordValid($user, $oldPassword));
+
+            // die();
 
             // Si l'ancien mot de passe est bon
-            if ($encoder->isPasswordValid($user, $oldPassword)) {
+            // if ($user->isPasswordValid($user, $oldPassword)) {
+                
+                $em = $this->getDoctrine()->getManager();
                 
                 $hash = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
                 
@@ -96,68 +102,12 @@ class DashboardUserController extends AbstractController
                 return $this->redirectToRoute('security_user_login');
             } else {
                 $form->addError(new FormError('Ancien mot de passe incorrect'));
+
             }
-        }
         return $this->render('dashboard-user/mon-compte.html.twig', [
             'user' => $user,
             'form' => $form->createView()
         ]);
-    }
-
-
-    /**
-     * @Route("/informations/validation", name="dashboard_user_informations_validation")
-     */
-    public function infoValidation(Request $request, ObjectManager $manager, AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $encoder)
-    {
-
-        $user = $this->getUser();
-
-        // dump($user);
-
-        // die();
-        
-    	$form = $this->createForm(EditInformationsType::class, $user);
-
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $passwordEncoder = $this->get('security.password_encoder');
-            $oldPassword = $authenticationUtils->getLastUsername();
-
-            $user->getPassword();
-
-            // $passwordEncoder = $this->get('security.password_encoder');
-            // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
-
-            // Si l'ancien mot de passe est bon
-            if ($encoder->isPasswordValid($user, $oldPassword)) {
-                
-                $hash = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
-                
-                $username_mail = $user->getUsername();
-                $tel = $user->getTel();
-                
-                $user->setPassword($hash) // Enregistrer le mot de passee chiffré en BDD
-                     ->setUsername($username_mail)
-                     ->setTel($tel);
-                
-                $manager->persist($user);
-                $manager->flush();
-
-                $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
-
-                return $this->redirectToRoute('security_user_login');
-            } else {
-                $form->addError(new FormError('Ancien mot de passe incorrect'));
-            }
-        }
-    	
-    	return $this->render('dashboard-user/mon-compte.html.twig', array(
-    		'form' => $form->createView(),
-        ));
-        
     }
 
     /**

@@ -22,13 +22,10 @@ Encore
     .addEntry('front', './assets/front/js/layout-front.js')
     .addEntry('admin', './assets/back/js/layout-back.js')
     .addPlugin(new CopyWebpackPlugin([
-        // copies to {output}/static
         { from: './assets/front/static', to: 'images' }
     ]))
 
     .enableSingleRuntimeChunk()
-    
-
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())

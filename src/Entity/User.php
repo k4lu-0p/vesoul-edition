@@ -86,6 +86,7 @@ class User implements UserInterface
      * @ORM\Column(type="date", nullable=true)
      */
     private $birth;
+
     
 
 
