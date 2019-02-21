@@ -21,29 +21,35 @@ use App\Repository\AuthorRepository;
 class VesoulEditionController extends AbstractController
 {
 
+    /**
+     * @var integer
+     */
+    public $quantity;
+
+    /**
+     * @var integer
+     */
+    public $nbItems;
 
     /**
      * @Route("/", name="home")
      */
     public function home(SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
     {
-        
-        // $session->invalidate();
-        // if(!$session){
+        // Si le panier est bien existant, capte le, et compte le nombre d'articles contenu.
+        if($panier = $session->get('panier')){
+            $this->nbItems = count($panier);
+        } else { // Sinon crée le et initialise à 0 le nombre d'articles contenu.
             $session->set('panier', []);
-        // }
-
-        $panier = $session->get('panier');
-        $nbItems = count($panier);
-
+            $this->nbItems = 0;
+        }
+    
         $books = $repoBook->findAll();
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
 
-        // dump($books);
-
         return $this->render('vesoul-edition/home.html.twig', [
-            'nbItems' => $nbItems,
+            'nbItems' => $this->nbItems,
             'books' => $books,
             'genras' => $genras,
             'authors' => $authors
@@ -53,7 +59,7 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="addItem")
      */
-    public function addItem(SessionInterface $session, BookRepository $book)
+    public function addItem($id, SessionInterface $session, BookRepository $repo)
     {
         $book = $repo->find($id);
 
@@ -61,26 +67,31 @@ class VesoulEditionController extends AbstractController
         $title = $book->getTitle();
         $author = $book->getAuthor();
         $price = $book->getPrice();
+        $stock = $book->getStock();
 
-        $panier = $session->get('panier');
 
-        $qantity = $panier[$id]['quantity']++;
+        if ($stock > 0) {
 
-        $panier[$id] = [
-            'title'-> $title,
-            'author'-> $author,
-            'quantity'-> $quantity,
-            'price'-> $price
-        ];
+            $this->quantity++;
+            $book->setStock($stock--);
+            $panier = $session->get('panier');
+            
+            array_push($panier, $id = [
+                'title'=> $title,
+                'author'=> $author,
+                'quantity'=> $this->quantity,
+                'price'=> $price                
+            ]);
 
-        $session->set('panier', $panier);
-        $panier = $session->get('panier');
+            $session->set('panier', $panier);
+            $panier = $session->get('panier');
+            $this->nbItems = count($panier);
 
-        dump($session);
-
-        $nbItems = count($panier);
-
-        return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home');
+            
+        } else {
+            return $this->redirectToRoute('home');
+        }
     }
 
     /**
