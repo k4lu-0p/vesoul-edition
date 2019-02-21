@@ -199,10 +199,6 @@
 #commandes-compte {
 
 
-    .table-commandes:nth-child(odd) {
-        background-color: rgba(212, 212, 212, 0.6);
-    }
-
     .col-2 {
         display: flex;
         justify-content: center;
@@ -211,6 +207,10 @@
     .wrapper-commandes {
         width: 100%;
         background-color: white;
+        
+        .table-commandes:nth-child(odd) {
+            background-color: rgba(212, 212, 212, 0.6);
+        }
     }
 
     .commandes-header, .commandes-tableau {

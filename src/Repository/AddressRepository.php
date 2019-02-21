@@ -22,19 +22,25 @@ class AddressRepository extends ServiceEntityRepository
     // /**
     //  * @return Address[] Returns an array of Address objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAddressByUserId($value)
     {
-        return $this->createQueryBuilder('a')
-            ->andWhere('a.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT address.title, address.firstname, address.lastname, address.number, address.type, address.street, address.city, address.cp, address.country, address.additional
+            FROM address
+            INNER JOIN user_address ON address.id = user_address.address_id
+            INNER JOIN user ON user.id = user_address.user_id
+            WHERE user.id = :value        
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['value' => $value]);
+    
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Address
@@ -47,4 +53,5 @@ class AddressRepository extends ServiceEntityRepository
         ;
     }
     */
+    
 }

@@ -175,7 +175,6 @@ class UserFixtures extends Fixture
         $address2 = new Address();
         
         $address2->setNumber("7")
-        ->setType("ter")
         ->setStreet("rue du chien")
         ->setCity("besançon")
         ->setCp("25000")
@@ -195,7 +194,6 @@ class UserFixtures extends Fixture
         ->setCity("dijon")
         ->setCp("39000")
         ->setCountry("France")
-        ->setAdditional("terrain 1")
         ->setTitle("Voisin")
         ->setFirstname("Thomas")
         ->setLastname("Dujardin");
