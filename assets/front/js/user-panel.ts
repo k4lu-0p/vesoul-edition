@@ -1,10 +1,13 @@
 let checkHomme = document.querySelector(".homme") as HTMLInputElement;
 let checkFemme = document.querySelector(".femme") as HTMLInputElement;
 
-checkHomme.addEventListener('click', () => {
-    checkFemme.checked = false;
-})
+if (checkHomme && checkFemme) {
 
-checkFemme.addEventListener('click', () => {
-    checkHomme.checked = false;
-})
+    checkHomme.addEventListener('click', (e) => {
+        checkFemme.checked = false;
+    })
+    
+    checkFemme.addEventListener('click', (e) => {
+        checkHomme.checked = false;
+    })
+}
