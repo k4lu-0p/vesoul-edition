@@ -62,18 +62,18 @@ class VesoulEditionController extends AbstractController
     public function addItem($id, SessionInterface $session, BookRepository $repo)
     {
         $book = $repo->find($id);
+        // dump($book);
 
         $id = $book->getId();
         $title = $book->getTitle();
         $author = $book->getAuthor();
         $price = $book->getPrice();
         $stock = $book->getStock();
-
-
+        
         if ($stock > 0) {
 
             $this->quantity++;
-            $book->setStock($stock--);
+            $book->setStock($stock - 1);
             $panier = $session->get('panier');
             
             array_push($panier, $id = [
