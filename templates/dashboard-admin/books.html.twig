@@ -50,8 +50,7 @@
 
 {# lightbox détails livre #}
 
-<div class="modal fade" id="lightboxDetails" tabindex="-1" role="dialog" aria-labelledby="lightboxDetails"
-    aria-hidden="true">
+<div class="modal fade" id="lightboxDetails" tabindex="-1" role="dialog" aria-labelledby="lightboxDetails" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -71,14 +70,16 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-center align-items-center">
                     <div class="slider-for">
                         {# {% for image in book.images %} #}
-                        <img class="" src="IMAGE/URL" width="300" height="500" alt="">
+                        <div>
+                            <img class="" src="/build/livre1.jpg" alt="">
+                        </div>
                         {# {% endfor %} #}
 
                     </div>
                     <div class="slider-nav pt-5">
                         {# {% for image in book.images %} #}
                         <div class="elem">
-                            <img class="" src="IMAGE/URL" width="75" height="125" alt="">
+                            <img class="" src="/build/livre1.jpg" alt="">
                         </div>
                         {# {% endfor %} #}
                     </div>
@@ -93,8 +94,7 @@
 
 {# lightbox modifier un livre #}
 
-<div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit"
-    aria-hidden="true">
+<div class="modal fade" id="lightboxEdit" tabindex="-1" role="dialog" aria-labelledby="lightboxEdit" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -105,7 +105,7 @@
             </div>
             <div class="modal-body row">
                 {# {{ form_start(form) }} #}
-                
+
                 {# <strong class="py-1 m-0 col-4">{{ form_label(form.title, 'Titre') }}</strong>
                 {{ form_widget(form.title, {'value': '{{ book.title }}', 'attr': {'class': 'my-1 col-8'}} ) }}
 
@@ -194,8 +194,7 @@
 
 {# lightbox supprimer un livre #}
 
-<div class="modal fade" id="lightboxDelete" tabindex="-1" role="dialog" aria-labelledby="lightboxDelete"
-    aria-hidden="true">
+<div class="modal fade" id="lightboxDelete" tabindex="-1" role="dialog" aria-labelledby="lightboxDelete" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
