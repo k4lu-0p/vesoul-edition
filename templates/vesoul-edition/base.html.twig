@@ -55,7 +55,7 @@
                             <a href="panier" class="d-flex flex-column justify-content-center">
                                 <div>
                                     <i class="fas fa-shopping-cart"></i>
-                                    <span id="nb-items" class="badge badge-pill badge-warning">{{ nbItems }}</span>
+                                    <span id="nb-items" class="badge badge-pill badge-warning">{{ app.session.get('panier') | length}}</span>
                                 </div>
                                 <p class="m-0">panier</p>
                             </a>
