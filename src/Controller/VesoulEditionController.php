@@ -38,11 +38,12 @@ class VesoulEditionController extends AbstractController
     public function home(SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
     {
         // Si le panier est bien existant, capte le, et compte le nombre d'articles contenu.
-        if($panier = $session->get('panier')){
-            $this->nbItems = count($panier);
+        if($session->get('panier')) {
+
+            $panier = $session->get('panier');
+
         } else { // Sinon crée le et initialise à 0 le nombre d'articles contenu.
             $session->set('panier', []);
-            $this->nbItems = 0;
         }
     
         $books = $repoBook->findAll();
