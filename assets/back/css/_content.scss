@@ -32,14 +32,17 @@ main {
 
         .carre {
             width: 22%;
-            height: 80%;;
+            height: 80%;
+            ;
             border: #999999 solid 1px;
             border-radius: 0.1rem;
-            p{
+
+            p {
                 color: #838383;
                 font-weight: bold;
             }
-            .chiffre{
+
+            .chiffre {
                 color: black;
                 font-size: 2rem;
             }
@@ -93,7 +96,8 @@ main {
 
     // En-tête
     .listBook,
-    .listCommande {
+    .listCommande,
+    .info-boutique {
         width: 85%;
 
         @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -120,8 +124,26 @@ main {
                 color: #999999;
             }
         }
+        .form-input{
+            input{
+                height: 2.5rem;
+            }
+        }
+        .parent-save-info {
 
-        // liste des livres
+            .save-info {
+                background-color: $color-details;
+                color: white;
+                font-size: 1rem;
+                font-weight: bold;
+                height: 2.5rem;
+                width: 9rem;
+                border: none;
+                border-radius: 0.25rem;
+                transition: all 0.3s ease;
+            }
+        }
+
         .livres,
         .commandes {
 
