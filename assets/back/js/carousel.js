@@ -9,8 +9,16 @@ $('.slider-for').slick({
 console.log(document.querySelectorAll('.elem').length)
 
 // TEST si moins de 4 elements, pas de carousel inférieur pour eviter les bugs
-let slide;
-if (document.querySelector('.slick-track').childNodes.length < 4) {
+let slide = 0;
+if(document.querySelector('.slick-track').childNodes.length == 0){
+    let divNoImg = document.createElement('div');
+    let noImg = document.createElement('h2');
+    noImg.textContent = "Pas d'image";
+    divNoImg.setAttribute('class', 'd-flex justify-content-center align-items-center')
+    noImg.setAttribute('class', 'text-muted');
+    divNoImg.appendChild(noImg);
+    document.querySelector('.slider-for').appendChild(divNoImg);
+} else if (document.querySelector('.slick-track').childNodes.length < 4) {
     slide = document.querySelectorAll('.elem').length;
 }
 else {
