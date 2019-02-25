@@ -109,7 +109,6 @@ class VesoulEditionController extends AbstractController
         $book = $repo->findBook($id);
 
         return $this->render('vesoul-edition/product.html.twig', [
-            'nbItems' => $this->nbItems,
             'book' => $book
         ]);
     }
