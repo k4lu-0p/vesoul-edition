@@ -73,6 +73,9 @@ class UserFixtures extends Fixture
         ->setIsbn(6486158165)
         ->setStock(5)
         ->setTitle("Le titre du livre")
+        ->setYear(2002)
+        ->setLength(15)
+        ->setWidth(10)
         ->addImage($image1)
         ->addGenra($genra1);
 
@@ -85,6 +88,9 @@ class UserFixtures extends Fixture
         ->setIsbn(87521463258)
         ->setStock(8)
         ->setTitle("Le meilleur livre du monde")
+        ->setYear(2007)
+        ->setLength(30)
+        ->setWidth(21)
         ->addImage($image2)
         ->addGenra($genra2);
 
@@ -97,6 +103,9 @@ class UserFixtures extends Fixture
         ->setIsbn(44215889753)
         ->setStock(10)
         ->setTitle("L'histoire du pinguoin")
+        ->setYear(1978)
+        ->setLength(18)
+        ->setWidth(12)
         ->addImage($image3)
         ->addGenra($genra3);
 
