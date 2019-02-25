@@ -125,6 +125,18 @@
 
 #adresses-compte {
 
+    .modal-footer {
+        button:nth-child(1) {
+            background-color: $color-main;
+            color: white;
+            // height: 33px;
+
+        }
+        button:nth-child(2) {
+            // height: 33px;
+        }
+    }
+
     padding-left: 15px;
 
     .icon {
@@ -164,8 +176,12 @@
         }
 
         .add-address {
-            border-radius: 50%;
-            color: $color-main;
+            color: $color-title;
+            background-color: white;
+        }
+
+        .add-address:hover {
+            background-color: rgb(221, 221, 221);
         }
 
         .new-card {
@@ -347,13 +363,14 @@
 
 .title-compte {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     height: 50px;
     width: 100%;
     background-color: $color-main;
     color: white;
     padding-right: 15px;
+    padding-left: 15px;
     margin-bottom: 20px;
     
     h2 {
