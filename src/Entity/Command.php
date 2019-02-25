@@ -55,21 +55,19 @@ private $user;
 
 /**
  * @ORM\ManyToOne(targetEntity="App\Entity\Address")
- * @ORM\JoinColumn(nullable=false)
+ * @ORM\JoinColumn(nullable=true)
  */
-private $relation_livraison;
+private $livraison;
 
 /**
  * @ORM\ManyToOne(targetEntity="App\Entity\Address")
- * @ORM\JoinColumn(nullable=false)
+ * @ORM\JoinColumn(nullable=true)
  */
-private $relation_facturation;
+private $facturation;
 
 public function __construct()
 {
 $this->books = new ArrayCollection();
-$this->Relation = new ArrayCollection();
-$this->relation = new ArrayCollection();
 }
 
 public function getId(): ?int
@@ -175,57 +173,26 @@ public function setUser(?User $user): self
     return $this;
 }
 
-/**
- * @return Collection|Address[]
- */
-public function getRelation(): Collection
+public function getLivraison(): ?Address
 {
-    return $this->Relation;
+    return $this->livraison;
 }
 
-public function addRelation(Address $relation): self
+public function setLivraison(?Address $livraison): self
 {
-    if (!$this->Relation->contains($relation)) {
-        $this->Relation[] = $relation;
-        $relation->setUserId($this);
-    }
+    $this->livraison = $livraison;
 
     return $this;
 }
 
-public function removeRelation(Address $relation): self
+public function getFacturation(): ?Address
 {
-    if ($this->Relation->contains($relation)) {
-        $this->Relation->removeElement($relation);
-        // set the owning side to null (unless already changed)
-        if ($relation->getUserId() === $this) {
-            $relation->setUserId(null);
-        }
-    }
-
-    return $this;
+    return $this->facturation;
 }
 
-public function getRelationLivraison(): ?Address
+public function setFacturation(?Address $facturation): self
 {
-    return $this->RelationLivraison;
-}
-
-public function setRelationLivraison(?Address $RelationLivraison): self
-{
-    $this->RelationLivraison = $RelationLivraison;
-
-    return $this;
-}
-
-public function getRelationFacturation(): ?Address
-{
-    return $this->relation_facturation;
-}
-
-public function setRelationFacturation(?Address $relation_facturation): self
-{
-    $this->relation_facturation = $relation_facturation;
+    $this->facturation = $facturation;
 
     return $this;
 }

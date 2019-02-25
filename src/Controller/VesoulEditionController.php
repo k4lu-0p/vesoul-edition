@@ -68,9 +68,6 @@ class VesoulEditionController extends AbstractController
         $price = $book->getPrice();
         $stock = $book->getStock();
 
-        // dump($author);
-        // die;
-
         if ($stock > 0) {
 
             $this->quantity++;
@@ -99,7 +96,6 @@ class VesoulEditionController extends AbstractController
             $panier = $session->get('panier');
 
             return $this->redirectToRoute('home');
-            
         } else {
             return $this->redirectToRoute('home');
         }
