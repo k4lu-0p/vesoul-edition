@@ -22,19 +22,22 @@ class CommandRepository extends ServiceEntityRepository
     // /**
     //  * @return Order[] Returns an array of Order objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findCommandByUserId($value)
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT command.date, command.number, command.quantity, command.totalcost, command.state
+            FROM command
+            WHERE command.user_id = :value
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['value' => $value]);
+    
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Order

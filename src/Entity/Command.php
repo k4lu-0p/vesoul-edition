@@ -53,9 +53,23 @@ private $books;
 */
 private $user;
 
+/**
+ * @ORM\ManyToOne(targetEntity="App\Entity\Address")
+ * @ORM\JoinColumn(nullable=false)
+ */
+private $relation_livraison;
+
+/**
+ * @ORM\ManyToOne(targetEntity="App\Entity\Address")
+ * @ORM\JoinColumn(nullable=false)
+ */
+private $relation_facturation;
+
 public function __construct()
 {
 $this->books = new ArrayCollection();
+$this->Relation = new ArrayCollection();
+$this->relation = new ArrayCollection();
 }
 
 public function getId(): ?int
@@ -157,6 +171,61 @@ public function getUser(): ?User
 public function setUser(?User $user): self
 {
     $this->user = $user;
+
+    return $this;
+}
+
+/**
+ * @return Collection|Address[]
+ */
+public function getRelation(): Collection
+{
+    return $this->Relation;
+}
+
+public function addRelation(Address $relation): self
+{
+    if (!$this->Relation->contains($relation)) {
+        $this->Relation[] = $relation;
+        $relation->setUserId($this);
+    }
+
+    return $this;
+}
+
+public function removeRelation(Address $relation): self
+{
+    if ($this->Relation->contains($relation)) {
+        $this->Relation->removeElement($relation);
+        // set the owning side to null (unless already changed)
+        if ($relation->getUserId() === $this) {
+            $relation->setUserId(null);
+        }
+    }
+
+    return $this;
+}
+
+public function getRelationLivraison(): ?Address
+{
+    return $this->RelationLivraison;
+}
+
+public function setRelationLivraison(?Address $RelationLivraison): self
+{
+    $this->RelationLivraison = $RelationLivraison;
+
+    return $this;
+}
+
+public function getRelationFacturation(): ?Address
+{
+    return $this->relation_facturation;
+}
+
+public function setRelationFacturation(?Address $relation_facturation): self
+{
+    $this->relation_facturation = $relation_facturation;
 
     return $this;
 }
