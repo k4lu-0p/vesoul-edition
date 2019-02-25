@@ -53,6 +53,18 @@ private $books;
 */
 private $user;
 
+/**
+ * @ORM\ManyToOne(targetEntity="App\Entity\Address")
+ * @ORM\JoinColumn(nullable=true)
+ */
+private $livraison;
+
+/**
+ * @ORM\ManyToOne(targetEntity="App\Entity\Address")
+ * @ORM\JoinColumn(nullable=true)
+ */
+private $facturation;
+
 public function __construct()
 {
 $this->books = new ArrayCollection();
@@ -157,6 +169,30 @@ public function getUser(): ?User
 public function setUser(?User $user): self
 {
     $this->user = $user;
+
+    return $this;
+}
+
+public function getLivraison(): ?Address
+{
+    return $this->livraison;
+}
+
+public function setLivraison(?Address $livraison): self
+{
+    $this->livraison = $livraison;
+
+    return $this;
+}
+
+public function getFacturation(): ?Address
+{
+    return $this->facturation;
+}
+
+public function setFacturation(?Address $facturation): self
+{
+    $this->facturation = $facturation;
 
     return $this;
 }

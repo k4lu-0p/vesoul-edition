@@ -27,16 +27,14 @@ class VesoulEditionController extends AbstractController
      */
     public $quantity;
 
-    /**
-     * @var integer
-     */
-    public $nbItems;
-
+    
     /**
      * @Route("/", name="home")
      */
     public function home(SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
     {
+        // $session->remove('panier');
+
         // Si le panier est bien existant, capte le, et compte le nombre d'articles contenu.
         if($session->get('panier')) {
 
@@ -53,7 +51,6 @@ class VesoulEditionController extends AbstractController
 
 
         return $this->render('vesoul-edition/home.html.twig', [
-            'nbItems' => $this->nbItems,
             'books' => $books,
             'genras' => $genras,
             'authors' => $authors
@@ -79,21 +76,26 @@ class VesoulEditionController extends AbstractController
             
             $manager->persist($book);
             $manager->flush();
-                        
-            array_push($panier, $id = [
-                'title'=> $title,
-                'author'=> $author,
-                'quantity'=> $this->quantity,
-                'price'=> $price                
-            ]);
+                   
+            if (array_key_exists($id, $panier)) {
+
+                $panier[$id]['quantity']++;
+
+            } else {
+                
+                array_push($panier, $id = [
+                    'title'=> $title,
+                    'firstname'=> $author->getFirstname(),
+                    'lastname'=> $author->getLastname(),
+                    'quantity'=> $this->quantity,
+                    'price'=> $price                
+                ]);
+            }
 
             $session->set('panier', $panier);
             $panier = $session->get('panier');
-            $this->nbItems = count($panier);
-            
 
             return $this->redirectToRoute('home');
-            
         } else {
             return $this->redirectToRoute('home');
         }
@@ -112,24 +114,16 @@ class VesoulEditionController extends AbstractController
         ]);
     }
 
-
-
     /**
      * @Route("/panier", name="panier")
      */
     public function showPanier(SessionInterface $session)
     {
 
-        
-
         return $this->render('vesoul-edition/panier.html.twig', [
             'controller_name' => 'FrontController'
         ]);
-
-
     }
-
-
 
     /**
      * @Route("/commande", name="commander")

@@ -62,7 +62,7 @@
             <div class="modal-body row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
                     <p class="pt-4 m-0"><strong>Code ISBN : </strong>CODE ISBN</p>
-                    <p class="pt-4 m-0"><strong>Auteur : </strong>PRENOM NOM AUTEUR</p>
+                    <p class="pt-4 m-0"><strong>Auteur : </strong>PRENOM NOM</p>
                     <p class="pt-4 m-0"><strong>Prix : </strong>PRIX €</p>
                     <p class="pt-4 m-0"><strong>Catégories : </strong>CATEGORIES</p>
                     <p class="pt-4 m-0"><strong>Description : </strong>DESCRIPTION</p>
@@ -70,8 +70,14 @@
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 d-flex flex-column justify-content-center align-items-center">
                     <div class="slider-for">
                         {# {% for image in book.images %} #}
-                        <div>
-                            <img class="" src="/build/livre1.jpg" alt="">
+                        <div class="">
+                            <img class="" src="/build/images/livre1.jpg" alt="">
+                        </div>
+                        <div class="">
+                            <img class="" src="/build/images/livre2.jpg" alt="">
+                        </div>
+                        <div class="">
+                            <img class="" src="/build/images/livre3.jpg" alt="">
                         </div>
                         {# {% endfor %} #}
 
@@ -79,7 +85,13 @@
                     <div class="slider-nav pt-5">
                         {# {% for image in book.images %} #}
                         <div class="elem">
-                            <img class="" src="/build/livre1.jpg" alt="">
+                            <img class="" src="/build/images/livre1.jpg" alt="">
+                        </div>
+                        <div class="elem">
+                            <img class="" src="/build/images/livre2.jpg" alt="">
+                        </div>
+                        <div class="elem">
+                            <img class="" src="/build/images/livre3.jpg" alt="">
                         </div>
                         {# {% endfor %} #}
                     </div>
@@ -137,7 +149,7 @@
                     </fieldset>
                     {# {% for image in book.images %} #}
                     <div class="elem">
-                        <img class="mt-1 ml-1" src="IMAGE/URL" width="100" height="170" alt="">
+                        <img class="mt-1 ml-1" src="/build/images/livre1.jpg" width="100" height="170" alt="">
                     </div>
                     {# {% endfor %} #}
                     {# {{ form_end(form) }} #}

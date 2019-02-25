@@ -125,14 +125,17 @@ main {
                 color: #999999;
             }
         }
-        .mention{
+
+        .mention {
             border: #999999 solid 1px;
             width: 95%;
-            min-height: 30vh; 
+            min-height: 30vh;
         }
-        .save-mentions{
+
+        .save-mentions {
             width: 95%;
-            button{
+
+            button {
                 background-color: $color-details;
                 color: white;
                 font-weight: bold;
@@ -142,17 +145,20 @@ main {
                 border: none;
                 border-radius: 0.25rem;
                 transition: all 0.3s ease;
+
                 &:hover {
                     cursor: pointer;
                     background-color: #58a0e7;
                 }
             }
         }
-        .form-input{
-            input{
+
+        .form-input {
+            input {
                 height: 2.5rem;
             }
         }
+
         .parent-save-info {
 
             .save-info {
@@ -165,6 +171,7 @@ main {
                 border: none;
                 border-radius: 0.25rem;
                 transition: all 0.3s ease;
+
                 &:hover {
                     cursor: pointer;
                     background-color: #58a0e7;
@@ -259,18 +266,42 @@ main {
 
     #lightboxDetails {
         .modal-dialog {
-            max-width: 45%;
+            max-width: 50%;
 
             .modal-content {
                 .modal-body {
                     div {
                         .slider-for {
-                            width: 300px;
-                            height: 500px;
+                            width: 350px;
+                            height: 350px;
+
+                            .slick-list {
+                                width: 350px;
+                                height: 350px;
+                                .slik-track {
+                                    width: 350px;
+                                    height: 350px;
+                                    div{
+                                        width: 350px;
+                                        height: 350px;
+                                        img {
+                                            width: 350px;
+                                            height: 350px;
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         .slider-nav {
                             width: 360px;
+
+                            .elem {
+                                img {
+                                    width: 120px;
+                                    height: 120px;
+                                }
+                            }
                         }
                     }
                 }

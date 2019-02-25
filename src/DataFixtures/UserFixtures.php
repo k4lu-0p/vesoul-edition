@@ -70,7 +70,7 @@ class UserFixtures extends Fixture
         
         $book1->setDescription("Un beau livre, bien propre, en papier. Il raconte un belle histoire, passionante, dense et bien documentée.")
         ->setPrice(24)
-        ->setIsbn(6486158165)
+        ->setIsbn("6486158165")
         ->setStock(5)
         ->setTitle("Le titre du livre")
         ->setYear(2002)
@@ -85,7 +85,7 @@ class UserFixtures extends Fixture
         
         $book2->setDescription("Le meilleur livre du monde à lire absolument. Ce livre changera votre vision du monde et votre compréhension de vous même.")
         ->setPrice(18)
-        ->setIsbn(87521463258)
+        ->setIsbn("87521463258")
         ->setStock(8)
         ->setTitle("Le meilleur livre du monde")
         ->setYear(2007)
@@ -100,7 +100,7 @@ class UserFixtures extends Fixture
         
         $book3->setDescription("C'est l'histoire d'un pinguoin qui vie au pole nord et qui aime nager et manger du poisson")
         ->setPrice(15)
-        ->setIsbn(44215889753)
+        ->setIsbn("44215889753")
         ->setStock(10)
         ->setTitle("L'histoire du pinguoin")
         ->setYear(1978)
@@ -132,9 +132,9 @@ class UserFixtures extends Fixture
         $command1 = new Command();
         
         $command1->setDate(new \DateTimeImmutable())
-        ->setNumber(8657185758)
+        ->setNumber("8657185758")
         ->setQuantity(2)
-        ->setTotalcost(44)
+        ->setTotalcost(44.0)
         ->setState("en cours")
         ->addBook($book1);
 
@@ -145,9 +145,9 @@ class UserFixtures extends Fixture
         // $objectManager->flush();
         
         $command2->setDate(new \DateTimeImmutable())
-        ->setNumber(8917186412)
+        ->setNumber("8917186412")
         ->setQuantity(1)
-        ->setTotalcost(22)
+        ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1);
         
@@ -157,9 +157,9 @@ class UserFixtures extends Fixture
 
 
         $command3->setDate(new \DateTimeImmutable())
-        ->setNumber(8917186412)
+        ->setNumber("8917186412")
         ->setQuantity(1)
-        ->setTotalcost(22)
+        ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1);
         
@@ -184,7 +184,6 @@ class UserFixtures extends Fixture
         $address2 = new Address();
         
         $address2->setNumber("7")
-        ->setType("ter")
         ->setStreet("rue du chien")
         ->setCity("besançon")
         ->setCp("25000")
@@ -204,7 +203,6 @@ class UserFixtures extends Fixture
         ->setCity("dijon")
         ->setCp("39000")
         ->setCountry("France")
-        ->setAdditional("terrain 1")
         ->setTitle("Voisin")
         ->setFirstname("Thomas")
         ->setLastname("Dujardin");
