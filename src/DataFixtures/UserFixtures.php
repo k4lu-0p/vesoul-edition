@@ -31,19 +31,19 @@ class UserFixtures extends Fixture
         // ==== Images ==========================================================
         $image1 = new Image();
     
-        $image1->setUrl("/build/livre1.jpg");
+        $image1->setUrl("/build/images/livre1.jpg");
 
         $objectManager->persist($image1);
         // -------------------------------------
         $image2 = new Image();
         
-        $image2->setUrl("/build/livre2.jpg");
+        $image2->setUrl("/build/images/livre2.jpg");
 
         $objectManager->persist($image2);
         // ------------------------------------
         $image3 = new Image();
         
-        $image3->setUrl("/build/livre3.jpg");
+        $image3->setUrl("/build/images/livre3.jpg");
 
         $objectManager->persist($image3);
 
@@ -68,9 +68,9 @@ class UserFixtures extends Fixture
         // ===== Books =====================================================
         $book1 = new Book();
         
-        $book1->setDescription("C'est très le livre")
+        $book1->setDescription("Un beau livre, bien propre, en papier. Il raconte un belle histoire, passionante, dense et bien documentée.")
         ->setPrice(24)
-        ->setIsbn(6486158165)
+        ->setIsbn("6486158165")
         ->setStock(5)
         ->setTitle("Le titre du livre")
         ->addImage($image1)
@@ -80,9 +80,9 @@ class UserFixtures extends Fixture
         // ---------------------------------------------
         $book2 = new Book();
         
-        $book2->setDescription("Le meilleur livre du monde à lire absolument")
+        $book2->setDescription("Le meilleur livre du monde à lire absolument. Ce livre changera votre vision du monde et votre compréhension de vous même.")
         ->setPrice(18)
-        ->setIsbn(87521463258)
+        ->setIsbn("87521463258")
         ->setStock(8)
         ->setTitle("Le meilleur livre du monde")
         ->addImage($image2)
@@ -92,9 +92,9 @@ class UserFixtures extends Fixture
         // ----------------------------------------------
         $book3 = new Book();
         
-        $book3->setDescription("C'est l'histoire d'un pinguoin qui respire par les fesses...")
+        $book3->setDescription("C'est l'histoire d'un pinguoin qui vie au pole nord et qui aime nager et manger du poisson")
         ->setPrice(15)
-        ->setIsbn(44215889753)
+        ->setIsbn("44215889753")
         ->setStock(10)
         ->setTitle("L'histoire du pinguoin")
         ->addImage($image3)
@@ -123,9 +123,9 @@ class UserFixtures extends Fixture
         $command1 = new Command();
         
         $command1->setDate(new \DateTimeImmutable())
-        ->setNumber(8657185758)
+        ->setNumber("8657185758")
         ->setQuantity(2)
-        ->setTotalcost(44)
+        ->setTotalcost(44.0)
         ->setState("en cours")
         ->addBook($book1);
 
@@ -136,9 +136,9 @@ class UserFixtures extends Fixture
         // $objectManager->flush();
         
         $command2->setDate(new \DateTimeImmutable())
-        ->setNumber(8917186412)
+        ->setNumber("8917186412")
         ->setQuantity(1)
-        ->setTotalcost(22)
+        ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1);
         
@@ -148,9 +148,9 @@ class UserFixtures extends Fixture
 
 
         $command3->setDate(new \DateTimeImmutable())
-        ->setNumber(8917186412)
+        ->setNumber("8917186412")
         ->setQuantity(1)
-        ->setTotalcost(22)
+        ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1);
         

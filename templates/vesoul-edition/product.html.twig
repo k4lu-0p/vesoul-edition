@@ -1,32 +1,56 @@
 {% extends "vesoul-edition/base.html.twig" %}
 
 {% block content %}
-
-    <div id="product-page" class="pt-4 pb-4">
-
-        <div class="row mt-4 mb-4 pt-5 pb-5">
-            <div id="preview-section" class="col-6 d-flex align-items-end d-flex flex-column">
-                <img id="preview-img" src="https://i.imgur.com/AceHnbf.jpg" alt="livre">
-                <div id="preview-small-section" class="d-flex align-items-center justify-content-between pt-2">
-                    <button><i class="fas fa-chevron-left fa-2x"></i></button>
-                    <img class="preview-small" src="https://i.imgur.com/AceHnbf.jpg" alt="livre">
-                    <img class="preview-small" src="https://i.imgur.com/AceHnbf.jpg" alt="livre">
-                    <img class="preview-small" src="https://i.imgur.com/AceHnbf.jpg" alt="livre">
-                    <button><i class="fas fa-chevron-right fa-2x"></i></button>
+<div id="product-page" class="m-0 p-0">
+    {% for info in book %}
+    <div class="row m-0 p-5">
+        {# ==> Section gauche avec les images ======================================== #}
+        <div id="preview-section" class="col-6 m-0 p-0 d-flex align-items-end d-flex flex-column">
+            {# ---------- Image principale ---------- #}
+            <img id="preview-img" src="{{info.url}}" alt="livre">
+            {# ---------- Carousel ----------- #}
+            <div id="preview-small-section" class="d-flex align-items-center justify-content-between pt-2">
+                <button><i class="fas fa-chevron-left fa-2x"></i></button>
+                <img class="preview-small" src="{{info.url}}" alt="livre">
+                <img class="preview-small" src="{{info.url}}" alt="livre">
+                <img class="preview-small" src="{{info.url}}" alt="livre">
+                <button><i class="fas fa-chevron-right fa-2x"></i></button>
+            </div>
+        </div>
+        {# ==> Section de droite informations ======================================== #}
+        <div id="detail-section" class="col-6 m-0 p-5">
+            <h2 class="mb-4">{{info.title}}</h2>
+            <p class="legend m-0">Auteur</p>
+            <h3 class="m-0 pt-3 pb-4">{{info.firstname}} {{info.lastname}}</h3>
+            <div class="d-flex">
+                <div id="stock-circle" class="mr-3"></div>
+                <p class="stock">{{info.stock}} <span id="stock-status">en stock</span></p>
+            </div>
+            <p class="legend">Description</p>
+            <p id="description">{{info.description}}</p>
+            <div class="d-flex align-items-center">
+                <p class="legend m-0 pr-4">Code ISBN : </p>
+                <p class="m-0">{{info.isbn}}</p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <p class="legend m-0 pr-4">Prix TTC</p>
+                    <p class="m-0" id="price">{{info.price}} €</p>
+                </div>
+                <div class="m-0 py-5 d-flex align-items-center">
+                        <p class="legend m-0 pr-4">Quantité :</p>
+                    <p class="m-0 p-3" id="quantite">1</p>
+                    <button class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</button>
+                    <button class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</button>
                 </div>
             </div>
-            <div id="detail-section" class="col-6">
-                <h2>Titre du livre qui se veut long</h2>
-                <p>20€</p>
-                <p>Stock : 15</p>
-                <p>Code ISBN : 8513415341543</p>
-                <p>C'est très le livre qui contient des mots et des phrases formant des pages. Le premier chapitre en contient aussi, il permet de débuter le livre et introduire les personne. Quant au second chapitre il enchaîne sur cette introduction.</p>
-                <input class="form-control mt-4" type="number" min="1" value="1">
-                <div class="d-flex justify-content-center">
-                    <button class="btn d-flex justify-content-center align-items-center mt-4"><i class="fas fa-shopping-cart fa-2x pr-2"></i> Ajouter au panier</button>
-                </div>
+            <div class="d-flex justify-content-center">
+                <button class="btn btn-info d-flex justify-content-center align-items-center mt-4"><i class="fas fa-shopping-cart fa-2x pr-2"></i>
+                    Ajouter au panier</button>
             </div>
         </div>
     </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

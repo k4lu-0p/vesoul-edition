@@ -75,13 +75,13 @@ class Address
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="Relation")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user_id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="relation")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $command_facturation_id;
 

@@ -55,21 +55,19 @@ private $user;
 
 /**
  * @ORM\ManyToOne(targetEntity="App\Entity\Address")
- * @ORM\JoinColumn(nullable=false)
+ * @ORM\JoinColumn(nullable=true)
  */
 private $livraison;
 
 /**
  * @ORM\ManyToOne(targetEntity="App\Entity\Address")
- * @ORM\JoinColumn(nullable=false)
+ * @ORM\JoinColumn(nullable=true)
  */
 private $facturation;
 
 public function __construct()
 {
 $this->books = new ArrayCollection();
-$this->Relation = new ArrayCollection();
-$this->relation = new ArrayCollection();
 }
 
 public function getId(): ?int
