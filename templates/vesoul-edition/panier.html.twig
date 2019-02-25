@@ -36,23 +36,23 @@
                 <div class="col-12  m-0 p-0 d-flex justify-content-between align-items-center">
                     <div class="d-flex livre">
                         <div class="d-flex align-items-center">
-                            <img src="build/livre2.jpg" alt="photo principale du livre" width="150px" height="150px">
+                            <img src="#" alt="photo principale du livre" width="150px" height="150px">
                             <div class="p-2 d-flex flex-column">
                                 <h4 class="m-0">{{ article.title }}</h4>
                                 <h5 class="m-0">{{ article.firstname }} {{ article.lastname }} </h5>
                             </div>
                         </div>
                     </div>
-                    <p class="m-0"><span>{{ article.price }}</span> €</p>
+                    <p class="m-0"><span>{{ article.price }}</span>€</p>
                     <div class="d-flex align-items-center">
                         <p class="m-0 p-3" id="quantite">{{ article.quantity }}</p>
-                        <button class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</button>
-                        <button class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</button>
+                        <a href="{{ path('addItem',{ 'id':article.id }) }}" class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</a>
+                        <a href="{{ path('reduceItem',{ 'id':article.id }) }}" class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</a>
                     </div>
-                    <p class="m-0 pr-3 total"><span>{{ article.price }}</span> €</p>
-                    <button class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
+                    <p class="m-0 pr-3 total"><span>{{ article.price * article.quantity }}</span> €</p>
+                    <a href="{{ path('deleteItem',{ 'id':article.id }) }}" class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
                         <i class="fas fa-trash"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -66,19 +66,16 @@
             </div>
             <div class="row py-3 d-flex justify-content-between">
                 <div class="col-6">Sous-total</div>
-                <div class="col-6 text-right infos"><span>73,49</span> €</div>
+                <div class="col-6 text-right infos"><span>{{ total }}</span> €</div>
             </div>
             <div class="row py-3 d-flex justify-content-between">
                 <div class="col-6">Livraison</div>
                 <div class="col-6 text-right infos">Gratuite</div>
             </div>
-            <div class="row py-3 d-flex justify-content-between">
-                <div class="col-6">TVA</div>
-                <div class="col-6 text-right infos"><span>14,70</span> €</div>
-            </div>
+            
             <div class="row py-4 d-flex justify-content-between">
                 <div class="col-6 total">Total</div>
-                <div class="col-6 text-right total"><span>73,49</span> €</div>
+                <div class="col-6 text-right total"><span>{{ total }}</span> €</div>
             </div>
             <div class="row">
                 <div class="col-12">
