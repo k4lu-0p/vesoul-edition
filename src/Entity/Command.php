@@ -196,4 +196,9 @@ public function setFacturation(?Address $facturation): self
 
     return $this;
 }
+
+public function __toString(){
+    return $this->number;
+}
+
 }

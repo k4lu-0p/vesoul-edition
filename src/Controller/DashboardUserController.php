@@ -11,9 +11,11 @@ use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
 use App\Repository\UserRepository;
 use App\Form\EditInformationsType;
+use App\Form\AddAddressesType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
+use App\Entity\Address;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -110,25 +112,32 @@ class DashboardUserController extends AbstractController
     /**
      * @Route("/adresses", name="dashboard_user_addresses")
      */
-    public function showAdresses(AddressRepository $repo)
+    public function showAdresses(AddressRepository $repo, Address $address = null, Request $request, ObjectManager $manager = null)
     {
 
         $user = $this->getUser();
 
         $id = $user->getId();
 
+        if(!$address) {
+            $address = new Address();
+        }
+
+        $form = $this->createForm(AddAddressesType::class, $address);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($address);
+            $manager->flush();
+
+            return $this->redirectToRoute('dashboard_user_addresses');
+        }
+
         $adresses = $repo->findAddressByUserId($id);
         return $this->render('dashboard-user/compte-adresses.html.twig', [
-            'adresses' => $adresses
+            'adresses' => $adresses,
+            'form' => $form->createView()
         ]);
-    }
-
-    /**
-     * @Route("/ajouter-adresses", name="dashboard_user_add_addresses")
-     */
-    public function addAdresses()
-    {
-        return $this->render('dashboard-user/ajouter-adresses.html.twig');
     }
 
     /**
