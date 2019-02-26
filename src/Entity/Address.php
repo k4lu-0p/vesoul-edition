@@ -86,7 +86,7 @@ class Address
     public function __construct()
     {
         $this->users = new ArrayCollection();
-        $this->commands = new ArrayCollection();
+        $this->command_facturation = new ArrayCollection();
         $this->command_livraison = new ArrayCollection();
     }
 
@@ -246,37 +246,32 @@ class Address
     /**
      * @return Collection|Command[]
      */
-    public function getCommands(): Collection
-    {
-        return $this->commands;
-    }
-
     public function getCommandFacturation(): Collection
     {
-    return $this->command_facturation;
+        return $this->command_facturation;
     }
-    
+
     public function addCommandFacturation(Command $commandFacturation): self
     {
-    if (!$this->command_facturation->contains($commandFacturation)) {
-    $this->command_facturation[] = $commandFacturation;
-    $commandFacturation->setFacturation($this);
+        if (!$this->command_facturation->contains($commandFacturation)) {
+            $this->command_facturation[] = $commandFacturation;
+            $commandFacturation->setFacturation($this);
+        }
+
+        return $this;
     }
-    
-    return $this;
-    }
-    
+
     public function removeCommandFacturation(Command $commandFacturation): self
     {
-    if ($this->command_facturation->contains($commandFacturation)) {
-    $this->command_facturation->removeElement($commandFacturation);
-    // set the owning side to null (unless already changed)
-    if ($commandFacturation->getFacturation() === $this) {
-    $commandFacturation->setFacturation(null);
-    }
-    }
-    
-    return $this;
+        if ($this->command_facturation->contains($commandFacturation)) {
+            $this->command_facturation->removeElement($commandFacturation);
+            // set the owning side to null (unless already changed)
+            if ($commandFacturation->getFacturation() === $this) {
+                $commandFacturation->setFacturation(null);
+            }
+        }
+
+        return $this;
     }
 
     /**

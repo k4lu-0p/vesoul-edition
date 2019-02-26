@@ -54,7 +54,7 @@ private $books;
 private $user;
 
 /**
- * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="commands")
+ * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="command_facturation")
  * @ORM\JoinColumn(nullable=false)
  */
 private $facturation;
