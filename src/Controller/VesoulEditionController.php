@@ -48,7 +48,16 @@ class VesoulEditionController extends AbstractController
             $session->set('panier', []);
         }
     
-        $books = $repoBook->findAllBooks();
+        $allBooks = $repoBook->findAllBooks();
+
+        // Garder uniquement les 9 premiers livres de la BDD pour la page d'acceuil
+        $books = [];
+        for($i = 0; $i < 9; $i++) {
+            array_push($books, $allBooks[$i]);
+        }
+        
+        // $books = $repoBook->findBy(['year' => '2019']);
+
         // $booksImages = $books->getImage()->getUrl();
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();

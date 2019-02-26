@@ -25,6 +25,7 @@ $font-main: 'Work Sans', sans-serif;
 @import "commande";
 @import "confirmation";
 @import 'inscription';
+@import 'loader';
 
 // Redéfinition ou ajout de classe Bootstrap
 @media (min-width: 1200px) {

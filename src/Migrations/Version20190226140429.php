@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190225160117 extends AbstractMigration
+final class Version20190226140429 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -24,8 +24,8 @@ final class Version20190225160117 extends AbstractMigration
 
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, gender TINYINT(1) NOT NULL, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, password VARCHAR(150) NOT NULL, username VARCHAR(100) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:simple_array)\', tel VARCHAR(30) NOT NULL, newsletter TINYINT(1) DEFAULT \'1\' NOT NULL, birth DATE DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user_address (user_id INT NOT NULL, address_id INT NOT NULL, INDEX IDX_5543718BA76ED395 (user_id), INDEX IDX_5543718BF5B7AF75 (address_id), PRIMARY KEY(user_id, address_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE address (id INT AUTO_INCREMENT NOT NULL, user_id_id INT DEFAULT NULL, command_facturation_id_id INT DEFAULT NULL, number VARCHAR(10) NOT NULL, type VARCHAR(45) DEFAULT NULL, street VARCHAR(150) NOT NULL, city VARCHAR(150) NOT NULL, cp VARCHAR(10) NOT NULL, country VARCHAR(100) NOT NULL, additional VARCHAR(255) DEFAULT NULL, title VARCHAR(45) NOT NULL, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, INDEX IDX_D4E6F819D86650F (user_id_id), INDEX IDX_D4E6F816E3062FB (command_facturation_id_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE command (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, livraison_id INT DEFAULT NULL, facturation_id INT DEFAULT NULL, date DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', number VARCHAR(150) NOT NULL, quantity INT NOT NULL, totalcost DOUBLE PRECISION NOT NULL, state VARCHAR(150) NOT NULL, INDEX IDX_8ECAEAD4A76ED395 (user_id), INDEX IDX_8ECAEAD48E54FB25 (livraison_id), INDEX IDX_8ECAEAD4DBC5F284 (facturation_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE address (id INT AUTO_INCREMENT NOT NULL, number VARCHAR(10) NOT NULL, type VARCHAR(45) DEFAULT NULL, street VARCHAR(150) NOT NULL, city VARCHAR(150) NOT NULL, cp VARCHAR(10) NOT NULL, country VARCHAR(100) NOT NULL, additional VARCHAR(255) DEFAULT NULL, title VARCHAR(45) NOT NULL, firstname VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE command (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, facturation_id INT NOT NULL, livraison_id INT NOT NULL, date DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', number VARCHAR(150) NOT NULL, quantity INT NOT NULL, totalcost DOUBLE PRECISION NOT NULL, state VARCHAR(150) NOT NULL, INDEX IDX_8ECAEAD4A76ED395 (user_id), INDEX IDX_8ECAEAD4DBC5F284 (facturation_id), INDEX IDX_8ECAEAD48E54FB25 (livraison_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE command_book (command_id INT NOT NULL, book_id INT NOT NULL, INDEX IDX_6A4F0DBC33E1689A (command_id), INDEX IDX_6A4F0DBC16A2B381 (book_id), PRIMARY KEY(command_id, book_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE book (id INT AUTO_INCREMENT NOT NULL, author_id INT DEFAULT NULL, description LONGTEXT NOT NULL, price DOUBLE PRECISION NOT NULL, isbn VARCHAR(100) NOT NULL, stock INT NOT NULL, title VARCHAR(150) NOT NULL, year INT NOT NULL, length INT NOT NULL, width INT NOT NULL, INDEX IDX_CBE5A331F675F31B (author_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE book_genra (book_id INT NOT NULL, genra_id INT NOT NULL, INDEX IDX_8AFFE29816A2B381 (book_id), INDEX IDX_8AFFE298CDF44448 (genra_id), PRIMARY KEY(book_id, genra_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
@@ -36,11 +36,9 @@ final class Version20190225160117 extends AbstractMigration
         $this->addSql('CREATE TABLE author (id INT AUTO_INCREMENT NOT NULL, firstname VARCHAR(150) NOT NULL, lastname VARCHAR(150) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE user_address ADD CONSTRAINT FK_5543718BA76ED395 FOREIGN KEY (user_id) REFERENCES user (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE user_address ADD CONSTRAINT FK_5543718BF5B7AF75 FOREIGN KEY (address_id) REFERENCES address (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE address ADD CONSTRAINT FK_D4E6F819D86650F FOREIGN KEY (user_id_id) REFERENCES command (id)');
-        $this->addSql('ALTER TABLE address ADD CONSTRAINT FK_D4E6F816E3062FB FOREIGN KEY (command_facturation_id_id) REFERENCES command (id)');
         $this->addSql('ALTER TABLE command ADD CONSTRAINT FK_8ECAEAD4A76ED395 FOREIGN KEY (user_id) REFERENCES user (id)');
-        $this->addSql('ALTER TABLE command ADD CONSTRAINT FK_8ECAEAD48E54FB25 FOREIGN KEY (livraison_id) REFERENCES address (id)');
         $this->addSql('ALTER TABLE command ADD CONSTRAINT FK_8ECAEAD4DBC5F284 FOREIGN KEY (facturation_id) REFERENCES address (id)');
+        $this->addSql('ALTER TABLE command ADD CONSTRAINT FK_8ECAEAD48E54FB25 FOREIGN KEY (livraison_id) REFERENCES address (id)');
         $this->addSql('ALTER TABLE command_book ADD CONSTRAINT FK_6A4F0DBC33E1689A FOREIGN KEY (command_id) REFERENCES command (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE command_book ADD CONSTRAINT FK_6A4F0DBC16A2B381 FOREIGN KEY (book_id) REFERENCES book (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE book ADD CONSTRAINT FK_CBE5A331F675F31B FOREIGN KEY (author_id) REFERENCES author (id)');
@@ -57,10 +55,8 @@ final class Version20190225160117 extends AbstractMigration
         $this->addSql('ALTER TABLE user_address DROP FOREIGN KEY FK_5543718BA76ED395');
         $this->addSql('ALTER TABLE command DROP FOREIGN KEY FK_8ECAEAD4A76ED395');
         $this->addSql('ALTER TABLE user_address DROP FOREIGN KEY FK_5543718BF5B7AF75');
-        $this->addSql('ALTER TABLE command DROP FOREIGN KEY FK_8ECAEAD48E54FB25');
         $this->addSql('ALTER TABLE command DROP FOREIGN KEY FK_8ECAEAD4DBC5F284');
-        $this->addSql('ALTER TABLE address DROP FOREIGN KEY FK_D4E6F819D86650F');
-        $this->addSql('ALTER TABLE address DROP FOREIGN KEY FK_D4E6F816E3062FB');
+        $this->addSql('ALTER TABLE command DROP FOREIGN KEY FK_8ECAEAD48E54FB25');
         $this->addSql('ALTER TABLE command_book DROP FOREIGN KEY FK_6A4F0DBC33E1689A');
         $this->addSql('ALTER TABLE command_book DROP FOREIGN KEY FK_6A4F0DBC16A2B381');
         $this->addSql('ALTER TABLE book_genra DROP FOREIGN KEY FK_8AFFE29816A2B381');
