@@ -168,7 +168,7 @@ class UserFixtures extends Fixture
         ->setAdditional("appartement 12")
         ->setTitle("Maison")
         ->setFirstname("Jean")
-        ->setLastname("Pierre");
+        ->setLastname("Pierre")
         
         $objectManager->persist($address1);
         // -----------------------------------------

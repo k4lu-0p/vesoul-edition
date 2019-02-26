@@ -125,9 +125,14 @@ class DashboardUserController extends AbstractController
 
         $form = $this->createForm(AddAddressesType::class, $address);
         $form->handleRequest($request);
+        
+        if($form->isSubmitted()) {
+            
+            // dump($address);
+            // die();
 
-        if($form->isSubmitted() && $form->isValid()) {
             $manager->persist($address);
+            $user->addAddress($address);
             $manager->flush();
 
             return $this->redirectToRoute('dashboard_user_addresses');
@@ -139,6 +144,27 @@ class DashboardUserController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+    
+
+    /**
+     * @Route("/adresses/{id}/delete", name="dashboard_user_addresses_delete")
+     */
+    public function delete($id, Address $address = null, Request $request, ObjectManager $manager)
+    {
+        
+        $repo = $this->getDoctrine()->getRepository(Address::class);
+        $address = $repo->find($id);
+        
+        $manager->remove($address);
+        $manager->flush();
+        
+            // dump($address);
+            // die();
+
+            return $this->redirectToRoute('dashboard_user_addresses', ['id' => $adresse->getId()]);
+
+    }
+
 
     /**
      * @Route("/commandes", name="dashboard_user_commands")

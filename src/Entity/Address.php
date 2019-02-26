@@ -74,20 +74,20 @@ class Address
     private $lastname;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="Relation")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="facturation")
      */
-    private $user_id;
+    private $commands;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Command", inversedBy="relation")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="livraison")
      */
-    private $command_facturation_id;
+    private $command_livraison;
 
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->commands = new ArrayCollection();
+        $this->command_livraison = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -243,26 +243,64 @@ class Address
         return $this;
     }
 
-    public function getUserId(): ?Command
+    /**
+     * @return Collection|Command[]
+     */
+    public function getCommands(): Collection
     {
-        return $this->user_id;
+        return $this->commands;
     }
 
-    public function setUserId(?Command $user_id): self
+    public function addCommand(Command $command): self
     {
-        $this->user_id = $user_id;
+        if (!$this->commands->contains($command)) {
+            $this->commands[] = $command;
+            $command->setFacturation($this);
+        }
 
         return $this;
     }
 
-    public function getCommandFacturationId(): ?Command
+    public function removeCommand(Command $command): self
     {
-        return $this->command_facturation_id;
+        if ($this->commands->contains($command)) {
+            $this->commands->removeElement($command);
+            // set the owning side to null (unless already changed)
+            if ($command->getFacturation() === $this) {
+                $command->setFacturation(null);
+            }
+        }
+
+        return $this;
     }
 
-    public function setCommandFacturationId(?Command $command_facturation_id): self
+    /**
+     * @return Collection|Command[]
+     */
+    public function getCommandLivraison(): Collection
     {
-        $this->command_facturation_id = $command_facturation_id;
+        return $this->command_livraison;
+    }
+
+    public function addCommandLivraison(Command $commandLivraison): self
+    {
+        if (!$this->command_livraison->contains($commandLivraison)) {
+            $this->command_livraison[] = $commandLivraison;
+            $commandLivraison->setLivraison($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandLivraison(Command $commandLivraison): self
+    {
+        if ($this->command_livraison->contains($commandLivraison)) {
+            $this->command_livraison->removeElement($commandLivraison);
+            // set the owning side to null (unless already changed)
+            if ($commandLivraison->getLivraison() === $this) {
+                $commandLivraison->setLivraison(null);
+            }
+        }
 
         return $this;
     }

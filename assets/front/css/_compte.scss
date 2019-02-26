@@ -125,6 +125,16 @@
 
 #adresses-compte {
 
+    .modal-head {
+        background-color: $color-main;
+        color: white;
+        height: 70px;
+        h5 {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    }
+
     .modal-footer {
         button:nth-child(1) {
             background-color: $color-main;

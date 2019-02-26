@@ -54,16 +54,16 @@ private $books;
 private $user;
 
 /**
- * @ORM\ManyToOne(targetEntity="App\Entity\Address")
- * @ORM\JoinColumn(nullable=true)
- */
-private $livraison;
-
-/**
- * @ORM\ManyToOne(targetEntity="App\Entity\Address")
- * @ORM\JoinColumn(nullable=true)
+ * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="commands")
+ * @ORM\JoinColumn(nullable=false)
  */
 private $facturation;
+
+/**
+ * @ORM\ManyToOne(targetEntity="App\Entity\Address", inversedBy="command_livraison")
+ * @ORM\JoinColumn(nullable=false)
+ */
+private $livraison;
 
 public function __construct()
 {
@@ -173,16 +173,8 @@ public function setUser(?User $user): self
     return $this;
 }
 
-public function getLivraison(): ?Address
-{
-    return $this->livraison;
-}
-
-public function setLivraison(?Address $livraison): self
-{
-    $this->livraison = $livraison;
-
-    return $this;
+public function __toString(){
+    return $this->number;
 }
 
 public function getFacturation(): ?Address
@@ -197,8 +189,16 @@ public function setFacturation(?Address $facturation): self
     return $this;
 }
 
-public function __toString(){
-    return $this->number;
+public function getLivraison(): ?Address
+{
+    return $this->livraison;
+}
+
+public function setLivraison(?Address $livraison): self
+{
+    $this->livraison = $livraison;
+
+    return $this;
 }
 
 }
