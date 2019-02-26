@@ -9,7 +9,7 @@ require('../../../node_modules/air-datepicker/dist/css/datepicker.min.css');
 require('../../../node_modules/air-datepicker/dist/js/datepicker');
 require('../../../node_modules/air-datepicker/dist/js/i18n/datepicker.fr');
 require('./main-front.ts');
-require('./home.ts');
+require('./home.js');
 require('./connexion-client.js');
 require('./user-panel.ts');
 

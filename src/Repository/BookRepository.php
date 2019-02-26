@@ -19,17 +19,78 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function findAllBooks(): array
+    public function findAllBooksByAscName(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = ' 
-            SELECT book.id, book.price, book.title, book.stock, author.firstname, author.lastname, image.url, genra.name AS genre
+            SELECT book.id, book.price, book.title, book.stock, book.year, author.firstname, author.lastname, image.url, genra.name AS genre
             FROM book
             INNER JOIN  author ON book.author_id = author.id
             INNER JOIN image ON book.id = image.book_id
             INNER jOIN book_genra ON book.id = book_genra.book_id
             INNER JOIN genra ON book_genra.genra_id = genra.id
+            ORDER BY book.title
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        // returns an array of book
+        return $stmt->fetchAll();
+    }
+
+    public function findAllBooksByDescName(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = ' 
+            SELECT book.id, book.price, book.title, book.stock, book.year, author.firstname, author.lastname, image.url, genra.name AS genre
+            FROM book
+            INNER JOIN  author ON book.author_id = author.id
+            INNER JOIN image ON book.id = image.book_id
+            INNER jOIN book_genra ON book.id = book_genra.book_id
+            INNER JOIN genra ON book_genra.genra_id = genra.id
+            ORDER BY book.title DESC
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        // returns an array of book
+        return $stmt->fetchAll();
+    }
+
+    public function findAllBooksByAscYear(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = ' 
+            SELECT book.id, book.price, book.title, book.stock, book.year, author.firstname, author.lastname, image.url, genra.name AS genre
+            FROM book
+            INNER JOIN  author ON book.author_id = author.id
+            INNER JOIN image ON book.id = image.book_id
+            INNER jOIN book_genra ON book.id = book_genra.book_id
+            INNER JOIN genra ON book_genra.genra_id = genra.id
+            ORDER BY book.year
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+    
+        // returns an array of book
+        return $stmt->fetchAll();
+    }
+
+    public function findAllBooksByDescYear(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = ' 
+            SELECT book.id, book.price, book.title, book.stock, book.year, author.firstname, author.lastname, image.url, genra.name AS genre
+            FROM book
+            INNER JOIN  author ON book.author_id = author.id
+            INNER JOIN image ON book.id = image.book_id
+            INNER jOIN book_genra ON book.id = book_genra.book_id
+            INNER JOIN genra ON book_genra.genra_id = genra.id
+            ORDER BY book.year DESC
         ';
         $stmt = $conn->prepare($sql);
         $stmt->execute();

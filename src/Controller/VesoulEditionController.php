@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use App\Repository\BookRepository;
 use App\Repository\CartRepository;
@@ -44,8 +46,7 @@ class VesoulEditionController extends AbstractController
             $session->set('panier', []);
         }
     
-        $books = $repoBook->findAllBooks();
-        // $booksImages = $books->getImage()->getUrl();
+        $books = $repoBook->findAllBooksByAscName();
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
 
@@ -56,6 +57,101 @@ class VesoulEditionController extends AbstractController
             'authors' => $authors
         ]);
     }
+
+    /**
+    * @Route("/ascName", name="sortByAscName")
+    *
+    * @param \App\Repository\BookRepository
+    */
+    public function sortByAscName(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByAscName();
+        $arrayBooks = [];
+        $data = [];
+
+        foreach($books as $book){
+            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[0]->getContent();
+        }
+
+        // dump($data);
+        // $header =
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+    }
+
+    /**
+     * 
+     * 
+    * @Route("/descName", name="sortByDescName")
+    */
+    public function sortByDescName(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByDescName();
+        $arrayBooks = [];
+        $data = [];
+
+        foreach($books as $book){
+            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[0]->getContent();
+        }
+
+        // dump($data);
+        // $header =
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+       
+    }
+
+    /**
+    * @Route("/ascYear", name="sortByAscYear")
+    */
+    public function sortByAscYear(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByAscYear();
+        $arrayBooks = [];
+        $data = [];
+
+        foreach($books as $book){
+            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[0]->getContent();
+        }
+
+        // dump($data);
+        // $header =
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+    }
+
+    /**
+    * @Route("/descYear", name="sortByDescYear")
+    */
+    public function sortByDescYear(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByDescYear();
+        $arrayBooks = [];
+        $data = [];
+
+        foreach($books as $book){
+            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[0]->getContent();
+        }
+
+        // dump($data);
+        // $header =
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+        
+    }
+
 
     /**
      * @Route("/panier/add/{id}", name="addItem")
