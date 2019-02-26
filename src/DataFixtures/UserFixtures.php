@@ -177,7 +177,9 @@ class UserFixtures extends Fixture
         ->setAdditional("appartement 12")
         ->setTitle("Maison")
         ->setFirstname("Jean")
-        ->setLastname("Pierre");
+        ->setLastname("Pierre")
+        ->addCommandFacturation($command3)
+        ->addCommandLivraison($command3);
         
         $objectManager->persist($address1);
         // -----------------------------------------
@@ -191,7 +193,9 @@ class UserFixtures extends Fixture
         ->setAdditional("cave 5")
         ->setTitle("Bureau")
         ->setFirstname("Jean")
-        ->setLastname("Pierre");
+        ->setLastname("Pierre")
+        ->addCommandFacturation($command1)
+        ->addCommandLivraison($command2);
 
         $objectManager->persist($address2);
         // ----------------------------------------
@@ -205,7 +209,9 @@ class UserFixtures extends Fixture
         ->setCountry("France")
         ->setTitle("Voisin")
         ->setFirstname("Thomas")
-        ->setLastname("Dujardin");
+        ->setLastname("Dujardin")
+        ->addCommandFacturation($command2)
+        ->addCommandLivraison($command1);
         
         $objectManager->persist($address3);
         
