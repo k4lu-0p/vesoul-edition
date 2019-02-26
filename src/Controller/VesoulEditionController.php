@@ -61,14 +61,16 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/panier/add/{id}", name="addItem")
      */
-    public function addItem(Book $book, SessionInterface $session, ObjectManager $manager)
+    public function addItem(Book $book, SessionInterface $session, ObjectManager $manager, BookRepository $repoBook)
     {
         $id = $book->getId();
         $title = $book->getTitle();
         $author = $book->getAuthor();
         $price = $book->getPrice();
         $stock = $book->getStock();
-        $image = $book->getImages();
+        $images = $book->getImages();
+        $image = $images[0]->getUrl(); // Juste la couverture du livre.
+
 
         if ($stock > 0) {
 
@@ -90,12 +92,12 @@ class VesoulEditionController extends AbstractController
                     'firstname'=> $author->getFirstname(),
                     'lastname'=> $author->getLastname(),
                     'quantity'=> 1,
-                    'price'=> $price                
+                    'price'=> $price,
+                    'image' => $image               
                 ];   
             }
 
             $session->set('panier', $panier);
-            $panier = $session->get('panier');
             
             return $this->redirectToRoute('panier');
         } else {
