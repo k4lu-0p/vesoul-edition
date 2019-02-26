@@ -2,22 +2,27 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Book;
+use App\Repository\BookRepository;
+
+use App\Repository\CartRepository;
+use App\Repository\GenraRepository;
+use App\Repository\AuthorRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Persistence\ObjectManager;
+
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
+
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
 
-use App\Repository\BookRepository;
-use App\Repository\CartRepository;
-
-use App\Entity\Book;
-use App\Repository\GenraRepository;
-use App\Repository\AuthorRepository;
-use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class VesoulEditionController extends AbstractController
 {
@@ -56,6 +61,16 @@ class VesoulEditionController extends AbstractController
             
         ]);
 
+    }
+
+    /**
+     * @Route("/home/load", name="load-home")
+     */
+    public function homeload(Request $request) {
+        
+        $data = ['foo1' => 'bar1', 'foo2' => 'bar2'];
+        return new JsonResponse($data);    
+       
     }
 
     /**
@@ -199,5 +214,5 @@ class VesoulEditionController extends AbstractController
         ]);
     }
 
+   
 }
-// lol
