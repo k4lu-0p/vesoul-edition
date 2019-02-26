@@ -76,7 +76,7 @@ class Address
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="facturation")
      */
-    private $commands;
+    private $command_facturation;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Command", mappedBy="livraison")
@@ -251,27 +251,32 @@ class Address
         return $this->commands;
     }
 
-    public function addCommand(Command $command): self
+    public function getCommandFacturation(): Collection
     {
-        if (!$this->commands->contains($command)) {
-            $this->commands[] = $command;
-            $command->setFacturation($this);
-        }
-
-        return $this;
+    return $this->command_facturation;
     }
-
-    public function removeCommand(Command $command): self
+    
+    public function addCommandFacturation(Command $commandFacturation): self
     {
-        if ($this->commands->contains($command)) {
-            $this->commands->removeElement($command);
-            // set the owning side to null (unless already changed)
-            if ($command->getFacturation() === $this) {
-                $command->setFacturation(null);
-            }
-        }
-
-        return $this;
+    if (!$this->command_facturation->contains($commandFacturation)) {
+    $this->command_facturation[] = $commandFacturation;
+    $commandFacturation->setFacturation($this);
+    }
+    
+    return $this;
+    }
+    
+    public function removeCommandFacturation(Command $commandFacturation): self
+    {
+    if ($this->command_facturation->contains($commandFacturation)) {
+    $this->command_facturation->removeElement($commandFacturation);
+    // set the owning side to null (unless already changed)
+    if ($commandFacturation->getFacturation() === $this) {
+    $commandFacturation->setFacturation(null);
+    }
+    }
+    
+    return $this;
     }
 
     /**

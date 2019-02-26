@@ -141,6 +141,7 @@ class UserFixtures extends Fixture
         ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1);
+
         
         $objectManager->persist($command2);
         // ------------------------------------------
@@ -153,6 +154,7 @@ class UserFixtures extends Fixture
         ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1);
+
         
         $objectManager->persist($command3);
 
@@ -169,6 +171,8 @@ class UserFixtures extends Fixture
         ->setTitle("Maison")
         ->setFirstname("Jean")
         ->setLastname("Pierre")
+        ->addCommandLivraison($command1)
+        ->addCommandFacturation($command1);
         
         $objectManager->persist($address1);
         // -----------------------------------------
@@ -182,7 +186,9 @@ class UserFixtures extends Fixture
         ->setAdditional("cave 5")
         ->setTitle("Bureau")
         ->setFirstname("Jean")
-        ->setLastname("Pierre");
+        ->setLastname("Pierre")
+        ->addCommandLivraison($command2)
+        ->addCommandFacturation($command1);
 
         $objectManager->persist($address2);
         // ----------------------------------------
@@ -196,7 +202,10 @@ class UserFixtures extends Fixture
         ->setCountry("France")
         ->setTitle("Voisin")
         ->setFirstname("Thomas")
-        ->setLastname("Dujardin");
+        ->setLastname("Dujardin")
+        ->addCommandLivraison($command3)
+        ->addCommandFacturation($command2);
+
         
         $objectManager->persist($address3);
         
