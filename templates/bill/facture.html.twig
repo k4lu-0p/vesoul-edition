@@ -12,6 +12,14 @@
     <p>
         Articles, prix, total, tout ce qu'on peut trouver sur une facture
     </p>
+    {% for row in test %}
+    <p>{{ row.date|date("d/m/y") }}</p>
+    <p>{{ row.title }}</p>
+    <p>{{ row.number }}</p>
+    <p>{{ row.user.lastname }}</p>
+    <p>{{ row.user.firstname }}</p>
+    <p>{{ row.livraison.street }}</p>
+    {% endfor %}
 </body>
 
 </html>

@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Dompdf\Dompdf;
 use Dompdf\Options;
-use App\Entity\Command;
 
 /**
  * @Route("/pannel-admin")
@@ -48,15 +47,17 @@ class DashboardAdminController extends AbstractController
     /**
      * @Route("/commandes/imprimer/{id}", name="dashboard_admin_commandes_imprime")
      */
-    public function printBill(Command $command)
+    public function printBill(CommandRepository $repo)
     {
-        $numero = $command->getId();
-        $date = $command->getDate();
-        $quantity = $command->getQuantity();
-        $totalCost = $command->getTotalcost();
-        $books = $command->getBooks();
-        $user = $command->getUser();
-        // $livraison = $command->getLivraison();
+
+        $commande = $repo->findOneById(4);
+        // $numero = $command->getNumber();
+        // $date = $command->getDate();
+        // $quantity = $command->getQuantity();
+        // $totalCost = $command->getTotalcost();
+        // $books = $command->getBooks();
+        // $user = $command->getUser();
+        // // $livraison = $command->getLivraison();
         // $facturation = $command->getFacturation();
 
          // Configure Dompdf according to your needs
@@ -68,12 +69,13 @@ class DashboardAdminController extends AbstractController
          
          // Retrieve the HTML generated in our twig file
          $html = $this->render('bill/facture.html.twig', [
-             'numero' => $numero,
-             'date' => $date,
-             'quantite' => $quantity,
-             'total' => $totalCost,
-             'livres' => $books,
-             'utilisateur' => $user,
+             'test' => $commande,
+            //  'numero' => $numero,
+            //  'date' => $date,
+            //  'quantite' => $quantity,
+            //  'total' => $totalCost,
+            //  'livres' => $books,
+            //  'utilisateur' => $user,
             //  'adresseLivraison' => $livraison,
             //  'adresseFacturation' => $facturation,
          ]);
