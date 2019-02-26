@@ -3,20 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Admin;
 use App\Form\BookType;
+use App\Form\AdminType;
 use App\Repository\BookRepository;
-use Symfony\Component\HttpFoundation\Request;
+use App\Repository\AdminRepository;
+use App\Repository\CommandRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Repository\CommandRepository;
-use App\Repository\AdminRepository;
-use App\Entity\Admin;
-use App\Form\AdminType;
-// Include Dompdf required namespaces
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Entity\Command;
 
 /**
  * @Route("/pannel-admin")
@@ -39,10 +39,26 @@ class DashboardAdminController extends AbstractController
     public function commandes(CommandRepository $repo)
     {
         $allCommands = $repo->findAll();
-        $this->render('bill/facture.html.twig', [
+        return $this->render('dashboard-admin/commandes.html.twig', [
             'title' => 'Commandes',
             'commands' => $allCommands,
      ]);
+    }
+
+    /**
+     * @Route("/commandes/imprimer/{id}", name="dashboard_admin_commandes_imprime")
+     */
+    public function printBill(Command $command)
+    {
+        $numero = $command->getId();
+        $date = $command->getDate();
+        $quantity = $command->getQuantity();
+        $totalCost = $command->getTotalcost();
+        $books = $command->getBooks();
+        $user = $command->getUser();
+        // $livraison = $command->getLivraison();
+        // $facturation = $command->getFacturation();
+
          // Configure Dompdf according to your needs
          $pdfOptions = new Options();
          $pdfOptions->set('defaultFont', 'Arial');
@@ -52,10 +68,16 @@ class DashboardAdminController extends AbstractController
          
          // Retrieve the HTML generated in our twig file
          $html = $this->render('bill/facture.html.twig', [
-                'title' => 'Commandes',
-                'commands' => $allCommands,
+             'numero' => $numero,
+             'date' => $date,
+             'quantite' => $quantity,
+             'total' => $totalCost,
+             'livres' => $books,
+             'utilisateur' => $user,
+            //  'adresseLivraison' => $livraison,
+            //  'adresseFacturation' => $facturation,
          ]);
-         
+        
          // Load HTML to Dompdf
          $dompdf->loadHtml($html);
          
@@ -66,9 +88,11 @@ class DashboardAdminController extends AbstractController
          $dompdf->render();
  
          // Output the generated PDF to Browser (force download)
-         $dompdf->stream("mypdf.pdf", [
+         $dompdf->stream(".pdf", [
              "Attachment" => true
          ]);
+
+         return $this->redirectToRoute('dashboard_admin_commandes');
         
     }
 
