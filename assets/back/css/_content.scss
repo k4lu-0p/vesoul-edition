@@ -214,6 +214,7 @@ main {
                         background-color: $color-details;
 
                         &:hover {
+                            text-decoration: none;
                             cursor: pointer;
                             background-color: #58a0e7;
                         }

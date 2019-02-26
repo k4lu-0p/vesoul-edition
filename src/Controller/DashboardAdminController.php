@@ -17,6 +17,7 @@ use App\Form\AdminType;
 // Include Dompdf required namespaces
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Entity\Command;
 
 /**
  * @Route("/pannel-admin")
@@ -39,10 +40,17 @@ class DashboardAdminController extends AbstractController
     public function commandes(CommandRepository $repo)
     {
         $allCommands = $repo->findAll();
-        $this->render('bill/facture.html.twig', [
+        return $this->render('dashboard-admin/commandes.html.twig', [
             'title' => 'Commandes',
             'commands' => $allCommands,
      ]);
+    }
+
+    /**
+     * @Route("/commandes/imprimer/{id}", name="dashboard_admin_commandes_imprime")
+     */
+    public function printBill(CommandRepository $repo)
+    {
          // Configure Dompdf according to your needs
          $pdfOptions = new Options();
          $pdfOptions->set('defaultFont', 'Arial');
@@ -52,10 +60,8 @@ class DashboardAdminController extends AbstractController
          
          // Retrieve the HTML generated in our twig file
          $html = $this->render('bill/facture.html.twig', [
-                'title' => 'Commandes',
-                'commands' => $allCommands,
          ]);
-         
+        
          // Load HTML to Dompdf
          $dompdf->loadHtml($html);
          
@@ -69,6 +75,8 @@ class DashboardAdminController extends AbstractController
          $dompdf->stream("mypdf.pdf", [
              "Attachment" => true
          ]);
+
+         return $this->redirectToRoute('dashboard_admin_commandes');
         
     }
 
