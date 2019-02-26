@@ -139,6 +139,8 @@ class DashboardUserController extends AbstractController
         }
 
         $adresses = $repo->findAddressByUserId($id);
+        // dump($adresses);
+        // die();
         return $this->render('dashboard-user/compte-adresses.html.twig', [
             'adresses' => $adresses,
             'form' => $form->createView()

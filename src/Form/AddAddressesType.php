@@ -23,8 +23,6 @@ class AddAddressesType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('users')
-            ->add('user_id')
-            ->add('command_facturation_id')
         ;
     }
 

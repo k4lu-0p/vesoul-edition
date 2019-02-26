@@ -63,6 +63,21 @@ class Book
      */
     private $images;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $year;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $length;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $width;
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
@@ -228,6 +243,42 @@ class Book
                 $image->setBook(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getYear(): ?int
+    {
+        return $this->year;
+    }
+
+    public function setYear(int $year): self
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    public function getLength(): ?int
+    {
+        return $this->length;
+    }
+
+    public function setLength(int $length): self
+    {
+        $this->length = $length;
+
+        return $this;
+    }
+
+    public function getWidth(): ?int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(int $width): self
+    {
+        $this->width = $width;
 
         return $this;
     }

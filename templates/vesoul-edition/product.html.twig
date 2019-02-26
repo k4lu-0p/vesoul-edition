@@ -20,21 +20,27 @@
         {# ==> Section de droite informations ======================================== #}
         <div id="detail-section" class="col-6 m-0 p-5">
             <h2 class="mb-4">{{info.title}}</h2>
-            <p class="legend m-0">Auteur</p>
             <h3 class="m-0 pt-3 pb-4">{{info.firstname}} {{info.lastname}}</h3>
-            <div class="d-flex">
+            <div class="d-flex align-items-center pb-4">
                 <div id="stock-circle" class="mr-3"></div>
-                <p class="stock">{{info.stock}} <span id="stock-status">en stock</span></p>
+                <p class="stock m-0">en stock</span></p>
             </div>
-            <p class="legend">Description</p>
             <p id="description">{{info.description}}</p>
-            <div class="d-flex align-items-center">
-                <p class="legend m-0 pr-4">Code ISBN : </p>
+            <div class="py-2 d-flex align-items-center">
+                <p class="legend m-0 pr-2">Dimensions : </p>
+                <p class="m-0">{{info.length}} x {{info.width}} cm</p>
+            </div>
+            <div class="py-2 d-flex align-items-center">
+                <p class="legend m-0 pr-2">Année : </p>
+                <p class="m-0">{{info.year}}</p>
+            </div>
+            <div class="pt-2 d-flex align-items-center">
+                <p class="legend m-0 pr-2">Code ISBN : </p>
                 <p class="m-0">{{info.isbn}}</p>
             </div>
             <div class="d-flex justify-content-between">
                 <div class="d-flex align-items-center">
-                    <p class="legend m-0 pr-4">Prix TTC</p>
+                    <p class="legend m-0 pr-2">Prix publique :</p>
                     <p class="m-0" id="price">{{info.price}} €</p>
                 </div>
                 <div class="m-0 py-5 d-flex align-items-center">

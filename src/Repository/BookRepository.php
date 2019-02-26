@@ -24,7 +24,7 @@ class BookRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = ' 
-            SELECT book.id, book.description, book.price, book.isbn, book.title, book.stock,     author.firstname, author.lastname, image.url, genra.name AS genre
+            SELECT book.id, book.price, book.title, book.stock, author.firstname, author.lastname, image.url, genra.name AS genre
             FROM book
             INNER JOIN  author ON book.author_id = author.id
             INNER JOIN image ON book.id = image.book_id
@@ -43,7 +43,7 @@ class BookRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = ' 
-            SELECT book.description, book.price, book.isbn, book.title, book.stock, author.firstname, author.lastname, genra.name AS genre, image.url
+            SELECT book.description, book.price, book.isbn, book.title, book.stock, book.year, book.length, book.width, author.firstname, author.lastname, genra.name AS genre, image.url
             FROM book
             INNER JOIN  author ON book.author_id = author.id
             INNER jOIN book_genra ON book.id = book_genra.book_id
