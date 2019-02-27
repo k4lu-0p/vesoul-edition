@@ -136,6 +136,7 @@ class UserFixtures extends Fixture
         ->setQuantity(2)
         ->setTotalcost(44.0)
         ->setState("en cours")
+        ->addBook($book2)
         ->addBook($book1);
 
         $objectManager->persist($command1);

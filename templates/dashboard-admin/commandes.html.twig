@@ -46,7 +46,7 @@
                 {{ book.title }}</br>
                 {% endfor %}</p>
             <div class="col-2 d-flex justify-content-center align-items-center">
-                <a href=" {{ path('dashboard_admin_commandes_imprime',{id: command.number} ) }} " class="pdf d-flex justify-content-center align-items-center">PDF</a>
+                <a href=" {{ path('dashboard_admin_commandes_imprime',{id: command.id} ) }} " class="pdf d-flex justify-content-center align-items-center">PDF</a>
             </div>
             <p class="text-center m-0 py-3 col-1">{{ command.state }}</p>
         </div>

@@ -13,13 +13,33 @@
         Articles, prix, total, tout ce qu'on peut trouver sur une facture
     </p>
     {% for row in test %}
-    <p>{{ row.date|date("d/m/y") }}</p>
-    <p>{{ row.title }}</p>
-    <p>{{ row.number }}</p>
-    <p>{{ row.user.lastname }}</p>
-    <p>{{ row.user.firstname }}</p>
-    <p>{{ row.livraison.street }}</p>
+    {{ id }}-IT
+        <p>Date de commande : {{ row.date|date("d/m/y") }}</p>
+        <p>Client : {{ row.firstname }} {{ row.lastname }}</p>
+        <p>Numéro de commande : {{ row.number }}</p>
+        <p>Quantité : {{ row.quantity }}</p>
+        <p>Total : {{ row.totalcost }}</p>
+        {# <p>{{ row.COUNT(book.isbn) }}</p> #}
     {% endfor %}
 </body>
 
 </html>
+
+{# 
+    Adresse Boutique
+    Telephone Boutique
+    Nom propriétaire
+    Prenom propriétaire
+
+    Titre du livre
+    Quantité de chaque livre
+    Prix de chaque livre  
+    
+    Nom client
+    Prenom client
+    Genre (Monsieur/Madame)
+    Adresse facturation
+    Adresse Livraison
+    
+    
+    #}

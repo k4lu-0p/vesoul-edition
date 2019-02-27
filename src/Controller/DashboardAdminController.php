@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Entity\Command;
 
 /**
  * @Route("/pannel-admin")
@@ -47,10 +48,30 @@ class DashboardAdminController extends AbstractController
     /**
      * @Route("/commandes/imprimer/{id}", name="dashboard_admin_commandes_imprime")
      */
-    public function printBill(CommandRepository $repo)
+    public function printBill(Command $command, CommandRepository $repo)
     {
 
-        $commande = $repo->findOneById(4);
+    // $test = $command->getId();
+    dump($command);
+foreach ($command->getBooks() as $key) {
+    
+    dump($key);
+    $key->getTitle();
+
+}
+die;        
+
+
+
+
+
+
+
+
+        // $commande = $repo->findOneById(4);
+        // dump($commande);
+
+
         // $numero = $command->getNumber();
         // $date = $command->getDate();
         // $quantity = $command->getQuantity();
@@ -60,43 +81,45 @@ class DashboardAdminController extends AbstractController
         // // $livraison = $command->getLivraison();
         // $facturation = $command->getFacturation();
 
-         // Configure Dompdf according to your needs
-         $pdfOptions = new Options();
-         $pdfOptions->set('defaultFont', 'Arial');
+        //  // Configure Dompdf according to your needs
+        //  $pdfOptions = new Options();
+        //  $pdfOptions->set('defaultFont', 'Arial');
          
-         // Instantiate Dompdf with our options
-         $dompdf = new Dompdf($pdfOptions);
+        //  // Instantiate Dompdf with our options
+        //  $dompdf = new Dompdf($pdfOptions);
          
-         // Retrieve the HTML generated in our twig file
-         $html = $this->render('bill/facture.html.twig', [
-             'test' => $commande,
-            //  'numero' => $numero,
-            //  'date' => $date,
-            //  'quantite' => $quantity,
-            //  'total' => $totalCost,
-            //  'livres' => $books,
-            //  'utilisateur' => $user,
-            //  'adresseLivraison' => $livraison,
-            //  'adresseFacturation' => $facturation,
-         ]);
+        //  // Retrieve the HTML generated in our twig file
+        //  $html = $this->render('bill/facture.html.twig', [
+        //      'test' => $commande,
+        //     //  'numero' => $numero,
+        //     //  'date' => $date,
+        //     //  'quantite' => $quantity,
+        //     //  'total' => $totalCost,
+        //     //  'livres' => $books,
+        //     //  'utilisateur' => $user,
+        //     //  'adresseLivraison' => $livraison,
+        //     //  'adresseFacturation' => $facturation,
+        //  ]);
         
-         // Load HTML to Dompdf
-         $dompdf->loadHtml($html);
+        //  // Load HTML to Dompdf
+        //  $dompdf->loadHtml($html);
          
-         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-         $dompdf->setPaper('A4', 'portrait');
+        //  // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        //  $dompdf->setPaper('A4', 'portrait');
  
-         // Render the HTML as PDF
-         $dompdf->render();
+        //  // Render the HTML as PDF
+        //  $dompdf->render();
  
-         // Output the generated PDF to Browser (force download)
-         $dompdf->stream(".pdf", [
-             "Attachment" => true
-         ]);
+        //  // Output the generated PDF to Browser (force download)
+        //  $dompdf->stream(".pdf", [
+        //      "Attachment" => true
+        //  ]);
 
-         return $this->redirectToRoute('dashboard_admin_commandes');
+        //  return $this->redirectToRoute('dashboard_admin_commandes');
         
     }
+
+
 
     /**
      * @Route("/livres", name="dashboard_admin_livres")
