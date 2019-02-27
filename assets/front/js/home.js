@@ -7,7 +7,7 @@ window.onload = function(){
 
         let activeOption = itemList.value;
         let route = '';
-        // Routeur pour  
+        // Routeur pour 
         switch(activeOption){
             case  'ascName' :
                 route = '/ascName';
@@ -33,7 +33,6 @@ window.onload = function(){
     })
 }
 
-
 // Fonction qui va chercher en Ajac le nouvel ordre des livres à afficher
 function fetchNewOrder(route, target)
 {
@@ -45,10 +44,10 @@ function fetchNewOrder(route, target)
         method: 'POST',
     })
     .then(res => res.json())
-    .then(data => function(){
+    .then(data => {
 
         console.log(data);
-        // target.innerHTML = 'coucou';
+        target.innerHTML = data
 
     })
     .catch((err) => { if (err) throw err;})

@@ -11,7 +11,6 @@ use App\Repository\AuthorRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -23,9 +22,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Doctrine\ORM\Query\Expr\GroupBy;
 class VesoulEditionController extends AbstractController
 {
 
@@ -50,7 +47,7 @@ class VesoulEditionController extends AbstractController
             $session->set('panier', []);
         }
     
-        $allBooks = $repoBook->findAllBooks();
+        $allBooks = $repoBook->findAllBooksByAscName();
 
         // Garder uniquement les 9 premiers livres de la BDD pour la page d'acceuil
         $books = [];
@@ -58,9 +55,6 @@ class VesoulEditionController extends AbstractController
             array_push($books, $allBooks[$i]);
         }
         
-        // $books = $repoBook->findBy(['year' => '2019']);
-
-        // $booksImages = $books->getImage()->getUrl();
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
 
@@ -94,14 +88,13 @@ class VesoulEditionController extends AbstractController
         $books = $repo->findAllBooksByAscName();
         $arrayBooks = [];
         $data = [];
+        $i = 0;
 
-        foreach($books as $book){
-            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
-            $data[] = $arrayBooks[0]->getContent();
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
         }
-
-        // dump($data);
-        // $header =
 
         $json = new JsonResponse($data, 200);
 
@@ -118,14 +111,13 @@ class VesoulEditionController extends AbstractController
         $books = $repo->findAllBooksByDescName();
         $arrayBooks = [];
         $data = [];
+        $i = 0;
 
-        foreach($books as $book){
-            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
-            $data[] = $arrayBooks[0]->getContent();
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
         }
-
-        // dump($data);
-        // $header =
 
         $json = new JsonResponse($data, 200);
 
@@ -141,14 +133,13 @@ class VesoulEditionController extends AbstractController
         $books = $repo->findAllBooksByAscYear();
         $arrayBooks = [];
         $data = [];
+        $i = 0;
 
-        foreach($books as $book){
-            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
-            $data[] = $arrayBooks[0]->getContent();
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
         }
-
-        // dump($data);
-        // $header =
 
         $json = new JsonResponse($data, 200);
 
@@ -163,14 +154,13 @@ class VesoulEditionController extends AbstractController
         $books = $repo->findAllBooksByDescYear();
         $arrayBooks = [];
         $data = [];
+        $i = 0;
 
-        foreach($books as $book){
-            $arrayBooks[] = $this->render('ajax/book.html.twig', ['book' => $book]);
-            $data[] = $arrayBooks[0]->getContent();
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
         }
-
-        // dump($data);
-        // $header =
 
         $json = new JsonResponse($data, 200);
 
