@@ -3,17 +3,20 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\Admin;
 use App\Form\BookType;
+use App\Form\AdminType;
 use App\Repository\BookRepository;
-use Symfony\Component\HttpFoundation\Request;
+use App\Repository\AdminRepository;
+use App\Repository\CommandRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Repository\CommandRepository;
-use App\Repository\AdminRepository;
-use App\Entity\Admin;
-use App\Form\AdminType;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use App\Entity\Command;
 
 /**
  * @Route("/pannel-admin")
@@ -39,7 +42,58 @@ class DashboardAdminController extends AbstractController
         return $this->render('dashboard-admin/commandes.html.twig', [
             'title' => 'Commandes',
             'commands' => $allCommands,
-        ]);
+     ]);
+    }
+
+    /**
+     * @Route("/commandes/imprimer/{id}", name="dashboard_admin_commandes_imprime")
+     */
+    public function printBill(Command $command)
+    {
+        $numero = $command->getId();
+        $date = $command->getDate();
+        $quantity = $command->getQuantity();
+        $totalCost = $command->getTotalcost();
+        $books = $command->getBooks();
+        $user = $command->getUser();
+        // $livraison = $command->getLivraison();
+        // $facturation = $command->getFacturation();
+
+         // Configure Dompdf according to your needs
+         $pdfOptions = new Options();
+         $pdfOptions->set('defaultFont', 'Arial');
+         
+         // Instantiate Dompdf with our options
+         $dompdf = new Dompdf($pdfOptions);
+         
+         // Retrieve the HTML generated in our twig file
+         $html = $this->render('bill/facture.html.twig', [
+             'numero' => $numero,
+             'date' => $date,
+             'quantite' => $quantity,
+             'total' => $totalCost,
+             'livres' => $books,
+             'utilisateur' => $user,
+            //  'adresseLivraison' => $livraison,
+            //  'adresseFacturation' => $facturation,
+         ]);
+        
+         // Load HTML to Dompdf
+         $dompdf->loadHtml($html);
+         
+         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+         $dompdf->setPaper('A4', 'portrait');
+ 
+         // Render the HTML as PDF
+         $dompdf->render();
+ 
+         // Output the generated PDF to Browser (force download)
+         $dompdf->stream(".pdf", [
+             "Attachment" => true
+         ]);
+
+         return $this->redirectToRoute('dashboard_admin_commandes');
+        
     }
 
     /**

@@ -11,9 +11,11 @@ use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
 use App\Repository\UserRepository;
 use App\Form\EditInformationsType;
+use App\Form\AddAddressesType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
+use App\Entity\Address;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -110,26 +112,61 @@ class DashboardUserController extends AbstractController
     /**
      * @Route("/adresses", name="dashboard_user_addresses")
      */
-    public function showAdresses(AddressRepository $repo)
+    public function showAdresses(AddressRepository $repo, Address $address = null, Request $request, ObjectManager $manager = null)
     {
 
         $user = $this->getUser();
 
         $id = $user->getId();
 
+        if(!$address) {
+            $address = new Address();
+        }
+
+        $form = $this->createForm(AddAddressesType::class, $address);
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted()) {
+            
+            // dump($address);
+            // die();
+
+            $manager->persist($address);
+            $user->addAddress($address);
+            $manager->flush();
+
+            return $this->redirectToRoute('dashboard_user_addresses');
+        }
+
         $adresses = $repo->findAddressByUserId($id);
+        // dump($adresses);
+        // die();
         return $this->render('dashboard-user/compte-adresses.html.twig', [
-            'adresses' => $adresses
+            'adresses' => $adresses,
+            'form' => $form->createView()
         ]);
     }
+    
 
     /**
-     * @Route("/ajouter-adresses", name="dashboard_user_add_addresses")
+     * @Route("/adresses/{id}/delete", name="dashboard_user_addresses_delete")
      */
-    public function addAdresses()
+    public function delete($id, Address $address = null, Request $request, ObjectManager $manager)
     {
-        return $this->render('dashboard-user/ajouter-adresses.html.twig');
+        
+        $repo = $this->getDoctrine()->getRepository(Address::class);
+        $address = $repo->find($id);
+        
+        $manager->remove($address);
+        $manager->flush();
+        
+            // dump($address);
+            // die();
+
+            return $this->redirectToRoute('dashboard_user_addresses', ['id' => $adresse->getId()]);
+
     }
+
 
     /**
      * @Route("/commandes", name="dashboard_user_commands")

@@ -12,5 +12,6 @@ require('./main-front.ts');
 require('./home.js');
 require('./connexion-client.js');
 require('./user-panel.ts');
+require('./lazy-load.js');
 
 // const $ = require('jquery');
