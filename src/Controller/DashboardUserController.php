@@ -11,6 +11,7 @@ use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
 use App\Repository\UserRepository;
 use App\Form\EditInformationsType;
+use App\Form\EditAddressesType;
 use App\Form\AddAddressesType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -123,10 +124,25 @@ class DashboardUserController extends AbstractController
             $address = new Address();
         }
 
-        $form = $this->createForm(AddAddressesType::class, $address);
+        $form = $this->createForm(AddAddressesType::class, new Address());
         $form->handleRequest($request);
+
+        $form_edit = $this->createForm(AddAddressesType::class, new Address());
+        $form_edit->handleRequest($request);
         
         if($form->isSubmitted()) {
+            
+            // dump($address);
+            // die();
+
+            $manager->persist($address);
+            $user->addAddress($address);
+            $manager->flush();
+
+            return $this->redirectToRoute('dashboard_user_addresses');
+        }
+
+        if($form_edit->isSubmitted()) {
             
             // dump($address);
             // die();
@@ -143,7 +159,8 @@ class DashboardUserController extends AbstractController
         // die();
         return $this->render('dashboard-user/compte-adresses.html.twig', [
             'adresses' => $adresses,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form_edit' => $form_edit->createView()
         ]);
     }
     
@@ -157,13 +174,14 @@ class DashboardUserController extends AbstractController
         $repo = $this->getDoctrine()->getRepository(Address::class);
         $address = $repo->find($id);
         
+        
         $manager->remove($address);
         $manager->flush();
         
             // dump($address);
             // die();
 
-            return $this->redirectToRoute('dashboard_user_addresses', ['id' => $adresse->getId()]);
+            return $this->redirectToRoute('dashboard_user_addresses');
 
     }
 
