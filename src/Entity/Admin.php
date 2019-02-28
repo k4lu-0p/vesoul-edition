@@ -26,16 +26,31 @@ class Admin implements UserInterface
      * @ORM\Column(type="string", length=30)
      */
     private $tel;
+    
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $libelle;
+
+    /**
+     * @ORM\Column(type="string", length=150)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $cp;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $country;
 
     /**
      * @ORM\Column(type="string", length=150)
      */
     private $email;
-
-    /**
-     * @ORM\Column(type="string", length=150)
-     */
-    private $address;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -80,6 +95,54 @@ class Admin implements UserInterface
 
         return $this;
     }
+    
+    public function getLibelle(): ?string
+    {
+        return $this->libelle;
+    }
+
+    public function setLibelle(string $libelle): self
+    {
+        $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCp(): ?string
+    {
+        return $this->cp;
+    }
+
+    public function setCp(string $cp): self
+    {
+        $this->cp = $cp;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
 
     public function getEmail(): ?string
     {
@@ -89,18 +152,6 @@ class Admin implements UserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getAddress(): ?string
-    {
-        return $this->address;
-    }
-
-    public function setAddress(string $address): self
-    {
-        $this->address = $address;
 
         return $this;
     }

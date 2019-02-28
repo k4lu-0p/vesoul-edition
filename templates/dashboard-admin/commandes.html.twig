@@ -38,15 +38,17 @@
 
         <div class="commande row m-0 d-flex justify-content-between">
             <p class="m-0 py-3 col-1">{{ command.date|date("d/m/y") }}</p>
-            <p class="m-0 py-3 col-1">{{ command.number }}</p>
+            <p class="m-0 py-3 col-1">{{ command.id }}</p>
             <p class="m-0 py-3 col-2">{{ command.user.lastname }} {{ command.user.firstname }}</p>
-            <p class="m-0 py-3 col-3">{{ command.livraison.number }} {{ command.livraison.type }} {{ command.livraison.street }}, {{ command.livraison.city }} {{ command.livraison.cp }}{% if command.livraison.additional %}, {{ command.livraison.additional }}{% endif %}</p>
-            <p class="m-0 py-3 col-2">
+            <p class="m-0 py-3 col-3 text-center">
+                {{ command.livraison.number }} {{ command.livraison.type }} {{ command.livraison.street }}{% if command.livraison.additional %}, {{ command.livraison.additional }}{% endif %},</br> {{ command.livraison.city }} {{ command.livraison.cp }}</p>
+            <p class="m-0 pt-4 col-2">
                 {% for book in command.books %}
-                {{ book.title }}</br>
-                {% endfor %}</p>
+                - {{ book.title }}</br>
+                {% endfor %}
+            </p>
             <div class="col-2 d-flex justify-content-center align-items-center">
-                <a href=" {{ path('dashboard_admin_commandes_imprime',{id: command.id} ) }} " class="pdf d-flex justify-content-center align-items-center">PDF</a>
+                <a href="{{ path('dashboard_admin_commandes_imprime',{id: command.id} ) }}" class="pdf d-flex justify-content-center align-items-center">PDF</a>
             </div>
             <p class="text-center m-0 py-3 col-1">{{ command.state }}</p>
         </div>

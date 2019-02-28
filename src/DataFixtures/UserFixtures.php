@@ -98,11 +98,11 @@ class UserFixtures extends Fixture
         // ----------------------------------------------
         $book3 = new Book();
         
-        $book3->setDescription("C'est l'histoire d'un pinguoin qui vie au pole nord et qui aime nager et manger du poisson")
+        $book3->setDescription("C'est l'histoire d'un pingouin qui vie au pole nord et qui aime nager et manger du poisson")
         ->setPrice(15)
         ->setIsbn("44215889753")
         ->setStock(10)
-        ->setTitle("L'histoire du pinguoin")
+        ->setTitle("L'histoire du pingouin")
         ->setYear(1978)
         ->setLength(18)
         ->setWidth(12)
@@ -137,6 +137,7 @@ class UserFixtures extends Fixture
         ->setTotalcost(44.0)
         ->setState("en cours")
         ->addBook($book2)
+        ->addBook($book1)
         ->addBook($book1);
 
         $objectManager->persist($command1);
@@ -150,7 +151,9 @@ class UserFixtures extends Fixture
         ->setQuantity(1)
         ->setTotalcost(22.0)
         ->setState("expédié")
-        ->addBook($book1);
+        ->addBook($book1)
+        ->addBook($book2)
+        ->addBook($book3);
         
         $objectManager->persist($command2);
         // ------------------------------------------
@@ -162,7 +165,10 @@ class UserFixtures extends Fixture
         ->setQuantity(1)
         ->setTotalcost(22.0)
         ->setState("expédié")
-        ->addBook($book1);
+        ->addBook($book1)
+        ->addBook($book3)
+        ->addBook($book3)
+        ->addBook($book3);
         
         $objectManager->persist($command3);
 

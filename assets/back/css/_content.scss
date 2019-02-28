@@ -200,6 +200,9 @@ main {
                     justify-content: center;
                     align-items: center;
                 }
+                p:nth-child(5){
+                    overflow-y: scroll;
+                }
 
                 div {
                     .pdf {

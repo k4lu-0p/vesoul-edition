@@ -51,71 +51,96 @@ class DashboardAdminController extends AbstractController
     public function printBill(Command $command, CommandRepository $repo)
     {
 
-    // $test = $command->getId();
-    dump($command);
-foreach ($command->getBooks() as $key) {
-    
-    dump($key);
-    $key->getTitle();
+        // dump($command);
+        $commandNumero = $command->getId();
+        $commandDate = $command->getDate();
 
-}
-die;        
+        // Titre et prix des livres
+        foreach ($command->getBooks() as $value) {
+            $bookTitle = $value->getTitle(); 
+            $bookPrice = $value->getPrice();
+            // dump($bookTitle);
+            // dump($bookPrice);
+        }
 
+        // Prénom et nom de l'utilisateur passant la commande
+        $userFirstname = $command->getUser()->getFirstname();
+        $userLastname = $command->getUser()->getLastname();
+        // dump($userFirstname, $userLastname);
 
+        // Adresse de facturation 
+        $billNumber = $command->getFacturation()->getNumber();
+        $billType = $command->getFacturation()->getType();
+        $billStreet = $command->getFacturation()->getStreet();
+        $billCity = $command->getFacturation()->getCity();
+        $billCp = $command->getFacturation()->getCp();
+        $billCountry = $command->getFacturation()->getCountry();
+        $billAdditional = $command->getFacturation()->getAdditional();
+        $billFirstname = $command->getFacturation()->getFirstname();
+        $billLastname = $command->getFacturation()->getLastname();
 
+        // dump($billFirstname, $billLastname, $billNumber, $billType, $billStreet, $billCity, $billCp, $billCountry, $billAdditional);
+        // Adresse de facturation 
+        $shipNumber = $command->getLivraison()->getNumber();
+        $shipType = $command->getLivraison()->getType();
+        $shipStreet = $command->getLivraison()->getStreet();
+        $shipCity = $command->getLivraison()->getCity();
+        $shipCp = $command->getLivraison()->getCp();
+        $shipCountry = $command->getLivraison()->getCountry();
+        $shipAdditional = $command->getLivraison()->getAdditional();
+        $shipFirstname = $command->getLivraison()->getFirstname();
+        $shipLastname = $command->getLivraison()->getLastname();
 
+        // dump($shipFirstname, $shipLastname, $shipNumber, $shipType, $shipStreet, $shipCity, $shipCp, $shipCountry, $shipAdditional);
 
-
-
-
-        // $commande = $repo->findOneById(4);
-        // dump($commande);
-
-
-        // $numero = $command->getNumber();
-        // $date = $command->getDate();
-        // $quantity = $command->getQuantity();
-        // $totalCost = $command->getTotalcost();
-        // $books = $command->getBooks();
-        // $user = $command->getUser();
-        // // $livraison = $command->getLivraison();
-        // $facturation = $command->getFacturation();
-
-        //  // Configure Dompdf according to your needs
-        //  $pdfOptions = new Options();
-        //  $pdfOptions->set('defaultFont', 'Arial');
+         // Configure Dompdf according to your needs
+         $pdfOptions = new Options();
+         $pdfOptions->set('defaultFont', 'Arial');
          
-        //  // Instantiate Dompdf with our options
-        //  $dompdf = new Dompdf($pdfOptions);
+         // Instantiate Dompdf with our options
+         $dompdf = new Dompdf($pdfOptions);
          
-        //  // Retrieve the HTML generated in our twig file
-        //  $html = $this->render('bill/facture.html.twig', [
-        //      'test' => $commande,
-        //     //  'numero' => $numero,
-        //     //  'date' => $date,
-        //     //  'quantite' => $quantity,
-        //     //  'total' => $totalCost,
-        //     //  'livres' => $books,
-        //     //  'utilisateur' => $user,
-        //     //  'adresseLivraison' => $livraison,
-        //     //  'adresseFacturation' => $facturation,
-        //  ]);
+         // Retrieve the HTML generated in our twig file
+         $html = $this->render('bill/facture.html.twig', [
+             'commandNumero' => $commandNumero,
+             'commandDate' => $commandDate,
+             'livreTitre' => $bookTitle,
+             'livrePrix' => $bookPrice,
+             'afNumero' => $billNumber,
+             'afType' => $billType,
+             'afRue' => $billStreet,
+             'afVille' => $billCity,
+             'afCp' => $billCp,
+             'afPays' => $billCountry,
+             'afComplement' => $billAdditional,
+             'afPrenom' => $billFirstname,
+             'afNom' => $billLastname,
+             'alNumero' => $shipNumber,
+             'alType' => $shipType,
+             'alRue' => $shipStreet,
+             'alVille' => $shipCity,
+             'alCp' => $shipCp,
+             'alPays' => $shipCountry,
+             'alComplement' => $shipAdditional,
+             'alPrenom' => $shipFirstname,
+             'alNom' => $shipLastname,
+         ]);
         
-        //  // Load HTML to Dompdf
-        //  $dompdf->loadHtml($html);
+         // Load HTML to Dompdf
+         $dompdf->loadHtml($html);
          
-        //  // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
-        //  $dompdf->setPaper('A4', 'portrait');
+         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+         $dompdf->setPaper('A4', 'portrait');
  
-        //  // Render the HTML as PDF
-        //  $dompdf->render();
+         // Render the HTML as PDF
+         $dompdf->render();
  
-        //  // Output the generated PDF to Browser (force download)
-        //  $dompdf->stream(".pdf", [
-        //      "Attachment" => true
-        //  ]);
+         // Output the generated PDF to Browser (force download)
+         $dompdf->stream(".pdf", [
+             "Attachment" => true
+         ]);
 
-        //  return $this->redirectToRoute('dashboard_admin_commandes');
+         return $this->redirectToRoute('dashboard_admin_commandes');
         
     }
 
@@ -216,4 +241,78 @@ die;
         ]);
     }
 
+    /**
+     * @Route("/bill/{id}", name="test_facture")
+     */
+    public function testFacture(Command $command){
+
+
+        // dump($command);
+        $commandNumero = $command->getId();
+        $commandDate = $command->getDate();
+
+        // Titre et prix des livres
+        foreach ($command->getBooks() as $value) {
+            $bookTitle = $value->getTitle(); 
+            $bookPrice = $value->getPrice();
+            // dump($bookTitle);
+            // dump($bookPrice);
+        }
+
+        // Prénom et nom de l'utilisateur passant la commande
+        $userFirstname = $command->getUser()->getFirstname();
+        $userLastname = $command->getUser()->getLastname();
+        // dump($userFirstname, $userLastname);
+
+        // Adresse de facturation 
+        $billNumber = $command->getFacturation()->getNumber();
+        $billType = $command->getFacturation()->getType();
+        $billStreet = $command->getFacturation()->getStreet();
+        $billCity = $command->getFacturation()->getCity();
+        $billCp = $command->getFacturation()->getCp();
+        $billCountry = $command->getFacturation()->getCountry();
+        $billAdditional = $command->getFacturation()->getAdditional();
+        $billFirstname = $command->getFacturation()->getFirstname();
+        $billLastname = $command->getFacturation()->getLastname();
+
+        // dump($billFirstname, $billLastname, $billNumber, $billType, $billStreet, $billCity, $billCp, $billCountry, $billAdditional);
+        // Adresse de facturation 
+        $shipNumber = $command->getLivraison()->getNumber();
+        $shipType = $command->getLivraison()->getType();
+        $shipStreet = $command->getLivraison()->getStreet();
+        $shipCity = $command->getLivraison()->getCity();
+        $shipCp = $command->getLivraison()->getCp();
+        $shipCountry = $command->getLivraison()->getCountry();
+        $shipAdditional = $command->getLivraison()->getAdditional();
+        $shipFirstname = $command->getLivraison()->getFirstname();
+        $shipLastname = $command->getLivraison()->getLastname();
+
+        // dump($shipFirstname, $shipLastname, $shipNumber, $shipType, $shipStreet, $shipCity, $shipCp, $shipCountry, $shipAdditional);
+
+        return $this->render('bill/facture.html.twig', [
+             'commandNumero' => $commandNumero,
+             'commandDate' => $commandDate,
+             'livreTitre' => $bookTitle,
+             'livrePrix' => $bookPrice,
+             'afNumero' => $billNumber,
+             'afType' => $billType,
+             'afRue' => $billStreet,
+             'afVille' => $billCity,
+             'afCp' => $billCp,
+             'afPays' => $billCountry,
+             'afComplement' => $billAdditional,
+             'afPrenom' => $billFirstname,
+             'afNom' => $billLastname,
+             'alNumero' => $shipNumber,
+             'alType' => $shipType,
+             'alRue' => $shipStreet,
+             'alVille' => $shipCity,
+             'alCp' => $shipCp,
+             'alPays' => $shipCountry,
+             'alComplement' => $shipAdditional,
+             'alPrenom' => $shipFirstname,
+             'alNom' => $shipLastname,
+         ]);
+
+    }
 }

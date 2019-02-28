@@ -5,22 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        
+    </style>
 </head>
 
 <body>
-    <h1>Vesoul Edition</h1>
-    <p>
-        Articles, prix, total, tout ce qu'on peut trouver sur une facture
-    </p>
-    {% for row in test %}
-    {{ id }}-IT
-        <p>Date de commande : {{ row.date|date("d/m/y") }}</p>
-        <p>Client : {{ row.firstname }} {{ row.lastname }}</p>
-        <p>Numéro de commande : {{ row.number }}</p>
-        <p>Quantité : {{ row.quantity }}</p>
-        <p>Total : {{ row.totalcost }}</p>
-        {# <p>{{ row.COUNT(book.isbn) }}</p> #}
-    {% endfor %}
+    <h1>Facture</h1>
+
+        <p><strong>Vesoul Edition</strong></p>
+
+        <p>Numéro de commande : {{ commandNumero }}-IT</p>
+        <p>Date de commande : {{ commandDate|date("d/m/y") }}</p>
+        <h2>Facturation</h2>
+        <p>{{ afPrenom }} {{ afNom }}</p>
+        <p>{{ afNumero }} {{ afType }} {{ afRue }} {{ afComplement }}, </p>
+        <p>{{ afVille }} {{ afCp }}, {{ afPays }}</p>
+        <h2>Livraison</h2>
+        <p>{{ alPrenom }} {{ alNom }}</p>
+        <p>{{ alNumero }} {{ alType }} {{ alRue }} {{ alComplement }}, </p>
+        <p>{{ alVille }} {{ alCp }}, {{ alPays }}</p>
 </body>
 
 </html>
@@ -33,13 +37,14 @@
 
     Titre du livre
     Quantité de chaque livre
-    Prix de chaque livre  
+    Prix de chaque livre
+    Code ISBN
     
     Nom client
     Prenom client
     Genre (Monsieur/Madame)
+
     Adresse facturation
     Adresse Livraison
-    
     
     #}

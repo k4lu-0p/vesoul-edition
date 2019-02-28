@@ -26,7 +26,10 @@ class AdminFixtures extends Fixture
         $hash = $this->passwordEncoder->encodePassword($man, "online@2017");
 
         $man->setCompany("Vesoul Édition")
-        ->setAddress("Boite Postale 1038 70001 Vesoul Cedex France")
+        ->setLibelle("Boite Postale 1038")
+        ->setCity("Vesoul Cedex")
+        ->setCp("70001")
+        ->setCountry("France")
         ->setEmail("vesouledition@sfr.fr")
         ->setTel("0699658600")
         ->setUsername("root")
