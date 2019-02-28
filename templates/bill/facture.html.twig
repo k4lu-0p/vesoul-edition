@@ -13,7 +13,13 @@
 <body>
     <h1>Facture</h1>
 
-        <p><strong>Vesoul Edition</strong></p>
+        <p><strong>{{ boutiqueNom }}</strong></p>
+        <p>{{ boutiqueLibelle }}</p>
+        <p>{{ boutiqueCp }}</p>
+        <p>{{ boutiqueVille }}</p>
+        <p>{{ boutiquePays }}</p>
+        <p>{{ boutiqueTelephone }}</p>
+
 
         <p>Numéro de commande : {{ commandNumero }}-IT</p>
         <p>Date de commande : {{ commandDate|date("d/m/y") }}</p>
@@ -25,6 +31,16 @@
         <p>{{ alPrenom }} {{ alNom }}</p>
         <p>{{ alNumero }} {{ alType }} {{ alRue }} {{ alComplement }}, </p>
         <p>{{ alVille }} {{ alCp }}, {{ alPays }}</p>
+
+        {% for titre in livreTitre %}
+        <p>{{ titre }}</p>    
+        {% endfor %}
+        {% for prix in livrePrix %}
+        <p>{{ prix }}</p>
+        {% endfor %}
+        
+
+
 </body>
 
 </html>

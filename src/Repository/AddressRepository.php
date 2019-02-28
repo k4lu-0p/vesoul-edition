@@ -28,7 +28,7 @@ class AddressRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT address.title, address.firstname, address.lastname, address.number, address.type, address.street, address.city, address.cp, address.country, address.additional
+            SELECT address.id, address.title, address.firstname, address.lastname, address.number, address.type, address.street, address.city, address.cp, address.country, address.additional
             FROM address
             INNER JOIN user_address ON address.id = user_address.address_id
             INNER JOIN user ON user.id = user_address.user_id

@@ -53,6 +53,5 @@ class BookFixtures extends Fixture
             $manager->persist($author);
             $manager->flush();
         }
-
     }
 }

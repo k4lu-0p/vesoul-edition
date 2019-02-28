@@ -11,7 +11,6 @@ use App\Repository\AuthorRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -21,9 +20,9 @@ use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
 
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
-
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
+use Doctrine\ORM\Query\Expr\GroupBy;
 class VesoulEditionController extends AbstractController
 {
 
@@ -48,8 +47,14 @@ class VesoulEditionController extends AbstractController
             $session->set('panier', []);
         }
     
-        $books = $repoBook->findAllBooks();
-        // $booksImages = $books->getImage()->getUrl();
+        $allBooks = $repoBook->findAllBooksByAscName();
+
+        // Garder uniquement les 9 premiers livres de la BDD pour la page d'acceuil
+        $books = [];
+        for($i = 0; $i < 9; $i++) {
+            array_push($books, $allBooks[$i]);
+        }
+        
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
 
@@ -72,6 +77,107 @@ class VesoulEditionController extends AbstractController
         return new JsonResponse($data);    
        
     }
+
+    /**
+     * @Route("/home/filter", name="filter-home")
+     */
+    public function filterHome() {
+        
+        $data = ['foo1' => 'bar1', 'foo2' => 'bar2'];
+        return new JsonResponse($data);    
+       
+    }
+
+    /**
+    * @Route("/ascName", name="sortByAscName")
+    *
+    * @param \App\Repository\BookRepository
+    */
+    public function sortByAscName(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByAscName();
+        $arrayBooks = [];
+        $data = [];
+        $i = 0;
+
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
+        }
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+    }
+
+    /**
+     * 
+     * 
+    * @Route("/descName", name="sortByDescName")
+    */
+    public function sortByDescName(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByDescName();
+        $arrayBooks = [];
+        $data = [];
+        $i = 0;
+
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
+        }
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+       
+    }
+
+    /**
+    * @Route("/ascYear", name="sortByAscYear")
+    */
+    public function sortByAscYear(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByAscYear();
+        $arrayBooks = [];
+        $data = [];
+        $i = 0;
+
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
+        }
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+    }
+
+    /**
+    * @Route("/descYear", name="sortByDescYear")
+    */
+    public function sortByDescYear(BookRepository $repo) : Response
+    {
+        $books = $repo->findAllBooksByDescYear();
+        $arrayBooks = [];
+        $data = [];
+        $i = 0;
+
+        foreach($books as $key => $book){
+            $i++;
+            $arrayBooks[$key + 1] = $this->render('ajax/book.html.twig', ['book' => $book]);
+            $data[] = $arrayBooks[$i]->getContent();
+        }
+
+        $json = new JsonResponse($data, 200);
+
+        return $json;
+        
+    }
+
 
     /**
      * @Route("/panier/add/{id}", name="addItem")

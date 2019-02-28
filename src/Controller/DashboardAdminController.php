@@ -39,35 +39,57 @@ class DashboardAdminController extends AbstractController
     public function commandes(CommandRepository $repo)
     {
         $allCommands = $repo->findAll();
+        $enCours = 0;
+        $expedie = 0;
+        $total = 0;
+        foreach ($allCommands as $value) {
+            $total++;
+            if($value->getState() == "en cours"){
+                $enCours++;
+            }
+            if($value->getState() == "expédié"){
+                $expedie++;
+            }
+        }
         return $this->render('dashboard-admin/commandes.html.twig', [
             'title' => 'Commandes',
             'commands' => $allCommands,
+            'total' => $total,
+            'enCours' => $enCours,
+            'expedie' => $expedie,
      ]);
     }
 
     /**
      * @Route("/commandes/imprimer/{id}", name="dashboard_admin_commandes_imprime")
      */
-    public function printBill(Command $command, CommandRepository $repo)
+    public function printBill(Command $command,AdminRepository $adminRepo, CommandRepository $repo)
     {
+        // Information de la boutique
+        $admin = $adminRepo->findOneById(2);
+        $boutiqueNom = $admin->getCompany();
+        $boutiqueTelephone = $admin->getTel();
+        $boutiqueEmail = $admin->getEmail();
+        $boutiqueLibelle = $admin->getLibelle();
+        $boutiqueCp = $admin->getCp();
+        $boutiqueVille = $admin->getCity();
+        $boutiquePays = $admin->getCountry();
 
-        // dump($command);
+        // Information de la commande
         $commandNumero = $command->getId();
         $commandDate = $command->getDate();
 
         // Titre et prix des livres
+        $bookTitle = [];
+        $bookPrice = [];
+        dump($command->getBooks());
+        die;
         foreach ($command->getBooks() as $value) {
-            $bookTitle = $value->getTitle(); 
-            $bookPrice = $value->getPrice();
-            // dump($bookTitle);
-            // dump($bookPrice);
+            array_push($bookTitle, $value->getTitle()); 
+            array_push($bookPrice, $value->getPrice());
+            // dump($bookTitle, $bookPrice);        
         }
-
-        // Prénom et nom de l'utilisateur passant la commande
-        $userFirstname = $command->getUser()->getFirstname();
-        $userLastname = $command->getUser()->getLastname();
-        // dump($userFirstname, $userLastname);
-
+        // die;
         // Adresse de facturation 
         $billNumber = $command->getFacturation()->getNumber();
         $billType = $command->getFacturation()->getType();
@@ -79,7 +101,6 @@ class DashboardAdminController extends AbstractController
         $billFirstname = $command->getFacturation()->getFirstname();
         $billLastname = $command->getFacturation()->getLastname();
 
-        // dump($billFirstname, $billLastname, $billNumber, $billType, $billStreet, $billCity, $billCp, $billCountry, $billAdditional);
         // Adresse de facturation 
         $shipNumber = $command->getLivraison()->getNumber();
         $shipType = $command->getLivraison()->getType();
@@ -91,8 +112,6 @@ class DashboardAdminController extends AbstractController
         $shipFirstname = $command->getLivraison()->getFirstname();
         $shipLastname = $command->getLivraison()->getLastname();
 
-        // dump($shipFirstname, $shipLastname, $shipNumber, $shipType, $shipStreet, $shipCity, $shipCp, $shipCountry, $shipAdditional);
-
          // Configure Dompdf according to your needs
          $pdfOptions = new Options();
          $pdfOptions->set('defaultFont', 'Arial');
@@ -102,28 +121,35 @@ class DashboardAdminController extends AbstractController
          
          // Retrieve the HTML generated in our twig file
          $html = $this->render('bill/facture.html.twig', [
+             'boutiqueNom' => $boutiqueNom,
+             'boutiqueTelephone' => $boutiqueTelephone,
+             'boutiqueEmail' => $boutiqueEmail,
+             'boutiqueLibelle' => $boutiqueLibelle,
+             'boutiqueCp' => $boutiqueCp,
+             'boutiqueVille' => $boutiqueVille,
+             'boutiquePays' => $boutiquePays,
              'commandNumero' => $commandNumero,
              'commandDate' => $commandDate,
              'livreTitre' => $bookTitle,
              'livrePrix' => $bookPrice,
+             'afPrenom' => $billFirstname,
+             'afNom' => $billLastname,
              'afNumero' => $billNumber,
              'afType' => $billType,
              'afRue' => $billStreet,
+             'afComplement' => $billAdditional,
              'afVille' => $billCity,
              'afCp' => $billCp,
              'afPays' => $billCountry,
-             'afComplement' => $billAdditional,
-             'afPrenom' => $billFirstname,
-             'afNom' => $billLastname,
+             'alPrenom' => $shipFirstname,
+             'alNom' => $shipLastname,
              'alNumero' => $shipNumber,
              'alType' => $shipType,
              'alRue' => $shipStreet,
+             'alComplement' => $shipAdditional,
              'alVille' => $shipCity,
              'alCp' => $shipCp,
              'alPays' => $shipCountry,
-             'alComplement' => $shipAdditional,
-             'alPrenom' => $shipFirstname,
-             'alNom' => $shipLastname,
          ]);
         
          // Load HTML to Dompdf
