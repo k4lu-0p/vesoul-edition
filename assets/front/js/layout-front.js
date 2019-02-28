@@ -8,10 +8,12 @@ require('../css/main-front.scss');
 require('../../../node_modules/air-datepicker/dist/css/datepicker.min.css');
 require('../../../node_modules/air-datepicker/dist/js/datepicker');
 require('../../../node_modules/air-datepicker/dist/js/i18n/datepicker.fr');
+require('../../../node_modules/nouislider/distribute/nouislider.js');
+require('../../../node_modules/nouislider/distribute/nouislider.min.css');
 require('./main-front.ts');
-require('./home.js');
 require('./connexion-client.js');
 require('./user-panel.ts');
 require('./lazy-load.js');
+require('./home.js');
 
 // const $ = require('jquery');

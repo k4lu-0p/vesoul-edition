@@ -79,6 +79,16 @@ class VesoulEditionController extends AbstractController
     }
 
     /**
+     * @Route("/home/filter", name="filter-home")
+     */
+    public function filterHome() {
+        
+        $data = ['foo1' => 'bar1', 'foo2' => 'bar2'];
+        return new JsonResponse($data);    
+       
+    }
+
+    /**
     * @Route("/ascName", name="sortByAscName")
     *
     * @param \App\Repository\BookRepository

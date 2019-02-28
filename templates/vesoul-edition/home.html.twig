@@ -13,59 +13,90 @@
                 </div>
             </div>
             <form action="">
-                {# => Sous secton Auteur ------------- #}
+                {# => Sous secton Badges ----------------- #}
                 <div class="row p-0 m-0">
-                    <div id="badges" class="col-12 p-2">
-                        <a href="#" class="badge badge-light p-2 m-2">Auteur 1</a>
-                        <a href="#" class="badge badge-light p-2 m-2">Genre 1</a>
+                    <div id="badges" class="col-12 p-2 d-flex">
+                        <div class="badge-filter px-2  d-flex align-items-center">
+                            <p class="m-0 p-0 mr-2">Histoire</p>
+                            <i class="fas fa-times-circle"></i>
+                        </div>
                     </div>
                 </div>
                 {# => Fin Sous section Badges ----------- #}
-                {# => Sous secton Auteur ------------- #}
+                {# Sous-section nouveautés --------------- #}
+                <div class="row p-0 m-0">
+                    <div class="col-12 p-2 m-0 align-items-center">
+                        <div class="p-0 pl-3 m-0">
+                            <label class="check-container m-0" for="news">Nouveautés
+                                <input type="checkbox" class="form-check-input" id="news">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                {# Fin Sous-section nouveautés------------ #}
+                {# => Sous secton Années------------------- #}
+                <div class="row p-0 m-0">
+                    <div class="price col-12 p-2">
+                        <div class="m-0 p-0 d-flex justify-content-between">
+                            <h3 class="pl-2">Année</h3>
+                            <button id="expand-year" class="mr-2 expand-button active">+</button>
+                        </div>
+                        <div id="year-slider" class="filter-section d-flex justify-content-center active">
+                            <p>* Y aura un slider là *</p>
+                        </div>
+                    </div>
+                </div>
+                {# => Fin Sous section Années ------------- #}
+                {# => Sous secton Genre ------------------ #}
                 <div class="row p-0 m-0">
                     <div class="col-12 p-2">
-                        <h3 class="pl-2">Auteur</h3>
-                        <ul class="d-flex flex-column p-0 pl-3 m-0">
+                        <div class="m-0 p-0 d-flex justify-content-between">
+                            <h3 class="pl-2">Genre</h3>
+                            <button id="expand-genra" class="mr-2 p-0 m-0 expand-button active">+</button>
+                        </div>
+                        <ul id="genra-list" class="filter-section d-flex flex-column p-0 m-0 active">
+                            {% for genra in genras %}
+                            <div class="d-flex px-3 p-2">
+                                <label class="check-container" for="{{genra.name}}">{{genra.name}}
+                                    <input type="checkbox" class="form-check-input" id="{{genra.name}}">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {# => Fin Sous section genre -------------- #}
+                {# => Sous secton Auteur ---------------- #}
+                <div class="author-section row p-0 m-0">
+                    <div class="col-12 p-2">
+                        <div class="m-0 p-0 d-flex justify-content-between">
+                            <h3 class="pl-2">Auteur</h3>
+                            <button id="expand-author" class="mr-2 expand-button">+</button>
+                        </div>
+                        <ul id="author-list" class="filter-section d-flex flex-column p-0 m-0">
                             {% for author in authors %}
                             <div class="d-flex px-3 p-2">
-                                <input type="checkbox" class="form-check-input" id="{{author.firstname}}-{{author.lastname}}">
-                                <label class="form-check-label" for="{{author.firstname}}-{{author.lastname}}">{{author.firstname}}
-                                    {{author.lastname}}</label>
+                                <label class="check-container" for="{{author.firstname}}-{{author.lastname}}">{{author.firstname}}
+                                    {{author.lastname}}
+                                    <input type="checkbox" class="form-check-input" id="{{author.firstname}}-{{author.lastname}}">
+                                    <span class="checkmark"></span>
+                                </label>
                             </div>
                             {% endfor %}
                         </ul>
                     </div>
                 </div>
                 {# => Fin Sous section Auteur ----------- #}
-                {# => Sous secton Genre ------------- #}
-                <div class="row p-0 m-0">
-                    <div class="col-12 p-2">
-                        <h3 class="pl-2">Genre</h3>
-                        <ul class="d-flex flex-column p-0 pl-3 m-0">
-                            {% for genra in genras %}
-                            <div class="d-flex px-3 p-2">
-                                <input type="checkbox" class="form-check-input" id="{{genra.name}}">
-                                <label class="form-check-label" for="{{genra.name}}">{{genra.name}}</label>
-                            </div>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                {# => Fin Sous section genre ----------- #}
-                {# => Sous secton Prix ------------- #}
-                <div class="row p-0 m-0">
-                    <div class="price col-12 p-2">
-                        <h3 class="pl-2">Prix</h3>
-                        <div id="price-slider">
-                        </div>
-                    </div>
-                </div>
+                {# Sous section submit -------------------- #}
                 <div class="row p-0 m-0">
                     <div class="col-12 d-flex justify-content-center align-items-center p-3">
-                        <button type="submit" class="btn btn-info mb-2">Appliquer les filtres</button>
+                        <button type="submit" class="btn btn-info m-2">Appliquer les filtres</button>
+                        <button class="btn btn-light m-2">Enlever tous les filtres</button>
                     </div>
                 </div>
-                {# => Fin Sous section Prix ------------- #}
+                {# Fin Sous section submit --------------- #}
             </form>
         </div>
         {# Fin de la partie filtres ======================================= #}
