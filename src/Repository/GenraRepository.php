@@ -19,6 +19,16 @@ class GenraRepository extends ServiceEntityRepository
         parent::__construct($registry, Genra::class);
     }
 
+    public function findAll() : array
+    {
+        $qb = $this->createQueryBuilder('g')
+            ->select('g.name')
+            ->groupBy('g.name')
+            ->getQuery();
+
+        return $qb->execute();
+    }
+    
     // /**
     //  * @return Genra[] Returns an array of Genra objects
     //  */
