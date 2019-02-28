@@ -124,43 +124,49 @@ class DashboardUserController extends AbstractController
             $address = new Address();
         }
 
-        $form = $this->createForm(AddAddressesType::class, new Address());
+        $form = $this->createForm(AddAddressesType::class, $address);
         $form->handleRequest($request);
 
-        $form_edit = $this->createForm(AddAddressesType::class, new Address());
-        $form_edit->handleRequest($request);
+        // $form_edit = $this->createForm(AddAddressesType::class, $address);
+        // $form_edit->handleRequest($request);
         
-        if($form->isSubmitted()) {
+        if($form->isSubmitted() && $form->isValid()) {
             
             // dump($address);
+            // dump($form);
+            // dump($user);
             // die();
 
+            $address->setCity(strtoupper($address->getCity()))
+            ->setCountry(strtoupper($address->getCountry()))
+            ->setFirstname(ucfirst($address->getFirstname()))
+            ->setLastname(ucfirst($address->getLastname()));
+            
+            $address->addUser($user);
             $manager->persist($address);
-            $user->addAddress($address);
             $manager->flush();
 
             return $this->redirectToRoute('dashboard_user_addresses');
         }
 
-        if($form_edit->isSubmitted()) {
+        // if($form_edit->isSubmitted()) {
             
-            // dump($address);
-            // die();
 
-            $manager->persist($address);
-            $user->addAddress($address);
-            $manager->flush();
+        //     $manager->persist($address);
+        //     $user->addAddress($address);
+        //     $manager->flush();
 
-            return $this->redirectToRoute('dashboard_user_addresses');
-        }
+        //     return $this->redirectToRoute('dashboard_user_addresses');
+
+        // }
 
         $adresses = $repo->findAddressByUserId($id);
         // dump($adresses);
         // die();
         return $this->render('dashboard-user/compte-adresses.html.twig', [
             'adresses' => $adresses,
-            'form' => $form->createView(),
-            'form_edit' => $form_edit->createView()
+            'form' => $form->createView()
+            // 'form_edit' => $form_edit->createView()
         ]);
     }
     
@@ -196,14 +202,36 @@ class DashboardUserController extends AbstractController
         $id = $user->getId();
 
         $commandes = $repo_commande->findCommandByUserId($id);
-        $addresses = $repo_adresse->findAddressByUserId($id);
+        
+        // $address = $this->getId();
+
+
+        // $test = $repo_commande->findCommandById(2);
+
+        // $addresses = $repo_adresse->findAddressByUserId($id);
+
+        // dump($commandes);
+        // dump($addresses);
+        // dump($commandes_livraison);
+        // dump($commandes_facturation);
+
+        // die();
         
         return $this->render('dashboard-user/compte-commandes.html.twig', [
-            'commandes' => $commandes,
-            'addresses' => $addresses
+            'commandes' => $commandes
+            // 'addresses' => $addresses
         ]);
     }
 
 
 
 }
+
+/* 
+
+SELECT address.id, address.title, address.firstname, address.lastname, address.number, address.type, address.street, address.city, address.cp, address.country, address.additional
+			FROM address
+            INNER JOIN command ON address.id = command.livraison_id
+            WHERE command.id = 2
+
+*/
