@@ -1,7 +1,5 @@
 <?php
-
 namespace App\DataFixtures;
-
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\User;
@@ -13,56 +11,44 @@ use App\Entity\Author;
 use App\Entity\Address;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
-
 class UserFixtures extends Fixture
 {
     /**
      * @var UserPasswordEncoderInterface
      */
     private $passwordEncoder;
-
     public function __construct(UserPasswordEncoderInterface $passwordEncoder) 
     {
         $this->passwordEncoder = $passwordEncoder;
     }
-
     public function load(ObjectManager $objectManager)
     {   
         // ==== Images ==========================================================
         $image1 = new Image();
     
         $image1->setUrl("/build/images/livre1.jpg");
-
         $objectManager->persist($image1);
         // -------------------------------------
         $image2 = new Image();
         
         $image2->setUrl("/build/images/livre2.jpg");
-
         $objectManager->persist($image2);
         // ------------------------------------
         $image3 = new Image();
         
         $image3->setUrl("/build/images/livre3.jpg");
-
         $objectManager->persist($image3);
-
         // ===== Categories ===============================================
         $genra1 = new Genra();
         $genra1->setName('Histoire');
-
         $objectManager->persist($genra1);
         //-----------------------------------
         $genra2 = new Genra();
-
         $genra2->setName('Politique');
-
         $objectManager->persist($genra2);
         // ----------------------------------
         $genra3 = new Genra();
-
         $genra3->setName('Humour');
-
         $objectManager->persist($genra3);
          
         // ===== Books =====================================================
@@ -78,7 +64,6 @@ class UserFixtures extends Fixture
         ->setWidth(10)
         ->addImage($image1)
         ->addGenra($genra1);
-
         $objectManager->persist($book1);
         // ---------------------------------------------
         $book2 = new Book();
@@ -93,7 +78,6 @@ class UserFixtures extends Fixture
         ->setWidth(21)
         ->addImage($image2)
         ->addGenra($genra2);
-
         $objectManager->persist($book2);
         // ----------------------------------------------
         $book3 = new Book();
@@ -108,16 +92,13 @@ class UserFixtures extends Fixture
         ->setWidth(12)
         ->addImage($image3)
         ->addGenra($genra3);
-
         $objectManager->persist($book3);
-
         // ===== Authors ========================================================
         $author1 = new Author();
         
         $author1->setFirstname("Alain")
         ->setLastname("Jean")
         ->addBook($book1);
-
         $objectManager->persist($author1);
         // ---------------------------------
         $author2 = new Author();
@@ -126,7 +107,6 @@ class UserFixtures extends Fixture
         ->setLastname("Pinot")
         ->addBook($book2)
         ->addBook($book3);
-
         $objectManager->persist($author2);
         // ===== Commands ======================================================
         $command1 = new Command();
@@ -137,7 +117,6 @@ class UserFixtures extends Fixture
         ->setTotalcost(44.0)
         ->setState("en cours")
         ->addBook($book1);
-
         $objectManager->persist($command1);
         // ------------------------------------------
         $command2 = new Command();
@@ -154,8 +133,6 @@ class UserFixtures extends Fixture
         $objectManager->persist($command2);
         // ------------------------------------------
         $command3 = new Command();
-
-
         $command3->setDate(new \DateTimeImmutable())
         ->setNumber("8917186412")
         ->setQuantity(1)
@@ -164,10 +141,8 @@ class UserFixtures extends Fixture
         ->addBook($book1);
         
         $objectManager->persist($command3);
-
         // ===== Adresses ======================================================
         $address1 = new Address();
-
         $address1->setNumber("2")
         ->setType("bis")
         ->setStreet("rue du pont")
@@ -196,11 +171,9 @@ class UserFixtures extends Fixture
         ->setLastname("Pierre")
         ->addCommandFacturation($command1)
         ->addCommandLivraison($command2);
-
         $objectManager->persist($address2);
         // ----------------------------------------
         $address3 = new Address();
-
         $address3->setNumber("3")
         ->setType("bis")
         ->setStreet("rue du chat")
