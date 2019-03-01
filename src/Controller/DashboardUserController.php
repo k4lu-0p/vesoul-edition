@@ -82,6 +82,8 @@ class DashboardUserController extends AbstractController
 
             // Si l'ancien mot de passe est bon
             // if ($user->isPasswordValid($user, $oldPassword)) {
+
+                $confirmation;
                 
                 $em = $this->getDoctrine()->getManager();
 
@@ -125,12 +127,40 @@ class DashboardUserController extends AbstractController
         }
 
         $form = $this->createForm(AddAddressesType::class, $address);
+        $form_edit = $this->createForm(EditAddressesType::class, $address);
         $form->handleRequest($request);
+        $form_edit->handleRequest($request);
 
         // $form_edit = $this->createForm(AddAddressesType::class, $address);
         // $form_edit->handleRequest($request);
         
-        if($form->isSubmitted() && $form->isValid()) {
+        if($form->isSubmitted()) {
+            
+            // dump($address);
+            // dump($form);
+            // dump($user);
+            // die();
+
+            $address->get;
+
+            $address->setCity(strtoupper($address->getCity()))
+            ->setCountry(strtoupper($address->getCountry()))
+            ->setFirstname(ucfirst($address->getFirstname()))
+            ->setLastname(ucfirst($address->getLastname()));
+            
+            $address->addUser($user);
+            $manager->persist($address);
+            $manager->flush();
+
+            return $this->redirectToRoute('dashboard_user_addresses');
+
+        }
+
+        
+
+
+
+        if($form_edit->isSubmitted()) {
             
             // dump($address);
             // dump($form);
@@ -147,6 +177,7 @@ class DashboardUserController extends AbstractController
             $manager->flush();
 
             return $this->redirectToRoute('dashboard_user_addresses');
+
         }
 
         // if($form_edit->isSubmitted()) {
@@ -165,9 +196,50 @@ class DashboardUserController extends AbstractController
         // die();
         return $this->render('dashboard-user/compte-adresses.html.twig', [
             'adresses' => $adresses,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form_edit' => $form_edit->createView()
             // 'form_edit' => $form_edit->createView()
         ]);
+    }
+
+
+
+    /**
+     * @Route("/adresses/{id}/edit", name="dashboard_user_addresses_edit")
+     */
+    public function EditAddresses(AddressRepository $repo, Address $address = null, Request $request, ObjectManager $manager = null)
+    {
+        die();
+
+        // $user = $this->getUser();
+
+        // $id = $user->getId();
+
+        // $form = $this->createForm(EditAddressesType::class, $address);
+        // $form->handleRequest($request);
+
+        // if($form->isSubmitted()) {
+            
+        //     $address->get;
+
+        //     $address->setCity(strtoupper($address->getCity()))
+        //     ->setCountry(strtoupper($address->getCountry()))
+        //     ->setFirstname(ucfirst($address->getFirstname()))
+        //     ->setLastname(ucfirst($address->getLastname()));
+            
+        //     $address->addUser($user);
+        //     $manager->persist($address);
+        //     $manager->flush();
+
+        //     return $this->redirectToRoute('dashboard_user_addresses');
+
+        // }
+
+        // $adresses = $repo->findAddressByUserId($id);
+        // return $this->render('dashboard-user/compte-adresses.html.twig', [
+        //     'adresses' => $adresses,
+        //     'form' => $form->createView(),
+        // ]);
     }
     
 
@@ -177,15 +249,15 @@ class DashboardUserController extends AbstractController
     public function delete($id, Address $address = null, Request $request, ObjectManager $manager)
     {
         
-        $repo = $this->getDoctrine()->getRepository(Address::class);
-        $address = $repo->find($id);
+        // $repo = $this->getDoctrine()->getRepository(Address::class);
+        // $address = $repo->find($id);
         
         
-        $manager->remove($address);
-        $manager->flush();
+        // $manager->remove($address);
+        // $manager->flush();
         
-            // dump($address);
-            // die();
+        //     // dump($address);
+        //     // die();
 
             return $this->redirectToRoute('dashboard_user_addresses');
 
