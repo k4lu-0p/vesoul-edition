@@ -195,13 +195,10 @@ main {
                 }
 
                 p {
-                    height: 3rem;
+                    height: fit-content;
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                }
-                p:nth-child(5){
-                    overflow-y: scroll;
                 }
 
                 div {

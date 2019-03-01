@@ -145,9 +145,7 @@ return $this->books;
 
 public function addBook(Book $book): self
 {
-if (!$this->books->contains($book)) {
     $this->books[] = $book;
-}
 
     return $this;
 }

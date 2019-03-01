@@ -70,7 +70,7 @@ class DashboardAdminController extends AbstractController
         $boutiqueNom = $admin->getCompany();
         $boutiqueTelephone = $admin->getTel();
         $boutiqueEmail = $admin->getEmail();
-        $boutiqueLibelle = $admin->getLibelle();
+        $boutiqueLibelleAdresse = $admin->getLibelle();
         $boutiqueCp = $admin->getCp();
         $boutiqueVille = $admin->getCity();
         $boutiquePays = $admin->getCountry();
@@ -80,17 +80,22 @@ class DashboardAdminController extends AbstractController
         $commandDate = $command->getDate();
 
         // Titre et prix des livres
-        $bookTitle = [];
-        $bookPrice = [];
-        dump($command->getBooks());
-        die;
+        $book = [];
+        $books = [];
+        $prixTotal = 0;
         foreach ($command->getBooks() as $value) {
-            array_push($bookTitle, $value->getTitle()); 
-            array_push($bookPrice, $value->getPrice());
-            // dump($bookTitle, $bookPrice);        
+            array_push($book, $value->getIsbn());
+            array_push($book, $value->getTitle());
+            array_push($book, $value->getPrice());
+            $prixTotal = $prixTotal+$value->getPrice();
+            array_push($books, $book);
+            $book = [];
+
+            // dump($bookTitle, $bookPrice);
         }
+        // dump($books);
         // die;
-        // Adresse de facturation 
+        // Adresse de facturation
         $billNumber = $command->getFacturation()->getNumber();
         $billType = $command->getFacturation()->getType();
         $billStreet = $command->getFacturation()->getStreet();
@@ -101,7 +106,7 @@ class DashboardAdminController extends AbstractController
         $billFirstname = $command->getFacturation()->getFirstname();
         $billLastname = $command->getFacturation()->getLastname();
 
-        // Adresse de facturation 
+        // Adresse de facturation
         $shipNumber = $command->getLivraison()->getNumber();
         $shipType = $command->getLivraison()->getType();
         $shipStreet = $command->getLivraison()->getStreet();
@@ -120,18 +125,18 @@ class DashboardAdminController extends AbstractController
          $dompdf = new Dompdf($pdfOptions);
          
          // Retrieve the HTML generated in our twig file
-         $html = $this->render('bill/facture.html.twig', [
+         $html = $this->renderView('bill/facture.html.twig', [
              'boutiqueNom' => $boutiqueNom,
              'boutiqueTelephone' => $boutiqueTelephone,
              'boutiqueEmail' => $boutiqueEmail,
-             'boutiqueLibelle' => $boutiqueLibelle,
+             'boutiqueLibelleAdresse' => $boutiqueLibelleAdresse,
              'boutiqueCp' => $boutiqueCp,
              'boutiqueVille' => $boutiqueVille,
              'boutiquePays' => $boutiquePays,
              'commandNumero' => $commandNumero,
              'commandDate' => $commandDate,
-             'livreTitre' => $bookTitle,
-             'livrePrix' => $bookPrice,
+             'livres' => $books,
+             'prixTotal' => $prixTotal,
              'afPrenom' => $billFirstname,
              'afNom' => $billLastname,
              'afNumero' => $billNumber,
@@ -162,7 +167,7 @@ class DashboardAdminController extends AbstractController
          $dompdf->render();
  
          // Output the generated PDF to Browser (force download)
-         $dompdf->stream(".pdf", [
+         $dompdf->stream("Facture " . $commandNumero . "-IT.pdf", [
              "Attachment" => true
          ]);
 

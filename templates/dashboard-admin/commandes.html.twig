@@ -42,7 +42,7 @@
             <p class="m-0 py-3 col-2">{{ command.user.lastname }} {{ command.user.firstname }}</p>
             <p class="m-0 py-3 col-3 text-center">
                 {{ command.livraison.number }} {{ command.livraison.type }} {{ command.livraison.street }}{% if command.livraison.additional %}, {{ command.livraison.additional }}{% endif %},</br> {{ command.livraison.city }} {{ command.livraison.cp }}</p>
-            <p class="m-0 pt-4 col-2">
+            <p class="m-0 py-1 col-2">
                 {% for book in command.books %}
                 - {{ book.title }}</br>
                 {% endfor %}
