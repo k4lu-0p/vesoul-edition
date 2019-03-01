@@ -87,9 +87,9 @@
             {# Fin de la partie trie =============================== #}
             {# Partie Livres ============================== #}
             <div class="row">
-                <div class="col-12 m-0 p-0 d-flex flex-wrap justify-content-center">
+                <div id="container-books" class="col-12 m-0 p-0 d-flex flex-wrap justify-content-center">
                     {# --- Génération de livre--- #}
-                    {% for book in books %}
+                    {# {% for book in books %}
                         <div class="m-0 p-2">
                             <div class="book-card">
                                 <div class="photo">
@@ -107,15 +107,13 @@
                                         </div>
                                         <div class="col-8 d-flex justify-content-end">
                                             <a href="{{ path('addItem',{ 'id':book.id }) }}"><button class="btn btn-info">Ajouter | <i class="fas fa-shopping-cart"></i></button></a>
-                                            {#  #}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
-
-                </div>
+                    {% endfor %} #}
+              </div>
                 <div class="loader book">
                     <figure class="page"></figure>
                     <figure class="page"></figure>
@@ -126,3 +124,5 @@
     </div>
 </section>
 {% endblock %}
+
+

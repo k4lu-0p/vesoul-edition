@@ -6,12 +6,17 @@
     background: transparent;
   }
   
-  
-  
   .loader {
-    margin: 5% auto 30px;
+    margin: 10% auto 100px;
+    opacity: 0.0;
   }
   
+  .loader-on {
+    transition: opacity 5s;
+    opacity: 1.0;
+  }
+
+
   .book {
     border: 4px solid $color-main;
     width: 60px;

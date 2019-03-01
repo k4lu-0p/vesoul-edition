@@ -35,7 +35,7 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
+    public function home(Request $request, SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
     {
         // $session->remove('panier');
 
@@ -48,20 +48,19 @@ class VesoulEditionController extends AbstractController
             $session->set('panier', []);
         }
     
-        $allBooks = $repoBook->findAllBooks();
+        $books = $repoBook->findAllBooks();
 
         // Garder uniquement les 9 premiers livres de la BDD pour la page d'acceuil
-        $books = [];
-        for($i = 0; $i < 9; $i++) {
-            array_push($books, $allBooks[$i]);
-        }
+        // $books = [];
+        // for($i = 0; $i < 9; $i++) {
+        //     array_push($books, $allBooks[$i]);
+        // }
         
         // $books = $repoBook->findBy(['year' => '2019']);
 
         // $booksImages = $books->getImage()->getUrl();
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
-
 
         return $this->render('vesoul-edition/home.html.twig', [
             'books' => $books,
@@ -75,10 +74,10 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/home/load", name="load-home")
      */
-    public function homeload(Request $request) {
-        
+    public function homeload() {
         $data = ['foo1' => 'bar1', 'foo2' => 'bar2'];
-        return new JsonResponse($data);    
+        return new JsonResponse($data); 
+           
        
     }
 
