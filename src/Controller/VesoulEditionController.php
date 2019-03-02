@@ -93,7 +93,7 @@ class VesoulEditionController extends AbstractController
     *
     * @param \App\Repository\BookRepository
     */
-    public function sortByAscName(BookRepository $repo) : Response
+    public function sortByAscName(BookRepository $repo) : JsonResponse
     {
         $books = $repo->findAllBooksByAscName();
         $arrayBooks = [];
@@ -116,7 +116,7 @@ class VesoulEditionController extends AbstractController
      * 
     * @Route("/descName", name="sortByDescName")
     */
-    public function sortByDescName(BookRepository $repo) : Response
+    public function sortByDescName(BookRepository $repo) : JsonResponse
     {
         $books = $repo->findAllBooksByDescName();
         $arrayBooks = [];
@@ -138,7 +138,7 @@ class VesoulEditionController extends AbstractController
     /**
     * @Route("/ascYear", name="sortByAscYear")
     */
-    public function sortByAscYear(BookRepository $repo) : Response
+    public function sortByAscYear(BookRepository $repo) : JsonResponse
     {
         $books = $repo->findAllBooksByAscYear();
         $arrayBooks = [];
@@ -159,7 +159,7 @@ class VesoulEditionController extends AbstractController
     /**
     * @Route("/descYear", name="sortByDescYear")
     */
-    public function sortByDescYear(BookRepository $repo) : Response
+    public function sortByDescYear(BookRepository $repo) : JsonResponse
     {
         $books = $repo->findAllBooksByDescYear();
         $arrayBooks = [];
@@ -175,9 +175,7 @@ class VesoulEditionController extends AbstractController
         $json = new JsonResponse($data, 200);
 
         return $json;
-        
     }
-
 
     /**
      * @Route("/panier/add/{id}", name="addItem")

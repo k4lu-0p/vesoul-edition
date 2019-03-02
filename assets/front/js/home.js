@@ -1,3 +1,5 @@
+//Variables globales de la page home ====================================
+
 const bookCollection = document.querySelector('#book-collection');
 const filterButtons = document.querySelectorAll('.expand-button');
 const genra = document.querySelector('#genra-list');
@@ -8,9 +10,52 @@ const slider = document.querySelector('#year-slider');
 const yearButton = document.querySelector('#expand-year');
 let itemList = document.getElementById('sort-select');
 
+//=======================================================================
+
+//Objets de la page home ================================================
+
+class filters {
+    constructor(news, price, genra, author){
+        this.news = false;
+        this.price = [];
+        this.genra = [];
+        this.author = [];
+    }
+    //Getter
+    get news(){
+
+    }
+    //Setter
+
+    //Method
+
+}
+
+class book {
+    constructor(image, title, author, year, price, news){
+        this.image = '';
+        this.title = '';
+        this.author = {
+            'firstname' : '', 
+            'lastname' : ''
+        };
+        this.year = 0;
+        this.price = 0;
+        this.news = false;
+    }
+    //Getter
+
+    //Setter
+
+    //Method
+}
+//=======================================================================
+
+// Scripts executés au chargement =======================================
+
 window.onload = function(){
 
-    // Ouverture des boutons
+    // Ouverture des sections de filtrage
     filterButtons.forEach((elem)=>{
         elem.addEventListener('click', (e)=>{
         
@@ -54,23 +99,20 @@ window.onload = function(){
 
         let activeOption = itemList.value;
         let route = '';
+
         // Routeur pour le trie des livres affichés
         switch(activeOption){
             case  'ascName' :
                 route = '/ascName';
-                console.log(route);
                 break;
             case 'descName' :
                 route = '/descName';
-                console.log(route);
                 break;
             case 'ascYear' :
                 route = '/ascYear';
-                console.log(route);
                 break;
             case 'descYear' :
                 route = '/descYear';
-                console.log(route);
                 break;
         }
 
@@ -79,12 +121,14 @@ window.onload = function(){
     })
 }
 
-// Fonction qui va chercher en Ajac le nouvel ordre des livres à afficher
-function fetchNewOrder(route, target)
-{
-    let url = 'http://localhost:8080'.concat(route);
+//=======================================================================
 
-    console.log(url);
+// Fonctions ============================================================
+
+// Fonction qui va chercher en Ajax le nouvel ordre des livres à afficher
+function fetchNewOrder(route, target){
+    
+    let url = 'http://localhost:8080'.concat(route);
 
     fetch(url, {
         method: 'POST',
@@ -92,16 +136,31 @@ function fetchNewOrder(route, target)
     .then(res => res.json())
     .then(data => {
 
-        console.log(data);
-        target.innerHTML = data
+        displayBooks(target, data);
 
     })
     .catch((err) => { if (err) throw err;})
 }
 
+//Fonction qui applique les filtres au livres 
+// function applyFilters(){
 
+// }
+
+//Fonction qui affiche les livres dans le DOM
+function displayBooks(target, content){
+    
+    let strContent = content.join('');
+    console.log(strContent);
+    target.innerHTML = strContent;
+
+}
+
+//Fonction d'affichage/masquage des filtres
 function displayFilters(button, target)
 {
         button.classList.toggle('active');
         target.classList.toggle('active');
 }
+
+//========================================================================
