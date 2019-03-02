@@ -34,59 +34,46 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function home(SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
+    public function home(Request $request, SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
     {
         // $session->remove('panier');
 
-        // Si le panier est bien existant, capte le, et compte le nombre d'articles contenu.
         if($session->get('panier')) {
 
             $panier = $session->get('panier');
 
-        } else { // Sinon crée le et initialise à 0 le nombre d'articles contenu.
+        } else { 
             $session->set('panier', []);
         }
     
         $allBooks = $repoBook->findAllBooksByAscName();
-
-        // Garder uniquement les 9 premiers livres de la BDD pour la page d'acceuil
-        $books = [];
-        for($i = 0; $i < 9; $i++) {
-            array_push($books, $allBooks[$i]);
-        }
         
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
 
-
         return $this->render('vesoul-edition/home.html.twig', [
-            'books' => $books,
             'genras' => $genras,
             'authors' => $authors,
-            
-        ]);
 
+        ]);
     }
 
     /**
      * @Route("/home/load", name="load-home")
      */
-    public function homeload(Request $request) {
-        
-        $data = ['foo1' => 'bar1', 'foo2' => 'bar2'];
-        return new JsonResponse($data);    
-       
+    public function homeload(Request $request, BookRepository $repoBook) {
+        $page = $request->get('page'); 
+        $offset = ($page - 1) * 9;
+
+        // return new JsonResponse($repoBook->findPageOfListBook($offset));
+
+        $books = $repoBook->findPageOfListBook($offset);
+
+        return $this->render('ajax/page-book.html.twig', [
+            'books' => $books
+        ]);
     }
 
-    /**
-     * @Route("/home/filter", name="filter-home")
-     */
-    public function filterHome() {
-        
-        $data = ['foo1' => 'bar1', 'foo2' => 'bar2'];
-        return new JsonResponse($data);    
-       
-    }
 
     /**
     * @Route("/ascName", name="sortByAscName")
