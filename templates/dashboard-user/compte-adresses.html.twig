@@ -26,7 +26,7 @@
 
 
 
-                    <!-- Modal -->
+                    <!-- Modal ajouter adresse -->
                     <div class="modal fade" id="add-modal" tabindex="-1" role="dialog" aria-labelledby="add-title" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -91,7 +91,7 @@
 
                         </div>
                         <div class="modal-footer d-flex justify-content-between pl-5 pr-5 pb-5">
-                            <button class="btn-add-address btn btn-info" type="submit">Enregistrer les modification</button>
+                            <button class="btn-add-address btn btn-info" type="submit">Enregistrer</button>
                             {# <button type="button" class="d-flex btn btn-danger" data-dismiss="modal">FERMER</button> #}
                         </div>
                         </div>
@@ -108,6 +108,76 @@
                 </div>
 
                     {% for adresse in adresses %}
+
+                    <!-- Modal modifier adresse -->
+                    <div class="modal fade modal-address" id="edit-modal-{{ adresse.id }}" tabindex="-1" role="dialog" aria-labelledby="edit-title" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                        <div class="modal-head d-flex">
+                            <div class="col-8 offset-2 d-flex justify-content-center align-items-center">
+                                <h5 class="modal-title" id="cmd-title">Modifier l'adresse</h5>
+                            </div>
+                            <div class="col-1 offset-1 pt-2">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </div>
+                            </button>
+                        </div>
+                        <div class="modal-body d-flex flex-column pl-5 pr-5 pb-5 pt-5">
+
+                            {{ form_start(form_edit) }}
+
+                                <div class="d-flex flex-column">
+
+                                        {{ form_row(form_edit.title, {'label' : false ,'attr' : {'class': 'form-control mb-3', 'placeholder' : 'Libellé', 'id' : 'inputNew'}}) }}
+
+                                        {{ form_row(form_edit.lastname, {'label' : false ,'attr' : {'class': 'form-control mb-4', 'placeholder' : 'Prénom', 'id' : 'inputNew'}}) }}
+
+                                        {{ form_row(form_edit.firstname, {'label' : false ,'attr' : {'class': 'form-control mb-4', 'placeholder' : 'Nom', 'id' : 'inputNew'}}) }}
+
+                                    <div class="d-flex justify-content-between">
+
+                                        {{ form_widget(form_edit.number, {'label' : false ,'attr' : {'class': 'col-5 form-control mb-4', 'placeholder' : 'Numéro', 'id' : 'inputUser'}}) }}
+
+                                        {{ form_widget(form_edit.type, {'label' : false ,'attr' : {'class': 'col-5 form-control mb-4', 'placeholder' : 'Type', 'id' : 'inputPassword'}}) }}
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+
+                                        {{ form_widget(form_edit.street, {'label' : false ,'attr' : {'class': 'col-5 form-control mb-4', 'placeholder' : 'Rue', 'id' : 'inputNew'}}) }}
+
+                                        {{ form_widget(form_edit.city, {'label' : false ,'attr' : {'class': 'col-5 form-control mb-4', 'placeholder' : 'Ville', 'id' : 'inputNew'}}) }}
+
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+
+                                        {{ form_widget(form_edit.cp, {'label' : false ,'attr' : {'class': 'col-5 form-control mb-4', 'placeholder' : 'CP', 'id' : 'inputNew'}}) }}
+
+                                        {{ form_widget(form_edit.country, {'label' : false ,'attr' : {'class': 'col-5 form-control mb-4', 'placeholder' : 'Pays', 'id' : 'inputNew'}}) }}
+
+                                    </div>
+
+                                        {{ form_row(form_edit.additional, {'label' : false ,'attr' : {'class': 'form-control', 'placeholder' : 'Additionnel', 'id' : 'inputNew'}}) }}
+
+                                        
+                                </div>
+
+                                <div class="d-flex justify-content-center align-items-start">
+
+                                        
+                                </div>
+
+
+                        </div>
+                        <div class="modal-footer d-flex justify-content-between pl-5 pr-5 pb-5">
+                            <button class="btn-add-address btn btn-info" type="submit">Enregistrer les modifications</button>
+                        </div>
+                        </div>
+                            {{ form_end(form_edit, {'render_rest': false}) }}
+                    </div>
+                    </div>
 
                         <div class="col-12 list-adresse card mb-3 ml-2 mr-2 pt-4 pb-4 pl-4 pr-4 d-flex justify-content-center">
                             <div class="row">
@@ -136,7 +206,7 @@
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end col-4">
-                                    <button class="align-self-end btn edit-address mr-2">Modifier</button>
+                                    <button class="align-self-end btn edit-address mr-2" data-toggle="modal" data-target="#edit-modal-{{ adresse.id }}">Modifier</button>
                                     <a class="align-self-end btn delete-address" href="{{ path('dashboard_user_addresses_delete', {'id' :adresse.id}) }}"><i class="fas fa-trash trash-address"></i></a>
                                     {# <button class="align-self-end btn delete-address"><i class="fas fa-trash trash-address"></i></button> #}
                                 </div>

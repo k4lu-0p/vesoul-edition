@@ -42,6 +42,24 @@ class AddressRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAddressByCommandId($value)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            SELECT address.id, address.title, address.firstname, address.lastname, address.number, address.type, address.street, address.city, address.cp, address.country, address.additional
+            FROM address
+            INNER JOIN command ON address.id = command.livraison_id
+            WHERE command.id = 2
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['value' => $value]);
+    
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+        ;
+    }
+        
     /*
     public function findOneBySomeField($value): ?Address
     {

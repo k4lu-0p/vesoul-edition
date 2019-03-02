@@ -11,6 +11,7 @@ use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
 use App\Repository\UserRepository;
 use App\Form\EditInformationsType;
+use App\Form\EditAddressesType;
 use App\Form\AddAddressesType;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,6 +82,8 @@ class DashboardUserController extends AbstractController
 
             // Si l'ancien mot de passe est bon
             // if ($user->isPasswordValid($user, $oldPassword)) {
+
+                $confirmation;
                 
                 $em = $this->getDoctrine()->getManager();
 
@@ -124,27 +127,119 @@ class DashboardUserController extends AbstractController
         }
 
         $form = $this->createForm(AddAddressesType::class, $address);
+        $form_edit = $this->createForm(EditAddressesType::class, $address);
         $form->handleRequest($request);
+        $form_edit->handleRequest($request);
+
+        // $form_edit = $this->createForm(AddAddressesType::class, $address);
+        // $form_edit->handleRequest($request);
         
         if($form->isSubmitted()) {
             
             // dump($address);
+            // dump($form);
+            // dump($user);
             // die();
 
+            $address->get;
+
+            $address->setCity(strtoupper($address->getCity()))
+            ->setCountry(strtoupper($address->getCountry()))
+            ->setFirstname(ucfirst($address->getFirstname()))
+            ->setLastname(ucfirst($address->getLastname()));
+            
+            $address->addUser($user);
             $manager->persist($address);
-            $user->addAddress($address);
             $manager->flush();
 
             return $this->redirectToRoute('dashboard_user_addresses');
+
         }
+
+        
+
+
+
+        if($form_edit->isSubmitted()) {
+            
+            // dump($address);
+            // dump($form);
+            // dump($user);
+            // die();
+
+            $address->setCity(strtoupper($address->getCity()))
+            ->setCountry(strtoupper($address->getCountry()))
+            ->setFirstname(ucfirst($address->getFirstname()))
+            ->setLastname(ucfirst($address->getLastname()));
+            
+            $address->addUser($user);
+            $manager->persist($address);
+            $manager->flush();
+
+            return $this->redirectToRoute('dashboard_user_addresses');
+
+        }
+
+        // if($form_edit->isSubmitted()) {
+            
+
+        //     $manager->persist($address);
+        //     $user->addAddress($address);
+        //     $manager->flush();
+
+        //     return $this->redirectToRoute('dashboard_user_addresses');
+
+        // }
 
         $adresses = $repo->findAddressByUserId($id);
         // dump($adresses);
         // die();
         return $this->render('dashboard-user/compte-adresses.html.twig', [
             'adresses' => $adresses,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form_edit' => $form_edit->createView()
+            // 'form_edit' => $form_edit->createView()
         ]);
+    }
+
+
+
+    /**
+     * @Route("/adresses/{id}/edit", name="dashboard_user_addresses_edit")
+     */
+    public function EditAddresses(AddressRepository $repo, Address $address = null, Request $request, ObjectManager $manager = null)
+    {
+        die();
+
+        // $user = $this->getUser();
+
+        // $id = $user->getId();
+
+        // $form = $this->createForm(EditAddressesType::class, $address);
+        // $form->handleRequest($request);
+
+        // if($form->isSubmitted()) {
+            
+        //     $address->get;
+
+        //     $address->setCity(strtoupper($address->getCity()))
+        //     ->setCountry(strtoupper($address->getCountry()))
+        //     ->setFirstname(ucfirst($address->getFirstname()))
+        //     ->setLastname(ucfirst($address->getLastname()));
+            
+        //     $address->addUser($user);
+        //     $manager->persist($address);
+        //     $manager->flush();
+
+        //     return $this->redirectToRoute('dashboard_user_addresses');
+
+        // }
+
+        // $adresses = $repo->findAddressByUserId($id);
+        // return $this->render('dashboard-user/compte-adresses.html.twig', [
+        //     'adresses' => $adresses,
+        //     'form' => $form->createView(),
+        // ]);
     }
     
 
@@ -154,16 +249,17 @@ class DashboardUserController extends AbstractController
     public function delete($id, Address $address = null, Request $request, ObjectManager $manager)
     {
         
-        $repo = $this->getDoctrine()->getRepository(Address::class);
-        $address = $repo->find($id);
+        // $repo = $this->getDoctrine()->getRepository(Address::class);
+        // $address = $repo->find($id);
         
-        $manager->remove($address);
-        $manager->flush();
         
-            // dump($address);
-            // die();
+        // $manager->remove($address);
+        // $manager->flush();
+        
+        //     // dump($address);
+        //     // die();
 
-            return $this->redirectToRoute('dashboard_user_addresses', ['id' => $adresse->getId()]);
+            return $this->redirectToRoute('dashboard_user_addresses');
 
     }
 
@@ -178,14 +274,36 @@ class DashboardUserController extends AbstractController
         $id = $user->getId();
 
         $commandes = $repo_commande->findCommandByUserId($id);
-        $addresses = $repo_adresse->findAddressByUserId($id);
+        
+        // $address = $this->getId();
+
+
+        // $test = $repo_commande->findCommandById(2);
+
+        // $addresses = $repo_adresse->findAddressByUserId($id);
+
+        // dump($commandes);
+        // dump($addresses);
+        // dump($commandes_livraison);
+        // dump($commandes_facturation);
+
+        // die();
         
         return $this->render('dashboard-user/compte-commandes.html.twig', [
-            'commandes' => $commandes,
-            'addresses' => $addresses
+            'commandes' => $commandes
+            // 'addresses' => $addresses
         ]);
     }
 
 
 
 }
+
+/* 
+
+SELECT address.id, address.title, address.firstname, address.lastname, address.number, address.type, address.street, address.city, address.cp, address.country, address.additional
+			FROM address
+            INNER JOIN command ON address.id = command.livraison_id
+            WHERE command.id = 2
+
+*/

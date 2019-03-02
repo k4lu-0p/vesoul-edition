@@ -27,7 +27,7 @@ class CommandRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            SELECT command.date, command.number, command.quantity, command.totalcost, command.state
+            SELECT command.livraison_id, command.facturation_id, command.date, command.number, command.quantity, command.totalcost, command.state
             FROM command
             WHERE command.user_id = :value
             ';
