@@ -13,7 +13,11 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Book[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class BookRepository extends ServiceEntityRepository
-{
+{   
+
+    public const LIMIT = 9;
+
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Book::class);
@@ -147,4 +151,18 @@ class BookRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findPageOfListBook($offset) {
+
+        $qb = $this->createQueryBuilder('b');
+
+        return $qb->select(['book', 'author', 'images'])
+        ->from(Book::class, 'book')
+        ->innerJoin('book.author', 'author')
+        ->innerJoin('book.images', 'images')
+        ->setFirstResult( $offset )
+        ->setMaxResults( self::LIMIT )
+        ->getQuery()
+        ->getArrayResult();
+    }
 }
