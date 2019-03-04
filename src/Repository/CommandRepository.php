@@ -39,24 +39,20 @@ class CommandRepository extends ServiceEntityRepository
         ;
     }
 
-    // public function findOneById($value)
-    // {
-    //     $conn = $this->getEntityManager()->getConnection();
+    public function findQuantity($commandId, $bookId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
-    //     $sql = '
-    //         SELECT command.date, command.number, command.quantity, command.totalcost, user.firstname, user.lastname,
-    //         COUNT(book.isbn)
-    //         FROM command
-    //         INNER JOIN user ON user.id = command.user_id
-    //         INNER JOIN command_book ON command_book.command_id = command.id
-    //         INNER JOIN book ON book.id = command_book.book_id
-    //         WHERE command.id = :value
-    //         ';
-    //     $stmt = $conn->prepare($sql);
-    //     $stmt->execute(['value' => $value]);
+        $sql = '
+            SELECT COUNT(book_id) AS quantity
+            FROM command_book
+            WHERE command_id = :value AND book_id = :book
+            ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['value' => $commandId, 'book' => $bookId]);
     
-    //     // returns an array of arrays (i.e. a raw data set)
-    //     return $stmt->fetchAll();
-    //     ;
-    // }
+        // returns an array of arrays (i.e. a raw data set)
+        return $stmt->fetchAll();
+        ;
+    }
 }

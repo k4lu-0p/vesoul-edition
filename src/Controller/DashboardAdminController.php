@@ -63,7 +63,7 @@ class DashboardAdminController extends AbstractController
     /**
      * @Route("/commandes/imprimer/{id}", name="dashboard_admin_commandes_imprime")
      */
-    public function printBill(Command $command,AdminRepository $adminRepo, CommandRepository $repo)
+    public function printBill(Command $command, AdminRepository $adminRepo, CommandRepository $commandRepo)
     {
         // Information de la boutique
         $admin = $adminRepo->findOneById(2);
@@ -80,21 +80,32 @@ class DashboardAdminController extends AbstractController
         $commandDate = $command->getDate();
 
         // Titre et prix des livres
+        $quantity = [];
         $book = [];
         $books = [];
         $prixTotal = 0;
+        
+        // N'affiche pas 
         foreach ($command->getBooks() as $value) {
             array_push($book, $value->getIsbn());
             array_push($book, $value->getTitle());
+            
+            if(!in_array($value->getId(), $quantity)){
+                $quant = $commandRepo->findQuantity($command->getid(), $value->getId())[0]["quantity"];
+                array_push($book, $quant);
+                $prixTotal = $prixTotal + $quant*$value->getPrice();
+            }
             array_push($book, $value->getPrice());
-            $prixTotal = $prixTotal+$value->getPrice();
             array_push($books, $book);
             $book = [];
-
-            // dump($bookTitle, $bookPrice);
+            
         }
+
+        
         // dump($books);
         // die;
+
+
         // Adresse de facturation
         $billNumber = $command->getFacturation()->getNumber();
         $billType = $command->getFacturation()->getType();
@@ -136,6 +147,7 @@ class DashboardAdminController extends AbstractController
              'commandNumero' => $commandNumero,
              'commandDate' => $commandDate,
              'livres' => $books,
+             'quantité' => $quantity,
              'prixTotal' => $prixTotal,
              'afPrenom' => $billFirstname,
              'afNom' => $billLastname,
