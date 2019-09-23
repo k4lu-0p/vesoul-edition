@@ -117,7 +117,6 @@ class UserFixtures extends Fixture
         ->setTotalcost(44.0)
         ->setState("en cours")
         ->addBook($book2)
-        ->addBook($book1)
         ->addBook($book1);
         $objectManager->persist($command1);
         // ------------------------------------------
@@ -127,7 +126,7 @@ class UserFixtures extends Fixture
         
         $command2->setDate(new \DateTimeImmutable())
         ->setNumber("8917186412")
-        ->setQuantity(1)
+        ->setQuantity(3)
         ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1)
@@ -139,12 +138,11 @@ class UserFixtures extends Fixture
         $command3 = new Command();
         $command3->setDate(new \DateTimeImmutable())
         ->setNumber("8917186412")
-        ->setQuantity(1)
+        ->setQuantity(3)
         ->setTotalcost(22.0)
         ->setState("expédié")
         ->addBook($book1)
-        ->addBook($book3)
-        ->addBook($book3)
+        ->addBook($book2)
         ->addBook($book3);
         
         $objectManager->persist($command3);

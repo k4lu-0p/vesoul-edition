@@ -19,7 +19,7 @@ for (let i = 0; i < buttonEdit.length; i++) {
         .then(data => {
 
             console.log(data);
-            target.innerHTML = data
+            //target.innerHTML = data
 
         })
         .catch((err) => { if (err) throw err;})

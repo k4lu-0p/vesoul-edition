@@ -23,6 +23,15 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function countBooks(){
+        
+        return $this->createQueryBuilder('b')
+        ->select('count(b.id) as count')
+        ->getQuery()
+        ->getSingleScalarResult();
+        
+    }
+
     public function findAllBooksByAscName(): array
     {
         $conn = $this->getEntityManager()->getConnection();

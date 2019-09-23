@@ -62,16 +62,42 @@ class VesoulEditionController extends AbstractController
      * @Route("/home/load", name="load-home")
      */
     public function homeload(Request $request, BookRepository $repoBook) {
+        
+        $max_per_page = 9;
+
+        $total_books = $repoBook->countBooks();
+        $pages = ceil($total_books / $max_per_page);
+
         $page = $request->get('page'); 
-        $offset = ($page - 1) * 9;
+        $offset = ($page - 1) * $max_per_page;
 
         // return new JsonResponse($repoBook->findPageOfListBook($offset));
 
         $books = $repoBook->findPageOfListBook($offset);
 
-        return $this->render('ajax/page-book.html.twig', [
-            'books' => $books
-        ]);
+        
+        
+        $response = new Response();
+        // $response->setContent( $this->render('ajax/page-book.html.twig', 
+        //         [
+        //             'books' => $books
+        //         ]
+        //     )
+        // );
+        $response->setCharset('utf-8');
+        $response->headers->set('Content-Type', 'text/html');
+        $response->headers->set('X-TotalBooks', $total_books );
+        $response->headers->set('X-TotalPage', $pages );
+        $response->setStatusCode(Response::HTTP_OK);
+        $response->send();
+        return $this->render(
+            'ajax/page-book.html.twig', 
+            [
+                'books' => $books
+            ]
+        );
+        
+        
     }
 
 

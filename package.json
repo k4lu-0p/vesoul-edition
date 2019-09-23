@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.22.0",
+        "@symfony/webpack-encore": "^0.27.0",
         "copy-webpack-plugin": "^5.0.0",
         "node-sass": "^4.11.0",
         "sass-loader": "^7.0.1",
@@ -12,7 +12,7 @@
     "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
-        "dev": "encore dev",
+        "dev": "node_modules/@symfony/webpack-encore/bin/encore.js dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
