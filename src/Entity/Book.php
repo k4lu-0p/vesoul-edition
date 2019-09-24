@@ -78,6 +78,11 @@ class Book
      */
     private $width;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $new;
+
     public function __construct()
     {
         $this->commands = new ArrayCollection();
@@ -168,7 +173,7 @@ class Book
         return $this;
     }
 
-    public function removeCommand(Command $Command): self
+    public function removeCommand(Command $command): self
     {
         if ($this->commands->contains($command)) {
             $this->commands->removeElement($command);
@@ -279,6 +284,26 @@ class Book
     public function setWidth(int $width): self
     {
         $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of new
+     */ 
+    public function getNew()
+    {
+        return $this->new;
+    }
+
+    /**
+     * Set the value of new
+     *
+     * @return  self
+     */ 
+    public function setNew($new)
+    {
+        $this->new = $new;
 
         return $this;
     }

@@ -1,16 +1,18 @@
 <?php
 namespace App\DataFixtures;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
-use App\Entity\User;
-use App\Entity\Command;
-use App\Entity\Image;
-use App\Entity\Genra;
+use Faker\Factory;
 use App\Entity\Book;
+use App\Entity\User;
+use App\Entity\Genra;
+use App\Entity\Image;
 use App\Entity\Author;
 use App\Entity\Address;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Entity\Command;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 class UserFixtures extends Fixture
 {
     /**
@@ -23,6 +25,8 @@ class UserFixtures extends Fixture
     }
     public function load(ObjectManager $objectManager)
     {   
+        
+        $faker = \Faker\Factory::create('fr_FR');
         // ==== Images ==========================================================
         $image1 = new Image();
     
@@ -62,6 +66,7 @@ class UserFixtures extends Fixture
         ->setYear(2002)
         ->setLength(15)
         ->setWidth(10)
+        ->setNew($faker->numberBetween($min = 0, $max = 1))
         ->addImage($image1)
         ->addGenra($genra1);
         $objectManager->persist($book1);
@@ -76,6 +81,7 @@ class UserFixtures extends Fixture
         ->setYear(2007)
         ->setLength(30)
         ->setWidth(21)
+        ->setNew($faker->numberBetween($min = 0, $max = 1))
         ->addImage($image2)
         ->addGenra($genra2);
         $objectManager->persist($book2);
@@ -90,6 +96,7 @@ class UserFixtures extends Fixture
         ->setYear(1978)
         ->setLength(18)
         ->setWidth(12)
+        ->setNew($faker->numberBetween($min = 0, $max = 1))
         ->addImage($image3)
         ->addGenra($genra3);
         $objectManager->persist($book3);
