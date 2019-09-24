@@ -13,8 +13,6 @@ require('../../../node_modules/nouislider/distribute/nouislider.min.css');
 require('./main-front.ts');
 require('./connexion-client.js');
 require('./user-panel.ts');
-require('./lazy-load.js');
-require('./home.js');
 require('./dashboard-user.ts');
 
 // const $ = require('jquery');

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Mapping\OrderBy;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -161,14 +162,36 @@ class BookRepository extends ServiceEntityRepository
     }
     */
 
-    public function findPageOfListBook($offset) {
+    public function findPageOfListBook($offset, $orderBy) {
 
-        $qb = $this->createQueryBuilder('b');
+        $fieldOrderBy = 'title';
+        $howOrderBy = 'ASC';
 
-        return $qb->select(['book', 'author', 'images'])
-        ->from(Book::class, 'book')
-        ->innerJoin('book.author', 'author')
-        ->innerJoin('book.images', 'images')
+        switch($orderBy){
+
+            case 'ascName' : 
+                $fieldOrderBy = 'title';
+                $howOrderBy = 'ASC';
+                break;
+            case 'descName' : 
+                $fieldOrderBy = 'title';
+                $howOrderBy = 'DESC';
+                break;
+            case 'ascYear' : 
+                $fieldOrderBy = 'year';
+                $howOrderBy = 'ASC';
+                break;
+            case 'descYear' : 
+                $fieldOrderBy = 'year';
+                $howOrderBy = 'DESC';
+                break;
+        }
+        
+        return $this->createQueryBuilder('b')
+        ->select('b','j','i')
+        ->join('b.author', 'j')
+        ->join('b.images', 'i')
+        ->orderBy('b.'.$fieldOrderBy, $howOrderBy)
         ->setFirstResult( $offset )
         ->setMaxResults( self::LIMIT )
         ->getQuery()

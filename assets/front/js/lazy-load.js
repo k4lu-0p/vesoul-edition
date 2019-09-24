@@ -1,9 +1,4 @@
-const loader = document.querySelector(".loader");
-const wrapperBooks = document.querySelector("#book-collection");
 
-totalPages = 0;
-let page = 1;
-let ticking = false;
 
 
 window.addEventListener('DOMContentLoaded', (e) => {

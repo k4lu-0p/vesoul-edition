@@ -8,8 +8,14 @@ const author = document.querySelector('#author-list');
 const authorButton = document.querySelector('#expand-author');
 const slider = document.querySelector('#year-slider');
 const yearButton = document.querySelector('#expand-year');
-let itemList = document.getElementById('sort-select');
+const itemList = document.getElementById('sort-select');
+const loader = document.querySelector(".loader");
+const wrapperBooks = document.querySelector("#book-collection");
 
+let totalPages = 0;
+let page = 1;
+let ticking = false;
+let orderBy = 'ascName';
 //=======================================================================
 
 //Objets de la page home ================================================
@@ -97,26 +103,13 @@ window.onload = function(){
     // Ecoute de la selection du tri apres chargement de la page   
     itemList.addEventListener('change', ()=>{
 
-        let activeOption = itemList.value;
-        let route = '';
+        orderBy = itemList.value;
+        page = 1;
 
-        // Routeur pour le trie des livres affichés
-        switch(activeOption){
-            case  'ascName' :
-                route = '/ascName';
-                break;
-            case 'descName' :
-                route = '/descName';
-                break;
-            case 'ascYear' :
-                route = '/ascYear';
-                break;
-            case 'descYear' :
-                route = '/descYear';
-                break;
-        }
-
-        fetchNewOrder(route, bookCollection);
+        wrapperBooks.innerHTML = '';
+        loader.classList.add("loader-on");
+        fetchBooks();
+        ticking = true;
         
     })
 }
@@ -164,3 +157,70 @@ function displayFilters(button, target)
 }
 
 //========================================================================
+
+
+
+
+window.addEventListener('DOMContentLoaded', (e) => {
+  
+    fetchBooks();
+    ticking = true;
+  });
+  
+  window.addEventListener('scroll', function (e) {
+    pageHeight = document.querySelector('.wrapper').offsetHeight;
+    footer = document.querySelector('footer').offsetHeight;
+    windowHeight = window.innerHeight;
+    scrollPosition = window.scrollY ||  window.pageYOffset || document.body.scrollTop + (document.documentElement && document.documentElement.scrollTop || 0 );
+    if( (pageHeight-footer) <= windowHeight+scrollPosition ){
+      if( page <= totalPages ){
+        if (ticking === false) {
+          onScrollFetch();
+          ticking = true;
+        }
+      }
+    }
+  });
+  
+  function onScrollFetch() {    
+    if( page <= totalPages ){
+      if(ticking === false){
+        loader.classList.add("loader-on");
+        fetchBooks();
+      } 
+    } 
+  }
+  
+  function fetchBooks() {
+    
+    if(ticking === false){
+      fetch(`home/load?page=${page}&orderBy=${orderBy}`, {
+          method: 'GET'
+        })
+        .then(res => {      
+          const totalBooks = res.headers.get('X-TotalBooks');
+          totalPages = res.headers.get('X-TotalPage');
+          elTotalBooks = document.querySelector('#totalPage')
+          elTotalBooks.innerHTML = totalBooks;
+          return res.text();
+          
+        })
+        .then(res => {
+  
+          if (loader.classList.contains("loader-on")) {
+            loader.classList.remove("loader-on");
+  
+          }
+          
+          
+          wrapperBooks.innerHTML+= res;
+          ticking = false;
+          page++;
+          
+          
+        })
+        .catch(err => {
+          if (err) throw err;
+        });
+    }
+  }
