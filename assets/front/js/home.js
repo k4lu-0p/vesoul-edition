@@ -1,6 +1,7 @@
 //Variables globales de la page home ====================================
 
 const bookCollection = document.querySelector('#book-collection');
+const checkNews = document.querySelector('#news');
 const filterButtons = document.querySelectorAll('.expand-button');
 const genra = document.querySelector('#genra-list');
 const genraButton = document.querySelector('#expand-genra');
@@ -11,6 +12,9 @@ const yearButton = document.querySelector('#expand-year');
 const itemList = document.getElementById('sort-select');
 const loader = document.querySelector(".loader");
 const wrapperBooks = document.querySelector("#book-collection");
+const filter = {
+  nouveaute: false
+}
 
 let totalPages = 0;
 let page = 1;
@@ -114,6 +118,19 @@ window.onload = function(){
     })
 }
 
+
+//=============================================
+//Activation on non de la fonction nouveauté
+checkNews.addEventListener('change', function(){
+  filter.nouveaute = !filter.nouveaute;
+  orderBy = itemList.value;
+  page = 1;
+
+  wrapperBooks.innerHTML = '';
+  loader.classList.add("loader-on");
+  fetchBooks();
+  ticking = true;
+})
 //=======================================================================
 
 // Fonctions ============================================================
@@ -194,7 +211,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
   function fetchBooks() {
     
     if(ticking === false){
-      fetch(`home/load?page=${page}&orderBy=${orderBy}`, {
+      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}`, {
           method: 'GET'
         })
         .then(res => {      

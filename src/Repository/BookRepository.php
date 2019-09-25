@@ -24,12 +24,18 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function countBooks(){
+    public function countBooks($new){
         
-        return $this->createQueryBuilder('b')
-        ->select('count(b.id) as count')
-        ->getQuery()
+        $query =  $this->createQueryBuilder('b')
+        ->select('count(b.id) as count');
+        if( $new === "true" ){
+            $query = $query->andWhere('b.new = :new')
+            ->setParameter(':new', $new);
+        }
+        $query = $query->getQuery()
         ->getSingleScalarResult();
+
+        return $query;
         
     }
 
@@ -162,7 +168,7 @@ class BookRepository extends ServiceEntityRepository
     }
     */
 
-    public function findPageOfListBook($offset, $orderBy) {
+    public function findPageOfListBook($offset, $orderBy, $new) {
 
         $fieldOrderBy = 'title';
         $howOrderBy = 'ASC';
@@ -187,14 +193,22 @@ class BookRepository extends ServiceEntityRepository
                 break;
         }
         
-        return $this->createQueryBuilder('b')
+        $query =  $this->createQueryBuilder('b')
         ->select('b','j','i')
         ->join('b.author', 'j')
-        ->join('b.images', 'i')
-        ->orderBy('b.'.$fieldOrderBy, $howOrderBy)
+        ->join('b.images', 'i');
+        if( $new === "true" ){
+            $query = $query->andWhere('b.new = :new')
+            ->setParameter(':new', $new);
+        }
+        $query = $query->orderBy('b.'.$fieldOrderBy, $howOrderBy)        
         ->setFirstResult( $offset )
         ->setMaxResults( self::LIMIT )
         ->getQuery()
         ->getArrayResult();
+        
+        
+
+        return $query;
     }
 }
