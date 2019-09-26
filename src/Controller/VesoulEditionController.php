@@ -65,10 +65,12 @@ class VesoulEditionController extends AbstractController
         
         $page = $request->get('page');
         $orderBy = $request->get('orderBy');
-        $new = $request->get('new'); 
+        $new = $request->get('new');
+        $genre = strlen($request->get('genre')) > 0 ? explode(',', $request->get('genre')) : []; 
+
         $max_per_page = 9;
 
-        $total_books = $repoBook->countBooks($new);
+        $total_books = $repoBook->countBooks($new, $genre);
         $pages = ceil($total_books / $max_per_page);
 
         
@@ -77,7 +79,7 @@ class VesoulEditionController extends AbstractController
 
         // return new JsonResponse($repoBook->findPageOfListBook($offset));
 
-        $books = $repoBook->findPageOfListBook($offset, $orderBy, $new);
+        $books = $repoBook->findPageOfListBook($offset, $orderBy, $new, $genre);
         $response = new Response();
         // $response->setContent( $this->render('ajax/page-book.html.twig', 
         //         [

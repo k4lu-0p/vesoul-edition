@@ -4,6 +4,7 @@ const bookCollection = document.querySelector('#book-collection');
 const checkNews = document.querySelector('#news');
 const filterButtons = document.querySelectorAll('.expand-button');
 const genra = document.querySelector('#genra-list');
+const checksGenre = genra.querySelectorAll('.form-check-input');
 const genraButton = document.querySelector('#expand-genra');
 const author = document.querySelector('#author-list');
 const authorButton = document.querySelector('#expand-author');
@@ -12,8 +13,11 @@ const yearButton = document.querySelector('#expand-year');
 const itemList = document.getElementById('sort-select');
 const loader = document.querySelector(".loader");
 const wrapperBooks = document.querySelector("#book-collection");
+const btnApplyFilter = document.querySelector("#applyFilter");
+
 const filter = {
-  nouveaute: false
+  nouveaute: false,
+  genre: []
 }
 
 let totalPages = 0;
@@ -131,6 +135,93 @@ checkNews.addEventListener('change', function(){
   fetchBooks();
   ticking = true;
 })
+
+//=============================================
+//Sur clique des cases genres 
+for( let item of checksGenre){
+  item.addEventListener('change', (evt)=>{
+    
+    elChecked = evt.currentTarget;
+    choiceId = elChecked.getAttribute('id');
+    const zoneBadge = document.querySelector('#badges');
+
+    if( elChecked.checked ){
+      
+      filter.genre.push(choiceId);
+
+      //ajout du bagde      
+      const newBadge = document.createElement('div');
+      const listClass = ['badge-filter', 'px-2',  'd-flex', 'align-items-center', 'mr-1', 'mb-1'];
+      const newBadgeTexte = document.createElement('p');
+      const listClassTexte = ['m-0', 'p-0', 'mr-2'];
+      const newBadgeClose = document.createElementNS('http://www.w3.org/2000/svg','svg');
+      const listClassClose = ['svg-inline--fa', 'fa-times-circle', 'fa-w-16'];
+      const newBadgeClosePath = document.createElementNS('http://www.w3.org/2000/svg','path');
+      
+      newBadge.classList.add(...listClass);
+      newBadge.setAttribute('data-value', choiceId );
+      newBadge.addEventListener('click', evt => {
+
+        baliseHasClicked = evt.currentTarget;
+        choiceId = baliseHasClicked.dataset.value;
+        baliseHasClicked.remove();
+        inputWantDesactivate = document.querySelector('#'+ choiceId );
+        inputWantDesactivate.checked = false;
+        removeAndUpdateFilter(choiceId);
+      });
+      
+      newBadgeTexte.classList.add(...listClassTexte);
+      newBadgeTexte.innerText = choiceId;
+      newBadge.appendChild(newBadgeTexte);
+
+      newBadgeClose.classList.add(...listClassClose);
+      newBadgeClose.setAttribute('aria-hidden', "true");
+      newBadgeClose.setAttribute('data-prefix', "fas");
+      newBadgeClose.setAttribute('data-icon', "times-circle");
+      newBadgeClose.setAttribute('role', "img");
+      newBadgeClose.setAttribute('viewBox', "0 0 512 512");
+      newBadgeClose.setAttribute('data-fa-i2svg', "");
+      newBadge.appendChild(newBadgeClose);
+      
+      
+      newBadgeClosePath.setAttribute('fill', "currentColor");
+      newBadgeClosePath.setAttribute('d', "M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z");
+      newBadgeClose.appendChild(newBadgeClosePath);      
+      zoneBadge.appendChild(newBadge);
+
+    }else{
+      
+      removeAndUpdateFilter(choiceId);
+      badge = zoneBadge.querySelector('div[data-value="'+choiceId+'"]');
+      badge.remove();
+    }
+    
+    
+    
+    
+  });
+}
+
+
+//=================================================
+//Apllique les filtres de recherches
+btnApplyFilter.addEventListener('click', function(){
+  orderBy = itemList.value;
+  page = 1;
+
+  wrapperBooks.innerHTML = '';
+  loader.classList.add("loader-on");
+  fetchBooks();
+  ticking = true;
+});
+
+function removeAndUpdateFilter(choiceId){
+
+  indexInArrayGenre = filter.genre.findIndex( (element)=>  element == choiceId );
+  filter.genre.splice(indexInArrayGenre,1);
+
+}
+
 //=======================================================================
 
 // Fonctions ============================================================
@@ -211,7 +302,8 @@ window.addEventListener('DOMContentLoaded', (e) => {
   function fetchBooks() {
     
     if(ticking === false){
-      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}`, {
+
+      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}`, {
           method: 'GET'
         })
         .then(res => {      

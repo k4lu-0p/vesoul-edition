@@ -24,14 +24,37 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function countBooks($new){
+    public function countBooks($new, $genre){
         
+        $queryParamaters = [];
+
         $query =  $this->createQueryBuilder('b')
-        ->select('count(b.id) as count');
+        ->select('count(b.id) as count')
+        ->join('b.genras', 'g');
+
         if( $new === "true" ){
-            $query = $query->andWhere('b.new = :new')
-            ->setParameter(':new', $new);
+            $query = $query->andWhere('b.new = :new');
+            $queryParamaters[':new'] = $new;
         }
+
+        if( count($genre) > 0 ){
+
+            $queryGenre = "";
+            
+
+            for( $i = 0; $i < count($genre); $i++){
+                $queryGenre .= ($i === 0 ) ? 'g.name = :genre'.$i : ' OR g.name = :genre'.$i ;
+                $queryParamaters['genre'.$i] = $genre[$i];
+            }
+            
+            $query = $query->andWhere($queryGenre);
+            
+        }
+
+        if(count($queryParamaters) > 0 ){
+            $query = $query->setParameters($queryParamaters);
+        }
+        
         $query = $query->getQuery()
         ->getSingleScalarResult();
 
@@ -168,10 +191,11 @@ class BookRepository extends ServiceEntityRepository
     }
     */
 
-    public function findPageOfListBook($offset, $orderBy, $new) {
+    public function findPageOfListBook($offset, $orderBy, $new, $genre) {
 
         $fieldOrderBy = 'title';
         $howOrderBy = 'ASC';
+        $queryParamaters = [];
 
         switch($orderBy){
 
@@ -196,11 +220,32 @@ class BookRepository extends ServiceEntityRepository
         $query =  $this->createQueryBuilder('b')
         ->select('b','j','i')
         ->join('b.author', 'j')
-        ->join('b.images', 'i');
+        ->join('b.images', 'i')
+        ->join('b.genras', 'g');
+
         if( $new === "true" ){
-            $query = $query->andWhere('b.new = :new')
-            ->setParameter(':new', $new);
+            $query = $query->andWhere('b.new = :new');
+            $queryParamaters[':new'] = $new;
         }
+
+        if( count($genre) > 0 ){
+
+            $queryGenre = "";
+            
+
+            for( $i = 0; $i < count($genre); $i++){
+                $queryGenre .= ($i === 0 ) ? 'g.name = :genre'.$i : ' OR g.name = :genre'.$i ;
+                $queryParamaters[':genre'.$i] = $genre[$i];
+            }
+            
+            $query = $query->andWhere($queryGenre);
+            
+        }
+        
+        if(count($queryParamaters) > 0 ){
+            $query = $query->setParameters($queryParamaters);
+        }
+        
         $query = $query->orderBy('b.'.$fieldOrderBy, $howOrderBy)        
         ->setFirstResult( $offset )
         ->setMaxResults( self::LIMIT )
