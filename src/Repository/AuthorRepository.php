@@ -23,7 +23,7 @@ class AuthorRepository extends ServiceEntityRepository
     public function findAll() : array
     {
         $qb = $this->createQueryBuilder('a')
-        ->select('a.firstname', 'a.lastname')
+        ->select('a.id','a.firstname', 'a.lastname')
         ->groupBy('a.lastname')
         ->orderBy('a.lastname')
         ->getQuery();

@@ -1,12 +1,13 @@
+
 //Variables globales de la page home ====================================
 
 const bookCollection = document.querySelector('#book-collection');
 const checkNews = document.querySelector('#news');
 const filterButtons = document.querySelectorAll('.expand-button');
 const genra = document.querySelector('#genra-list');
-const checksGenre = genra.querySelectorAll('.form-check-input');
-const genraButton = document.querySelector('#expand-genra');
 const author = document.querySelector('#author-list');
+const checksFilter = document.querySelectorAll('#genra-list .form-check-input, #author-list .form-check-input ');
+const genraButton = document.querySelector('#expand-genra');
 const authorButton = document.querySelector('#expand-author');
 const slider = document.querySelector('#year-slider');
 const yearButton = document.querySelector('#expand-year');
@@ -14,10 +15,16 @@ const itemList = document.getElementById('sort-select');
 const loader = document.querySelector(".loader");
 const wrapperBooks = document.querySelector("#book-collection");
 const btnApplyFilter = document.querySelector("#applyFilter");
+const sliderYear = document.querySelectorAll('.range');
 
 const filter = {
   nouveaute: false,
-  genre: []
+  genre: [],
+  author: [],
+  year:{
+    min: 0,
+    max: 0
+  }
 }
 
 let totalPages = 0;
@@ -67,7 +74,7 @@ class book {
 
 // Scripts executés au chargement =======================================
 
-window.onload = function(){
+window.addEventListener('load', function(){
 
     // Ouverture des sections de filtrage
     filterButtons.forEach((elem)=>{
@@ -96,31 +103,35 @@ window.onload = function(){
             
             displayFilters(button, target);
         });
-    })
+    });
     
-    // création du Slider pour les années
-    // noUiSlider.create(slider, {
-    //     start: [20, 80],
-    //     connect: true,
-    //     range: {
-    //         'min': 0,
-    //         'max': 100
-    //     }
-    // });
+    
+     for(  let item of sliderYear) {
+       if( item.dataset.direction === 'min'){
+         filter.year.min = item.value;
+       }else{
+          filter.year.max = item.value;
+       }
+     }
 
-    // Ecoute de la selection du tri apres chargement de la page   
-    itemList.addEventListener('change', ()=>{
+    fetchBooks();
+    ticking = true;
 
-        orderBy = itemList.value;
-        page = 1;
+    
+});
 
-        wrapperBooks.innerHTML = '';
-        loader.classList.add("loader-on");
-        fetchBooks();
-        ticking = true;
-        
-    })
-}
+// Ecoute de la selection du tri apres chargement de la page   
+itemList.addEventListener('change', ()=>{
+
+  orderBy = itemList.value;
+  page = 1;
+
+  wrapperBooks.innerHTML = '';
+  loader.classList.add("loader-on");
+  fetchBooks();
+  ticking = true;
+  
+});
 
 
 //=============================================
@@ -138,16 +149,19 @@ checkNews.addEventListener('change', function(){
 
 //=============================================
 //Sur clique des cases genres 
-for( let item of checksGenre){
+for( let item of checksFilter){
   item.addEventListener('change', (evt)=>{
     
-    elChecked = evt.currentTarget;
-    choiceId = elChecked.getAttribute('id');
+    const  elChecked = evt.currentTarget;
+    let choiceId = elChecked.getAttribute('id');
+    let  typeFilter = elChecked.dataset.type;
     const zoneBadge = document.querySelector('#badges');
 
     if( elChecked.checked ){
       
-      filter.genre.push(choiceId);
+      filter[typeFilter].push(choiceId);
+      console.log(filter);
+      
 
       //ajout du bagde      
       const newBadge = document.createElement('div');
@@ -162,12 +176,13 @@ for( let item of checksGenre){
       newBadge.setAttribute('data-value', choiceId );
       newBadge.addEventListener('click', evt => {
 
-        baliseHasClicked = evt.currentTarget;
+        baliseHasClicked = evt.currentTarget;        
         choiceId = baliseHasClicked.dataset.value;
         baliseHasClicked.remove();
         inputWantDesactivate = document.querySelector('#'+ choiceId );
         inputWantDesactivate.checked = false;
-        removeAndUpdateFilter(choiceId);
+        typeFilter = inputWantDesactivate.dataset.type
+        removeAndUpdateFilter(choiceId, typeFilter);
       });
       
       newBadgeTexte.classList.add(...listClassTexte);
@@ -191,7 +206,7 @@ for( let item of checksGenre){
 
     }else{
       
-      removeAndUpdateFilter(choiceId);
+      removeAndUpdateFilter(choiceId, typeFilter);
       badge = zoneBadge.querySelector('div[data-value="'+choiceId+'"]');
       badge.remove();
     }
@@ -215,10 +230,11 @@ btnApplyFilter.addEventListener('click', function(){
   ticking = true;
 });
 
-function removeAndUpdateFilter(choiceId){
+function removeAndUpdateFilter(choiceId, typeFilter){
 
-  indexInArrayGenre = filter.genre.findIndex( (element)=>  element == choiceId );
-  filter.genre.splice(indexInArrayGenre,1);
+  
+  indexInArrayGenre = filter[typeFilter].findIndex( (element)=>  element == choiceId );
+  filter[typeFilter].splice(indexInArrayGenre,1);
 
 }
 
@@ -269,7 +285,7 @@ function displayFilters(button, target)
 
 
 
-window.addEventListener('DOMContentLoaded', (e) => {
+window.addEventListener('load', (e) => {
   
     fetchBooks();
     ticking = true;
@@ -303,7 +319,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
     
     if(ticking === false){
 
-      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}`, {
+      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}&author=${[...filter.author]}&yearmin=${filter.year.min}&yearmax=${filter.year.max}`, {
           method: 'GET'
         })
         .then(res => {      
@@ -333,3 +349,7 @@ window.addEventListener('DOMContentLoaded', (e) => {
         });
     }
   }
+
+
+  
+    

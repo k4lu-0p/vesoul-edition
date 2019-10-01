@@ -19,7 +19,7 @@ Encore
         'window.jQuery': 'jquery',
     })
     
-    .addEntry('front', ['./assets/front/js/layout-front.js', './assets/front/js/home.js'])
+    .addEntry('front', ['./assets/front/js/layout-front.js'])
     .addEntry('admin', './assets/back/js/layout-back.js')
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/front/static', to: 'images' }
