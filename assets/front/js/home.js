@@ -15,6 +15,7 @@ const itemList = document.getElementById('sort-select');
 const loader = document.querySelector(".loader");
 const wrapperBooks = document.querySelector("#book-collection");
 const btnApplyFilter = document.querySelector("#applyFilter");
+const btnDesactivateFilter = document.querySelector("#desactivateFilter");
 const sliderYear = document.querySelectorAll('.range');
 
 const filter = {
@@ -155,7 +156,6 @@ for( let item of checksFilter){
     if( elChecked.checked ){
       
       filter[typeFilter].push(choiceId);
-      console.log(filter);
       
 
       //ajout du bagde      
@@ -217,6 +217,46 @@ for( let item of checksFilter){
 //Apllique les filtres de recherches
 btnApplyFilter.addEventListener('click', function(){
   applyYearFilter();
+  orderBy = itemList.value;
+  page = 1;
+
+  wrapperBooks.innerHTML = '';
+  loader.classList.add("loader-on");
+  fetchBooks();
+  ticking = true;
+});
+
+
+btnDesactivateFilter.addEventListener('click', () => {
+  
+  //Désactiver new
+  if( checkNews.checked == true ){
+    checkNews.checked = false;
+    filter.nouveaute = false;
+  } 
+
+  //Désactiver les années
+  initialValues = resetSlider();
+  filter.year.min = initialValues[0];
+  filter.year.max = initialValues[1];
+
+
+ //Désactiver les genres et auteurs
+  for( let item of checksFilter ){
+    if( item.checked === true ){
+      item.checked = false;
+    }
+  }
+
+  badgeFilter = document.querySelectorAll('.badge-filter');
+  for( let item of badgeFilter){
+    item.remove();
+  }
+
+  filter.genre = [];
+  filter.author = [];
+
+  //on recharge la page
   orderBy = itemList.value;
   page = 1;
 
@@ -289,11 +329,7 @@ function applyYearFilter(){
 
 
 
-window.addEventListener('load', (e) => {
-  
-    fetchBooks();
-    ticking = true;
-  });
+
   
   window.addEventListener('scroll', function (e) {
     pageHeight = document.querySelector('.wrapper').offsetHeight;
