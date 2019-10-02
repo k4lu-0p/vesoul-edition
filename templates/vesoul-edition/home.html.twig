@@ -40,9 +40,12 @@
                             <button id="expand-year" class="mr-2 expand-button active">+</button>
                         </div>
                         <div id="year-slider" class="filter-section d-flex justify-content-center active">
-                            {% for item in maxAndMin %}
-                                <input type="range" data-direction="min" min="{{ item.minyear }}" max="{{ item.minyear + ((item.maxyear - item.minyear) / 2 ) | round(0, 'floor') }}" class="range" value="{{ item.minyear }}" step="1" ><input type="range" min="{{ item.minyear + ((item.maxyear - item.minyear) / 2 ) | round(0, 'floor') }}" max="{{ item.maxyear  }}" class="range" value="{{ item.maxyear  }}" step="1" data-direction="max" >
-                            {% endfor %}                            
+                            <p>
+                                <label for="amount"></label>
+                                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+                            </p>
+ 
+                            <div id="slider-range"></div>                          
                         </div>
                     </div>
                 </div>

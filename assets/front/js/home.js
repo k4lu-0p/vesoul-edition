@@ -105,15 +105,6 @@ window.addEventListener('load', function(){
         });
     });
     
-    
-     for(  let item of sliderYear) {
-       if( item.dataset.direction === 'min'){
-         filter.year.min = item.value;
-       }else{
-          filter.year.max = item.value;
-       }
-     }
-
     fetchBooks();
     ticking = true;
 

@@ -16,7 +16,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
     {{ encore_entry_link_tags("front")}}
-
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
     <!-- Feuille de style personalisée -->
     {#
     <link rel="stylesheet" href="build/front.css"> #}
@@ -161,6 +162,23 @@
 
     </div>
     {{ encore_entry_script_tags("front")}}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+            range: true,
+            min: 1973,
+            max: 2020,
+            values: [ 1973, 2020 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            }
+            });
+            $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+            " - " + $( "#slider-range" ).slider( "values", 1 ) );
+        } );
+  </script>
 </body>
 
 
