@@ -104,6 +104,10 @@ window.addEventListener('load', function(){
             displayFilters(button, target);
         });
     });
+
+    //Récupération des années
+    applyYearFilter();
+    
     
     fetchBooks();
     ticking = true;
@@ -212,6 +216,7 @@ for( let item of checksFilter){
 //=================================================
 //Apllique les filtres de recherches
 btnApplyFilter.addEventListener('click', function(){
+  applyYearFilter();
   orderBy = itemList.value;
   page = 1;
 
@@ -269,6 +274,14 @@ function displayFilters(button, target)
 {
         button.classList.toggle('active');
         target.classList.toggle('active');
+}
+
+
+function applyYearFilter(){
+    amount = document.querySelector('#amount');
+    years  = amount.value.split('-');
+    filter.year.min = years[0].trim();
+    filter.year.max = years[1].trim();
 }
 
 //========================================================================

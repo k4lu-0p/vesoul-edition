@@ -51,11 +51,15 @@ class VesoulEditionController extends AbstractController
         $genras = $repoGenra->findAll();
         $authors = $repoAuthor->findAll();
         $maxAndMinYear = $repoBook->maxAndMinYear();
-
+        $minYear = $maxAndMinYear[0]['minyear'];
+        $maxYear = $maxAndMinYear[0]['maxyear'];
+        
+        
         return $this->render('vesoul-edition/home.html.twig', [
             'genras' => $genras,
             'authors' => $authors,
-            'maxAndMin' => $maxAndMinYear
+            'minyear' => $minYear,
+            'maxyear' => $maxYear
 
         ]);
     }
