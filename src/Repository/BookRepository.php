@@ -32,7 +32,7 @@ class BookRepository extends ServiceEntityRepository
         return $query;
     }
 
-    public function countBooks($new, $genre, $author, $yearmin, $yearmax){
+    public function countBooks($new, $genre, $author, $yearmin, $yearmax, $title){
         
         $queryParamaters = [];
 
@@ -76,6 +76,11 @@ class BookRepository extends ServiceEntityRepository
             
             $query = $query->andWhere($queryAuthor);
             
+        }
+
+        if( strlen(trim($title)) > 0 ){
+            $query = $query->andWhere(' b.title like :title ');
+            $queryParamaters[':title'] = '%'.$title.'%';
         }
 
         $query = $query->andWhere('b.year >= :yearmin and b.year <= :yearmax');
@@ -222,7 +227,7 @@ class BookRepository extends ServiceEntityRepository
     }
     */
 
-    public function findPageOfListBook($offset, $orderBy, $new, $genre, $author, $yearmin, $yearmax) {
+    public function findPageOfListBook($offset, $orderBy, $new, $genre, $author, $yearmin, $yearmax, $title) {
 
         $fieldOrderBy = 'title';
         $howOrderBy = 'ASC';
@@ -289,6 +294,12 @@ class BookRepository extends ServiceEntityRepository
             
             $query = $query->andWhere($queryAuthor);
             
+        }
+
+
+        if( strlen(trim($title)) > 0 ){
+            $query = $query->andWhere(' b.title like :title ');
+            $queryParamaters[':title'] = '%'.$title.'%';
         }
 
         $query = $query->andWhere('b.year >= :yearmin and b.year <= :yearmax');

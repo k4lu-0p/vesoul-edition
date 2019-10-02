@@ -17,8 +17,10 @@ const wrapperBooks = document.querySelector("#book-collection");
 const btnApplyFilter = document.querySelector("#applyFilter");
 const btnDesactivateFilter = document.querySelector("#desactivateFilter");
 const sliderYear = document.querySelectorAll('.range');
+const btnSearch = document.querySelector('.btn-search');
 
 const filter = {
+  title: '',
   nouveaute: false,
   genre: [],
   author: [],
@@ -228,7 +230,27 @@ btnApplyFilter.addEventListener('click', function(){
 
 
 btnDesactivateFilter.addEventListener('click', () => {
+
+  resetFilter();
+
+});
+
+
+
+btnSearch.addEventListener('click', (evt) =>{
+  resetFilter('search');
+});
+
+function removeAndUpdateFilter(choiceId, typeFilter){
+
   
+  indexInArrayGenre = filter[typeFilter].findIndex( (element)=>  element == choiceId );
+  filter[typeFilter].splice(indexInArrayGenre,1);
+
+}
+
+
+function resetFilter(action=''){
   //Désactiver new
   if( checkNews.checked == true ){
     checkNews.checked = false;
@@ -256,6 +278,18 @@ btnDesactivateFilter.addEventListener('click', () => {
   filter.genre = [];
   filter.author = [];
 
+  searchBar = document.querySelector('.search-bar');
+
+  if( action === 'search'){
+    titleBook = searchBar.value;
+    filter.title = titleBook;
+  }else{
+    //on annule la barre de recherche
+    searchBar.value = '';
+    filter.title= '';
+  }
+  
+
   //on recharge la page
   orderBy = itemList.value;
   page = 1;
@@ -264,14 +298,6 @@ btnDesactivateFilter.addEventListener('click', () => {
   loader.classList.add("loader-on");
   fetchBooks();
   ticking = true;
-});
-
-function removeAndUpdateFilter(choiceId, typeFilter){
-
-  
-  indexInArrayGenre = filter[typeFilter].findIndex( (element)=>  element == choiceId );
-  filter[typeFilter].splice(indexInArrayGenre,1);
-
 }
 
 //=======================================================================
@@ -359,7 +385,7 @@ function applyYearFilter(){
     
     if(ticking === false){
 
-      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}&author=${[...filter.author]}&yearmin=${filter.year.min}&yearmax=${filter.year.max}`, {
+      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}&author=${[...filter.author]}&yearmin=${filter.year.min}&yearmax=${filter.year.max}&title=${filter.title}`, {
           method: 'GET'
         })
         .then(res => {      
