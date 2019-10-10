@@ -64,6 +64,37 @@ class VesoulEditionController extends AbstractController
         ]);
     }
 
+     /**
+     * @Route("/home/search/ajax/{searchValue}", name="search-autocomplete")
+     */
+    public function autocomplete(Request $request, BookRepository $repoBook, string $searchValue) {
+        
+        $books = [];
+        
+        if( strlen( $searchValue ) >= 3 ){
+            $books = $repoBook->findByTitle($searchValue);
+        }
+        
+        $response = new Response();
+        if( count($books) > 0 ){
+            
+            $response->setContent(json_encode([
+                'books' => $books,
+            ]));
+            $response->setStatusCode(Response::HTTP_OK);
+            $response->headers->set('Content-Type', 'application/json');
+            
+        }else{
+            
+            $response->headers->set('Content-Type', 'text/plain');
+            $response->setStatusCode(Response::HTTP_NO_CONTENT);
+
+        }
+        
+
+        return $response;
+    }
+
     /**
      * @Route("/home/load", name="load-home")
      */

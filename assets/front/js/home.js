@@ -18,6 +18,7 @@ const btnApplyFilter = document.querySelector("#applyFilter");
 const btnDesactivateFilter = document.querySelector("#desactivateFilter");
 const sliderYear = document.querySelectorAll('.range');
 const btnSearch = document.querySelector('.btn-search');
+const inptSarch = document.querySelector('.search-bar');
 
 const filter = {
   title: '',
@@ -239,6 +240,116 @@ btnDesactivateFilter.addEventListener('click', () => {
 
 btnSearch.addEventListener('click', (evt) =>{
   resetFilter('search');
+});
+
+inptSarch.addEventListener('keyup', (evt) => {
+  
+  //Récup des éléments du script
+  element = evt.currentTarget;
+  autocomplete = document.querySelector('.search-autocomplete');
+
+  //test si on appui sur la touche return et si c'est le cas on sort de l'événement
+  if( (evt.keyCode || evt.which) == 13   ){
+    evt.preventDefault();
+    return false;
+  }
+
+  //Tester si moins de 3 caractères saisie
+  if( element.value.trim().length < 3 ){
+    if( autocomplete !== null ){
+      autocomplete.remove();
+    }
+
+    return;
+  }
+
+  
+    
+  //On récupère le contenu saisie
+  filter.title = element.value;
+
+  //appel ajax
+  fetch(`/home/search/ajax/${filter.title}`)
+  .then( response => {
+
+    //Si pas de réponse 
+    if(response.status === 204 ){
+      
+      //on supprime la liste
+      if( autocomplete !== null ){
+        autocomplete.remove();
+      }
+
+      //on arrête la promesse
+      throw new Error('handled');
+
+    }
+
+    //Conversion en json si reponse
+    return response.json();
+
+  })
+  .then( data => {
+
+    //on va vérifier si on n'est null
+    if( data === null   ){
+      
+      if( autocomplete !== null){
+        autocomplete.remove();
+      }
+
+      return;
+    }
+    
+
+
+    
+    //on va créer créer la zone autocomplete
+    if( document.querySelector('.search-autocomplete') === null ){
+      formSearch = document.querySelector('.form-search');
+      autocomplete = document.createElement('div');
+      autocomplete.style.position = 'absolute';
+      autocomplete.style.top = element.offsetHeight+"px";
+      autocomplete.style.left = ( element.offsetLeft  ) +"px";
+      autocomplete.style.width = (element.offsetWidth ) +"px";
+      autocomplete.style.minHeight = "100px";
+      autocomplete.style.backgroundColor = "#fff";
+      autocomplete.style.borderLeft = "solid #00BCD4 1px";
+      autocomplete.style.borderRight = "solid #00BCD4 1px";
+      autocomplete.style.zIndex = 10;
+      autocomplete.classList.add('search-autocomplete');
+      formSearch.appendChild(autocomplete);
+    }
+
+    listPropositionExist = autocomplete.querySelectorAll('.search-autocomplete-proposition');
+    
+    for( item of listPropositionExist){
+      item.remove();
+    }
+
+    for( item of data.books ){      
+      newP = document.createElement('p');
+      newP.innerText = item.title;
+      newP.setAttribute('data-title' , item.title );
+      newP.classList.add('search-autocomplete-proposition');
+      newP.addEventListener('click', evt => {
+        elementHasClicked = evt.currentTarget;
+        element.value = elementHasClicked.innerText;
+        autocomplete.remove();
+      })
+      autocomplete = document.querySelector('.search-autocomplete');
+      autocomplete.appendChild(newP);
+    }
+
+
+  })
+  .catch(error => {
+    console.log(error);
+  });
+
+  
+
+
 });
 
 function removeAndUpdateFilter(choiceId, typeFilter){

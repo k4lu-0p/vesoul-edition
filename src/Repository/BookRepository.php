@@ -24,6 +24,20 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function findByTitle($title){
+        
+        $query =  $this->createQueryBuilder('b')
+                    ->select('b.id, b.title')
+                    ->andWhere('b.title like :title')
+                    ->setParameter(':title', '%'.$title.'%')
+                    ->orderBy('b.id', 'ASC')
+                    ->setMaxResults(10)
+                    ->getQuery()
+                    ->getResult();
+        
+        return $query;
+    }
+
     public function maxAndMinYear(){
         $query =  $this->createQueryBuilder('b')
                     ->select('max(b.year) as maxyear, min(b.year) as minyear')

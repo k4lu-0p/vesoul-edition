@@ -166,6 +166,19 @@ $font-main: 'Work Sans', sans-serif;
   padding-right:15px;
 }
 
+//=================search autocomplete
+.search-autocomplete-proposition{
+  color: #272727;
+  margin: 0;
+  padding: 8px;
+  border-bottom: solid #00BCD4 1px;
+  cursor: pointer;
+}
+
+.search-autocomplete-proposition:hover{
+  background-color: #EDEDED;
+}
+
 // Redéfinition ou ajout de classe Bootstrap
 @media (min-width: 1200px) {
     .container {
