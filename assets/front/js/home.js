@@ -388,6 +388,15 @@ function removeAndUpdateFilter(choiceId, typeFilter){
 
 
 function resetFilter(){
+  
+  //Si on n'est sur la page search alors
+  //on redirige la personne sur la page d'acceuil
+  areaDescribeSearch = document.querySelector('.search-result-phras');
+  if( areaDescribeSearch !== null ){
+    window.location.replace("/");
+    return false;
+  }
+  
   //Désactiver new
   if( checkNews.checked == true ){
     checkNews.checked = false;
