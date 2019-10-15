@@ -21,7 +21,6 @@ const btnSearch = document.querySelector('.btn-search');
 const inptSarch = document.querySelector('.search-bar');
 
 const filter = {
-  title: '',
   nouveaute: false,
   genre: [],
   author: [],
@@ -112,9 +111,12 @@ window.addEventListener('load', function(){
     //Récupération des années
     applyYearFilter();
     
-    
-    fetchBooks();
-    ticking = true;
+    booksCollection = document.querySelector('#book-collection');
+    console.log('hasChildNodes', booksCollection.childElementCount);
+    if( booksCollection.childElementCount === 0 ){
+      fetchBooks();
+      ticking = true;
+    }
 
     
 });
@@ -239,10 +241,24 @@ btnDesactivateFilter.addEventListener('click', () => {
 
 
 btnSearch.addEventListener('click', (evt) =>{
-  resetFilter('search');
+  
+  inptSarch.classList.remove('is-invalid');
+
+  //Si pas de saisie ou saisi
+  if( inptSarch.value.trim().length === 0 ){
+    inptSarch.classList.add('is-invalid');
+    return;
+  }
+
+  searchValue = inptSarch.value.trim();
+  formSearch = document.querySelector('.form-search');
+  formSearch.action = `/home/search/bytitle/${searchValue}`;
+  formSearch.submit();
+
+
 });
 
-inptSarch.addEventListener('keyup', (evt) => {
+inptSarch.addEventListener('keypress', (evt) => {
   
   //Récup des éléments du script
   element = evt.currentTarget;
@@ -266,10 +282,10 @@ inptSarch.addEventListener('keyup', (evt) => {
   
     
   //On récupère le contenu saisie
-  filter.title = element.value;
+  searchValue = element.value;
 
   //appel ajax
-  fetch(`/home/search/ajax/${filter.title}`)
+  fetch(`/home/search/ajax/${searchValue}`)
   .then( response => {
 
     //Si pas de réponse 
@@ -361,7 +377,7 @@ function removeAndUpdateFilter(choiceId, typeFilter){
 }
 
 
-function resetFilter(action=''){
+function resetFilter(){
   //Désactiver new
   if( checkNews.checked == true ){
     checkNews.checked = false;
@@ -389,16 +405,10 @@ function resetFilter(action=''){
   filter.genre = [];
   filter.author = [];
 
-  searchBar = document.querySelector('.search-bar');
-
-  if( action === 'search'){
-    titleBook = searchBar.value;
-    filter.title = titleBook;
-  }else{
-    //on annule la barre de recherche
-    searchBar.value = '';
-    filter.title= '';
-  }
+  //réinitialisation de la case de formulaire
+  inptSarch.value = '';
+  inptSarch.classList.remove('is-invalid');
+  
   
 
   //on recharge la page
@@ -496,7 +506,7 @@ function applyYearFilter(){
     
     if(ticking === false){
 
-      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}&author=${[...filter.author]}&yearmin=${filter.year.min}&yearmax=${filter.year.max}&title=${filter.title}`, {
+      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}&author=${[...filter.author]}&yearmin=${filter.year.min}&yearmax=${filter.year.max}`, {
           method: 'GET'
         })
         .then(res => {      

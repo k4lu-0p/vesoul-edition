@@ -91,7 +91,13 @@
         background-color: white;
         height: 70px;
 
-        span {
+        .search-result-phras{
+            display: block;
+            color: $color-text-dark;
+            font-weight: normal;
+        }
+
+        span, .search-keyword {
             color: $color-main;
             font-weight: bold;
         }
@@ -102,6 +108,8 @@
         #sort-select{
             width: 200px
         }
+
+        
     }
     .book-card{
         background-color: white;
