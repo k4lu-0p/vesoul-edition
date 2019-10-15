@@ -27,7 +27,8 @@ const filter = {
   year:{
     min: 0,
     max: 0
-  }
+  },
+  title : ''
 }
 
 let totalPages = 0;
@@ -112,7 +113,6 @@ window.addEventListener('load', function(){
     applyYearFilter();
     
     booksCollection = document.querySelector('#book-collection');
-    console.log('hasChildNodes', booksCollection.childElementCount);
     if( booksCollection.childElementCount === 0 ){
       fetchBooks();
       ticking = true;
@@ -123,6 +123,15 @@ window.addEventListener('load', function(){
 
 // Ecoute de la selection du tri apres chargement de la page   
 itemList.addEventListener('change', ()=>{
+
+  areaDescribeSearch = document.querySelector('.search-result-phras');
+
+  if( areaDescribeSearch !== null ){
+    areaSearchKeyword = areaDescribeSearch.querySelector('.search-keyword');
+    valueSearch = areaSearchKeyword.innerText;
+    valueSearch = valueSearch.slice( 1, - 1 );
+    filter.title = valueSearch;
+  }
 
   orderBy = itemList.value;
   page = 1;
@@ -394,7 +403,7 @@ function resetFilter(){
   areaDescribeSearch = document.querySelector('.search-result-phras');
   if( areaDescribeSearch !== null ){
     window.location.replace("/");
-    return false;
+    return;
   }
   
   //Désactiver new
@@ -525,7 +534,7 @@ function applyYearFilter(){
     
     if(ticking === false){
 
-      fetch(`home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}&author=${[...filter.author]}&yearmin=${filter.year.min}&yearmax=${filter.year.max}`, {
+      fetch(`/home/load?page=${page}&orderBy=${orderBy}&new=${filter.nouveaute}&genre=${[...filter.genre]}&author=${[...filter.author]}&yearmin=${filter.year.min}&yearmax=${filter.year.max}&title=${filter.title}`, {
           method: 'GET'
         })
         .then(res => {      
