@@ -368,6 +368,16 @@ inptSarch.addEventListener('keypress', (evt) => {
 
 });
 
+document.addEventListener('click', evt =>{
+  elementHasClicked = evt.target;
+  if( !elementHasClicked.classList.contains('search-autocomplete-proposition')){
+    areaAutocomplete = document.querySelector('.search-autocomplete');
+    if( areaAutocomplete !== null ){
+      areaAutocomplete.remove();
+    }
+  }
+})
+
 function removeAndUpdateFilter(choiceId, typeFilter){
 
   
