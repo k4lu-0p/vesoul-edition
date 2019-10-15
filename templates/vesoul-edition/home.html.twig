@@ -42,7 +42,7 @@
                         <div id="year-slider" class="filter-section d-flex justify-content-center active">
                             <p>
                                 <label for="amount"></label>
-                                <input type="text" id="amount" readonly style="border:0; color:#00BCD4; font-weight:bold;">
+                                <input type="text" id="amount" readonly style="border:0; color:#212529;">
                             </p>
  
                             <div id="slider-range"></div>                          
@@ -108,7 +108,7 @@
             {# Partie trie ============================ #}
             <div class="row" id="sort">
                 <div class="col-6 d-flex align-items-center">
-                    <p class="m-0"><span id="totalPage" ></span> Livre(s) trouvé(s)</p>
+                    <p class="m-0"><span id="totalPage" >{% if books is defined %}{% if books | length > 0 %}{{  books | length }}{% else %} 0 {% endif %}{% endif %}</span> Livre(s) trouvé(s) {% if books is defined %}<span class="search-result-phras"> Recherche :  <span class="search-keyword" >"{{ searchValue }}"{% endif %}</span></span></p>
                 </div>
                 <div class="col-6 d-flex justify-content-end align-items-center">
                     <label for="sort-select" class="m-0 p-2">Trier par : </label>
@@ -124,37 +124,43 @@
             {# Partie Livres ======================================= #}
             <div class="row">
                 <div id="book-collection" class="col-12 m-0 p-0 d-flex flex-wrap justify-content-center">
+                
                     {# --- Génération de livre--- #}
-                    {# {% for book in books %}
-                    <div class="m-0 p-2">
-                        <div class="book-card">
-                            <div class="photo">
-                                <img class="book-pic" src="{{book.url}}" alt="image du livre">
-                                <div class="overlay d-flex justify-content-center  align-items-center">
-                                    <a href="product/{{book.id}}"><button class="btn btn-info p-2">Details</button></a>
+                    {% if books is defined %}
+                        {% if books | length > 0 %}                        
+                            {% for book in books %}
+                                <div class="m-0 p-2">
+                                <div class="book-card">
+                                    <div class="photo">
+                                        <img class="book-pic" src="{{book.images[0].url}}" alt="image du livre">
+                                        <div class="overlay d-flex justify-content-center  align-items-center">
+                                            <a href="product/{{book.id}}"><button class="btn btn-info p-2">Details</button></a>
+                                        </div>
+                                    </div>
+                                    <div class="info p-2 d-flex flex-column justify-content-between">
+                                        <h3 class="m-0">{{book.title}}</h3>
+                                        <div class="d-flex justify-content-between w-100">
+                                            <p class="m-0">{{book.author.firstname}} {{book.author.lastname}}</p>
+                                            <p class="m-0">{{book.year}}</p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-4 d-flex align-items-center">
+                                                <p class="m-0 pl-2" id="price"><span>{{book.price}}</span>€</p>
+                                            </div>
+                                            <div class="col-8 d-flex justify-content-end">
+                                                <a href="{{ path('addItem',{ 'id':book.id }) }}">
+                                                    <button class="btn btn-info">Ajouter<i class="fas fa-shopping-cart"></i></button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="info p-2 d-flex flex-column justify-content-between">
-                                <h3 class="m-0">{{book.title}}</h3>
-                                <div class="d-flex justify-content-between w-100">
-                                    <p class="m-0">{{book.firstname}} {{book.lastname}}</p>
-                                    <p class="m-0">{{book.year}}</p>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-4 d-flex align-items-center">
-                                        <p class="m-0 pl-2" id="price"><span>{{book.price}}</span>€</p>
-                                    </div>
-                                    <div class="col-8 d-flex justify-content-end">
-                                        <a href="{{ path('addItem',{ 'id':book.id }) }}"><button class="btn btn-info">Ajouter
-                                                | <i class="fas fa-shopping-cart"></i></button></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
- #}
+                            {% endfor %}
+                        {% else %}
+                            <p>Aucun livre correspondant à votre recherche</p>
+                        {% endif %}
+                    {% endif %}
                 </div>
                 <div class="loader book">
                     <figure class="page"></figure>

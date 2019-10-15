@@ -24,7 +24,9 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function findByTitle($title){
+    
+    
+    public function findTitle($title){
         
         $query =  $this->createQueryBuilder('b')
                     ->select('b.id, b.title')
@@ -46,7 +48,7 @@ class BookRepository extends ServiceEntityRepository
         return $query;
     }
 
-    public function countBooks($new, $genre, $author, $yearmin, $yearmax, $title){
+    public function countBooks($new, $genre, $author, $yearmin, $yearmax){
         
         $queryParamaters = [];
 
@@ -92,10 +94,7 @@ class BookRepository extends ServiceEntityRepository
             
         }
 
-        if( strlen(trim($title)) > 0 ){
-            $query = $query->andWhere(' b.title like :title ');
-            $queryParamaters[':title'] = '%'.$title.'%';
-        }
+       
 
         $query = $query->andWhere('b.year >= :yearmin and b.year <= :yearmax');
         $queryParamaters[':yearmin'] = $yearmin;
@@ -241,7 +240,7 @@ class BookRepository extends ServiceEntityRepository
     }
     */
 
-    public function findPageOfListBook($offset, $orderBy, $new, $genre, $author, $yearmin, $yearmax, $title) {
+    public function findPageOfListBook($offset, $orderBy, $new, $genre, $author, $yearmin, $yearmax) {
 
         $fieldOrderBy = 'title';
         $howOrderBy = 'ASC';
@@ -311,10 +310,7 @@ class BookRepository extends ServiceEntityRepository
         }
 
 
-        if( strlen(trim($title)) > 0 ){
-            $query = $query->andWhere(' b.title like :title ');
-            $queryParamaters[':title'] = '%'.$title.'%';
-        }
+        
 
         $query = $query->andWhere('b.year >= :yearmin and b.year <= :yearmax');
         $queryParamaters[':yearmin'] = $yearmin;
@@ -334,5 +330,26 @@ class BookRepository extends ServiceEntityRepository
         
 
         return $query;
+    }
+
+
+
+    public function searchByTitle(  $title ) {
+
+        $fieldOrderBy = 'title';
+        $howOrderBy = 'ASC';
+        
+        $query =  $this->createQueryBuilder('b')
+        ->select('b','a','i')
+        ->join('b.author', 'a')
+        ->join('b.images', 'i')
+        ->join('b.genras', 'g')
+        ->andWhere(' b.title like :title ')
+        ->setParameter(':title', '%'.$title.'%')
+        ->orderBy('b.'.$fieldOrderBy, $howOrderBy) 
+        ->getQuery()
+        ->getArrayResult();
+
+        return $query;   
     }
 }
