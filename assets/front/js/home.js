@@ -542,6 +542,12 @@ function applyYearFilter(){
           totalPages = res.headers.get('X-TotalPage');
           elTotalBooks = document.querySelector('#totalPage')
           elTotalBooks.innerHTML = totalBooks;
+          console.log(totalBooks);
+          if( totalBooks == 0 ){
+            wrapperBooks.innerHTML += `<p class="p-4 mt-2 alert alert-dark" > Aucun livre ne correspond à vos critères de recherches. Modifiez vos critères et cliquez à nouveau sur 'Appliquer les filtres' ou cliquez sur le bouton 'Enlever tous les filtres'</p>`;
+            loader.classList.remove('loader-on');
+            throw new Error('handled');
+          }
           return res.text();
           
         })

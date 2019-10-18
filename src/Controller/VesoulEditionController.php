@@ -71,6 +71,7 @@ class VesoulEditionController extends AbstractController
     public function searchByTitle(Request $request, SessionInterface $session, BookRepository $repoBook,  GenraRepository $repoGenra, AuthorRepository $repoAuthor, string $searchValue) {
         
         $books = [];
+
         if( strlen( $searchValue ) > 0 ){
             $books = $repoBook->searchByTitle($searchValue);
         }
@@ -88,6 +89,7 @@ class VesoulEditionController extends AbstractController
         $maxAndMinYear = $repoBook->maxAndMinYear();
         $minYear = $maxAndMinYear[0]['minyear'];
         $maxYear = $maxAndMinYear[0]['maxyear'];
+        
         return $this->render('vesoul-edition/home.html.twig', [
             'genras' => $genras,
             'authors' => $authors,
