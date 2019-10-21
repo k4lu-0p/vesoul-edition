@@ -158,7 +158,8 @@
                             </div>
                             {% endfor %}
                         {% else %}
-                            <p>Aucun livre correspondant à votre recherche</p>
+                            <p class="p-4 ml-2 mt-2 alert alert-dark" > Aucun livre ne correspond à votre recherche.  <span class="font-italic" >Modifier vos mots-clés</span> et <span class="font-weight-bold" >rechercher à nouveau</span> ou cliquez sur le lien <span class="font-weight-bold" >'Afficher tous les livres'.</span></p>
+                            <p><a href="/"  class="btn btn-info btn-lg btn-block">Afficher tous les livres</a></p>
                         {% endif %}
                     {% endif %}
                 </div>
