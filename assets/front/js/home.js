@@ -553,8 +553,8 @@ function applyYearFilter(){
           elTotalBooks.innerHTML = totalBooks;
           if( totalBooks == 0 ){
             if( document.querySelector('.search-keyword') !== null ){
-              wrapperBooks.innerHTML += `<p class="p-4 ml-2 mt-2 alert alert-dark" > Aucun livre ne correspond à votre recherche.  <span class="font-italic" >Modifier vos mots-clés</span> et <span class="font-weight-bold" >rechercher à nouveau</span> ou cliquez sur le lien <span class="font-weight-bold" >'Afficher tous les livres'.</span></p>
-              <p><a href="/"  class="btn btn-info btn-lg btn-block">Afficher tous les livres</a></p>`;
+              wrapperBooks.innerHTML += `<p class="p-4 mt-2 alert alert-dark" > Aucun livre ne correspond à votre recherche.  <span class="font-italic" >Modifier vos mots-clés</span> et <span class="font-weight-bold" >rechercher à nouveau</span> ou cliquez sur le lien <span class="font-weight-bold" >'Afficher tous les livres'.</span></p>
+              <p class="w-100" ><a href="/"  class="btn btn-info btn-lg btn-block">Afficher tous les livres</a></p>`;
             }else{
               wrapperBooks.innerHTML += `<p class="p-4 ml-2 mt-2 alert alert-dark" > Aucun livre ne correspond à vos critères de recherches. <span class="font-italic" >Modifiez vos critères et cliquez</span> à nouveau sur <span class="font-weight-bold" >'Appliquer les filtres'</span> ou cliquez sur le bouton <span class="font-weight-bold" >'Enlever tous les filtres'.</span></p>`;
             }
