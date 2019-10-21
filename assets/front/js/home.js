@@ -233,7 +233,6 @@ btnApplyFilter.addEventListener('click', function(){
   applyYearFilter();
   orderBy = itemList.value;
   page = 1;
-
   wrapperBooks.innerHTML = '';
   loader.classList.add("loader-on");
   fetchBooks();
@@ -542,10 +541,11 @@ function applyYearFilter(){
           totalPages = res.headers.get('X-TotalPage');
           elTotalBooks = document.querySelector('#totalPage')
           elTotalBooks.innerHTML = totalBooks;
-          console.log(totalBooks);
           if( totalBooks == 0 ){
-            wrapperBooks.innerHTML += `<p class="p-4 mt-2 alert alert-dark" > Aucun livre ne correspond à vos critères de recherches. Modifiez vos critères et cliquez à nouveau sur 'Appliquer les filtres' ou cliquez sur le bouton 'Enlever tous les filtres'</p>`;
+            wrapperBooks.innerHTML += `<p class="p-4 ml-2 mt-2 alert alert-dark" > Aucun livre ne correspond à vos critères de recherches. <span class="font-italic" >Modifiez vos critères et cliquez</span> à nouveau sur <span class="font-weight-bold" >'Appliquer les filtres'</span> ou cliquez sur le bouton <span class="font-weight-bold" >'Enlever tous les filtres'.</span></p>`;
             loader.classList.remove('loader-on');
+            page = 1;
+            ticking = false;
             throw new Error('handled');
           }
           return res.text();
