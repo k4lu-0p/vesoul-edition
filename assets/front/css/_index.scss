@@ -129,12 +129,13 @@
                 width: $width-book-card;
                 height: $width-book-card;
                 background-color: rgba(10,10,10,0.4);
-                opacity: 40%;
+                opacity: 0;
             }
         }
         .photo:hover{
             .overlay{
                 display: flex !important;
+                opacity: 100%;
                 transition: 0.3s
             }
         }
