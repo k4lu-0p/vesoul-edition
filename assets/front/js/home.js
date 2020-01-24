@@ -19,6 +19,7 @@ const btnDesactivateFilter = document.querySelector("#desactivateFilter");
 const sliderYear = document.querySelectorAll('.range');
 const btnSearch = document.querySelector('.btn-search');
 const inptSarch = document.querySelector('.search-bar');
+const btnQuantity = document.querySelectorAll('.btn-quantity');
 
 const filter = {
   nouveaute: false,
@@ -109,53 +110,63 @@ window.addEventListener('load', function(){
         });
     });
 
-    //Récupération des années
-    applyYearFilter();
+    if( filterButtons.length > 0 ){
+      //Récupération des années
+      applyYearFilter();
+    }
     
     booksCollection = document.querySelector('#book-collection');
-    if( booksCollection.childElementCount === 0 ){
-      fetchBooks();
-      ticking = true;
+    
+    if( booksCollection !== null ){
+      if( booksCollection.childElementCount === 0 ){
+        fetchBooks();
+        ticking = true;
+      }
     }
 
     
 });
 
-// Ecoute de la selection du tri apres chargement de la page   
-itemList.addEventListener('change', ()=>{
+if( itemList !== null){
+  // Ecoute de la selection du tri apres chargement de la page   
+  itemList.addEventListener('change', ()=>{
 
-  areaDescribeSearch = document.querySelector('.search-result-phras');
+    areaDescribeSearch = document.querySelector('.search-result-phras');
 
-  if( areaDescribeSearch !== null ){
-    areaSearchKeyword = areaDescribeSearch.querySelector('.search-keyword');
-    valueSearch = areaSearchKeyword.innerText;
-    valueSearch = valueSearch.slice( 1, - 1 );
-    filter.title = valueSearch;
-  }
+    if( areaDescribeSearch !== null ){
+      areaSearchKeyword = areaDescribeSearch.querySelector('.search-keyword');
+      valueSearch = areaSearchKeyword.innerText;
+      valueSearch = valueSearch.slice( 1, - 1 );
+      filter.title = valueSearch;
+    }
 
-  orderBy = itemList.value;
-  page = 1;
+    orderBy = itemList.value;
+    page = 1;
 
-  wrapperBooks.innerHTML = '';
-  loader.classList.add("loader-on");
-  fetchBooks();
-  ticking = true;
-  
-});
+    wrapperBooks.innerHTML = '';
+    loader.classList.add("loader-on");
+    fetchBooks();
+    ticking = true;
+    
+  });
+}
 
 
 //=============================================
-//Activation on non de la fonction nouveauté
-checkNews.addEventListener('change', function(){
-  filter.nouveaute = !filter.nouveaute;
-  orderBy = itemList.value;
-  page = 1;
 
-  wrapperBooks.innerHTML = '';
-  loader.classList.add("loader-on");
-  fetchBooks();
-  ticking = true;
-})
+if( checkNews !== null ){
+  //Activation on non de la fonction nouveauté
+  checkNews.addEventListener('change', function(){
+    filter.nouveaute = !filter.nouveaute;
+    orderBy = itemList.value;
+    page = 1;
+
+    wrapperBooks.innerHTML = '';
+    loader.classList.add("loader-on");
+    fetchBooks();
+    ticking = true;
+  })
+}
 
 //=============================================
 //Sur clique des cases genres 
@@ -228,33 +239,37 @@ for( let item of checksFilter){
 
 
 //=================================================
-//Apllique les filtres de recherches
-btnApplyFilter.addEventListener('click', function(){
-  applyYearFilter();
-  orderBy = itemList.value;
-  page = 1;
+if( btnApplyFilter !== null ){
+  //Apllique les filtres de recherches
+  btnApplyFilter.addEventListener('click', function(){
+    applyYearFilter();
+    orderBy = itemList.value;
+    page = 1;
 
-  //Si je suis sur la page search
-  //Ajouter le titre dans le filter
-  if( document.querySelector('.search-keyword')){
-    elSearchKeyword = document.querySelector('.search-keyword');
-    searchKeyword = elSearchKeyword.innerText.slice(1,-1);
-    filter.title = searchKeyword;
-  }
+    //Si je suis sur la page search
+    //Ajouter le titre dans le filter
+    if( document.querySelector('.search-keyword')){
+      elSearchKeyword = document.querySelector('.search-keyword');
+      searchKeyword = elSearchKeyword.innerText.slice(1,-1);
+      filter.title = searchKeyword;
+    }
 
-  wrapperBooks.innerHTML = '';
-  loader.classList.add("loader-on");
-  fetchBooks();
-  ticking = true;
+    wrapperBooks.innerHTML = '';
+    loader.classList.add("loader-on");
+    fetchBooks();
+    ticking = true;
+    
 
-});
+  });
+}
 
+if( btnDesactivateFilter !== null ){
+  btnDesactivateFilter.addEventListener('click', () => {
 
-btnDesactivateFilter.addEventListener('click', () => {
+    resetFilter();
 
-  resetFilter();
-
-});
+  });
+}
 
 
 
@@ -296,6 +311,8 @@ inptSarch.addEventListener('keypress', (evt) => {
 
     return;
   }
+
+  
 
   
     
@@ -584,6 +601,98 @@ function applyYearFilter(){
           if (err) throw err;
         });
     }
+  }
+
+  //Page panier
+ 
+  if( btnQuantity.length > 0 ){
+    btnQuantity.forEach( (element) => {
+      element.addEventListener('click', (e) => {  
+        
+        e.preventDefault();  
+        
+        const  elementHasClicked = e.currentTarget;
+        const action = elementHasClicked.dataset.action;
+        const idProduct = parseInt( elementHasClicked.dataset.id, 10 );
+        const price = parseFloat( elementHasClicked.dataset.price, 10 );
+        const  elementQuantity = elementHasClicked.parentNode.children[0];
+        const elementTotalProduct = elementHasClicked.parentNode.nextElementSibling;
+        const elementTotalArticles = document.querySelectorAll('.article .total');
+        const elementsTotals = document.querySelectorAll('#subtotal, #totalpanier')
+        let quantity = ( elementQuantity === null )? 0 : parseInt(elementQuantity.innerText, 10 );
+        let total = 0;
+
+        //Vérifier si l'objet est en stock
+        
+       
+     
+        if( elementQuantity === null){
+          return;
+        }
+
+        if( elementTotalProduct === null ){
+          return;
+        }
+
+        if( elementTotalArticles.length === 0 ){
+          return;
+        }
+
+        if( elementsTotals.length === 0 ){
+          return;
+        }
+
+        if( isNaN( idProduct )){
+          return;
+        }        
+
+        if( isNaN( price )){
+          return;
+        }       
+
+
+
+        switch( action ){
+          case 'add':
+            quantity += 1;
+            break;
+
+          case 'reduce' :
+            if( quantity > 1 ){
+              quantity -= 1;
+            } 
+            break;
+
+          default : 
+            return;
+        }
+        
+
+        
+          
+        elementQuantity.innerText = quantity;
+        total = quantity * price;
+        elementTotalProduct.innerText = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR' }).format(total);
+
+        //Mise à jour du panier
+        
+        let totalPannier = 0;
+
+        elementTotalArticles.forEach( (element ) => {
+          totalPannier += parseFloat(element.innerText);
+        }); 
+        
+        elementsTotals.forEach( element => {          
+          element.innerText = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR' }).format(totalPannier);
+        });
+
+
+        //Mise à jour du panier côté back
+
+
+
+      });
+    });
   }
 
 

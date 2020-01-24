@@ -43,13 +43,13 @@
                             </div>
                         </div>
                     </div>
-                    <p class="m-0"><span>{{ article.price }}</span>€</p>
+                    <p class="m-0"><span>{{ article.price|number_format(2, ',') }}</span> €</p>
                     <div class="d-flex align-items-center">
-                        <p class="m-0 p-3" id="quantite">{{ article.quantity }}</p>
-                        <a href="{{ path('addItem',{ 'id':article.id }) }}" class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</a>
-                        <a href="{{ path('reduceItem',{ 'id':article.id }) }}" class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</a>
+                        <p class="m-0 p-3" class="quantite">{{ article.quantity }}</p>
+                        <a href="{{ path('addItem',{ 'id':article.id }) }}" data-action="add" data-id="{{ article.id  }}" data-price="{{ article.price|number_format(2, ',')  }}" class="btn-quantity btn btn-info d-flex justify-content-center align-items-center">+</a>
+                        <a href="{{ path('reduceItem',{ 'id':article.id }) }}" data-action="reduce" data-id="{{ article.id  }}" data-price="{{ article.price|number_format(2, ',')  }}" class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</a>
                     </div>
-                    <p class="m-0 pr-3 total"><span>{{ article.price * article.quantity }}</span> €</p>
+                    <p class="m-0 pr-3 total"><span>{{ (article.price * article.quantity) |number_format(2, ',') }}</span> €</p>
                     <a href="{{ path('deleteItem',{ 'id':article.id }) }}" class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
                         <i class="fas fa-trash"></i>
                     </a>
@@ -66,7 +66,7 @@
             </div>
             <div class="row py-3 d-flex justify-content-between">
                 <div class="col-6">Sous-total</div>
-                <div class="col-6 text-right infos"><span>{{ total }}</span> €</div>
+                <div class="col-6 text-right infos "><span id="subtotal">{{ total|number_format(2, ',') }} €</span></div>
             </div>
             <div class="row py-3 d-flex justify-content-between">
                 <div class="col-6">Livraison</div>
@@ -75,7 +75,7 @@
             
             <div class="row py-4 d-flex justify-content-between">
                 <div class="col-6 total">Total</div>
-                <div class="col-6 text-right total"><span>{{ total }}</span> €</div>
+                <div class="col-6 text-right total"><span id="totalpanier" >{{ total|number_format(2, ',') }} €</span></div>
             </div>
             <div class="row">
                 <div class="col-12">

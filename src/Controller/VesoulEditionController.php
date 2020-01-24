@@ -321,6 +321,53 @@ class VesoulEditionController extends AbstractController
     }
 
     /**
+     * @Route("/panier/ajax/add/{id}", name="ajaxaddItem")
+     */
+    public function ajaxAddItem(Book $book, SessionInterface $session, ObjectManager $manager, BookRepository $repoBook)
+    {
+        $id = $book->getId();
+        $title = $book->getTitle();
+        $author = $book->getAuthor();
+        $price = $book->getPrice();
+        $stock = $book->getStock();
+        $images = $book->getImages();
+        $image = $images[0]->getUrl(); // Juste la couverture du livre.
+
+
+        if ($stock > 0) {
+
+            $book->setStock($stock - 1);
+            $panier = $session->get('panier');
+            
+            $manager->persist($book);
+            $manager->flush();
+              
+            if (array_key_exists($id, $panier)) {
+
+                $panier[$id]['quantity']++;
+
+            } else {
+                
+                $panier[$id] = [
+                    'id' => $id,
+                    'title'=> $title,
+                    'firstname'=> $author->getFirstname(),
+                    'lastname'=> $author->getLastname(),
+                    'quantity'=> 1,
+                    'price'=> $price,
+                    'image' => $image               
+                ];   
+            }
+
+            $session->set('panier', $panier);
+            
+            return $this->redirectToRoute('panier');
+        } else {
+            return $this->redirectToRoute('home');
+        }
+    }
+
+    /**
      * @Route("/panier/reduce/{id}", name="reduceItem")
      */
     public function reduceItem(Book $book, SessionInterface $session, ObjectManager $manager)

@@ -27,7 +27,8 @@ class BookFixtures extends Fixture
             $book = new Book();
             $author = new Author();
 
-            $image->setUrl($faker->imageUrl($width = 640, $height = 480));
+            //$image->setUrl($faker->imageUrl($width = 640, $height = 480));
+            $image->setUrl('https://picsum.photos/640/480');
             $manager->persist($image);
 
             $genra->setName($faker->randomElement($array = array ('Science-Fiction','Roman','Histoire','Politique','Humour')));
