@@ -361,9 +361,9 @@ class VesoulEditionController extends AbstractController
 
             $session->set('panier', $panier);
             
-            return $this->redirectToRoute('panier');
+            return new Response("OK", Response::HTTP_OK);
         } else {
-            return $this->redirectToRoute('home');
+            return new Response("Not Acceptable", Response::HTTP_NOT_ACCEPTABLE);
         }
     }
 
