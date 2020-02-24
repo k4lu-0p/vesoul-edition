@@ -332,15 +332,9 @@ class VesoulEditionController extends AbstractController
         $stock = $book->getStock();
         $images = $book->getImages();
         $image = $images[0]->getUrl(); // Juste la couverture du livre.
-
-
-        if ($stock > 0) {
-
-            $book->setStock($stock - 1);
-            $panier = $session->get('panier');
-            
-            $manager->persist($book);
-            $manager->flush();
+        $panier = $session->get('panier');
+        $quantityInPanier = $panier[$id]['quantity'];
+        if ( ($stock - $quantityInPanier - 1 ) > 0) { 
               
             if (array_key_exists($id, $panier)) {
 
