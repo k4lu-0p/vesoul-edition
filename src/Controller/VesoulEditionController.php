@@ -36,7 +36,7 @@ class VesoulEditionController extends AbstractController
      */
     public function home(Request $request, SessionInterface $session, BookRepository $repoBook, GenraRepository $repoGenra, AuthorRepository $repoAuthor)
     {
-        // $session->remove('panier');
+        
 
         if($session->get('panier')) {
 
@@ -157,16 +157,12 @@ class VesoulEditionController extends AbstractController
         
         $offset = ($page - 1) * $max_per_page;
 
-        // return new JsonResponse($repoBook->findPageOfListBook($offset));
+        
 
         $books = $repoBook->findPageOfListBook($offset, $orderBy, $new, $genre, $author, $yearmin, $yearmax, $title);
         $response = new Response();
-        // $response->setContent( $this->render('ajax/page-book.html.twig', 
-        //         [
-        //             'books' => $books
-        //         ]
-        //     )
-        // );
+       
+        
         $response->setCharset('utf-8');
         $response->headers->set('Content-Type', 'text/html');
         $response->headers->set('X-TotalBooks', $total_books );
@@ -287,13 +283,10 @@ class VesoulEditionController extends AbstractController
         $image = $images[0]->getUrl(); // Juste la couverture du livre.
 
 
-        if ($stock > 0) {
+        if ( ($stock - $quantityInPanier - 1 ) > 0) { 
 
-            $book->setStock($stock - 1);
-            $panier = $session->get('panier');
             
-            $manager->persist($book);
-            $manager->flush();
+            $panier = $session->get('panier'); 
               
             if (array_key_exists($id, $panier)) {
 
@@ -362,26 +355,65 @@ class VesoulEditionController extends AbstractController
     }
 
     /**
+     * @Route("/panier/ajax/reduce/{id}", name="reduceAjaxItem")
+     */
+    public function reduceAjaxItem(Book $book, SessionInterface $session, ObjectManager $manager)
+    {   
+        
+        $id = $book->getId();
+        
+        $panier = $session->get('panier');
+       
+        if (array_key_exists($id, $panier) && ($panier[$id]['quantity'] - 1 ) >= 1) {
+            
+            $panier[$id]['quantity']--;            
+            $session->set('panier', $panier);
+            return new Response("OK", Response::HTTP_OK);
+
+        } 
+
+        return new Response("Not Acceptable", Response::HTTP_NOT_ACCEPTABLE);
+    }
+
+    /**
      * @Route("/panier/reduce/{id}", name="reduceItem")
      */
     public function reduceItem(Book $book, SessionInterface $session, ObjectManager $manager)
     {   
-        $stock = $book->getStock();
+        
         $id = $book->getId();
         
         $panier = $session->get('panier');
-        
-        if (array_key_exists($id, $panier) && $panier[$id]['quantity'] > 1) {
+       
+        if (array_key_exists($id, $panier) && ($panier[$id]['quantity'] - 1 ) >= 1) {
             
-            $panier[$id]['quantity']--;
-            $book->setStock($stock + 1);
+            $panier[$id]['quantity']--;            
             $session->set('panier', $panier);
-            $manager->persist($book);
-            $manager->flush();
+            return new Response("OK", Response::HTTP_OK);
 
         } 
 
-        return $this->redirectToRoute('panier');
+        return new Response("Not Acceptable", Response::HTTP_NOT_ACCEPTABLE);
+    }
+
+    /**
+     * @Route("/panier/ajax/delete/{id}", name="deleteAjaxItem")
+     */
+    public function deleteAjaxItem(Book $book, SessionInterface $session, ObjectManager $manager)
+    {
+        $id = $book->getId();
+        $panier = $session->get('panier');
+        
+       
+        if (array_key_exists($id, $panier)){
+            unset($panier[$id]);
+            $session->set('panier', $panier);
+            return new Response("OK", Response::HTTP_OK);
+        }
+        
+
+        return new Response("Not Acceptable", Response::HTTP_NOT_ACCEPTABLE);
+        
     }
 
     /**
@@ -390,18 +422,14 @@ class VesoulEditionController extends AbstractController
     public function deleteItem(Book $book, SessionInterface $session, ObjectManager $manager)
     {
         $id = $book->getId();
-        $stock = $book->getStock();
         $panier = $session->get('panier');
         
-        $book->setStock($stock + $panier[$id]['quantity']);
+        
 
         unset($panier[$id]);
         $session->set('panier', $panier);
-        $manager->persist($book);
-        $manager->flush();
 
-        // dump($panier);
-        // die();
+        
 
         return $this->redirectToRoute('panier');
         

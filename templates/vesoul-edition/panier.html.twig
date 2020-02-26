@@ -50,10 +50,10 @@
                         <a href="{{ path('reduceItem',{ 'id':article.id }) }}" data-action="reduce" data-id="{{ article.id  }}" data-price="{{ article.price|number_format(2, ',')  }}" class="btn-quantity btn btn-light d-flex justify-content-center align-items-center">-</a>
                     </div>
                     <p class="m-0 pr-3 total"><span>{{ (article.price * article.quantity) |number_format(2, ',') }}</span> €</p>
-                    <a href="{{ path('deleteItem',{ 'id':article.id }) }}" class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
+                    <a href="{{ path('deleteItem',{ 'id':article.id }) }}" data-id="{{ article.id  }}" class="btn btn-danger delete-article d-flex justify-content-center align-item-center">
                         <i class="fas fa-trash"></i>
                     </a>
-                </div>
+                </div>  
             </div>
             {% endfor %}
             <!-- ----- Articles 3 ----- -->
@@ -85,12 +85,9 @@
             </div-col-3>
         </div>
     </div>
-    <div class="row py-4">
-        <div class="col-4">
-            <a href="panier/update"><button class="btn btn-info w-100">Mettre à jour le panier</button></a>
-        </div>
-        <div class="col-4">
-            <a href=""><button class="btn btn-light w-100">continuer mes ahats</button></a>
+    <div class="row py-4">        
+        <div class="col-4 offset-4">
+            <a href="{{ path('home') }}"><button class="btn btn-info w-100">Continuer mes achats</button></a>
         </div>
     </div>
 </div>

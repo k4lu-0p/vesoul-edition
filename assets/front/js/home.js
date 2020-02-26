@@ -20,6 +20,7 @@ const sliderYear = document.querySelectorAll('.range');
 const btnSearch = document.querySelector('.btn-search');
 const inptSarch = document.querySelector('.search-bar');
 const btnQuantity = document.querySelectorAll('.btn-quantity');
+const btnDelete = document.querySelectorAll('.delete-article');
 
 const filter = {
   nouveaute: false,
@@ -607,7 +608,7 @@ function applyYearFilter(){
  
   if( btnQuantity.length > 0 ){
     btnQuantity.forEach( (element) => {
-      element.addEventListener('click', (e) => {  
+      element.addEventListener('click', async (e) => {  
         
         e.preventDefault();  
         
@@ -623,9 +624,14 @@ function applyYearFilter(){
         let total = 0;
 
         //Vérifier si l'objet est en stock
-        
+
+        let response = await fetch(`/panier/ajax/${action}/${idProduct}`);
+        let status = await response.status
        
-     
+        if( status === 406 ){          
+          return;
+        }
+
         if( elementQuantity === null){
           return;
         }
@@ -691,9 +697,61 @@ function applyYearFilter(){
 
 
 
+      }, false);
+    });
+  }
+
+  if( btnDelete.length > 0 ){
+    btnDelete.forEach( (element)=>{
+      element.addEventListener('click', async (e) =>{
+        e.preventDefault();
+        const  elementHasClicked = e.currentTarget;
+        const idProduct = elementHasClicked.dataset.id;
+        const rowArticle = elementHasClicked.parentNode.parentNode;
+        let elementTotalArticles = null;
+        let elementsTotals = null;
+        const badge = document.querySelector('#nb-items');
+
+        
+        //Suppression session panier
+        let response = await fetch(`/panier/ajax/delete/${idProduct}`);
+        let status = await response.status;
+
+        if( status === 406){
+          return;
+        }
+
+        if( rowArticle === null){
+          return;
+        }
+
+        if( badge === null){
+          return;
+        }
+
+        rowArticle.remove();
+
+        //Mise à jour du panier
+        
+        let totalPannier = 0;
+        elementTotalArticles = document.querySelectorAll('.article .total');
+        elementsTotals = document.querySelectorAll('#subtotal, #totalpanier');
+
+        elementTotalArticles.forEach( (element ) => {
+          totalPannier += parseFloat(element.innerText);
+        }); 
+        
+        elementsTotals.forEach( element => {  
+          element.innerText = new Intl.NumberFormat('fr-FR', {style: 'currency', currency: 'EUR' }).format(totalPannier);
+        });
+
+        badge.innerText = elementTotalArticles.length;
+        
       });
     });
   }
+
+
 
 
   
