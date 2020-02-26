@@ -18,6 +18,12 @@ Encore
         jQuery: 'jquery',
         'window.jQuery': 'jquery',
     })
+
+    .configureBabel( function(babelConfig){
+        babelConfig.plugins.push('@babel/plugin-transform-async-to-generator');
+        babelConfig.plugins.push('@babel/plugin-transform-runtime');
+        babelConfig.plugins.push('babel-plugin-syntax-async-functions');
+    })
     
     .addEntry('front', ['./assets/front/js/layout-front.js'])
     .addEntry('admin', './assets/back/js/layout-back.js')
