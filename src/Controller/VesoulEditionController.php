@@ -62,7 +62,10 @@ class VesoulEditionController extends AbstractController
             'maxyear' => $maxYear
 
         ]);
-    }   
+    } 
+    
+    
+     
    
 
      /**
@@ -283,14 +286,17 @@ class VesoulEditionController extends AbstractController
         $image = $images[0]->getUrl(); // Juste la couverture du livre.
 
 
-        if ( ($stock - $quantityInPanier - 1 ) > 0) { 
+        
 
             
             $panier = $session->get('panier'); 
               
             if (array_key_exists($id, $panier)) {
-
-                $panier[$id]['quantity']++;
+                
+                $quantityInPanier = $panier[$id]['quantity'];
+                if ( ($stock - $quantityInPanier - 1 ) > 0) { 
+                    $panier[$id]['quantity']++;
+                }
 
             } else {
                 
@@ -327,6 +333,7 @@ class VesoulEditionController extends AbstractController
         $image = $images[0]->getUrl(); // Juste la couverture du livre.
         $panier = $session->get('panier');
         $quantityInPanier = $panier[$id]['quantity'];
+        
         if ( ($stock - $quantityInPanier - 1 ) > 0) { 
               
             if (array_key_exists($id, $panier)) {
@@ -464,7 +471,7 @@ class VesoulEditionController extends AbstractController
     }
 
     /**
-     * @Route("/commande", name="commander")
+     * @Route("/commande", name="commande")
      */
     public function showCommande(SessionInterface $session)
     {
