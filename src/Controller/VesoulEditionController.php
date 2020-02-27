@@ -292,7 +292,7 @@ class VesoulEditionController extends AbstractController
             $panier = $session->get('panier'); 
               
             if (array_key_exists($id, $panier)) {
-                
+
                 $quantityInPanier = $panier[$id]['quantity'];
                 if ( ($stock - $quantityInPanier - 1 ) > 0) { 
                     $panier[$id]['quantity']++;
@@ -311,12 +311,9 @@ class VesoulEditionController extends AbstractController
                 ];   
             }
 
-            $session->set('panier', $panier);
             
+            $session->set('panier', $panier);            
             return $this->redirectToRoute('panier');
-        } else {
-            return $this->redirectToRoute('home');
-        }
     }
 
     /**
