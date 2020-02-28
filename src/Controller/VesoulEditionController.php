@@ -8,21 +8,23 @@ use App\Repository\BookRepository;
 use App\Repository\CartRepository;
 use App\Repository\GenraRepository;
 use App\Repository\AuthorRepository;
+use Doctrine\ORM\Query\Expr\GroupBy;
 use Symfony\Component\HttpFoundation\Request;
-use Doctrine\Common\Persistence\ObjectManager;
 
+use Symfony\Component\Security\Core\Security;
+
+use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag;
-
 use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Doctrine\ORM\Query\Expr\GroupBy;
+
 class VesoulEditionController extends AbstractController
 {
 
@@ -458,6 +460,14 @@ class VesoulEditionController extends AbstractController
     {
 
         $panier = $session->get('panier');
+
+        if( $panier === null ){
+            return $this->render('vesoul-edition/panier.html.twig', [
+                'total' => 0
+            ]);
+        }
+
+
         foreach ($panier as $elem) {
             $this->totalCost += $elem['price'] * $elem['quantity'];                
         }
@@ -470,8 +480,25 @@ class VesoulEditionController extends AbstractController
     /**
      * @Route("/commande", name="commande")
      */
-    public function showCommande(SessionInterface $session)
+    public function showCommande(Security $security, SessionInterface $session)
     {
+        $panier = $session->get('panier');
+        
+        
+        //Si le panier est vide alors pas de commande
+        //Prévenir que la personn
+        if( $panier === null){
+            return $this->redirectToRoute('panier');
+        }
+            dump($panier);die;
+        
+        
+        if( $security->getUser() === null ){
+            
+            return $this->redirectToRoute('security_user_login');
+        }
+
+
         return $this->render('vesoul-edition/commande.html.twig', [
             'controller_name' => 'FrontController',
         ]);
