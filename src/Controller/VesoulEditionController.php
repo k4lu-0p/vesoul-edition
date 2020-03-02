@@ -490,11 +490,13 @@ class VesoulEditionController extends AbstractController
         if( $panier === null){
             return $this->redirectToRoute('panier');
         }
-            dump($panier);die;
+           
         
         
         if( $security->getUser() === null ){
             
+            $commande['confirmation'] = true;
+            $session->set('commande', $commande);
             return $this->redirectToRoute('security_user_login');
         }
 
