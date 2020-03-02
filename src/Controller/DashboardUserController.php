@@ -50,40 +50,13 @@ class DashboardUserController extends AbstractController
         $form->handleRequest($request);
 
 
-        //     $manager->persist($user);
-        //     $manager->flush();
             
         
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // $passwordEncoder = 'bcrypt';
-            // $oldPassword = $authenticationUtils->getLastUsername();
-            // $oldPassword = $user->getPassword();
-
-            // $valid = $passwordEncoder->encodePassword('online@2017', null);
-
-            // dump($valid);
-            // die();
-
-            // $encoded = $encoder->encodePassword($user, $user->getPassword()); // Chiffrer le mot de passe de l'user
-
             
-            // dump($oldPassword);
-            // dump($user);
-            // die();
 
-
-            // $passwordEncoder = $this->container->get('security.encoder_factory');
-            // $oldPassword = $request->request->get('etiquettebundle_user')['oldPassword'];
-            
-            // dump($user->isPasswordValid($user, $oldPassword));
-
-            // die();
-
-            // Si l'ancien mot de passe est bon
-            // if ($user->isPasswordValid($user, $oldPassword)) {
-
-                $confirmation;
+               
                 
                 $em = $this->getDoctrine()->getManager();
 
@@ -131,16 +104,11 @@ class DashboardUserController extends AbstractController
         $form->handleRequest($request);
         $form_edit->handleRequest($request);
 
-        // $form_edit = $this->createForm(AddAddressesType::class, $address);
-        // $form_edit->handleRequest($request);
+       
         
         if($form->isSubmitted()) {
             
-            // dump($address);
-            // dump($form);
-            // dump($user);
-            // die();
-
+           
             $address->get;
 
             $address->setCity(strtoupper($address->getCity()))
@@ -162,10 +130,7 @@ class DashboardUserController extends AbstractController
 
         if($form_edit->isSubmitted()) {
             
-            // dump($address);
-            // dump($form);
-            // dump($user);
-            // die();
+           
 
             $address->setCity(strtoupper($address->getCity()))
             ->setCountry(strtoupper($address->getCountry()))
@@ -180,25 +145,15 @@ class DashboardUserController extends AbstractController
 
         }
 
-        // if($form_edit->isSubmitted()) {
-            
-
-        //     $manager->persist($address);
-        //     $user->addAddress($address);
-        //     $manager->flush();
-
-        //     return $this->redirectToRoute('dashboard_user_addresses');
-
-        // }
+       
 
         $adresses = $repo->findAddressByUserId($id);
-        // dump($adresses);
-        // die();
+       
         return $this->render('dashboard-user/compte-adresses.html.twig', [
             'adresses' => $adresses,
             'form' => $form->createView(),
             'form_edit' => $form_edit->createView()
-            // 'form_edit' => $form_edit->createView()
+            
         ]);
     }
 
