@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\User;
 use App\Entity\Address;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
@@ -30,8 +31,14 @@ class DashboardUserController extends AbstractController
     /**
      * @Route("/accueil", name="dashboard_user_home")
      */
-    public function home()
+    public function home(SessionInterface $session)
     {
+        $commande = $session->get('commande');
+
+        if( isset( $commande['confirmation']) && $commande['confirmation']=== true){
+            return $this->redirectToRoute('commande');
+        }
+        
         return $this->render('dashboard-user/mon-compte.html.twig', [
             'title' => 'Mon compte'
         ]);
