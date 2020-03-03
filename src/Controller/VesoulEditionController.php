@@ -483,7 +483,7 @@ class VesoulEditionController extends AbstractController
     public function showCommande(Security $security, SessionInterface $session)
     {
         $panier = $session->get('panier');
-        
+        $user = $security->getUser();
         
         //Si le panier est vide alors pas de commande
         //Prévenir que la personn
@@ -493,16 +493,17 @@ class VesoulEditionController extends AbstractController
            
         
         
-        if( $security->getUser() === null ){
+        if( $user === null ){
             
             $commande['confirmation'] = true;
             $session->set('commande', $commande);
             return $this->redirectToRoute('security_user_login');
         }
+        
 
-
-        return $this->render('vesoul-edition/commande.html.twig', [
-            'controller_name' => 'FrontController',
+        return $this->render('vesoul-edition/commande.html.twig',
+        [
+            'user' => $user
         ]);
     }
 

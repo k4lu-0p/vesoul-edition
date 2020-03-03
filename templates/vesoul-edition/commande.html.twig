@@ -13,36 +13,44 @@
         <div class="livraison m-0 p-0 d-flex flex-column">
           <h3 class="m-0 pb-3">Adresse de livraison</h3>
           <select>
-            <option value="" selected>Mes adresses</option>
-            <option value="domicile">Domicile</option>
-            <option value="travail">Travail</option>
-            <option value="pierre">Pierre</option>
+            {% if user.addresses|length == 0 %}            
+              <option value="" selected>Ajouter une adresse</option>
+            {% endif %} 
+            {% if user.addresses|length > 0 %}
+              {% for address in user.addresses %}
+                {% if address.type == 'livraison' %}
+                  <option value="{{address.id}}" selected>{{address.title}}</option>
+                {% endif %}
+              {% endfor %}
+            {% endif %}           
           </select>
-          <div class="destinataire m-0 py-2 d-flex align-items-center">
-            <i class="fas fa-user"></i>
-            <div class="d-flex flex-column pl-3">
-              <p class="prenom m-0">Jean-Jean</p>
-              <p class="nom m-0">Dupont</p>
-            </div>
-          </div>
-          <div class="place m-0 py-2 d-flex align-items-center">
-            <i class="fas fa-map-marker-alt"></i>
-            <div class="d-flex flex-column pl-3">
-              <p class="adress m-0">2 Bis Rue du Truc</p>
-              <p class="complement m-0">Appartement 4, 3e étage</p>
-              <div class="d-flex m-0">
-                <p class="cp m-0">70000</p>
-                <p class="ville m-0">VESOUL</p>
+          
+            
+              <div class="destinataire m-0 py-2 d-flex align-items-center">
+                <i class="fas fa-user"></i>
+                <div class="d-flex flex-column pl-3">
+                  <p class="prenom m-0">{% if user.addresses|length > 0 %}{{ user.addresses[0].firstname}}{% endif %}</p>
+                  <p class="nom m-0">{% if user.addresses|length > 0 %}{{ user.addresses[0].lastname}}{% endif %}</p>
+                </div> 
+              </div>        
+              <div class="place m-0 py-2 d-flex align-items-center">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="d-flex flex-column pl-3">
+                  <p class="adress m-0">{% if user.addresses|length > 0 %}{{ user.addresses[0].street}}{% endif %}</p>
+                  <p class="complement m-0">{% if user.addresses|length > 0 %}{{ user.addresses[0].additional}}{% endif %}</p>
+                  <div class="d-flex m-0">
+                    <p class="cp m-0">{% if user.addresses|length > 0 %}{{ user.addresses[0].cp}}{% endif %}</p>
+                    <p class="ville m-0">{% if user.addresses|length > 0 %}{{ user.addresses[0].city}}{% endif %}</p>
+                  </div>                  
+                </div>
               </div>
-              <p class="pays m-0">FRANCE</p>
+            
+            <div class="m-0 py-2 d-flex align-items-center">
+              <input type="checkbox" name="same-adress" value="yes">
+              <p class="same-adress m-0 px-3">Utiliser la même adresse pour la facturation</p>
+              <button class="btn btn-light">Modifier</button>
             </div>
           </div>
-          <div class="m-0 py-2 d-flex align-items-center">
-            <input type="checkbox" name="same-adress" value="yes">
-            <p class="same-adress m-0 px-3">Utiliser la même adresse pour la facturation</p>
-            <button class="btn btn-light">Modifier</button>
-          </div>
-        </div>
         <!-- --- Adresse de facturation --- -->
         <div class="facturation m-0 p-0 d-flex flex-column">
           <h3 class="m-0 my-3">Adresse de facturation</h3>
@@ -143,34 +151,29 @@
       <div class="card m-0 p-3">
         <h2 class="mb-3">Récapitulatif</h2>
         <div class="items mt-3">
-          <row class="item d-flex justify-content-between">
-            <p>Un livre <span class="qte">x1</span></p>
-            <p class="price">15,99 €</p>
-          </row>
-          <row class="item d-flex justify-content-between">
-            <p>Un autre livre <span class="qte">x2</span></p>
-            <p class="price">36,00 €</p>
-          </row>
-          <row class="item d-flex justify-content-between">
-            <p>Encore un livre <span class="qte">x1</span></p>
-            <p class="price">21,50 €</p>
-          </row>
+          {% set panier = app.session.get('panier') %}
+          {% set total = 0 %}
+          {% for item in panier %}
+            <div class="item d-flex justify-content-between">
+              <p class="w-50">{{ item.title }}</p>
+              <p class="w-25 text-center">{{ item.quantity}}</p>
+              <p class="price w-25 text-right">{{ (item.quantity * item.price)|number_format(2, ',') }} €</p>
+            </div>
+            {%  set total =  (item.quantity * item.price) %}
+          {% endfor %}          
         </div>
-        <row class="ss-total py-2 mt-3 d-flex justify-content-between">
-          <p class="m-0">Sous-Total</p>
-          <p class="m-0">73,49 €</p>
-        </row>
-        <row class="livraison py-2 d-flex justify-content-between">
-          <p class="m-0">Livraison</p>
-          <p class="m-0">Gratuite</p>
-        </row>
-        <row class="tva py-2 d-flex justify-content-between">
-          <p class="m-0">TVA</p>
-          <p class="m-0">14,70 €</p>
-        </row>
+        <div class="ss-total py-2 mt-3 d-flex justify-content-between">
+          <p class="w-75 m-0">Sous-Total</p>
+          <p class="w-25 text-right m-0">{{ total|number_format(2, ',') }} €</p>
+        </div>
+        <div class="livraison py-2 d-flex justify-content-between">
+          <p class="w-75 m-0">Livraison</p>
+          <p class="w-25 text-right m-0">Gratuite</p>
+        </div>
+        
         <row class="total mt-3 py-2 d-flex justify-content-between">
-          <p class="m-0">Total</p>
-          <p class="m-0">73,49 €</p>
+          <p class="w-75 m-0">Total</p>
+          <p class="w-25 text-right m-0">{{ total|number_format(2, ',') }} €</p>
         </row>
         <button type="submit" class="mt-3 btn btn-info w-100">Commander</button>
       </div>

@@ -49,8 +49,14 @@ class DashboardUserController extends AbstractController
      * @Route("/informations", name="dashboard_user_informations")
      * 
      */
-    public function showInformations(Request $request, ObjectManager $manager, AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $encoder)
+    public function showInformations(SessionInterface $session, Request $request, ObjectManager $manager, AuthenticationUtils $authenticationUtils, UserPasswordEncoderInterface $encoder)
     {
+        $commande = $session->get('commande');
+
+        if( isset( $commande['confirmation']) && $commande['confirmation']=== true){
+            return $this->redirectToRoute('commande');
+        }
+        
         $user = $this->getUser();
 
         $form = $this->createForm(EditInformationsType::class, $user);

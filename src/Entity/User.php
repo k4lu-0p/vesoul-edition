@@ -27,7 +27,7 @@ class User implements UserInterface
     private $id;
     
     /**
-     * @ORM\Column(type="boolean", options={"default":null})
+     * @ORM\Column(type="integer", options={"default":null})
      */
     private $gender;
     
