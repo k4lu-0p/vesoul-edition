@@ -24,7 +24,7 @@
         "babel-plugin-syntax-async-functions": "^6.13.0",
         "bootstrap": "^4.2.1",
         "chart.js": "^2.7.3",
-        "jquery": "^3.3.1",
+        "jquery": "^3.5.0",
         "materialize-css": "^1.0.0",
         "mjml": "^4.4.0-beta.1",
         "popper.js": "^1.14.7",
